@@ -1,0 +1,1767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>METHOD | BASEWAVES — Spatial Strength Training</title>
+  <meta name="description" content="The architecture of Spatial Strength Training. BASE directs attention. SPACE creates conditions. WAVES emerges when interference clears.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="METHOD | BASEWAVES">
+  <meta property="og:description" content="The architecture of Spatial Strength Training. BASE directs attention. SPACE creates conditions. WAVES emerges when interference clears.">
+  <meta property="og:type" content="website">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Option B Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- GSAP + ScrollTrigger CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'base-bg': '#0E1220',
+            'base-bg-alt': '#141B2E',
+            'base-bg-dark': '#080B14',
+            'turquoise': '#58FCC8',
+            'coral': '#FFA565',
+            'text-primary': '#E8E3FF',
+            'text-secondary': '#9994B8',
+            'text-dim': '#5A5672',
+          },
+          fontFamily: {
+            'cinzel': ['Cinzel', 'serif'],
+            'ibm': ['IBM Plex Mono', 'monospace'],
+            'mono': ['Space Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* ═══════════════════════════════════════════
+       RESET
+       ═══════════════════════════════════════════ */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      background-color: transparent;
+      color: #E8E3FF;
+      overflow-x: hidden;
+    }
+
+    /* ═══════════════════════════════════════════
+       ENVIRONMENTAL LAYERS (z-index stack)
+       -5: base color
+       -4: neural scaffolding texture
+       -3: grain overlay
+       -1: mobile darken (mobile only)
+        0+: content
+       ═══════════════════════════════════════════ */
+    .bg-base-color {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: #0E1220;
+      z-index: -5;
+    }
+
+    .bg-neural {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 120%;
+      background-image: url('../assets/neural_scaffolding_base.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: -4;
+      will-change: transform, filter, opacity;
+      filter: blur(10px);
+      opacity: 0.25;
+    }
+
+    .grain-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image: url('../assets/grain.png');
+      background-repeat: repeat;
+      mix-blend-mode: overlay;
+      z-index: -3;
+      pointer-events: none;
+      will-change: opacity;
+      opacity: 0.08;
+    }
+
+    .mobile-darken {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: #0E1220;
+      z-index: -1;
+      pointer-events: none;
+      will-change: opacity;
+      opacity: 0;
+    }
+
+    @media (max-width: 767px) {
+      .mobile-darken { display: block; }
+    }
+
+    /* ═══════════════════════════════════════════
+       GLOBAL TYPOGRAPHY: Option B — The Architect
+       ═══════════════════════════════════════════ */
+    h1, h2, h3, .headline {
+      font-family: 'Cinzel', serif;
+      font-weight: 400;
+    }
+
+    .body-text, p {
+      font-family: 'IBM Plex Mono', monospace;
+      letter-spacing: 0.15em;
+    }
+
+    /* ═══════════════════════════════════════════
+       NAVIGATION
+       ═══════════════════════════════════════════ */
+    .logo-container {
+      opacity: 0.7;
+      transition: opacity 0.3s ease, filter 0.3s ease;
+    }
+
+    .logo-container:hover {
+      opacity: 1;
+      filter: drop-shadow(0 0 12px #58FCC8) drop-shadow(0 0 24px rgba(88, 252, 200, 0.4));
+    }
+
+    .nav-link {
+      font-family: 'Space Mono', monospace;
+      font-size: 14px;
+      color: #9994B8;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link:hover { color: #58FCC8; }
+
+    .nav-link.active {
+      color: #E8E3FF;
+    }
+
+    .nav-separator {
+      color: #5A5672;
+      margin: 0 12px;
+    }
+
+    /* ═══ HAMBURGER MENU (<1024px) ═══ */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      z-index: 60;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: #E8E3FF;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .nav-desktop {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(14, 18, 32, 0.85);
+      z-index: 55;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav-overlay.open {
+      display: flex;
+      opacity: 1;
+    }
+
+    .nav-overlay a {
+      font-family: 'Space Mono', monospace;
+      font-size: 18px;
+      letter-spacing: 0.15em;
+      color: #9994B8;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-overlay a:hover {
+      color: #58FCC8;
+    }
+
+    .nav-overlay a.active {
+      color: #E8E3FF;
+    }
+
+    @media (max-width: 1023px) {
+      .nav-logo {
+        height: 32px;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-desktop {
+        display: none;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .nav-overlay {
+        display: none !important;
+      }
+    }
+
+    /* ═══════════════════════════════════════════
+       CONTENT SECTIONS
+       ═══════════════════════════════════════════ */
+    .content-column {
+      max-width: 900px;
+      margin: 0 auto;
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+
+    /* Movement 1: Sensorium Opening */
+    .sensorium-section {
+      padding: 30vh 0 16vh 0;
+    }
+
+    .sensorium-section h1 {
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.35;
+      color: #E8E3FF;
+      margin-bottom: 48px;
+    }
+
+    .body-copy {
+      font-size: 15px;
+      letter-spacing: 0.05em;
+      line-height: 1.8;
+      color: #9994B8;
+      margin-bottom: 32px;
+    }
+
+    .signal-line {
+      font-size: 15px;
+      letter-spacing: 0.05em;
+      line-height: 1.8;
+      color: #E8E3FF;
+      margin-bottom: 32px;
+    }
+
+    .turquoise-accent {
+      font-size: 15px;
+      letter-spacing: 0.05em;
+      line-height: 1.8;
+      color: #58FCC8;
+      margin-bottom: 32px;
+    }
+
+    .coral-accent {
+      font-size: 15px;
+      letter-spacing: 0.05em;
+      line-height: 1.8;
+      color: #FFA565;
+      margin-bottom: 32px;
+    }
+
+    /* Movement sections */
+    .movement-section {
+      padding: 16vh 0;
+    }
+
+    .movement-section h2 {
+      font-size: clamp(22px, 3vw, 32px);
+      line-height: 1.4;
+      color: #E8E3FF;
+      margin-bottom: 16px;
+    }
+
+    .movement-subhead {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 15px;
+      letter-spacing: 0.05em;
+      color: #9994B8;
+      margin-bottom: 40px;
+    }
+
+    /* Section backgrounds */
+    .section-bg-alt {
+      position: relative;
+    }
+
+    .section-bg-alt::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(180deg, rgba(20, 27, 46, 0.6) 0%, rgba(20, 27, 46, 0.6) 100%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .section-bg-alt > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Closing section deep background */
+    .section-bg-deep {
+      position: relative;
+    }
+
+    .section-bg-deep::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(180deg, rgba(8, 11, 20, 0.7) 0%, rgba(8, 11, 20, 0.7) 100%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .section-bg-deep > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ═══════════════════════════════════════════
+       DIAGRAM CONTAINERS
+       ═══════════════════════════════════════════ */
+    .diagram-container {
+      background: rgba(8, 11, 20, 0.6);
+      border-radius: 8px;
+      padding: 32px;
+      margin: 64px auto;
+      max-width: 100%;
+    }
+
+    .diagram-caption {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      color: #5A5672;
+      text-align: center;
+      margin-top: 24px;
+    }
+
+    /* ═══ DIAGRAM 1: TENSION CHANNELING LOOP ═══ */
+    .loop-diagram {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto;
+      aspect-ratio: 1.2 / 1;
+    }
+
+    .loop-node {
+      position: absolute;
+      padding: 8px 16px;
+      border: 1px solid;
+      border-radius: 4px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 14px;
+      letter-spacing: 0.05em;
+      text-align: center;
+      background: transparent;
+      white-space: nowrap;
+    }
+
+    .loop-node .sub-label {
+      display: block;
+      font-size: 11px;
+      color: #5A5672;
+      margin-top: 4px;
+      letter-spacing: 0.03em;
+    }
+
+    /* Loop SVG paths */
+    .loop-svg {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+    }
+
+    /* ═══ DIAGRAM 2: SPACE VALIDITY GATE ═══ */
+    .gate-line {
+      width: 100%;
+      height: 1px;
+      background: #E8E3FF;
+      margin: 24px 0;
+    }
+
+    .gate-block {
+      border: 1px solid;
+      border-radius: 4px;
+      padding: 12px 20px;
+      text-align: center;
+      font-family: 'IBM Plex Mono', monospace;
+      background: transparent;
+    }
+
+    .gate-block .sub-label {
+      font-size: 12px;
+      color: #5A5672;
+      margin-top: 4px;
+    }
+
+    .space-row {
+      display: flex;
+      align-items: center;
+      padding: 10px 0 10px 16px;
+      border-left: 1px solid #E8E3FF;
+      margin-bottom: 8px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 14px;
+      letter-spacing: 0.05em;
+    }
+
+    .space-row.curiosity-row {
+      border-left-color: #58FCC8;
+      background: rgba(88, 252, 200, 0.04);
+    }
+
+    .space-row .letter {
+      color: #E8E3FF;
+      width: 24px;
+      flex-shrink: 0;
+    }
+
+    .space-row .dim-name {
+      color: #E8E3FF;
+      width: 120px;
+      flex-shrink: 0;
+    }
+
+    .space-row .dim-type {
+      color: #5A5672;
+      width: 100px;
+      flex-shrink: 0;
+      font-size: 12px;
+    }
+
+    .space-row .dim-scale {
+      color: #5A5672;
+      font-size: 12px;
+    }
+
+    /* ═══ DIAGRAM 3: THREE Ms ═══ */
+    .three-ms-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+
+    .ms-block {
+      border: 1px solid;
+      border-radius: 4px;
+      padding: 24px;
+      text-align: center;
+      font-family: 'IBM Plex Mono', monospace;
+      background: transparent;
+    }
+
+    .ms-block .ms-header {
+      font-size: 14px;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    .ms-block .ms-sub {
+      font-size: 12px;
+      color: #9994B8;
+    }
+
+    /* ═══ DIAGRAM 4: DEVELOPMENTAL SPIRAL ═══ */
+    .spiral-diagram {
+      display: flex;
+      align-items: stretch;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .spiral-arrow-col {
+      width: 32px;
+      flex-shrink: 0;
+      position: relative;
+      margin-right: 16px;
+    }
+
+    .spiral-arrow-line {
+      position: absolute;
+      left: 50%;
+      top: 16px;
+      bottom: 16px;
+      width: 1px;
+      background: #9994B8;
+      transform: translateX(-50%);
+    }
+
+    .spiral-arrow-label {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) rotate(-90deg);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: #5A5672;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    /* Arrow tips for resourcing */
+    .spiral-arrow-col::before,
+    .spiral-arrow-col::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0; height: 0;
+    }
+
+    .spiral-arrow-col::before {
+      top: 4px;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-bottom: 6px solid #9994B8;
+    }
+
+    .spiral-arrow-col::after {
+      bottom: 4px;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 6px solid #9994B8;
+    }
+
+    .spiral-blocks-col {
+      flex: 1;
+    }
+
+    .spiral-block {
+      border: 1px solid;
+      border-radius: 4px;
+      padding: 16px 24px;
+      font-family: 'IBM Plex Mono', monospace;
+      background: transparent;
+    }
+
+    .spiral-block .stage-header {
+      font-size: 14px;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+
+    .spiral-block .stage-sub {
+      font-size: 12px;
+      color: #5A5672;
+    }
+
+    .spiral-down-arrow {
+      text-align: center;
+      padding: 8px 0;
+      color: #5A5672;
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    /* ═══════════════════════════════════════════
+       ACCENT LINE (closing section)
+       ═══════════════════════════════════════════ */
+    .accent-line {
+      width: 60px;
+      height: 1px;
+      background: #58FCC8;
+      margin: 0 auto 48px auto;
+    }
+
+    /* ═══════════════════════════════════════════
+       CTA LINK
+       ═══════════════════════════════════════════ */
+    .cta-link {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 15px;
+      letter-spacing: 0.1em;
+      color: #FFA565;
+      text-decoration: none;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    .cta-link:hover {
+      color: #ffffff;
+      text-shadow: 0 0 20px rgba(255, 165, 101, 0.6);
+    }
+
+    .signal-link {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 14px;
+      letter-spacing: 0.15em;
+      color: #58FCC8;
+      text-decoration: none;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    .signal-link:hover {
+      color: #ffffff;
+      text-shadow: 0 0 20px rgba(88, 252, 200, 0.6);
+    }
+
+    /* ═══════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════ */
+    .site-footer {
+      padding: 80px 40px 48px 40px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      height: 46px;
+      opacity: 0.5;
+      margin-bottom: 32px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .nav-logo {
+      height: 41px;
+      width: auto;
+    }
+
+    .footer-nav {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      margin-bottom: 24px;
+    }
+
+    .footer-nav a {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: #9994B8;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-nav a:hover { color: #E8E3FF; }
+
+    .footer-contact {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      color: #5A5672;
+      margin-bottom: 16px;
+    }
+
+    .footer-contact a {
+      color: #5A5672;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-contact a:hover { color: #9994B8; }
+
+    .footer-tagline {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 14px;
+      letter-spacing: 0.05em;
+      color: #5A5672;
+      margin-bottom: 16px;
+    }
+
+    .footer-copyright {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      color: #5A5672;
+    }
+
+    /* ═══════════════════════════════════════════
+       SCROLL REVEAL
+       ═══════════════════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ═══════════════════════════════════════════
+       MOBILE (<768px)
+       ═══════════════════════════════════════════ */
+    @media (max-width: 639px) {
+      .gate-grid-responsive {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+      }
+
+      .loop-diagram {
+        display: none;
+      }
+
+      .loop-mobile {
+        display: flex !important;
+      }
+    }
+
+    @media (min-width: 640px) {
+      .loop-mobile {
+        display: none;
+      }
+    }
+
+    @media (max-width: 767px) {
+      /* Disable all blur on mobile */
+      .bg-neural {
+        filter: none !important;
+        opacity: 0.08 !important;
+      }
+
+      .grain-overlay {
+        opacity: 0.02 !important;
+      }
+
+      .content-column {
+        padding: 0 24px;
+      }
+
+      .sensorium-section {
+        padding: 25vh 0 12vh 0;
+      }
+
+      .sensorium-section h1 {
+        font-size: clamp(1.75rem, 5vw, 2.5rem);
+      }
+
+      .movement-section {
+        padding: 10vh 0;
+      }
+
+      body {
+        font-size: 16px;
+        line-height: 1.75;
+      }
+
+      /* Diagrams mobile */
+      .diagram-container {
+        padding: 24px;
+        margin: 48px auto;
+      }
+
+      .three-ms-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .space-row {
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+
+      .space-row .dim-name {
+        width: auto;
+      }
+
+      .space-row .dim-type {
+        width: auto;
+      }
+
+      .loop-mobile {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        padding-left: 40px;
+      }
+
+      .loop-mobile .loop-node {
+        position: relative;
+        margin-bottom: 0;
+        width: 100%;
+        max-width: 260px;
+      }
+
+      .loop-mobile .loop-down-arrow {
+        color: #5A5672;
+        font-size: 18px;
+        padding: 6px 0;
+        text-align: center;
+      }
+
+      .loop-mobile .return-arrow {
+        position: absolute;
+        left: 8px;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background: #5A5672;
+      }
+
+      .loop-mobile .return-arrow::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -4px;
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-bottom: 6px solid #5A5672;
+      }
+
+      .loop-mobile .return-label {
+        position: absolute;
+        left: -4px;
+        top: 50%;
+        transform: translateY(-50%) rotate(-90deg);
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 10px;
+        color: #5A5672;
+        letter-spacing: 0.05em;
+        white-space: nowrap;
+      }
+
+      /* Footer */
+      .site-footer {
+        padding: 48px 24px;
+      }
+
+      .footer-nav {
+        flex-direction: column;
+        gap: 16px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .loop-mobile {
+        display: none;
+      }
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+      .content-column {
+        padding: 0 30px;
+      }
+    }
+
+    /* ═══════════════════════════════════════════
+       FALLBACK (no JS)
+       ═══════════════════════════════════════════ */
+    .no-js .bg-neural {
+      filter: blur(0px);
+      opacity: 0.08;
+    }
+
+    .no-js .grain-overlay {
+      opacity: 0.02;
+    }
+
+    .no-js .reveal {
+      opacity: 1;
+      transform: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- ═══════════════════════════════════════════
+       ENVIRONMENTAL LAYERS
+       ═══════════════════════════════════════════ -->
+  <div class="bg-base-color"></div>
+  <div class="bg-neural" id="bgNeural"></div>
+  <div class="grain-overlay" id="grainOverlay"></div>
+  <div class="mobile-darken" id="mobileDarken"></div>
+
+  <!-- ═══════════════════════════════════════════
+       NAVIGATION
+       ═══════════════════════════════════════════ -->
+  <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-5 flex justify-between items-center">
+    <a href="/" class="logo-container block">
+      <img src="../assets/Basewaves_logo.svg" alt="BASEWAVES" class="nav-logo">
+    </a>
+
+    <div class="nav-desktop">
+      <a href="/" class="nav-link">HOME</a>
+      <span class="nav-separator">|</span>
+      <a href="/origin/" class="nav-link">ORIGIN</a>
+      <span class="nav-separator">|</span>
+      <a href="/method/" class="nav-link active">METHOD</a>
+      <span class="nav-separator">|</span>
+      <a href="/signals/" class="nav-link">SIGNALS</a>
+    </div>
+
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Nav Overlay -->
+  <div class="nav-overlay" id="navOverlay">
+    <a href="/">HOME</a>
+    <a href="/origin/">ORIGIN</a>
+    <a href="/method/" class="active">METHOD</a>
+    <a href="/signals/">SIGNALS</a>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       MOVEMENT 1: SENSORIUM OPENING
+       Background: #0E1220 (default)
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="sensorium-section">
+    <div class="content-column">
+      <h1 class="reveal">Third rep. Something shifts.</h1>
+
+      <p class="body-copy reveal">Not the weight — the weight hasn't changed. Something beneath the weight. A tempo emerging in your nervous system that wasn't there two reps ago. Your hands tighten. Your feet press wider into the floor. The breath finds a rhythm you didn't choose.</p>
+
+      <p class="signal-line reveal">You're no longer thinking about the squat. You're inside it.</p>
+
+      <p class="body-copy reveal">The mental chatter that followed you from the parking lot — the email, the argument, the deadline — has gone quiet. Not because you forced it quiet. Because the load required resources your prefrontal cortex was using for worry, and the body repossessed them.</p>
+
+      <p class="turquoise-accent reveal">What replaced the noise isn't silence. It's signal.</p>
+
+      <p class="body-copy reveal">Tension patterns you've carried for months become visible. The left hip that always grips early. The right shoulder that compensates without permission. The exact moment where force transfers cleanly through your spine and the exact moment where it leaks. You've been broadcasting this information your entire training life. You just couldn't hear it over the noise your mind was generating.</p>
+
+      <p class="signal-line reveal">This is what Spatial Strength Training&trade; feels like when it works. Not harder effort. Clearer reception.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       MOVEMENT 2: THE OVERRIDE DEFAULT
+       Background: #141B2E
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="movement-section section-bg-alt">
+    <div class="content-column">
+      <h2 class="reveal">The Override Default</h2>
+
+      <p class="body-copy reveal">Training was designed for machines.</p>
+
+      <p class="body-copy reveal">Periodization models borrowed from Soviet Olympic programs. Progressive overload calculated in percentages. Volume measured in tonnage. Recovery prescribed in hours. The body reduced to an input-output engine: apply sufficient mechanical stress, wait specified duration, measure adaptation, repeat.</p>
+
+      <p class="body-copy reveal">It works. For a while. For some people. To a point.</p>
+
+      <p class="body-copy reveal">Then the programs stop working. The volume accumulates without the adaptation. The effort increases without the clarity. And the answer is always: different program, more data, push harder.</p>
+
+      <p class="signal-line reveal">Nobody asks whether the model is wrong.</p>
+
+      <p class="body-copy reveal">Your fascia — the connective tissue matrix that wraps every muscle, organ, and nerve in your body — contains seven interoceptive nerve endings for every one proprioceptive nerve ending. Seven channels sensing how you feel for every one tracking where you are. You are biologically wired 7-to-1 for sensing internal state.</p>
+
+      <p class="body-copy reveal">Traditional training addresses the one. The seven go unread.</p>
+
+      <p class="body-copy reveal">Not because the signals aren't there. Because the entire methodology was designed around a model that doesn't account for them. The industrial model sees the body as a force-production system. The body is a sensing organism that also produces force.</p>
+
+      <p class="turquoise-accent reveal">The methodology got the hierarchy inverted. Spatial Strength Training&trade; corrects it.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       DIAGRAM 1: TENSION CHANNELING LOOP
+       Between Movement 2 and Movement 3
+       Background: #0E1220 (default)
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="movement-section" style="padding: 8vh 0;">
+    <div class="content-column">
+      <div class="diagram-container reveal">
+
+        <!-- Desktop: Oval/racetrack layout -->
+        <div class="loop-diagram">
+          <svg class="loop-svg" viewBox="0 0 520 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Clockwise path arrows -->
+            <!-- Right side: LOAD → TENSION -->
+            <line x1="380" y1="58" x2="380" y2="100" stroke="#5A5672" stroke-width="1"/>
+            <polygon points="376,98 380,106 384,98" fill="#5A5672"/>
+            <!-- TENSION → SIGNAL generates -->
+            <line x1="380" y1="155" x2="380" y2="190" stroke="#5A5672" stroke-width="1"/>
+            <polygon points="376,188 380,196 384,188" fill="#5A5672"/>
+            <!-- SIGNAL generates → BASE -->
+            <line x1="380" y1="248" x2="380" y2="280" stroke="#5A5672" stroke-width="1"/>
+            <polygon points="376,278 380,286 384,278" fill="#5A5672"/>
+            <!-- BASE → bottom curve → SPACE -->
+            <path d="M 380 340 Q 380 390 260 390 Q 140 390 140 340" stroke="#5A5672" stroke-width="1" fill="none"/>
+            <polygon points="136,342 140,334 144,342" fill="#5A5672"/>
+            <!-- SPACE → WAVES -->
+            <line x1="140" y1="280" x2="140" y2="248" stroke="#5A5672" stroke-width="1"/>
+            <polygon points="136,250 140,242 144,250" fill="#5A5672"/>
+            <!-- WAVES → SIGNAL feeds back -->
+            <line x1="140" y1="190" x2="140" y2="155" stroke="#5A5672" stroke-width="1"/>
+            <polygon points="136,157 140,149 144,157" fill="#5A5672"/>
+            <!-- SIGNAL feeds back → top curve → LOAD -->
+            <path d="M 140 100 Q 140 50 260 50 Q 380 50 380 100" stroke="#5A5672" stroke-width="1" fill="none"/>
+            <!-- No extra arrowhead needed — LOAD node is the destination -->
+          </svg>
+
+          <!-- Nodes positioned absolutely -->
+          <!-- LOAD — top center -->
+          <div class="loop-node" style="top: 0; left: 50%; transform: translateX(-50%); border-color: #9994B8; color: #9994B8;">
+            LOAD
+            <span class="sub-label">external force</span>
+          </div>
+
+          <!-- TENSION — right upper -->
+          <div class="loop-node" style="top: 110px; right: 20px; border-color: #9994B8; color: #9994B8;">
+            TENSION
+            <span class="sub-label">force meets structure</span>
+          </div>
+
+          <!-- SIGNAL generates — right middle -->
+          <div class="loop-node" style="top: 200px; right: 20px; border-color: #9994B8; color: #9994B8;">
+            SIGNAL
+            <span class="sub-label">generates</span>
+          </div>
+
+          <!-- BASE — right lower -->
+          <div class="loop-node" style="top: 290px; right: 20px; border-color: #58FCC8; color: #58FCC8;">
+            BASE
+            <span class="sub-label">directs attention</span>
+          </div>
+
+          <!-- SPACE — left lower -->
+          <div class="loop-node" style="top: 290px; left: 20px; border-color: #E8E3FF; color: #E8E3FF;">
+            SPACE
+            <span class="sub-label">processes signal</span>
+          </div>
+
+          <!-- WAVES — left middle -->
+          <div class="loop-node" style="top: 200px; left: 20px; border-color: #FFA565; color: #FFA565;">
+            WAVES
+            <span class="sub-label">reflects emergence</span>
+          </div>
+
+          <!-- SIGNAL feeds back — left upper -->
+          <div class="loop-node" style="top: 110px; left: 20px; border-color: #9994B8; color: #9994B8;">
+            SIGNAL
+            <span class="sub-label">feeds back</span>
+          </div>
+        </div>
+
+        <!-- Mobile: Vertical stack -->
+        <div class="loop-mobile" style="display: none;">
+          <div class="return-arrow">
+            <span class="return-label">feeds back</span>
+          </div>
+
+          <div class="loop-node" style="border-color: #9994B8; color: #9994B8;">
+            LOAD
+            <span class="sub-label">external force</span>
+          </div>
+          <div class="loop-down-arrow">↓</div>
+
+          <div class="loop-node" style="border-color: #9994B8; color: #9994B8;">
+            TENSION
+            <span class="sub-label">force meets structure</span>
+          </div>
+          <div class="loop-down-arrow">↓</div>
+
+          <div class="loop-node" style="border-color: #9994B8; color: #9994B8;">
+            SIGNAL
+            <span class="sub-label">generates</span>
+          </div>
+          <div class="loop-down-arrow">↓</div>
+
+          <div class="loop-node" style="border-color: #58FCC8; color: #58FCC8;">
+            BASE
+            <span class="sub-label">directs attention</span>
+          </div>
+          <div class="loop-down-arrow">↓</div>
+
+          <div class="loop-node" style="border-color: #E8E3FF; color: #E8E3FF;">
+            SPACE
+            <span class="sub-label">processes signal</span>
+          </div>
+          <div class="loop-down-arrow">↓</div>
+
+          <div class="loop-node" style="border-color: #FFA565; color: #FFA565;">
+            WAVES
+            <span class="sub-label">reflects emergence</span>
+          </div>
+          <div class="loop-down-arrow">↓</div>
+
+          <div class="loop-node" style="border-color: #9994B8; color: #9994B8;">
+            SIGNAL
+            <span class="sub-label">feeds back → LOAD</span>
+          </div>
+        </div>
+
+        <p class="diagram-caption">Tension channeling — tension processed with attention channeled toward intention. Continuous. Not episodic.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       MOVEMENT 3: BASE — THE ATTENTION FRAMEWORK
+       Background: #141B2E
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="movement-section section-bg-alt">
+    <div class="content-column">
+      <h2 class="reveal">BASE</h2>
+      <p class="movement-subhead reveal">Where You Direct Attention</p>
+
+      <p class="body-copy reveal">Before the body can process signal, attention must be directed to signal. This is what BASE does. Four domains, each training a different category of perception.</p>
+
+      <p class="body-copy reveal">BASE is not a procedure. It is an attention framework — a way of organizing where you look when you're under load.</p>
+
+      <p class="turquoise-accent reveal" style="margin-top: 48px; margin-bottom: 16px;">B — Balancing: Where's my equilibrium?</p>
+
+      <p class="body-copy reveal">Not standing on one leg. Not stability training. Directing attention to your baseline frequency — the ground state where your nervous system receives clearly. Feel the micro-adjustments your feet make against the floor. Notice the constant negotiation between gravity and structure. You're not achieving balance. You're perceiving it.</p>
+
+      <p class="body-copy reveal">Balance is subcortical — brainstem and cerebellum. The analytical mind cannot think its way into equilibrium. Directing attention to balance quiets the cortex and amplifies what the deeper structures are already doing.</p>
+
+      <p class="turquoise-accent reveal" style="margin-top: 48px; margin-bottom: 16px;">A — Aligning: What's my structural organization?</p>
+
+      <p class="body-copy reveal">Every compensation pattern in your body is a signal. The knee that drifts inward, the shoulder that rounds, the hip that shifts — these aren't errors to correct. They're information to read. Aligning directs attention to the relationship between segments: ribs over pelvis, shoulders over hips, joints centered within their available range.</p>
+
+      <p class="body-copy reveal">You're not forcing posture. You're perceiving organization. What the system reveals under load is what it's been doing without your awareness.</p>
+
+      <p class="turquoise-accent reveal" style="margin-top: 48px; margin-bottom: 16px;">S — Sourcing: Where does my force come from?</p>
+
+      <p class="body-copy reveal">Real-time scanning: feet on ground, breath pattern, where force actually initiates. When you press a barbell overhead, where does the drive start? Floor? Hips? Shoulders? The mechanoreceptors in your fascia are reporting this in milliseconds. Sourcing trains the capacity to receive that report.</p>
+
+      <p class="body-copy reveal">Sourcing operates at the moment level — rep by rep, breath by breath. It is not a macro strategy. It is micro-perception of where power lives right now.</p>
+
+      <p class="turquoise-accent reveal" style="margin-top: 48px; margin-bottom: 16px;">E — Engaging: What's my attention perceiving?</p>
+
+      <p class="body-copy reveal">Attention to attention itself. The meta-skill that converts mechanical execution into conscious learning. You can squat with perfect form and learn nothing — if attention is elsewhere. You can squat with imperfect form and learn everything — if attention is present to what the imperfection reveals.</p>
+
+      <p class="body-copy reveal">Engaging is the pivot between BASE and what comes next. Without it, the other three domains are checkboxes. With it, they become signal channels.</p>
+
+      <p class="body-copy reveal" style="color: #5A5672; margin-top: 48px;">The sequence matters for learning. Balancing establishes the ground. Aligning organizes structure on that ground. Sourcing locates force through that structure. Engaging makes the whole thing conscious. Conductors need this sequence explicitly. Composers have dissolved it into simultaneous awareness — all four domains attended to at once, attention flowing to wherever signal requires.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       MOVEMENT 4: SPACE — THE PROCESSING MECHANISM
+       Background: #0E1220 (default)
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="movement-section">
+    <div class="content-column">
+      <h2 class="reveal">SPACE</h2>
+      <p class="movement-subhead reveal">Where Processing Happens</p>
+
+      <p class="body-copy reveal">BASE directs attention. SPACE is where what attention reveals gets processed.</p>
+
+      <p class="body-copy reveal">Not a metaphor. The literal processing environment — the neurological, metabolic, and perceptual conditions that determine whether signal converts to adaptation or dissolves into noise.</p>
+
+      <p class="body-copy reveal">Five dimensions. One orientation check. The orientation comes first. Always.</p>
+
+      <!-- ═══ DIAGRAM 2: SPACE VALIDITY GATE ═══ -->
+      <div class="diagram-container reveal">
+        <!-- Part 1: The Gate -->
+        <div style="text-align: center; margin-bottom: 8px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 16px; color: #E8E3FF; letter-spacing: 0.05em;">C — CURIOSITY</span>
+          <br>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5A5672;">orientation</span>
+        </div>
+
+        <div class="gate-line"></div>
+
+        <div class="gate-grid-responsive" style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 24px; margin: 24px 0; align-items: center;">
+          <div class="gate-block" style="border-color: #58FCC8;">
+            <span style="color: #58FCC8; font-size: 14px; letter-spacing: 0.05em;">EXPLORING</span>
+            <p class="sub-label">system online → SPACE readable</p>
+          </div>
+
+          <div style="text-align: center;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5A5672; letter-spacing: 0.05em;">binary —<br>not a gradient</span>
+          </div>
+
+          <div class="gate-block" style="border-color: #FFA565;">
+            <span style="color: #FFA565; font-size: 14px; letter-spacing: 0.05em;">GRASPING</span>
+            <p class="sub-label">system offline → SPACE distorted</p>
+          </div>
+        </div>
+
+        <!-- Part 2: The Dimensions -->
+        <div style="margin-top: 40px;">
+          <div class="space-row" style="margin-bottom: 8px;">
+            <span class="letter">S</span>
+            <span class="dim-name">SALIENCE</span>
+            <span class="dim-type">condition</span>
+            <span class="dim-scale">1–10</span>
+          </div>
+
+          <div class="space-row" style="margin-bottom: 8px;">
+            <span class="letter">P</span>
+            <span class="dim-name">PITCH</span>
+            <span class="dim-type">condition</span>
+            <span class="dim-scale">1–10</span>
+          </div>
+
+          <div class="space-row" style="margin-bottom: 8px;">
+            <span class="letter">A</span>
+            <span class="dim-name">AMBIANCE</span>
+            <span class="dim-type">condition</span>
+            <span class="dim-scale">1–10 &nbsp;<span style="color: #5A5672; font-size: 11px;">← lower is better</span></span>
+          </div>
+
+          <div class="space-row curiosity-row" style="margin-bottom: 8px;">
+            <span class="letter" style="color: #58FCC8;">C</span>
+            <span class="dim-name" style="color: #58FCC8;">CURIOSITY</span>
+            <span class="dim-type">orientation</span>
+            <span class="dim-scale">binary</span>
+          </div>
+
+          <div class="space-row" style="margin-bottom: 0;">
+            <span class="letter">E</span>
+            <span class="dim-name">ENDURANCE</span>
+            <span class="dim-type">substrate</span>
+            <span class="dim-scale">1–10</span>
+          </div>
+        </div>
+
+        <p class="diagram-caption">Check orientation first. Then conditions. Then substrate.</p>
+      </div>
+
+      <!-- Resume body copy after diagram -->
+      <p class="turquoise-accent reveal" style="margin-top: 48px; margin-bottom: 16px;">C — Curiosity: Am I exploring or grasping?</p>
+
+      <p class="body-copy reveal">This is binary. Not a scale. Not a gradient.</p>
+
+      <p class="body-copy reveal">Exploring: internal inquiry, bottom-up reception, discovering what's actually present. "I feel the glutes firing." The system is online. Signal is receivable.</p>
+
+      <p class="body-copy reveal">Grasping: external seeking, top-down projection, hunting for what you expect. "I think I should feel glutes." The system is offline. Signal is distorted by expectation.</p>
+
+      <p class="body-copy reveal">If you are grasping, no other SPACE dimension functions accurately. The first intervention is always to restore exploring orientation before assessing anything else.</p>
+
+      <p class="body-copy reveal">This is why load works. Under sufficient resistance, the prefrontal cortex — grasping headquarters — runs out of metabolic fuel. The body repossesses glucose and oxygen for the motor and sensory systems that are actually handling the weight. Grasping becomes biologically unsustainable. What remains is direct perception.</p>
+
+      <p class="signal-line reveal">Check Curiosity first. Always.</p>
+
+      <p class="turquoise-accent reveal" style="margin-top: 48px; margin-bottom: 16px;">S — Salience: What's getting through?</p>
+
+      <p class="body-copy reveal">The editorial gate. Not everything your body signals reaches conscious awareness — Salience determines what gets forwarded. At dysfunction, nothing gets through (numbness) or everything floods (overwhelm). At optimal function, the right signals reach consciousness and the rest get filtered.</p>
+
+      <p class="body-copy reveal">Think of it as your nervous system's signal-to-noise ratio. Not how loud the signal is — how well your system discriminates between signal and noise.</p>
+
+      <p class="turquoise-accent reveal" style="margin-top: 48px; margin-bottom: 16px;">P — Pitch: How's my neural tempo?</p>
+
+      <p class="body-copy reveal">Processing speed. When your brain is firing quickly — well-rested, well-fueled, parasympathetically primed — signals arrive in high resolution. When firing is sluggish — sleep-deprived, underfed, sympathetically overloaded — the same signals arrive blurred.</p>
+
+      <p class="body-copy reveal">Pitch is biological, not motivational. You cannot will yourself into quick neural tempo. You sleep, eat, and recover into it.</p>
+
+      <p class="turquoise-accent reveal" style="margin-top: 48px; margin-bottom: 16px;">A — Ambiance: What's my noise floor?</p>
+
+      <p class="body-copy reveal">Every signal competes with background interference. Stress, inflammation, unresolved emotional load, environmental chaos — these raise the noise floor. The same signal that's clearly perceptible in a quiet system becomes inaudible in a noisy one.</p>
+
+      <p class="body-copy reveal">Lower is better. The intervention for high Ambiance is never "try harder to hear the signal." It's reduce the noise.</p>
+
+      <p class="turquoise-accent reveal" style="margin-top: 48px; margin-bottom: 16px;">E — Endurance: How deep are my reserves?</p>
+
+      <p class="body-copy reveal">Not cardiovascular stamina. Substrate capacity — the biological infrastructure that makes signaling possible. Mitochondrial density, ATP regeneration, neurotransmitter recycling, cellular hydration. The medium through which all signals propagate.</p>
+
+      <p class="body-copy reveal">When Endurance is robust, signals sustain. When depleted, even strong signals fade before they can be processed. This dimension changes slowly — over months, not days. It is the foundation beneath the foundation.</p>
+
+      <p class="body-copy reveal">Together these five dimensions compose a readable state. Check your SPACE before training. Curiosity first, then conditions, then substrate. The reading tells you what kind of session is available — not what you planned, but what your system can actually process today.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       MOVEMENT 5: WAVES — EMERGENCE
+       Background: #141B2E
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="movement-section section-bg-alt">
+    <div class="content-column">
+      <h2 class="reveal">WAVES</h2>
+      <p class="movement-subhead reveal">What Emerges</p>
+
+      <p class="body-copy reveal">WAVES is not a technique. It is what happens when foundation no longer requires thought.</p>
+
+      <p class="body-copy reveal"><span style="color: #58FCC8;">Wisdom</span> — pattern recognition across time. The capacity to know when to push and when to regulate, drawn not from a protocol but from accumulated signal history. You've felt this pattern before. Your body remembers what happened next.</p>
+
+      <p class="body-copy reveal"><span style="color: #58FCC8;">Adaptation</span> — real-time responsiveness. Movement adjusting mid-rep based on signals, not plans. The body modifying its own strategy faster than conscious thought can intervene.</p>
+
+      <p class="body-copy reveal"><span style="color: #58FCC8;">Variance</span> — controlled diversity within structure. The deliberate experimentation that prevents stagnation. Not random novelty. Intelligent variation emerging from signal literacy — your system testing its own edges because it can perceive them.</p>
+
+      <p class="body-copy reveal"><span style="color: #58FCC8;">Exploration</span> — following proprioceptive curiosity into territory the program didn't prescribe. Novel movement patterns emerging without instruction. The body composing with the vocabulary that BASE provided.</p>
+
+      <p class="body-copy reveal"><span style="color: #58FCC8;">Synergy</span> — the whole exceeding the sum. When the channels converge and something emerges that wasn't in any of the parts. Flow states. Creative expression. Integration that transcends component training.</p>
+
+      <p class="body-copy reveal">WAVES doesn't arrive because you earned it. It emerges because you cleared the interference that was preventing it. The capacity was already there. The framework was in the way.</p>
+
+      <p class="signal-line reveal">This is the self-canceling principle: BASEWAVES uses analytical structure to restore what analytical dominance buried. The framework succeeds when you no longer think about the framework. The scaffolding dissolves. What remains is what was always running.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       MOVEMENT 6: THE MECHANISM
+       Background: #0E1220 (default)
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="movement-section">
+    <div class="content-column">
+      <h2 class="reveal">The Mechanism</h2>
+      <p class="movement-subhead reveal">Why Load, Not Lecture</p>
+
+      <p class="body-copy reveal">Why a barbell and not a meditation cushion?</p>
+
+      <p class="body-copy reveal">Both quiet the prefrontal cortex. Both create conditions for direct perception. But load does something meditation cannot: it forces the issue.</p>
+
+      <p class="body-copy reveal">Meditation invites cognitive silencing. You sit, you breathe, you attempt to release the mental chatter. Some days it works. Some days the mind wins. The prefrontal cortex still has resources — it can maintain its projections if it chooses to.</p>
+
+      <p class="signal-line reveal">Load eliminates the choice.</p>
+
+      <p class="body-copy reveal">Under significant resistance, your brain must redirect glucose and oxygen from the prefrontal cortex to the motor and sensory systems handling the weight. The region responsible for planning, projecting, worrying, and grasping runs out of fuel. This isn't a technique. It's metabolic forcing — a biological constraint that makes cognitive override impossible.</p>
+
+      <p class="body-copy reveal">What remains when the override machinery shuts down is the body's native intelligence. The seven interoceptive channels come online. Tension patterns become readable. Compensation strategies reveal themselves. Signal clarity arrives not because you concentrated harder but because the machinery generating noise was metabolically silenced.</p>
+
+      <p class="body-copy reveal">Your body is competent material. Every cell participates in a collective intelligence that knows how to build, repair, adapt, and respond without your conscious instruction. Your wounds heal through coordination you never orchestrate. Your bones remodel along lines of force you never calculate. Your immune system solves problems you can't articulate.</p>
+
+      <p class="body-copy reveal">Training doesn't tell this intelligence what to do. It communicates goals. Each rep is a constraint — a goal-state provided to cellular collectives. The body navigates toward coherence within that constraint. You don't build capacity. You provide goals to an intelligent system and clear the interference that prevented it from expressing.</p>
+
+      <p class="body-copy reveal">The barbell is not a building tool. It is a communication portal. Progressive overload is not mechanical stress accumulation. It is goal provision — new constraints that maintain collective coherence. Without new goals, the system degrades. Novelty of constraint is what keeps the collective engaged.</p>
+
+      <p class="body-copy reveal">This is why the methodology works at a scale that instruction manuals and optimization programs cannot reach. You're not programming a machine. You're communicating with an intelligence that operates at cellular resolution. The body does the computing. Load creates the conditions.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       MOVEMENT 7: THREE CHANNELS
+       Background: #141B2E
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="movement-section section-bg-alt">
+    <div class="content-column">
+      <h2 class="reveal">Three Channels</h2>
+      <p class="movement-subhead reveal">How Signal Travels</p>
+
+      <p class="body-copy reveal">Signal doesn't move through a single pathway. It travels three channels simultaneously — and training addresses all three whether you're conscious of it or not.</p>
+
+      <!-- ═══ DIAGRAM 3: THE THREE Ms ═══ -->
+      <div class="diagram-container reveal">
+        <div class="three-ms-grid">
+          <div class="ms-block" style="border-color: #58FCC8;">
+            <div class="ms-header" style="color: #58FCC8;">METABOLISM</div>
+            <div class="ms-sub">The Fuel</div>
+          </div>
+
+          <div class="ms-block" style="border-color: #58FCC8;">
+            <div class="ms-header" style="color: #58FCC8;">MOVEMENT</div>
+            <div class="ms-sub">The Medium</div>
+          </div>
+
+          <div class="ms-block" style="border-color: #58FCC8;">
+            <div class="ms-header" style="color: #58FCC8;">MATRIX</div>
+            <div class="ms-sub">The Field</div>
+          </div>
+        </div>
+
+        <p class="diagram-caption">Signal travels all three simultaneously.</p>
+      </div>
+
+      <!-- Resume body copy -->
+      <p class="turquoise-accent reveal" style="margin-top: 48px; margin-bottom: 16px;">Metabolism — The Fuel</p>
+
+      <p class="body-copy reveal">Substrate, energy systems, recovery capacity. The biological infrastructure that makes signaling possible. You cannot read signals on a depleted system any more than you can hear music through dead speakers. Blood sugar stability, mitochondrial density, sleep architecture, hormonal rhythm — these aren't supplements to training. They are the medium through which training produces adaptation.</p>
+
+      <p class="body-copy reveal">Metabolic signal literacy means sensing hunger as information, not inconvenience. Recognizing fatigue as data, not weakness. Perceiving the difference between depletion and discomfort — because the intervention for each is opposite.</p>
+
+      <p class="turquoise-accent reveal" style="margin-top: 48px; margin-bottom: 16px;">Movement — The Medium</p>
+
+      <p class="body-copy reveal">Kinetic expression, motor patterns, force production. The channel most visible in training — the one the industrial model addresses almost exclusively. But movement in this framework is not output to be maximized. It is medium through which signal becomes legible.</p>
+
+      <p class="body-copy reveal">A squat is not a leg exercise. It is a whole-system signal event — balance, alignment, force sourcing, attention, metabolic demand, neural tempo, and pattern recognition converging in a single movement. The quality of the signal depends on the quality of the attention, not the quantity of the load.</p>
+
+      <p class="turquoise-accent reveal" style="margin-top: 48px; margin-bottom: 16px;">Matrix — The Field</p>
+
+      <p class="body-copy reveal">Patterns, processing environment, distributed intelligence. The body's own computational architecture — the extracellular matrix that stores mechanical memory, the fascial network that transmits force and sensation, the bioelectric gradients that coordinate cellular behavior.</p>
+
+      <p class="body-copy reveal">Matrix is not metaphor. It is structure. You are not translating experience through cognitive analogy. You are operating within a physical matrix of distributed intelligence that processes information at scales your conscious mind cannot access.</p>
+
+      <p class="body-copy reveal">When these three channels align — adequate fuel, clear medium, coherent field — signal literacy accelerates. When any channel is compromised, the system compensates. The compensation is itself a signal, readable through the framework. Nothing is wasted. Everything communicates.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       MOVEMENT 8: MAKING WAVES
+       Background: #0E1220 (default)
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="movement-section">
+    <div class="content-column">
+      <h2 class="reveal">Making WAVES</h2>
+
+      <p class="body-copy reveal">The phrase inverts itself.</p>
+
+      <p class="body-copy reveal">"Making waves" in common usage means disruption — confrontation, forcing change, refusing to go quietly. The energy is outward. Aggressive. Override-adjacent.</p>
+
+      <p class="signal-line reveal">Making WAVES in this methodology means the opposite.</p>
+
+      <p class="body-copy reveal">It means the emergence of Wisdom, Adaptation, Variance, Exploration, and Synergy from a foundation that no longer requires conscious maintenance. It means grace under pressure — not because you override harder, but because you've cleared the interference and the body's intelligence expresses freely.</p>
+
+      <p class="body-copy reveal">Making WAVES is what happens when training becomes composition. When load becomes language. When the barbell becomes portal and the body becomes the composer and the nervous system stops performing and starts expressing.</p>
+
+      <p class="turquoise-accent reveal">You don't make WAVES by pushing harder. You make WAVES by listening until the signal is louder than the noise. Then the waves make themselves.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       MOVEMENT 9: THE DEVELOPMENTAL ARC
+       Background: #141B2E
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="movement-section section-bg-alt">
+    <div class="content-column">
+      <h2 class="reveal">Three Stages</h2>
+      <p class="movement-subhead reveal">Conductor → Musician → Composer</p>
+
+      <p class="body-copy reveal">The framework dissolves as it develops. This is by design.</p>
+
+      <!-- ═══ DIAGRAM 4: DEVELOPMENTAL SPIRAL ═══ -->
+      <div class="diagram-container reveal">
+        <div class="spiral-diagram">
+          <!-- Resourcing arrow column -->
+          <div class="spiral-arrow-col">
+            <div class="spiral-arrow-line"></div>
+            <span class="spiral-arrow-label">resourcing ↕</span>
+          </div>
+
+          <!-- Blocks column -->
+          <div class="spiral-blocks-col">
+            <div class="spiral-block" style="border-color: #FFA565;">
+              <div class="stage-header" style="color: #FFA565;">CONDUCTOR</div>
+              <div class="stage-sub">follows the score</div>
+            </div>
+
+            <div class="spiral-down-arrow">↓</div>
+
+            <div class="spiral-block" style="border-color: #E8E3FF;">
+              <div class="stage-header" style="color: #E8E3FF;">MUSICIAN</div>
+              <div class="stage-sub">adapts the score</div>
+            </div>
+
+            <div class="spiral-down-arrow">↓</div>
+
+            <div class="spiral-block" style="border-color: #58FCC8;">
+              <div class="stage-header" style="color: #58FCC8;">COMPOSER</div>
+              <div class="stage-sub">writes the score</div>
+            </div>
+          </div>
+        </div>
+
+        <p class="diagram-caption">Not a ladder to climb. A spiral to navigate.</p>
+      </div>
+
+      <!-- Resume body copy -->
+      <p class="coral-accent reveal" style="margin-top: 48px; margin-bottom: 16px;">Conductor</p>
+
+      <p class="body-copy reveal">Follows the score. Needs explicit B→A→S→E sequencing — balance first, then alignment, then sourcing, then engaging. External cueing required. The coach provides structure because internal perception is still developing. Reps are deliberate. Tempo is prescribed. The analytical scaffolding is visible and necessary.</p>
+
+      <p class="body-copy reveal">This is not a lesser stage. This is foundation. Every musician was once a conductor. The precision of following before the freedom of interpreting.</p>
+
+      <p class="signal-line reveal" style="margin-top: 48px; margin-bottom: 16px;">Musician</p>
+
+      <p class="body-copy reveal">Adapts the score. Recognizes when to modify — when the written program needs adjustment based on what the body is actually sending. Internal monitoring emerging. BASE elements beginning to weave together rather than execute sequentially. SPACE becomes a self-assessment tool: "My Pitch is low today — I'll reduce complexity and build from foundation."</p>
+
+      <p class="body-copy reveal">The musician stage is where signal literacy becomes functional. You're no longer just perceiving signals — you're making decisions based on them.</p>
+
+      <p class="turquoise-accent reveal" style="margin-top: 48px; margin-bottom: 16px;">Composer</p>
+
+      <p class="body-copy reveal">Writes the score. Autonomous pattern recognition. The framework has dissolved into embodied capacity — you no longer think about Balancing, you simply balance. Attention flows to wherever signal requires without conscious routing. WAVES emerges: creative variation, intuitive adaptation, flow states accessible on demand.</p>
+
+      <p class="body-copy reveal">The composer doesn't reference the framework. The framework references the composer — it was built by observing what composers do naturally and reverse-engineering the path.</p>
+
+      <p class="body-copy reveal">The progression is not linear. Complexity can exceed capacity at any point — a new movement pattern, a life stressor, an injury. When it does, the response is not to push through. It is to resource — return to an earlier stage with dignity, re-establish foundation, and emerge again when capacity allows.</p>
+
+      <p class="body-copy reveal">A composer who resources to conductor for a movement they've never performed is not regressing. They are demonstrating the deepest form of signal literacy: knowing when the system needs structure and providing it without ego.</p>
+
+      <p class="signal-line reveal">This is the developmental arc. Not a ladder to climb. A spiral to navigate.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       CLOSING
+       Background: #080B14 (deepest)
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="movement-section section-bg-deep" style="padding: 16vh 0 10vh 0;">
+    <div class="content-column" style="text-align: center;">
+      <div class="accent-line reveal"></div>
+
+      <p class="body-copy reveal" style="color: #E8E3FF; margin-bottom: 40px;">Spatial Strength Training&trade; is not a program. It is a methodology for developing the capacity to read what your body has been sending all along.</p>
+
+      <p class="body-copy reveal">The 7-to-1 ratio was always there. The competent material was always there. The signal was always there.</p>
+
+      <p class="body-copy reveal">What wasn't there was the attention, the processing conditions, and the orientation required to receive it.</p>
+
+      <p class="signal-line reveal" style="margin-bottom: 40px;">BASE directs the attention. SPACE creates the conditions. WAVES emerges when the interference clears.</p>
+
+      <p class="turquoise-accent reveal" style="margin-bottom: 48px;">The barbell is waiting.</p>
+
+      <div class="reveal" style="margin-bottom: 32px;">
+        <a href="#" class="cta-link">Begin the Conversation →</a>
+      </div>
+
+      <div class="reveal">
+        <a href="mailto:signals@basewaves.com" class="signal-link">signals@basewaves.com</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════════════════ -->
+  <footer class="site-footer">
+    <img src="../assets/Basewaves_logo.svg" alt="BASEWAVES" class="footer-logo">
+
+    <nav class="footer-nav">
+      <a href="/">HOME</a>
+      <a href="/origin/">ORIGIN</a>
+      <a href="/method/">METHOD</a>
+      <a href="/signals/">SIGNALS</a>
+    </nav>
+
+    <p class="footer-contact">
+      <a href="mailto:greg@basewaves.com">greg@basewaves.com</a>
+      <span style="margin: 0 12px; color: #5A5672;">|</span>
+      <a href="tel:+15125853400">512.585.3400</a>
+    </p>
+
+    <p class="footer-tagline">You cannot think your way out of a sensing problem.</p>
+
+    <p class="footer-copyright">&copy; 2026 BASEWAVES</p>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       GSAP SCROLL CONTROLLER
+       ═══════════════════════════════════════════════════════════ -->
+  <script>
+    (function() {
+      const bgNeural = document.getElementById('bgNeural');
+      const grainOverlay = document.getElementById('grainOverlay');
+      const mobileDarken = document.getElementById('mobileDarken');
+
+      const gsapAvailable = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
+      const isMobile = window.innerWidth < 768;
+
+      // Scroll reveal observer
+      const revealElements = document.querySelectorAll('.reveal');
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.15 });
+
+      revealElements.forEach(el => revealObserver.observe(el));
+
+      if (gsapAvailable && !isMobile) {
+        // DESKTOP: GSAP animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Master timeline for opacity and grain (full scroll range)
+        const masterTL = gsap.timeline({
+          scrollTrigger: {
+            trigger: 'body',
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 1
+          }
+        });
+
+        // Background opacity: full scroll range (0.25 → 0.05)
+        masterTL.fromTo(bgNeural,
+          { opacity: 0.25 },
+          { opacity: 0.05, ease: 'none' },
+          0
+        );
+
+        // Grain opacity: full scroll range (0.08 → 0.02)
+        masterTL.fromTo(grainOverlay,
+          { opacity: 0.08 },
+          { opacity: 0.02, ease: 'none' },
+          0
+        );
+
+        // BLUR: Completes in first 33% of scroll
+        gsap.fromTo(bgNeural,
+          { filter: 'blur(10px)' },
+          {
+            filter: 'blur(0px)',
+            ease: 'none',
+            scrollTrigger: {
+              trigger: 'body',
+              start: 'top top',
+              end: '33% top',
+              scrub: 1
+            }
+          }
+        );
+
+        // Parallax: full scroll range
+        gsap.to(bgNeural, {
+          yPercent: -20,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: 'body',
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: true
+          }
+        });
+
+        // COLOR EMERGENCE: navy → dark teal in final 40% (60-100%)
+        gsap.to('.bg-base-color', {
+          backgroundColor: '#0C1A22',
+          ease: 'power2.inOut',
+          scrollTrigger: {
+            trigger: 'body',
+            start: '60% top',
+            end: '100% bottom',
+            scrub: 1
+          }
+        });
+
+      } else if (gsapAvailable && isMobile) {
+        // MOBILE: GSAP animations with darken overlay
+        gsap.registerPlugin(ScrollTrigger);
+
+        // No blur on mobile
+        bgNeural.style.filter = 'blur(0px)';
+
+        // Background opacity: full scroll range
+        gsap.fromTo(bgNeural,
+          { opacity: 0.25 },
+          {
+            opacity: 0.05,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: 'body',
+              start: 'top top',
+              end: 'bottom bottom',
+              scrub: 1
+            }
+          }
+        );
+
+        // Grain opacity: full scroll range
+        gsap.fromTo(grainOverlay,
+          { opacity: 0.08 },
+          {
+            opacity: 0.02,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: 'body',
+              start: 'top top',
+              end: 'bottom bottom',
+              scrub: 1
+            }
+          }
+        );
+
+        // MOBILE DARKEN: 0 for first 33%, then 0 → 0.7
+        gsap.fromTo(mobileDarken,
+          { opacity: 0 },
+          {
+            opacity: 0.7,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: 'body',
+              start: '33% top',
+              end: 'bottom bottom',
+              scrub: 1
+            }
+          }
+        );
+
+        // COLOR EMERGENCE (MOBILE): navy → dark teal in final 40%
+        gsap.to('.bg-base-color', {
+          backgroundColor: '#0C1A22',
+          ease: 'power2.inOut',
+          scrollTrigger: {
+            trigger: 'body',
+            start: '60% top',
+            end: '100% bottom',
+            scrub: 1
+          }
+        });
+
+      } else {
+        // FALLBACK: No GSAP
+        bgNeural.style.filter = 'blur(0px)';
+        bgNeural.style.opacity = '0.08';
+        grainOverlay.style.opacity = '0.02';
+      }
+
+    // Hamburger menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const navOverlay = document.getElementById('navOverlay');
+
+    if (hamburger && navOverlay) {
+      hamburger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        hamburger.classList.toggle('active');
+        navOverlay.classList.toggle('open');
+        document.body.style.overflow = navOverlay.classList.contains('open') ? 'hidden' : '';
+      });
+
+      navOverlay.addEventListener('click', function(e) {
+        if (e.target === navOverlay || e.target.tagName === 'A') {
+          hamburger.classList.remove('active');
+          navOverlay.classList.remove('open');
+          document.body.style.overflow = '';
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && navOverlay.classList.contains('open')) {
+          hamburger.classList.remove('active');
+          navOverlay.classList.remove('open');
+          document.body.style.overflow = '';
+        }
+      });
+    }
+
+    })();
+  </script>
+</body>
+</html>

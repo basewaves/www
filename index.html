@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BASEWAVES — Spatial Strength Training™</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Option B Typography (Cinzel + IBM Plex Mono) + Space Mono for UI -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- GSAP + ScrollTrigger CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'base-bg': '#0E1220',
+            'base-bg-dark': '#080B14',
+            'turquoise': '#58FCC8',
+            'coral': '#FFA565',
+            'text-primary': '#E8E3FF',
+            'text-secondary': '#9994B8',
+            'text-dim': '#5A5672',
+          },
+          fontFamily: {
+            'cinzel': ['Cinzel', 'serif'],
+            'ibm': ['IBM Plex Mono', 'monospace'],
+            'mono': ['Space Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    /* Base reset and background */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html, body {
+      background-color: transparent;
+      color: #E8E3FF;
+      overflow-x: hidden;
+    }
+    
+    /* Base color layer (z-index: -5) - must be below everything */
+    .bg-base-color {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #0E1220;
+      z-index: -5;
+    }
+    
+    /* Global Typography: Option B - The Architect */
+    h1, h2, h3, .headline {
+      font-family: 'Cinzel', serif;
+      font-weight: 400;
+    }
+    
+    .data-text, .body-text {
+      font-family: 'IBM Plex Mono', monospace;
+      letter-spacing: 0.15em;
+    }
+    
+    /* Fixed background layer (z-index: -4) - neural scaffolding texture */
+    .bg-neural {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 120%;
+      background-image: url('assets/neural_scaffolding_base.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: -4;
+      will-change: transform, filter, opacity;
+      filter: blur(10px);
+      opacity: 0.25;
+    }
+    
+    /* Grain overlay layer (z-index: -3) */
+    .grain-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('assets/grain.png');
+      background-repeat: repeat;
+      mix-blend-mode: overlay;
+      z-index: -3;
+      pointer-events: none;
+      will-change: opacity;
+      opacity: 0.08;
+    }
+    
+
+    /* Mobile darken overlay (z-index: -1) - between texture/grain and content */
+    .mobile-darken {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #0E1220;
+      z-index: -1;
+      pointer-events: none;
+      will-change: opacity;
+      opacity: 0;
+    }
+    
+    @media (max-width: 767px) {
+      .mobile-darken {
+        display: block;
+      }
+    }
+    
+    /* Logo hover glow */
+    .logo-container {
+      opacity: 0.7;
+      transition: opacity 0.3s ease, filter 0.3s ease;
+    }
+    
+    .logo-container:hover {
+      opacity: 1;
+      filter: drop-shadow(0 0 12px #58FCC8) drop-shadow(0 0 24px rgba(88, 252, 200, 0.4));
+    }
+    
+    /* Navigation links */
+    .nav-link {
+      font-family: 'Space Mono', monospace;
+      font-size: 14px;
+      color: #9994B8;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.3s ease;
+    }
+    
+    .nav-link:hover {
+      color: #58FCC8;
+    }
+    
+    .nav-separator {
+      color: #5A5672;
+      margin: 0 12px;
+    }
+    
+    /* Scroll indicator */
+    .scroll-indicator {
+      font-family: 'Space Mono', monospace;
+      font-size: 14px;
+      color: #5A5672;
+      letter-spacing: 0.1em;
+    }
+    
+    /* BASE Constellation */
+    .constellation-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .constellation-cluster {
+      position: relative;
+      width: 500px;
+      height: 400px;
+    }
+    
+    .base-letter {
+      font-family: 'Cinzel', serif;
+      font-weight: 500;
+      color: #E8E3FF;
+      position: absolute;
+      cursor: default;
+      transition: text-shadow 0.4s ease, color 0.4s ease, opacity 0.4s ease;
+      opacity: 0.85;
+      line-height: 1;
+    }
+    
+    .constellation-cluster:hover .base-letter {
+      text-shadow: 0 0 30px #58FCC8, 0 0 60px rgba(88, 252, 200, 0.5);
+      color: #ffffff;
+      opacity: 1;
+    }
+    
+    .base-letter.letter-s { 
+      font-size: 140px; 
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
+    .base-letter.letter-b { 
+      font-size: 120px; 
+      top: 15%;
+      left: 10%;
+    }
+    
+    .base-letter.letter-a { 
+      font-size: 96px; 
+      top: 65%;
+      left: 70%;
+    }
+    
+    .base-letter.letter-e { 
+      font-size: 108px; 
+      top: 25%;
+      left: 72%;
+    }
+    
+    .hz-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      color: #5A5672;
+      position: absolute;
+      bottom: 5%;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: color 0.4s ease;
+      letter-spacing: 0.05em;
+    }
+    
+    .constellation-cluster:hover .hz-label {
+      color: #58FCC8;
+    }
+    
+    /* Hero Section */
+    .hero-section {
+      padding: 30vh 0;
+      max-width: 900px;
+      margin: 0 auto;
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+    
+    .hero-headline {
+      font-family: 'Cinzel', serif;
+      font-weight: 400;
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.35;
+      color: #E8E3FF;
+      margin-bottom: 32px;
+    }
+    
+    .hero-subhead {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 18px;
+      letter-spacing: 0.15em;
+      color: #58FCC8;
+      margin-bottom: 40px;
+    }
+    
+    .hero-body {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 16px;
+      letter-spacing: 0.05em;
+      line-height: 1.8;
+      color: #9994B8;
+      max-width: 680px;
+      margin-bottom: 48px;
+    }
+    
+    .hero-cta {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 14px;
+      letter-spacing: 0.15em;
+      color: #58FCC8;
+      text-decoration: none;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+    
+    .hero-cta:hover {
+      color: #ffffff;
+      text-shadow: 0 0 20px rgba(88, 252, 200, 0.6);
+    }
+    
+    /* The Shift Section - Bilateral Contrast */
+    .shift-section {
+      padding: 120px 0;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    
+    /* 12-column grid with 48px minimum gutter */
+    .shift-grid {
+      display: grid;
+      grid-template-columns: 
+        minmax(0, 1fr)  /* col 1: margin */
+        repeat(4, minmax(0, 1fr))  /* cols 2-5: left content */
+        48px  /* col 6: gutter */
+        repeat(4, minmax(0, 1fr))  /* cols 7-10: right content */
+        minmax(0, 1fr);  /* col 11: margin */
+      row-gap: 0;
+    }
+    
+    /* Each row as a unified flex container for baseline alignment */
+    .shift-row {
+      display: contents;
+    }
+    
+    /* Left column: cols 2-5, right-aligned */
+    .shift-left {
+      grid-column: 2 / 6;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      min-height: 64px;
+      padding: 16px 0;
+    }
+    
+    /* Gutter: col 6 (48px dead zone) */
+    .shift-gutter {
+      grid-column: 6 / 7;
+    }
+    
+    /* Right column: cols 7-10, left-aligned */
+    .shift-right {
+      grid-column: 7 / 11;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 64px;
+      padding: 16px 0;
+    }
+    
+    .shift-text-left {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: clamp(12px, 1.4vw, 15px);
+      letter-spacing: 0.08em;
+      line-height: 1;
+      color: #5A5672;
+      white-space: nowrap;
+      text-align: right;
+    }
+    
+    .shift-text-right {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: clamp(12px, 1.4vw, 15px);
+      letter-spacing: 0.08em;
+      line-height: 1;
+      color: #E8E3FF;
+      white-space: nowrap;
+      text-align: left;
+    }
+    
+    /* The Promise Section */
+    .promise-section {
+      padding: 120px 40px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    .promise-headline {
+      font-family: 'Cinzel', serif;
+      font-weight: 400;
+      font-size: clamp(24px, 3.5vw, 36px);
+      line-height: 1.35;
+      color: #E8E3FF;
+      margin-bottom: 32px;
+    }
+    
+    .promise-body {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 18px;
+      letter-spacing: 0.1em;
+      line-height: 1.6;
+      color: #58FCC8;
+      margin-bottom: 40px;
+    }
+    
+    .promise-supporting {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 15px;
+      letter-spacing: 0.05em;
+      line-height: 1.8;
+      color: #9994B8;
+      max-width: 720px;
+    }
+    
+    /* Method Preview Section */
+    .method-section {
+      padding: 120px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .method-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    
+    .method-card {
+      position: relative;
+      background: rgba(14, 18, 32, 0.6);
+      border-radius: 12px;
+      padding: 40px 32px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .method-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 12px;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.02) 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+    
+    .method-card:hover {
+      transform: translateY(-4px);
+    }
+    
+    /* Card glow colors */
+    .method-card.card-base:hover {
+      box-shadow: 0 8px 32px rgba(88, 252, 200, 0.15), 0 0 0 1px rgba(88, 252, 200, 0.2);
+    }
+    
+    .method-card.card-space {
+      padding: 80px 64px; /* 2x internal padding */
+    }
+    
+    .method-card.card-space:hover {
+      box-shadow: 0 8px 32px rgba(192, 192, 192, 0.15), 0 0 0 1px rgba(192, 192, 192, 0.2);
+    }
+    
+    .method-card.card-waves:hover {
+      box-shadow: 0 8px 32px rgba(88, 252, 200, 0.15), 0 0 0 1px rgba(88, 252, 200, 0.2);
+    }
+    
+    .card-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    
+    .card-label.label-base { color: #58FCC8; }
+    .card-label.label-space { color: #C0C0C0; }
+    .card-label.label-waves { color: #58FCC8; }
+    
+    .card-body {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 14px;
+      letter-spacing: 0.05em;
+      line-height: 1.7;
+      color: #9994B8;
+    }
+    
+    /* CTA Section */
+    .cta-section {
+      padding: 20vh 40px 12vh 40px;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    .cta-headline {
+      font-family: 'Cinzel', serif;
+      font-weight: 400;
+      font-size: clamp(22px, 3vw, 32px);
+      line-height: 1.4;
+      color: #E8E3FF;
+      margin-bottom: 32px;
+    }
+    
+    .cta-body {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 15px;
+      letter-spacing: 0.05em;
+      line-height: 1.8;
+      color: #9994B8;
+      margin-bottom: 48px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      color: #0E1220;
+      background-color: #58FCC8;
+      padding: 16px 40px;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: filter 0.3s ease, transform 0.3s ease;
+    }
+    
+    .cta-button:hover {
+      filter: brightness(1.1);
+      transform: translateY(-2px);
+    }
+    
+    /* Footer */
+    .site-footer {
+      padding: 80px 40px 48px 40px;
+      text-align: center;
+    }
+    
+    .footer-logo {
+      height: 46px;
+      opacity: 0.5;
+      margin-bottom: 32px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .nav-logo {
+      height: 41px;
+      width: auto;
+    }
+    
+    .footer-nav {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      margin-bottom: 24px;
+    }
+    
+    .footer-nav a {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: #9994B8;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-nav a:hover {
+      color: #E8E3FF;
+    }
+    
+    .footer-tagline {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 14px;
+      letter-spacing: 0.05em;
+      color: #5A5672;
+      margin-bottom: 16px;
+    }
+    
+    .footer-copyright {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      color: #5A5672;
+    }
+    
+    /* ═══ HAMBURGER MENU (<1024px) ═══ */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      z-index: 60;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: #E8E3FF;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .nav-desktop {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(14, 18, 32, 0.85);
+      z-index: 55;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav-overlay.open {
+      display: flex;
+      opacity: 1;
+    }
+
+    .nav-overlay a {
+      font-family: 'Space Mono', monospace;
+      font-size: 18px;
+      letter-spacing: 0.15em;
+      color: #9994B8;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-overlay a:hover {
+      color: #58FCC8;
+    }
+
+    .nav-overlay a.active {
+      color: #E8E3FF;
+    }
+
+    @media (max-width: 1023px) {
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-desktop {
+        display: none;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .nav-overlay {
+        display: none !important;
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 1023px) {
+      .nav-logo {
+        height: 32px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      /* Disable all blur filters on mobile */
+      .bg-neural {
+        filter: none !important;
+        opacity: 0.08 !important;
+      }
+      
+      .grain-overlay {
+        opacity: 0.02 !important;
+      }
+      
+      /* Constellation */
+      .constellation-cluster {
+        width: 320px;
+        height: 280px;
+      }
+      
+      .base-letter.letter-s { font-size: 100px; }
+      .base-letter.letter-b { font-size: 86px; }
+      .base-letter.letter-e { font-size: 78px; }
+      .base-letter.letter-a { font-size: 70px; }
+      
+      /* Hero - reduced headline size */
+      .hero-section {
+        padding: 20vh 20px;
+      }
+      
+      .hero-headline {
+        font-size: clamp(1.75rem, 5vw, 2.5rem);
+      }
+      
+      /* The Shift - single column stacked */
+      .shift-section {
+        padding: 80px 20px;
+      }
+      
+      .shift-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+      }
+      
+      .shift-left,
+      .shift-right {
+        text-align: left;
+        padding: 0;
+        min-height: auto;
+        justify-content: flex-start;
+      }
+      
+      .shift-text-left,
+      .shift-text-right {
+        white-space: normal;
+        font-size: 14px;
+      }
+      
+      .shift-text-left {
+        color: #5A5672;
+      }
+      
+      .shift-text-right {
+        color: #E8E3FF;
+        margin-top: 8px;
+      }
+      
+      /* Promise */
+      .promise-section {
+        padding: 80px 20px;
+      }
+      
+      /* Method cards - full width with margins */
+      .method-section {
+        padding: 80px 24px;
+      }
+      
+      .method-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      
+      .method-card {
+        padding: 32px 24px;
+      }
+      
+      .method-card.card-space {
+        padding: 32px 24px;
+      }
+      
+      /* CTA - full width button with margins */
+      .cta-section {
+        padding: 15vh 24px 10vh 24px;
+      }
+      
+      .cta-button {
+        display: block;
+        width: calc(100% - 48px);
+        margin: 0 auto;
+        text-align: center;
+      }
+      
+      /* Footer - stacked nav */
+      .site-footer {
+        padding: 60px 24px 48px 24px;
+      }
+      
+      .footer-nav {
+        flex-direction: column;
+        gap: 16px;
+      }
+      
+      .footer-tagline {
+        font-size: 13px;
+      }
+    }
+    
+    @media (min-width: 768px) and (max-width: 1024px) {
+      .hero-section {
+        padding: 25vh 30px;
+      }
+      
+      .shift-left {
+        grid-column: 1 / 6;
+      }
+      
+      .shift-right {
+        grid-column: 7 / 12;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Base Color Layer (z-index: -5) -->
+  <div class="bg-base-color"></div>
+  
+  <!-- Neural Scaffolding Texture Layer (z-index: -4) -->
+  <div class="bg-neural" id="bgNeural"></div>
+  
+  <!-- Grain Overlay Layer (z-index: -3) -->
+  <div class="grain-overlay" id="grainOverlay"></div>
+  
+  <!-- Mobile Darken Overlay (z-index: -1) - only visible on mobile -->
+  <div class="mobile-darken" id="mobileDarken"></div>
+  
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-5 flex justify-between items-center">
+    <a href="#" class="logo-container block">
+      <img src="assets/Basewaves_logo.svg" alt="BASEWAVES" class="nav-logo">
+    </a>
+    
+    <div class="nav-desktop">
+      <a href="/origin/" class="nav-link">ORIGIN</a>
+      <span class="nav-separator">|</span>
+      <a href="/method/" class="nav-link">METHOD</a>
+      <span class="nav-separator">|</span>
+      <a href="/signals/" class="nav-link">SIGNALS</a>
+    </div>
+
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Nav Overlay -->
+  <div class="nav-overlay" id="navOverlay">
+    <a href="/" class="active">HOME</a>
+    <a href="/origin/">ORIGIN</a>
+    <a href="/method/">METHOD</a>
+    <a href="/signals/">SIGNALS</a>
+  </div>
+  
+  <!-- Scroll Progress Indicator -->
+  <div class="fixed bottom-6 right-6 z-50">
+    <span class="scroll-indicator" id="scrollCounter">000</span>
+  </div>
+  
+  <!-- Constellation: BASE -->
+  <section class="constellation-container">
+    <div class="constellation-cluster" id="baseCluster">
+      <span class="base-letter letter-s">S</span>
+      <span class="base-letter letter-b">B</span>
+      <span class="base-letter letter-a">A</span>
+      <span class="base-letter letter-e">E</span>
+      <span class="hz-label" id="hzLabel">5–10 Hz</span>
+    </div>
+  </section>
+  
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <h1 class="hero-headline">Most training targets muscles. BASEWAVES targets signals.</h1>
+    
+    <p class="hero-subhead">Same load. Different conversation.</p>
+    
+    <p class="hero-body">That off feeling you can't name. The plateau you can't break. The disconnect between effort and results. It's not a motivation problem. It's a signal problem.</p>
+    
+    <a href="/method/" class="hero-cta">Learn to Listen →</a>
+  </section>
+  
+  <!-- The Shift: Bilateral Contrast -->
+  <section class="shift-section">
+    <div class="shift-grid">
+      <!-- Row 1 -->
+      <div class="shift-left">
+        <p class="shift-text-left">Something's off.</p>
+      </div>
+      <div class="shift-right">
+        <p class="shift-text-right">Signal's noisy. I need sleep.</p>
+      </div>
+      
+      <!-- Row 2 -->
+      <div class="shift-left">
+        <p class="shift-text-left">More effort, same results.</p>
+      </div>
+      <div class="shift-right">
+        <p class="shift-text-right">Right signal, transformed results.</p>
+      </div>
+      
+      <!-- Row 3 -->
+      <div class="shift-left">
+        <p class="shift-text-left">Body as machine to force.</p>
+      </div>
+      <div class="shift-right">
+        <p class="shift-text-right">Body as intelligence to read.</p>
+      </div>
+      
+      <!-- Row 4 -->
+      <div class="shift-left">
+        <p class="shift-text-left">Reps you checkbox.</p>
+      </div>
+      <div class="shift-right">
+        <p class="shift-text-right">Signatures you compose.</p>
+      </div>
+      
+      <!-- Row 5 -->
+      <div class="shift-left">
+        <p class="shift-text-left">Lag between knowing and doing.</p>
+      </div>
+      <div class="shift-right">
+        <p class="shift-text-right">Intention and action in one breath.</p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- The Promise Section -->
+  <section class="promise-section">
+    <h2 class="promise-headline">This isn't just exercise. It's signal literacy.</h2>
+    
+    <p class="promise-body">Strength training becomes the antenna. Load becomes the amplifier. You become the composer.</p>
+    
+    <p class="promise-supporting">Your body has 7 interoceptive sensors for every 1 proprioceptive sensor. You are wired 7-to-1 for feeling state over position. Traditional training ignores this ratio. BASEWAVES develops it.</p>
+  </section>
+  
+  <!-- Method Preview Section -->
+  <section class="method-section" id="method">
+    <div class="method-grid">
+      <!-- Card 1: BASE -->
+      <div class="method-card card-base">
+        <div class="card-label label-base">BASE — Foundation</div>
+        <p class="card-body">Learning to Receive. BASE reframes chaotic stress into organized, processable load. Balance, Align, Source, Engage. Skip a step, build on noise.</p>
+      </div>
+      
+      <!-- Card 2: SPACE -->
+      <div class="method-card card-space">
+        <div class="card-label label-space">SPACE — Processing Capacity</div>
+        <p class="card-body">The environment where load is metabolized. Physical space in tissues. Mental bandwidth. Sensory access. Time to integrate. Substrate available for adaptation. If SPACE is compromised, emergence stalls.</p>
+      </div>
+      
+      <!-- Card 3: WAVES -->
+      <div class="method-card card-waves">
+        <div class="card-label label-waves">WAVES — Emergence</div>
+        <p class="card-body">Adaptive Response. What happens when BASE becomes automatic and SPACE is clear. You can't force this. You create the conditions for it. Then you allow the signal to resolve.</p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <h2 class="cta-headline">This is not for everyone. And that's by design.</h2>
+    
+    <p class="cta-body">If you're ready to stop forcing and start listening—if you sense there's more to your body than metrics can capture—this might be for you.</p>
+    
+    <a href="#contact" class="cta-button">Begin the Conversation →</a>
+  </section>
+  
+  <!-- Footer -->
+  <footer class="site-footer">
+    <img src="assets/Basewaves_logo.svg" alt="BASEWAVES" class="footer-logo">
+    
+    <nav class="footer-nav">
+      <a href="/origin/">ORIGIN</a>
+      <a href="/method/">METHOD</a>
+      <a href="/signals/">SIGNALS</a>
+    </nav>
+    
+    <p class="footer-tagline">You cannot think your way out of a sensing problem.</p>
+    
+    <p class="footer-copyright">© 2026 BASEWAVES</p>
+  </footer>
+  
+  <script>
+    (function() {
+      const bgNeural = document.getElementById('bgNeural');
+      const grainOverlay = document.getElementById('grainOverlay');
+      const mobileDarken = document.getElementById('mobileDarken');
+      const scrollCounter = document.getElementById('scrollCounter');
+      const hzLabel = document.getElementById('hzLabel');
+      const baseCluster = document.getElementById('baseCluster');
+      
+      const gsapAvailable = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
+      const isMobile = window.innerWidth < 768;
+      
+      if (gsapAvailable && !isMobile) {
+        // DESKTOP: GSAP animations
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Master timeline for opacity and grain (full scroll range)
+        const masterTL = gsap.timeline({
+          scrollTrigger: {
+            trigger: 'body',
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 1,
+            onUpdate: (self) => {
+              const progress = Math.round(self.progress * 100);
+              scrollCounter.textContent = String(progress).padStart(3, '0');
+            }
+          }
+        });
+        
+        // Background opacity: full scroll range (0-100%)
+        masterTL.fromTo(bgNeural, 
+          { opacity: 0.25 },
+          { opacity: 0.05, ease: 'none' },
+          0
+        );
+        
+        // Grain opacity: full scroll range (0-100%)
+        masterTL.fromTo(grainOverlay,
+          { opacity: 0.08 },
+          { opacity: 0.02, ease: 'none' },
+          0
+        );
+        
+        // BLUR: Separate timeline - completes in first 33% of scroll
+        gsap.fromTo(bgNeural,
+          { filter: 'blur(10px)' },
+          { 
+            filter: 'blur(0px)', 
+            ease: 'none',
+            scrollTrigger: {
+              trigger: 'body',
+              start: 'top top',
+              end: '33% top',
+              scrub: 1
+            }
+          }
+        );
+        
+        // Parallax: full scroll range
+        gsap.to(bgNeural, {
+          yPercent: -20,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: 'body',
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: true
+          }
+        });
+        
+        // COLOR EMERGENCE: base color shifts from navy to dark teal in final 40% (60-100%)
+        gsap.to('.bg-base-color', {
+          backgroundColor: '#0C1A22',
+          ease: 'power2.inOut',
+          scrollTrigger: {
+            trigger: 'body',
+            start: '60% top',
+            end: '100% bottom',
+            scrub: 1
+          }
+        });
+        
+      } else if (gsapAvailable && isMobile) {
+        // MOBILE: GSAP animations with darken overlay
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Scroll counter
+        ScrollTrigger.create({
+          trigger: 'body',
+          start: 'top top',
+          end: 'bottom bottom',
+          onUpdate: (self) => {
+            const progress = Math.round(self.progress * 100);
+            scrollCounter.textContent = String(progress).padStart(3, '0');
+          }
+        });
+        
+        // Mobile: No blur (disabled per mobile constraints)
+        bgNeural.style.filter = 'blur(0px)';
+        
+        // Background opacity: full scroll range
+        gsap.fromTo(bgNeural,
+          { opacity: 0.25 },
+          { 
+            opacity: 0.05, 
+            ease: 'none',
+            scrollTrigger: {
+              trigger: 'body',
+              start: 'top top',
+              end: 'bottom bottom',
+              scrub: 1
+            }
+          }
+        );
+        
+        // Grain opacity: full scroll range
+        gsap.fromTo(grainOverlay,
+          { opacity: 0.08 },
+          { 
+            opacity: 0.02, 
+            ease: 'none',
+            scrollTrigger: {
+              trigger: 'body',
+              start: 'top top',
+              end: 'bottom bottom',
+              scrub: 1
+            }
+          }
+        );
+        
+        // MOBILE DARKEN: Stays at 0 for first 33%, then 0 → 0.7 over remaining 67%
+        gsap.fromTo(mobileDarken,
+          { opacity: 0 },
+          { 
+            opacity: 0.7, 
+            ease: 'none',
+            scrollTrigger: {
+              trigger: 'body',
+              start: '33% top',
+              end: 'bottom bottom',
+              scrub: 1
+            }
+          }
+        );
+        
+        // COLOR EMERGENCE (MOBILE): base color shifts from navy to dark teal in final 40% (60-100%)
+        gsap.to('.bg-base-color', {
+          backgroundColor: '#0C1A22',
+          ease: 'power2.inOut',
+          scrollTrigger: {
+            trigger: 'body',
+            start: '60% top',
+            end: '100% bottom',
+            scrub: 1
+          }
+        });
+        
+      } else {
+        // FALLBACK: No GSAP available
+        bgNeural.style.filter = 'blur(0px)';
+        bgNeural.style.opacity = '0.08';
+        grainOverlay.style.opacity = '0.02';
+        
+        window.addEventListener('scroll', function() {
+          const scrollTop = window.scrollY;
+          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+          const progress = docHeight > 0 ? Math.round((scrollTop / docHeight) * 100) : 0;
+          scrollCounter.textContent = String(progress).padStart(3, '0');
+        });
+      }
+      
+      let hzTimeout;
+      baseCluster.addEventListener('mouseenter', function() {
+        clearTimeout(hzTimeout);
+        hzLabel.textContent = '50–60+ Hz';
+      });
+      
+      baseCluster.addEventListener('mouseleave', function() {
+        hzTimeout = setTimeout(function() {
+          hzLabel.textContent = '5–10 Hz';
+        }, 200);
+      });
+      
+    // Hamburger menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const navOverlay = document.getElementById('navOverlay');
+
+    if (hamburger && navOverlay) {
+      hamburger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        hamburger.classList.toggle('active');
+        navOverlay.classList.toggle('open');
+        document.body.style.overflow = navOverlay.classList.contains('open') ? 'hidden' : '';
+      });
+
+      navOverlay.addEventListener('click', function(e) {
+        if (e.target === navOverlay || e.target.tagName === 'A') {
+          hamburger.classList.remove('active');
+          navOverlay.classList.remove('open');
+          document.body.style.overflow = '';
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && navOverlay.classList.contains('open')) {
+          hamburger.classList.remove('active');
+          navOverlay.classList.remove('open');
+          document.body.style.overflow = '';
+        }
+      });
+    }
+
+    })();
+  </script>
+</body>
+</html>
