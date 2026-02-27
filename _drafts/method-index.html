@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Method — BASEWAVES</title>
+<meta name="description" content="The architecture of Spatial Strength Training. BASE directs attention. SPACE processes signal. WAVES emerges when interference clears.">
+<meta property="og:title" content="METHOD | BASEWAVES">
+<meta property="og:description" content="The architecture of Spatial Strength Training. BASE directs attention. SPACE processes signal. WAVES emerges when interference clears.">
+<meta property="og:type" content="website">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=IBM+Plex+Mono:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          'base-bg': '#0E1220',
+          'base-bg-alt': '#141B2E',
+          'base-bg-dark': '#080B14',
+          'turquoise': '#58FCC8',
+          'coral': '#FFA565',
+          'text-primary': '#E8E3FF',
+          'text-secondary': '#9994B8',
+          'text-dim': '#5A5672',
+        },
+        fontFamily: {
+          'cinzel': ['Cinzel', 'serif'],
+          'ibm': ['IBM Plex Mono', 'monospace'],
+          'mono': ['Space Mono', 'monospace'],
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+  :root {
+    --base-blue: #0E1220;
+    --deep-blue: #080B14;
+    --lighter-blue: #141B2E;
+    --primary-text: #E8E3FF;
+    --secondary-text: #9994B8;
+    --dim-text: #5A5672;
+    --turquoise: #58FCC8;
+    --coral: #FFA565;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--base-blue);
+    color: var(--primary-text);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 15px;
+    line-height: 1.7;
+    letter-spacing: 0.03em;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ========== STARFIELD ========== */
+  .starfield {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 2;
+    background:
+      radial-gradient(1px 1px at 10% 15%, rgba(232,227,255,0.4), transparent),
+      radial-gradient(1px 1px at 25% 35%, rgba(232,227,255,0.25), transparent),
+      radial-gradient(1.5px 1.5px at 40% 8%, rgba(232,227,255,0.35), transparent),
+      radial-gradient(1px 1px at 55% 42%, rgba(232,227,255,0.2), transparent),
+      radial-gradient(1px 1px at 70% 22%, rgba(88,252,200,0.12), transparent),
+      radial-gradient(1.5px 1.5px at 85% 55%, rgba(232,227,255,0.3), transparent),
+      radial-gradient(1px 1px at 15% 65%, rgba(232,227,255,0.2), transparent),
+      radial-gradient(1px 1px at 35% 78%, rgba(232,227,255,0.35), transparent),
+      radial-gradient(1.5px 1.5px at 60% 72%, rgba(232,227,255,0.25), transparent),
+      radial-gradient(1px 1px at 80% 85%, rgba(232,227,255,0.3), transparent),
+      radial-gradient(1px 1px at 92% 12%, rgba(232,227,255,0.2), transparent),
+      radial-gradient(1px 1px at 48% 92%, rgba(88,252,200,0.1), transparent),
+      radial-gradient(1px 1px at 5% 48%, rgba(232,227,255,0.3), transparent),
+      radial-gradient(1.5px 1.5px at 72% 38%, rgba(232,227,255,0.2), transparent),
+      radial-gradient(1px 1px at 30% 5%, rgba(232,227,255,0.35), transparent),
+      radial-gradient(1px 1px at 88% 72%, rgba(88,252,200,0.08), transparent);
+  }
+
+  h1, h2, h3, .headline { font-family: 'Cinzel', serif; font-weight: 400; }
+  .prose, p { font-family: 'IBM Plex Mono', monospace; font-weight: 300; letter-spacing: 0.03em; font-size: 15px; line-height: 1.85; }
+
+  /* ========== NAVIGATION ========== */
+  .site-nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    padding: 20px 24px; display: flex; justify-content: space-between; align-items: center;
+    transition: background 0.4s ease, backdrop-filter 0.4s ease;
+  }
+  .site-nav.scrolled { background: rgba(14, 18, 32, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+  .logo-container { opacity: 0.7; transition: opacity 0.3s ease, filter 0.3s ease; }
+  .logo-container:hover { opacity: 1; filter: drop-shadow(0 0 12px #58FCC8) drop-shadow(0 0 24px rgba(88, 252, 200, 0.4)); }
+  .nav-link { font-family: 'Space Mono', monospace; font-size: 15px; color: #9994B8; text-decoration: none; letter-spacing: 0.05em; transition: color 0.3s ease; }
+  .nav-link:hover { color: #58FCC8; }
+  .nav-link.active { color: #E8E3FF; }
+  .nav-separator { color: #5A5672; margin: 0 12px; }
+  .nav-desktop { display: flex; align-items: center; }
+
+  .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 28px; height: 28px; cursor: pointer; z-index: 60; background: none; border: none; padding: 0; }
+  .hamburger span { display: block; width: 100%; height: 2px; background-color: #E8E3FF; transition: transform 0.3s ease, opacity 0.3s ease; }
+  .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .nav-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(14, 18, 32, 0.92); z-index: 55; flex-direction: column; justify-content: center; align-items: center; gap: 40px; opacity: 0; transition: opacity 0.3s ease; }
+  .nav-overlay.open { display: flex; opacity: 1; }
+  .nav-overlay a { font-family: 'Space Mono', monospace; font-size: 18px; letter-spacing: 0.15em; color: #9994B8; text-decoration: none; transition: color 0.3s ease; }
+  .nav-overlay a:hover { color: #58FCC8; }
+  .nav-overlay a.active { color: #E8E3FF; }
+  @media (max-width: 1023px) { .nav-logo { height: 32px; } .hamburger { display: flex; } .nav-desktop { display: none; } }
+  @media (min-width: 1024px) { .nav-overlay { display: none !important; } }
+
+  /* ========== LAYOUT ========== */
+  .zone { position: relative; }
+  .zone-title { text-align: left; margin-bottom: 48px; }
+  .zone-title h2 { font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(24px, 3.5vw, 36px); color: #E8E3FF; letter-spacing: 0.06em; margin: 0 0 12px 0; line-height: 1.2; }
+  .zone-title .zone-subtag { font-family: 'Space Mono', monospace; font-size: 13px; color: #5A5672; letter-spacing: 0.1em; text-transform: uppercase; }
+  .zone-content { position: relative; z-index: 3; max-width: 900px; margin: 0 auto; padding: 0 40px; }
+  .zone-content-wide { position: relative; z-index: 3; max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+  .zone-bridge { position: relative; z-index: 3; text-align: center; padding: 48px 40px; max-width: 640px; margin: 0 auto; }
+  .zone-bridge p { font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: 14px; letter-spacing: 0.05em; color: #5A5672; line-height: 1.8; }
+
+  /* ========== SENSORIUM — CENTERED ========== */
+  .zone-entry {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: var(--base-blue);
+  }
+  .entry-tag { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim-text); margin-bottom: 24px; }
+  .entry-title { font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(36px, 5vw, 56px); letter-spacing: 0.1em; color: var(--primary-text); margin-bottom: 48px; }
+  .entry-prose { max-width: 560px; font-size: 15px; line-height: 1.9; color: var(--secondary-text); padding: 0 24px; }
+  .entry-prose em { color: var(--primary-text); font-style: normal; }
+  .scroll-hint { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dim-text); margin-top: 80px; animation: pulse-hint 2.5s ease infinite; }
+  .scroll-hint::after { content: ''; display: block; width: 1px; height: 40px; background: linear-gradient(180deg, var(--dim-text), transparent); margin: 12px auto 0; }
+  @keyframes pulse-hint { 0%, 100% { opacity: 0.35; } 50% { opacity: 0.7; } }
+
+  /* ========== TERRITORY BLOCKS ========== */
+  .territory-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .territory-block { border-left: 2px solid; padding: 28px 24px; }
+  .territory-block .block-header { font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 16px; letter-spacing: 0.1em; margin-bottom: 4px; }
+  .territory-block .block-subheader { font-family: 'IBM Plex Mono', monospace; font-weight: 400; font-size: 12px; letter-spacing: 0.05em; color: #9994B8; margin-bottom: 4px; }
+  .territory-block .block-nature { font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: 11px; letter-spacing: 0.05em; color: #5A5672; margin-bottom: 20px; }
+  .dimension-row { margin-bottom: 14px; }
+  .dimension-letter { font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 15px; letter-spacing: 0.1em; }
+  .dimension-name { font-family: 'IBM Plex Mono', monospace; font-weight: 400; font-size: 14px; color: #E8E3FF; letter-spacing: 0.03em; }
+  .dimension-question { font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: 12px; color: #9994B8; letter-spacing: 0.03em; display: block; margin-top: 2px; }
+  .dimension-type { font-family: 'IBM Plex Mono', monospace; font-weight: 400; font-size: 10px; color: #5A5672; letter-spacing: 0.1em; display: block; margin-top: 2px; }
+  .curiosity-divider { border: none; border-top: 1px solid rgba(232,227,255,0.12); margin: 16px 0; }
+  .curiosity-note { font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: 11px; color: #5A5672; letter-spacing: 0.03em; font-style: italic; }
+
+  /* ========== BASE GRID ========== */
+  .base-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; margin: 40px 0; }
+  .base-domain { padding: 28px; border-left: 1px solid rgba(88, 252, 200, 0.15); opacity: 0; transform: translateY(20px); }
+  .base-letter { font-family: 'Cinzel', serif; font-size: 32px; color: #58FCC8; opacity: 0.3; margin-bottom: 6px; line-height: 1; }
+  .base-name { font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 15px; letter-spacing: 0.08em; color: #E8E3FF; margin-bottom: 8px; }
+  .base-question { font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-style: italic; color: #58FCC8; opacity: 0.7; margin-bottom: 10px; }
+  .base-desc { font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: 14px; line-height: 1.7; color: #9994B8; }
+
+  /* ========== SVGs ========== */
+  .svg-container { width: 100%; margin: 48px 0; display: flex; justify-content: center; }
+  .svg-container svg { width: 100%; max-width: 900px; height: auto; overflow: visible; }
+  svg text { font-family: 'IBM Plex Mono', monospace; pointer-events: none; }
+  .mechanism-node { cursor: default; }
+  .node-core { transition: all 0.4s ease; }
+  .node-ring { transition: all 0.4s ease; }
+  .flow-path { stroke-dasharray: 6 4; stroke-dashoffset: 0; }
+  .feedback-path { stroke-dasharray: 3 6; stroke-dashoffset: 0; }
+  .space-bar-fill { transition: all 0.6s ease; }
+  .curiosity-indicator { transition: all 0.5s ease; }
+
+  /* ========== THREE Ms ========== */
+  .three-m-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .m-panel { border-left: 2px solid rgba(88, 252, 200, 0.15); padding: 24px 20px; opacity: 0; transform: translateY(20px); }
+  .m-panel .panel-header { font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 15px; letter-spacing: 0.1em; color: #58FCC8; margin-bottom: 4px; }
+  .m-panel .panel-nature { font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: 12px; color: #9994B8; letter-spacing: 0.03em; margin-bottom: 12px; }
+  .m-panel .panel-function { font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: 14px; color: #E8E3FF; letter-spacing: 0.03em; line-height: 1.7; }
+
+  /* ========== CALLOUT ========== */
+  .callout { border-left: 2px solid #FFA565; padding: 24px 32px; margin: 40px 0; background: rgba(255, 165, 101, 0.03); }
+  .callout p { font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: 16px; line-height: 1.9; color: #E8E3FF; }
+  .divider { width: 60px; height: 1px; background: #58FCC8; opacity: 0.4; margin: 56px 0; }
+  .divider-coral { width: 60px; height: 1px; background: #FFA565; opacity: 0.4; margin: 56px 0; }
+
+  /* ========== FOOTER ========== */
+  .site-footer { padding: 80px 40px 48px; text-align: center; }
+  .footer-logo { height: 46px; opacity: 0.5; margin: 0 auto 32px; display: block; }
+  .nav-logo { height: 41px; width: auto; }
+  .footer-nav { display: flex; justify-content: center; gap: 48px; margin-bottom: 24px; }
+  .footer-nav a { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #9994B8; text-decoration: none; transition: color 0.3s ease; }
+  .footer-nav a:hover { color: #E8E3FF; }
+  .footer-contact { font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.05em; color: #5A5672; margin-bottom: 16px; }
+  .footer-contact a { color: #5A5672; text-decoration: none; transition: color 0.3s ease; }
+  .footer-contact a:hover { color: #9994B8; }
+  .footer-tagline { font-family: 'IBM Plex Mono', monospace; font-size: 15px; letter-spacing: 0.05em; color: #5A5672; margin-bottom: 16px; }
+  .footer-copyright { font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.05em; color: #5A5672; }
+
+  .reveal { opacity: 0; transform: translateY(30px); }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 1023px) { .territory-grid, .three-m-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 767px) {
+    .zone-content, .zone-content-wide { padding: 0 24px; }
+    .zone-title { margin-bottom: 36px; }
+    .zone-title .zone-subtag { font-size: 11px; }
+    .zone-bridge { padding: 36px 24px; }
+    .territory-grid, .three-m-grid, .base-grid { grid-template-columns: 1fr; }
+    .svg-container svg { max-width: 100%; }
+    .site-footer { padding: 48px 24px; }
+    .footer-nav { flex-direction: column; gap: 16px; }
+    .reveal { transform: none !important; }
+  }
+  .no-js .reveal { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<div class="starfield"></div>
+
+<!-- Navigation -->
+<nav class="site-nav" id="siteNav">
+  <a href="/" class="logo-container block">
+    <img src="../assets/Basewaves_logo.svg" alt="BASEWAVES" class="nav-logo">
+  </a>
+  <div class="nav-desktop">
+    <a href="/" class="nav-link">HOME</a>
+    <span class="nav-separator">|</span>
+    <a href="/origin/" class="nav-link">ORIGIN</a>
+    <span class="nav-separator">|</span>
+    <a href="/method/" class="nav-link active">METHOD</a>
+    <span class="nav-separator">|</span>
+    <a href="/signals/" class="nav-link">SIGNALS</a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-overlay" id="navOverlay">
+  <a href="/">HOME</a>
+  <a href="/origin/">ORIGIN</a>
+  <a href="/method/" class="active">METHOD</a>
+  <a href="/signals/">SIGNALS</a>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     ZONE 0: SENSORIUM — centered
+     ═══════════════════════════════════════════════════════════ -->
+<section class="zone zone-entry">
+  <div style="position: relative; z-index: 3;">
+    <div class="entry-tag reveal">BASEWAVES</div>
+    <h1 class="entry-title reveal">Method</h1>
+    <p class="entry-prose reveal">
+      Third set. The weight is significant enough that your to-do list stops mid-sentence. Your breath finds a rhythm you didn't choose. Somewhere in the descent, a signal — not from your mind — tells you exactly when to reverse. <em>You didn't think that. You received it.</em> That reception is the capacity this method develops.
+    </p>
+    <div class="scroll-hint reveal">Navigate the architecture</div>
+  </div>
+</section>
+
+
+<!-- Bridge: Sensorium → Problem -->
+<div class="zone" style="background: linear-gradient(to bottom, #0E1220, #141B2E);">
+  <div class="zone-bridge reveal"><p>That signal was always there. The question is why you couldn't hear it.</p></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     ZONE 1: THE PROBLEM — 7:1
+     ═══════════════════════════════════════════════════════════ -->
+<section class="zone" style="background-color: #141B2E; padding: 80px 0 100px 0;">
+  <div class="zone-content">
+    <div class="zone-title reveal">
+      <h2>The Pivot</h2>
+      <span class="zone-subtag">What training has been — and what it becomes</span>
+    </div>
+    <p class="reveal prose" style="color: #9994B8; margin-bottom: 32px; max-width: 680px;">
+      Your fascia contains seven interoceptive nerve endings for every one proprioceptive ending. Seven receptors sensing <em style="color: #E8E3FF; font-style: normal;">how you are</em> for every one tracking <em style="color: #E8E3FF; font-style: normal;">where you are</em>. You are biologically wired 7-to-1 for feeling state over tracking position.
+    </p>
+
+    <div class="reveal" style="text-align: center; margin-bottom: 48px;">
+      <span style="font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(48px, 8vw, 96px); color: #58FCC8; letter-spacing: 0.05em; display: block; line-height: 1;">7:1</span>
+      <p style="font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: 14px; color: #5A5672; letter-spacing: 0.05em; margin-top: 16px; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.7;">
+        Interoceptive to proprioceptive. Wired for feeling state, not tracking position.
+      </p>
+    </div>
+
+    <p class="reveal prose" style="color: #9994B8; margin-bottom: 24px; max-width: 680px;">
+      Traditional training inverts this ratio entirely. Position cues dominate. The body becomes a machine receiving instructions. The seven-to-one system — the one that governs adaptation, recovery, and coherent force production — goes dark.
+    </p>
+
+    <p class="reveal prose" style="max-width: 680px;">
+      <span style="color: #FFA565;">BASEWAVES restores the ratio.</span> Not by abandoning load — load is the portal. By restoring attention to what load reveals.
+    </p>
+  </div>
+</section>
+
+
+<!-- Bridge -->
+<div class="zone" style="background: linear-gradient(to bottom, #141B2E, #0E1220);">
+  <div class="zone-bridge reveal"><p>Not by adding something new. By removing what was in the way.</p></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     ZONE 2: THE MECHANISM — SVG Chain
+     ═══════════════════════════════════════════════════════════ -->
+<section class="zone" style="background-color: #0E1220; padding: 80px 0;">
+  <div class="zone-content">
+    <div class="zone-title reveal">
+      <h2>The Mechanism</h2>
+      <span class="zone-subtag">Load → Tension → Signal → Processing → Emergence</span>
+    </div>
+    <p class="reveal prose" style="color: #9994B8; margin-bottom: 16px; max-width: 680px; text-align: center; margin-left: auto; margin-right: auto;">
+      Three events. Always in this order. Load arrives as external force. Tension emerges where force meets structure. Signal is how tension communicates through neuromuscular pathways — felt sense.
+    </p>
+  </div>
+
+  <div class="zone-content-wide">
+    <div class="svg-container reveal">
+      <svg id="mechanism-chain" viewBox="0 0 900 340" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="glow-turquoise" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+            <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+          </filter>
+          <filter id="glow-coral" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
+            <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+          </filter>
+          <marker id="arrow-turquoise" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#58FCC8" fill-opacity="0.5"/></marker>
+          <marker id="arrow-coral" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#FFA565" fill-opacity="0.4"/></marker>
+          <marker id="arrow-dim" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#9994B8" fill-opacity="0.3"/></marker>
+        </defs>
+
+        <!-- Flow paths -->
+        <line class="flow-path" x1="118" y1="140" x2="212" y2="140" stroke="#9994B8" stroke-width="1" stroke-opacity="0.3" marker-end="url(#arrow-dim)"/>
+        <line class="flow-path" x1="288" y1="140" x2="367" y2="140" stroke="#9994B8" stroke-width="1" stroke-opacity="0.3" marker-end="url(#arrow-dim)"/>
+        <line class="flow-path" x1="438" y1="140" x2="512" y2="140" stroke="#58FCC8" stroke-width="1" stroke-opacity="0.4" marker-end="url(#arrow-turquoise)"/>
+        <line class="flow-path" x1="588" y1="140" x2="642" y2="140" stroke="#58FCC8" stroke-width="1.5" stroke-opacity="0.5" marker-end="url(#arrow-turquoise)"/>
+        <line class="flow-path" x1="758" y1="140" x2="812" y2="140" stroke="#FFA565" stroke-width="1" stroke-opacity="0.4" marker-end="url(#arrow-coral)"/>
+
+        <!-- Feedback arc -->
+        <path class="feedback-path" d="M 850 170 C 860 260, 750 290, 650 290 C 500 290, 350 290, 250 270 C 170 255, 100 220, 80 170" fill="none" stroke="#FFA565" stroke-width="1" stroke-opacity="0.2" marker-end="url(#arrow-coral)"/>
+        <text x="450" y="308" text-anchor="middle" font-size="12" fill="#FFA565" fill-opacity="0.35" letter-spacing="0.15em" font-family="IBM Plex Mono, monospace">SIGNAL FEEDS BACK</text>
+
+        <!-- LOAD -->
+        <g class="mechanism-node" data-node="load" transform="translate(80, 140)">
+          <circle class="node-ring" r="36" fill="none" stroke="#9994B8" stroke-width="0.5" stroke-opacity="0.2"/>
+          <circle class="node-core" r="4" fill="#9994B8" fill-opacity="0.6"/>
+          <text class="node-label" y="-48" text-anchor="middle" font-size="14" fill="#9994B8" fill-opacity="0.7" letter-spacing="0.12em" font-family="IBM Plex Mono, monospace">LOAD</text>
+          <text y="60" text-anchor="middle" font-size="11" fill="#5A5672" fill-opacity="0.6" letter-spacing="0.04em" font-family="IBM Plex Mono, monospace">external force</text>
+        </g>
+
+        <!-- TENSION -->
+        <g class="mechanism-node" data-node="tension" transform="translate(250, 140)">
+          <circle class="node-ring" r="36" fill="none" stroke="#9994B8" stroke-width="0.5" stroke-opacity="0.2"/>
+          <circle class="node-core" r="4" fill="#9994B8" fill-opacity="0.6"/>
+          <text class="node-label" y="-48" text-anchor="middle" font-size="13" fill="#9994B8" fill-opacity="0.7" letter-spacing="0.12em" font-family="IBM Plex Mono, monospace">TENSION</text>
+          <text y="60" text-anchor="middle" font-size="11" fill="#5A5672" fill-opacity="0.6" letter-spacing="0.04em" font-family="IBM Plex Mono, monospace">force meets structure</text>
+        </g>
+
+        <!-- SIGNAL -->
+        <g class="mechanism-node" data-node="signal" transform="translate(405, 140)">
+          <circle class="node-ring" r="32" fill="none" stroke="#58FCC8" stroke-width="0.5" stroke-opacity="0.25"/>
+          <circle class="node-core" r="5" fill="#58FCC8" fill-opacity="0.7"/>
+          <text class="node-label" y="-46" text-anchor="middle" font-size="14" fill="#58FCC8" fill-opacity="0.8" letter-spacing="0.12em" font-family="IBM Plex Mono, monospace">SIGNAL</text>
+          <text y="58" text-anchor="middle" font-size="11" fill="#5A5672" fill-opacity="0.6" letter-spacing="0.04em" font-family="IBM Plex Mono, monospace">felt sense</text>
+        </g>
+
+        <!-- BASE -->
+        <g class="mechanism-node" data-node="base" transform="translate(550, 140)">
+          <circle class="node-ring" r="36" fill="none" stroke="#58FCC8" stroke-width="0.8" stroke-opacity="0.3"/>
+          <circle class="node-core" r="6" fill="#58FCC8" fill-opacity="0.5" filter="url(#glow-turquoise)"/>
+          <text class="node-label" y="-48" text-anchor="middle" font-size="14" fill="#58FCC8" fill-opacity="0.9" font-weight="500" letter-spacing="0.12em" font-family="IBM Plex Mono, monospace">BASE</text>
+          <text y="60" text-anchor="middle" font-size="11" fill="#58FCC8" fill-opacity="0.4" letter-spacing="0.04em" font-family="IBM Plex Mono, monospace">directs attention</text>
+        </g>
+
+        <!-- SPACE -->
+        <g class="mechanism-node" data-node="space" transform="translate(700, 140)">
+          <circle class="node-ring" r="42" fill="none" stroke="#E8E3FF" stroke-width="1" stroke-opacity="0.3"/>
+          <circle r="32" fill="none" stroke="#E8E3FF" stroke-width="0.3" stroke-opacity="0.15"/>
+          <circle class="node-core" r="7" fill="#E8E3FF" fill-opacity="0.6"/>
+          <text class="node-label" y="-54" text-anchor="middle" font-size="15" fill="#E8E3FF" fill-opacity="1" font-weight="500" letter-spacing="0.12em" font-family="IBM Plex Mono, monospace">SPACE</text>
+          <text y="66" text-anchor="middle" font-size="11" fill="#E8E3FF" fill-opacity="0.4" letter-spacing="0.04em" font-family="IBM Plex Mono, monospace">processes signal</text>
+        </g>
+
+        <!-- WAVES -->
+        <g class="mechanism-node" data-node="waves" transform="translate(850, 140)">
+          <circle class="node-ring" r="36" fill="none" stroke="#FFA565" stroke-width="0.8" stroke-opacity="0.25"/>
+          <circle class="node-core" r="6" fill="#FFA565" fill-opacity="0.5" filter="url(#glow-coral)"/>
+          <text class="node-label" y="-48" text-anchor="middle" font-size="14" fill="#FFA565" fill-opacity="0.9" font-weight="500" letter-spacing="0.12em" font-family="IBM Plex Mono, monospace">WAVES</text>
+          <text y="60" text-anchor="middle" font-size="11" fill="#FFA565" fill-opacity="0.4" letter-spacing="0.04em" font-family="IBM Plex Mono, monospace">reflects intention</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <div class="zone-content">
+    <p class="reveal prose" style="text-align: center; color: #9994B8; max-width: 600px; margin: 0 auto;">
+      This is <span style="color: #58FCC8;">tension channeling</span> — tension processed with attention channeled toward intention. The loop is continuous. Not episodic. Stress arrives from life. The architecture metabolizes it.
+    </p>
+  </div>
+</section>
+
+
+<!-- Bridge -->
+<div class="zone" style="background: linear-gradient(to bottom, #0E1220, #141B2E);">
+  <div class="zone-bridge reveal"><p>The mechanism runs continuously. The architecture gives it structure.</p></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     ZONE 3: ARCHITECTURE — BASE + SPACE + WAVES
+     ═══════════════════════════════════════════════════════════ -->
+<section class="zone" style="background-color: #141B2E; padding: 80px 0;">
+  <div class="zone-content">
+    <div class="zone-title reveal">
+      <h2>The Architecture</h2>
+      <span class="zone-subtag">BASE → SPACE → WAVES</span>
+    </div>
+    <p class="reveal prose" style="color: #9994B8; margin-bottom: 48px; max-width: 720px;">
+      The architecture uses left-hemisphere structure to restore right-hemisphere primacy. Analytical scaffolding designed to dissolve analytical control. It succeeds when you no longer think about it.
+    </p>
+
+    <!-- Territory Blocks -->
+    <div class="territory-grid reveal" style="margin-bottom: 64px;">
+      <div class="territory-block" style="border-color: rgba(88,252,200,0.15);">
+        <div class="block-header" style="color: #58FCC8;">BASE</div>
+        <div class="block-subheader">The Attention Framework</div>
+        <div class="block-nature">Mental model — directs attention to signal</div>
+        <div class="dimension-row"><span class="dimension-letter" style="color: #58FCC8;">B</span><span class="dimension-name"> — Balancing</span><span class="dimension-question">Where is equilibrium?</span></div>
+        <div class="dimension-row"><span class="dimension-letter" style="color: #58FCC8;">A</span><span class="dimension-name"> — Aligning</span><span class="dimension-question">What's my structural organization?</span></div>
+        <div class="dimension-row"><span class="dimension-letter" style="color: #58FCC8;">S</span><span class="dimension-name"> — Sourcing</span><span class="dimension-question">Where does force originate?</span></div>
+        <div class="dimension-row"><span class="dimension-letter" style="color: #58FCC8;">E</span><span class="dimension-name"> — Engaging</span><span class="dimension-question">What is attention perceiving?</span></div>
+      </div>
+
+      <div class="territory-block" style="border-color: rgba(232,227,255,0.15);">
+        <div class="block-header" style="color: #E8E3FF;">SPACE</div>
+        <div class="block-subheader">The Processing Mechanism</div>
+        <div class="block-nature">The mechanism — processes signal</div>
+        <div class="dimension-row"><span class="dimension-letter" style="color: #E8E3FF;">C</span><span class="dimension-name"> — Curiosity</span><span class="dimension-question">Exploring or grasping?</span><span class="dimension-type">ORIENTATION · BINARY · CHECK FIRST</span></div>
+        <hr class="curiosity-divider">
+        <p class="curiosity-note" style="margin-bottom: 16px;">If grasping, the system is offline.</p>
+        <div class="dimension-row"><span class="dimension-letter" style="color: #E8E3FF;">E</span><span class="dimension-name"> — Estate</span><span class="dimension-type">SUBSTRATE · 1-10</span></div>
+        <div class="dimension-row"><span class="dimension-letter" style="color: #E8E3FF;">S</span><span class="dimension-name"> — Salience</span><span class="dimension-type">CONDITION · 1-10</span></div>
+        <div class="dimension-row"><span class="dimension-letter" style="color: #E8E3FF;">P</span><span class="dimension-name"> — Pitch</span><span class="dimension-type">CONDITION · 1-10</span></div>
+        <div class="dimension-row"><span class="dimension-letter" style="color: #E8E3FF;">A</span><span class="dimension-name"> — Ambiance</span><span class="dimension-type">CONDITION · 1-10 · INVERTED</span></div>
+      </div>
+
+      <div class="territory-block" style="border-color: rgba(255,165,101,0.15);">
+        <div class="block-header" style="color: #FFA565;">WAVES</div>
+        <div class="block-subheader">Emergent Integration</div>
+        <div class="block-nature">Mental model — reflects emergent intention</div>
+        <p style="font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: 14px; color: #9994B8; letter-spacing: 0.03em; line-height: 1.75; margin-top: 8px;">
+          Not constructed. What remains when interference clears. Multi-timeline integration — session rhythms, weekly patterns, developmental arcs — reflecting back as coherent intention.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- BASE Expanded -->
+  <div class="zone-content-wide">
+    <div class="base-grid">
+      <div class="base-domain" data-base="B">
+        <div class="base-letter">B</div>
+        <div class="base-name">Balancing</div>
+        <div class="base-question">"Where is equilibrium?"</div>
+        <p class="base-desc">Sense what's present before adding load. Is your nervous system calm or defending? Are signals sharp or diffuse? You don't force programs onto depleted biology.</p>
+      </div>
+      <div class="base-domain" data-base="A">
+        <div class="base-letter">A</div>
+        <div class="base-name">Aligning</div>
+        <div class="base-question">"What's my structural organization?"</div>
+        <p class="base-desc">When joints align and force vectors optimize, the limbic system trusts the structure. Compensation noise drops. The kinetic chain clarifies — not forced, but cleared.</p>
+      </div>
+      <div class="base-domain" data-base="S">
+        <div class="base-letter">S</div>
+        <div class="base-name">Sourcing</div>
+        <div class="base-question">"Where does force originate?"</div>
+        <p class="base-desc">Feet on ground. Breath arriving. Where power actually generates — moment by moment, rep by rep. Real-time scanning at micro-scale, not developmental strategy.</p>
+      </div>
+      <div class="base-domain" data-base="E">
+        <div class="base-letter">E</div>
+        <div class="base-name">Engaging</div>
+        <div class="base-question">"What is attention perceiving?"</div>
+        <p class="base-desc">The meta-skill. Are you perceiving, or executing a checklist? Attention to attention — the signal about signal. This makes the other three conscious rather than mechanical.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Bridge -->
+<div class="zone" style="background: linear-gradient(to bottom, #141B2E, #0E1220);">
+  <div class="zone-bridge reveal"><p>BASE tells you where to point awareness. SPACE tells you what you find there.</p></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     ZONE 4: SPACE — SVG Visualizer
+     ═══════════════════════════════════════════════════════════ -->
+<section class="zone" style="background-color: #0E1220; padding: 80px 0;">
+  <div class="zone-content">
+    <div class="zone-title reveal">
+      <h2>Curiosity</h2>
+      <span class="zone-subtag">The system validity check</span>
+    </div>
+    <p class="reveal prose" style="color: #E8E3FF; margin-bottom: 8px; max-width: 680px;">
+      Check Curiosity first. Always. If the system is grasping — seeking pre-existing answers, projecting expectations — nothing else functions. The gate must be open before signal flows.
+    </p>
+  </div>
+
+  <div class="zone-content-wide">
+    <div class="svg-container reveal">
+      <svg id="space-visualizer" viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="salience-fill" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#58FCC8" stop-opacity="0.6"/><stop offset="100%" stop-color="#58FCC8" stop-opacity="0.2"/></linearGradient>
+          <linearGradient id="pitch-fill" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#58FCC8" stop-opacity="0.5"/><stop offset="100%" stop-color="#58FCC8" stop-opacity="0.15"/></linearGradient>
+          <linearGradient id="ambiance-fill" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#9994B8" stop-opacity="0.5"/><stop offset="100%" stop-color="#9994B8" stop-opacity="0.15"/></linearGradient>
+          <linearGradient id="estate-fill" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#E8E3FF" stop-opacity="0.4"/><stop offset="100%" stop-color="#E8E3FF" stop-opacity="0.1"/></linearGradient>
+        </defs>
+
+        <!-- CURIOSITY GATE -->
+        <g class="space-dimension" data-dim="curiosity" transform="translate(400, 45)">
+          <text x="0" y="-22" text-anchor="middle" font-size="12" fill="#E8E3FF" fill-opacity="0.5" letter-spacing="0.2em" font-family="IBM Plex Mono, monospace">ORIENTATION — CHECK FIRST</text>
+          <rect x="-160" y="-6" width="320" height="12" rx="6" fill="none" stroke="#E8E3FF" stroke-width="0.5" stroke-opacity="0.2"/>
+          <rect x="-160" y="-6" width="160" height="12" rx="6" fill="#5A5672" fill-opacity="0.15"/>
+          <text x="-80" y="34" text-anchor="middle" font-size="13" fill="#5A5672" fill-opacity="0.5" letter-spacing="0.1em" font-family="IBM Plex Mono, monospace">GRASPING</text>
+          <text x="-80" y="50" text-anchor="middle" font-size="11" fill="#5A5672" fill-opacity="0.3" font-family="IBM Plex Mono, monospace">system offline</text>
+          <rect x="0" y="-6" width="160" height="12" rx="6" fill="#58FCC8" fill-opacity="0.12"/>
+          <text x="80" y="34" text-anchor="middle" font-size="13" fill="#58FCC8" fill-opacity="0.7" letter-spacing="0.1em" font-family="IBM Plex Mono, monospace">EXPLORING</text>
+          <text x="80" y="50" text-anchor="middle" font-size="11" fill="#58FCC8" fill-opacity="0.4" font-family="IBM Plex Mono, monospace">system online</text>
+          <circle class="curiosity-indicator" cx="80" cy="0" r="5" fill="#58FCC8" fill-opacity="0.8"/>
+          <text x="-200" y="5" text-anchor="end" font-size="16" fill="#E8E3FF" fill-opacity="0.9" font-weight="500" letter-spacing="0.1em" font-family="IBM Plex Mono, monospace">C</text>
+        </g>
+
+        <!-- Divider -->
+        <line x1="200" y1="85" x2="600" y2="85" stroke="#E8E3FF" stroke-width="0.3" stroke-opacity="0.15"/>
+        <text x="400" y="108" text-anchor="middle" font-size="11" fill="#E8E3FF" fill-opacity="0.3" letter-spacing="0.15em" font-family="IBM Plex Mono, monospace">SUBSTRATE & CONDITIONS</text>
+
+        <!-- ESTATE -->
+        <g class="space-dimension" data-dim="estate" transform="translate(0, 155)">
+          <text x="195" y="5" text-anchor="end" font-size="16" fill="#E8E3FF" fill-opacity="0.7" font-weight="500" letter-spacing="0.1em" font-family="IBM Plex Mono, monospace">E</text>
+          <text x="212" y="5" text-anchor="start" font-size="13" fill="#E8E3FF" fill-opacity="0.5" letter-spacing="0.06em" font-family="IBM Plex Mono, monospace">ESTATE</text>
+          <text x="610" y="5" text-anchor="start" font-size="12" fill="#5A5672" fill-opacity="0.5" letter-spacing="0.04em" font-family="IBM Plex Mono, monospace">"What is my biological estate?"</text>
+          <rect class="space-bar-track" x="240" y="-4" width="350" height="8" rx="4" fill="#E8E3FF" fill-opacity="0.06"/>
+          <rect class="space-bar-fill" data-target="280" x="240" y="-4" width="0" height="8" rx="4" fill="url(#estate-fill)"/>
+        </g>
+
+        <!-- SALIENCE -->
+        <g class="space-dimension" data-dim="salience" transform="translate(0, 215)">
+          <text x="195" y="5" text-anchor="end" font-size="16" fill="#58FCC8" fill-opacity="0.9" font-weight="500" letter-spacing="0.1em" font-family="IBM Plex Mono, monospace">S</text>
+          <text x="212" y="5" text-anchor="start" font-size="13" fill="#58FCC8" fill-opacity="0.6" letter-spacing="0.06em" font-family="IBM Plex Mono, monospace">SALIENCE</text>
+          <text x="610" y="5" text-anchor="start" font-size="12" fill="#5A5672" fill-opacity="0.5" letter-spacing="0.04em" font-family="IBM Plex Mono, monospace">"What's getting through?"</text>
+          <rect class="space-bar-track" x="240" y="-4" width="350" height="8" rx="4" fill="#E8E3FF" fill-opacity="0.06"/>
+          <rect class="space-bar-fill" data-target="245" x="240" y="-4" width="0" height="8" rx="4" fill="url(#salience-fill)"/>
+        </g>
+
+        <!-- PITCH -->
+        <g class="space-dimension" data-dim="pitch" transform="translate(0, 275)">
+          <text x="195" y="5" text-anchor="end" font-size="16" fill="#58FCC8" fill-opacity="0.9" font-weight="500" letter-spacing="0.1em" font-family="IBM Plex Mono, monospace">P</text>
+          <text x="212" y="5" text-anchor="start" font-size="13" fill="#58FCC8" fill-opacity="0.6" letter-spacing="0.06em" font-family="IBM Plex Mono, monospace">PITCH</text>
+          <text x="610" y="5" text-anchor="start" font-size="12" fill="#5A5672" fill-opacity="0.5" letter-spacing="0.04em" font-family="IBM Plex Mono, monospace">"How's my neural tempo?"</text>
+          <rect class="space-bar-track" x="240" y="-4" width="350" height="8" rx="4" fill="#E8E3FF" fill-opacity="0.06"/>
+          <rect class="space-bar-fill" data-target="210" x="240" y="-4" width="0" height="8" rx="4" fill="url(#pitch-fill)"/>
+        </g>
+
+        <!-- AMBIANCE -->
+        <g class="space-dimension" data-dim="ambiance" transform="translate(0, 335)">
+          <text x="195" y="5" text-anchor="end" font-size="16" fill="#9994B8" fill-opacity="0.9" font-weight="500" letter-spacing="0.1em" font-family="IBM Plex Mono, monospace">A</text>
+          <text x="212" y="5" text-anchor="start" font-size="13" fill="#9994B8" fill-opacity="0.6" letter-spacing="0.06em" font-family="IBM Plex Mono, monospace">AMBIANCE</text>
+          <text x="610" y="5" text-anchor="start" font-size="12" fill="#5A5672" fill-opacity="0.5" letter-spacing="0.04em" font-family="IBM Plex Mono, monospace">"What's my noise floor?"</text>
+          <rect class="space-bar-track" x="240" y="-4" width="350" height="8" rx="4" fill="#E8E3FF" fill-opacity="0.06"/>
+          <rect class="space-bar-fill" data-target="105" x="240" y="-4" width="0" height="8" rx="4" fill="url(#ambiance-fill)"/>
+          <text x="592" y="6" text-anchor="end" font-size="10" fill="#5A5672" fill-opacity="0.35" font-family="IBM Plex Mono, monospace">lower = clearer</text>
+        </g>
+
+        <text x="400" y="400" text-anchor="middle" font-size="11" fill="#E8E3FF" fill-opacity="0.25" letter-spacing="0.15em" font-family="IBM Plex Mono, monospace">ORIENTATION → SUBSTRATE → CONDITIONS</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="zone-content">
+    <p class="reveal prose" style="color: #9994B8; max-width: 680px;">
+      SPACE determines whether tension metabolizes or accumulates. The five dimensions don't measure performance — they read the processing environment.
+    </p>
+  </div>
+</section>
+
+
+<!-- Bridge -->
+<div class="zone" style="background: linear-gradient(to bottom, #0E1220, #141B2E);">
+  <div class="zone-bridge reveal"><p>The architecture maps the process. But what makes the process possible is older than any framework.</p></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     ZONE 5: COMPETENT MATERIAL
+     ═══════════════════════════════════════════════════════════ -->
+<section class="zone" style="background-color: #141B2E; padding: 80px 0;">
+  <div class="zone-content">
+    <div class="zone-title reveal">
+      <h2>Competent Material</h2>
+      <span class="zone-subtag">The body's inherent intelligence</span>
+    </div>
+    <div class="reveal" style="max-width: 720px; margin-bottom: 40px;">
+      <p class="prose" style="color: #E8E3FF; margin-bottom: 20px;">
+        Your body is competent material. Every cell collectively knows what to build, when to stop, how to adapt. Training doesn't tell your body what to do — it communicates goals. The barbell provides a constraint. Your cellular collectives navigate toward coherence within that constraint.
+      </p>
+      <p class="prose" style="color: #9994B8;">
+        You don't build capacity. You <span style="color: #FFA565;">remove obstacles</span> to capacity that was already present.
+      </p>
+    </div>
+
+    <div class="callout reveal">
+      <p>Each session provides new goal-states through progressive load. Not mechanical stress accumulation — information provision for intelligent systems. The barbell is a portal for communication with distributed intelligence. Each rep is a goal-state. The body navigates there.</p>
+    </div>
+
+    <div class="divider-coral reveal"></div>
+
+    <p class="reveal prose" style="color: #5A5672; max-width: 680px; font-size: 14px;">
+      The mechanism may involve bioelectric signaling — cellular collectives communicating through voltage gradients, establishing goal-states at tissue scale. This is the frontier where training science meets developmental biology.
+    </p>
+  </div>
+</section>
+
+
+<!-- Bridge -->
+<div class="zone" style="background: linear-gradient(to bottom, #141B2E, #0E1220);">
+  <div class="zone-bridge reveal"><p>The intelligence moves through channels. Three of them. Simultaneously.</p></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     ZONE 6: THREE Ms
+     ═══════════════════════════════════════════════════════════ -->
+<section class="zone" style="background-color: #0E1220; padding: 80px 0;">
+  <div class="zone-content">
+    <div class="zone-title reveal">
+      <h2>Three Channels</h2>
+      <span class="zone-subtag">Signal travels through three domains simultaneously</span>
+    </div>
+  </div>
+  <div class="zone-content-wide">
+    <div class="three-m-grid">
+      <div class="m-panel" data-m="metabolism">
+        <div class="panel-header">METABOLISM</div>
+        <div class="panel-nature">"The Fuel"</div>
+        <p class="panel-function">Substrate, energy systems, recovery. Without adequate metabolic capacity, SPACE collapses — not because willpower fails, but because the biology can't sustain the processing.</p>
+      </div>
+      <div class="m-panel" data-m="movement">
+        <div class="panel-header">MOVEMENT</div>
+        <div class="panel-nature">"The Medium"</div>
+        <p class="panel-function">Kinetic expression, motor patterns, force production. The channel through which signal becomes visible. The quality of movement reveals the quality of processing.</p>
+      </div>
+      <div class="m-panel" data-m="matrix">
+        <div class="panel-header">MATRIX</div>
+        <div class="panel-nature">"The Field"</div>
+        <p class="panel-function">Patterns, processing environment, distributed intelligence. Not cognitive metaphor — structural matrix. The body's own computational architecture where signals propagate and patterns emerge.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Bridge -->
+<div class="zone" style="background: linear-gradient(to bottom, #0E1220, #141B2E);">
+  <div class="zone-bridge reveal"><p>Access develops in stages. The scaffolding is designed to disappear.</p></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     ZONE 7: DEVELOPMENTAL — SVG
+     ═══════════════════════════════════════════════════════════ -->
+<section class="zone" style="background-color: #141B2E; padding: 80px 0;">
+  <div class="zone-content">
+    <div class="zone-title reveal">
+      <h2>Developmental Terrain</h2>
+      <span class="zone-subtag">The framework succeeds when you no longer think about it</span>
+    </div>
+    <p class="reveal prose" style="color: #9994B8; margin-bottom: 16px; max-width: 680px;">
+      Development isn't linear accumulation. It's a spiral — moving through three orientations with increasing autonomy. The framework succeeds when you no longer think about the framework.
+    </p>
+  </div>
+
+  <div class="zone-content-wide">
+    <div class="svg-container reveal">
+      <svg id="dev-stages" viewBox="0 0 900 280" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="stage-glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur"/>
+            <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+          </filter>
+        </defs>
+
+        <!-- Conductor — rigid -->
+        <g class="dev-stage" data-stage="conductor" transform="translate(150, 140)">
+          <rect class="stage-shape" x="-50" y="-50" width="100" height="100" fill="none" stroke="#58FCC8" stroke-width="0.8" stroke-opacity="0.3" rx="2"/>
+          <rect x="-35" y="-35" width="70" height="70" fill="none" stroke="#58FCC8" stroke-width="0.4" stroke-opacity="0.15" rx="1"/>
+          <circle r="3" fill="#58FCC8" fill-opacity="0.5"/>
+          <text y="-68" text-anchor="middle" font-size="14" fill="#58FCC8" fill-opacity="0.8" letter-spacing="0.1em" font-weight="500" font-family="IBM Plex Mono, monospace">CONDUCTOR</text>
+          <text y="80" text-anchor="middle" font-size="12" fill="#9994B8" fill-opacity="0.6" letter-spacing="0.04em" font-family="IBM Plex Mono, monospace">follows instructions</text>
+          <text y="98" text-anchor="middle" font-size="11" fill="#5A5672" fill-opacity="0.4" font-family="IBM Plex Mono, monospace">explicit B→A→S→E sequencing</text>
+        </g>
+
+        <!-- Transition 1 -->
+        <line x1="230" y1="140" x2="330" y2="140" stroke="#9994B8" stroke-width="0.5" stroke-opacity="0.2" stroke-dasharray="4 4"/>
+        <text x="280" y="126" text-anchor="middle" font-size="10" fill="#5A5672" fill-opacity="0.35" letter-spacing="0.1em" font-family="IBM Plex Mono, monospace">EMERGENCE</text>
+
+        <!-- Musician — adaptive -->
+        <g class="dev-stage" data-stage="musician" transform="translate(450, 140)">
+          <rect class="stage-shape" x="-55" y="-50" width="110" height="100" fill="none" stroke="#E8E3FF" stroke-width="0.8" stroke-opacity="0.3" rx="20"/>
+          <rect x="-40" y="-35" width="80" height="70" fill="none" stroke="#E8E3FF" stroke-width="0.4" stroke-opacity="0.15" rx="14"/>
+          <circle r="4" fill="#E8E3FF" fill-opacity="0.5"/>
+          <text y="-68" text-anchor="middle" font-size="14" fill="#E8E3FF" fill-opacity="0.8" letter-spacing="0.1em" font-weight="500" font-family="IBM Plex Mono, monospace">MUSICIAN</text>
+          <text y="80" text-anchor="middle" font-size="12" fill="#9994B8" fill-opacity="0.6" letter-spacing="0.04em" font-family="IBM Plex Mono, monospace">adapts patterns</text>
+          <text y="98" text-anchor="middle" font-size="11" fill="#5A5672" fill-opacity="0.4" font-family="IBM Plex Mono, monospace">internal monitoring emerging</text>
+        </g>
+
+        <!-- Transition 2 -->
+        <line x1="535" y1="140" x2="635" y2="140" stroke="#9994B8" stroke-width="0.5" stroke-opacity="0.2" stroke-dasharray="4 4"/>
+        <text x="585" y="126" text-anchor="middle" font-size="10" fill="#5A5672" fill-opacity="0.35" letter-spacing="0.1em" font-family="IBM Plex Mono, monospace">DISSOLUTION</text>
+
+        <!-- Composer — organic -->
+        <g class="dev-stage" data-stage="composer" transform="translate(750, 140)">
+          <circle class="stage-shape" r="50" fill="none" stroke="#FFA565" stroke-width="0.8" stroke-opacity="0.3"/>
+          <circle r="35" fill="none" stroke="#FFA565" stroke-width="0.4" stroke-opacity="0.15"/>
+          <circle r="18" fill="none" stroke="#FFA565" stroke-width="0.3" stroke-opacity="0.1"/>
+          <circle r="5" fill="#FFA565" fill-opacity="0.5" filter="url(#stage-glow)"/>
+          <text y="-68" text-anchor="middle" font-size="14" fill="#FFA565" fill-opacity="0.8" letter-spacing="0.1em" font-weight="500" font-family="IBM Plex Mono, monospace">COMPOSER</text>
+          <text y="80" text-anchor="middle" font-size="12" fill="#9994B8" fill-opacity="0.6" letter-spacing="0.04em" font-family="IBM Plex Mono, monospace">creates variations</text>
+          <text y="98" text-anchor="middle" font-size="11" fill="#5A5672" fill-opacity="0.4" font-family="IBM Plex Mono, monospace">framework dissolved into capacity</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <div class="zone-content">
+    <p class="reveal prose" style="color: #9994B8; max-width: 680px;">
+      The Conductor follows explicit sequencing. External cueing. The Musician adapts — recognizing when to modify without being told. The Composer no longer sequences. The framework has dissolved into embodied capacity. The structure served its purpose by making itself unnecessary.
+    </p>
+    <p class="reveal prose" style="color: #5A5672; max-width: 680px; font-size: 14px; margin-top: 24px;">
+      The path is spiral, not linear. A Composer encountering new complexity may resource back to Musician — or even Conductor — without regression. This is Resourcing: the macro decision to return to foundation when complexity exceeds capacity. Strategic. Dignified.
+    </p>
+  </div>
+</section>
+
+
+<!-- Bridge -->
+<div class="zone" style="background: linear-gradient(to bottom, #141B2E, #080B14);">
+  <div class="zone-bridge reveal"><p>What remains when the scaffolding dissolves is what was always running.</p></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     ZONE 8: CLOSE
+     ═══════════════════════════════════════════════════════════ -->
+<section class="zone" style="background-color: #080B14; padding: 80px 0;">
+  <div class="zone-content">
+    <div class="zone-title reveal" style="text-align: center;">
+      <h2>Making WAVES</h2>
+      <span class="zone-subtag">Not disruption — emergence</span>
+    </div>
+  </div>
+  <div class="zone-content" style="text-align: center;">
+    <div class="divider reveal" style="margin: 0 auto 56px;"></div>
+
+    <p class="reveal" style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #5A5672; letter-spacing: 0.1em; margin-bottom: 40px;">THE INTELLIGENCE WAS ALWAYS THERE</p>
+
+    <h2 class="reveal" style="font-size: clamp(24px, 3.5vw, 40px); letter-spacing: 0.08em; margin-bottom: 32px;">
+      Teasing my prisms,<br><span style="opacity: 0.6;">with silent rhythms.</span>
+    </h2>
+
+    <p class="reveal prose" style="color: #9994B8; max-width: 520px; margin: 0 auto 48px;">
+      The prism doesn't create the spectrum. It reveals what light already contained. Training doesn't build capacity. It teases apart the signals the body was always producing.
+    </p>
+
+    <div class="reveal" style="margin-bottom: 48px;">
+      <a href="mailto:greg@basewaves.com?subject=State%20Transition%20Session" class="cta-btn" style="display: inline-block; font-family: 'Space Mono', monospace; font-size: 14px; letter-spacing: 0.15em; color: #FFA565; text-decoration: none; padding: 16px 40px; border: 1px solid rgba(255, 165, 101, 0.3); transition: all 0.3s ease;">
+        SCHEDULE A STATE TRANSITION SESSION
+      </a>
+    </div>
+
+    <p style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #5A5672; letter-spacing: 0.05em; margin-bottom: 8px;">
+      <a href="mailto:greg@basewaves.com" style="color: #5A5672; text-decoration: none; transition: color 0.3s ease;">greg@basewaves.com</a>
+      <span style="margin: 0 8px;">·</span>
+      <a href="tel:+15125853400" style="color: #5A5672; text-decoration: none; transition: color 0.3s ease;">512.585.3400</a>
+    </p>
+
+    <div class="reveal" style="margin-top: 48px; display: flex; justify-content: center; gap: 48px; flex-wrap: wrap;">
+      <a href="/origin/" style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; letter-spacing: 0.05em; color: #58FCC8; text-decoration: none;">← Return to Origin</a>
+      <a href="/signals/" style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; letter-spacing: 0.05em; color: #58FCC8; text-decoration: none;">Enter Signals →</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- Footer -->
+<footer class="site-footer zone" style="background-color: #080B14;">
+  <img src="../assets/Basewaves_logo.svg" alt="BASEWAVES" class="footer-logo">
+  <nav class="footer-nav">
+    <a href="/">HOME</a><a href="/origin/">ORIGIN</a><a href="/method/">METHOD</a><a href="/signals/">SIGNALS</a>
+  </nav>
+  <p class="footer-contact">
+    <a href="mailto:greg@basewaves.com">greg@basewaves.com</a>
+    <span style="margin: 0 12px; color: #5A5672;">|</span>
+    <a href="tel:+15125853400">512.585.3400</a>
+  </p>
+  <p class="footer-tagline">Spatial Strength Training&#8482;</p>
+  <p class="footer-copyright">&copy; 2026 BASEWAVES</p>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     GSAP
+     ═══════════════════════════════════════════════════════════ -->
+<script>
+  (function() {
+    const gsapOk = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
+    const isMobile = window.innerWidth < 768;
+
+    if (!gsapOk) {
+      document.querySelectorAll('.reveal, .base-domain, .m-panel').forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; });
+      return;
+    }
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Nav blur on scroll
+    const nav = document.getElementById('siteNav');
+    ScrollTrigger.create({ start: 'top -80', onUpdate: s => nav.classList.toggle('scrolled', s.scroll() > 80) });
+
+    // General reveals
+    document.querySelectorAll('.reveal').forEach((el, i) => {
+      const isZone0 = el.closest('.zone-entry');
+      if (isZone0) {
+        gsap.fromTo(el, { opacity: 0, y: isMobile ? 0 : 30 }, { opacity: 1, y: 0, duration: 0.8, delay: 0.6 + i * 0.2, ease: 'power2.out' });
+      } else {
+        const p = el.parentElement;
+        const sibs = p ? Array.from(p.querySelectorAll(':scope > .reveal')) : [];
+        const idx = sibs.indexOf(el);
+        gsap.fromTo(el, { opacity: 0, y: isMobile ? 0 : 30 }, { opacity: 1, y: 0, duration: 0.6, delay: idx > 0 ? idx * 0.15 : 0, ease: 'power2.out', scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' } });
+      }
+    });
+
+    // BASE domains stagger
+    gsap.utils.toArray('.base-domain').forEach((el, i) => {
+      gsap.to(el, { opacity: 1, y: 0, duration: 0.7, delay: i * 0.15, ease: 'power2.out', scrollTrigger: { trigger: '.base-grid', start: 'top 80%', toggleActions: 'play none none none' } });
+    });
+
+    // Three Ms stagger
+    gsap.utils.toArray('.m-panel').forEach((el, i) => {
+      gsap.to(el, { opacity: 1, y: 0, duration: 0.7, delay: i * 0.2, ease: 'power2.out', scrollTrigger: { trigger: '.three-m-grid', start: 'top 80%', toggleActions: 'play none none none' } });
+    });
+
+    // Mechanism: flow paths animate
+    gsap.utils.toArray('.flow-path').forEach(p => {
+      gsap.to(p, { strokeDashoffset: -20, duration: 3, ease: 'none', repeat: -1, scrollTrigger: { trigger: '#mechanism-chain', start: 'top 80%', toggleActions: 'play pause resume pause' } });
+    });
+
+    // Mechanism: feedback arc
+    gsap.to('.feedback-path', { strokeDashoffset: -18, duration: 4, ease: 'none', repeat: -1, scrollTrigger: { trigger: '#mechanism-chain', start: 'top 80%', toggleActions: 'play pause resume pause' } });
+
+    // Mechanism: sequential node reveal
+    ['load','tension','signal','base','space','waves'].forEach((n, i) => {
+      const node = document.querySelector(`[data-node="${n}"]`);
+      if (!node) return;
+      gsap.from(node, { opacity: 0, scale: 0.5, duration: 0.6, delay: i * 0.18, ease: 'back.out(1.4)', transformOrigin: 'center', scrollTrigger: { trigger: '#mechanism-chain', start: 'top 80%', toggleActions: 'play none none none' } });
+    });
+
+    // Mechanism: core pulse
+    document.querySelectorAll('.node-core').forEach(c => {
+      gsap.to(c, { attr: { r: '+=2' }, fillOpacity: '-=0.15', duration: 2, ease: 'sine.inOut', repeat: -1, yoyo: true, delay: Math.random() * 2 });
+    });
+
+    // SPACE: bar fills on scroll
+    document.querySelectorAll('.space-bar-fill').forEach(bar => {
+      gsap.to(bar, { attr: { width: parseInt(bar.getAttribute('data-target')) }, duration: 1.2, ease: 'power2.out', scrollTrigger: { trigger: '#space-visualizer', start: 'top 75%', toggleActions: 'play none none none' } });
+    });
+
+    // SPACE: curiosity indicator pulse
+    gsap.to('.curiosity-indicator', { fillOpacity: 0.4, attr: { r: 7 }, duration: 1.5, ease: 'sine.inOut', repeat: -1, yoyo: true });
+
+    // Dev stages: sequential reveal
+    document.querySelectorAll('.dev-stage').forEach((s, i) => {
+      gsap.from(s, { opacity: 0, scale: 0.6, duration: 0.8, delay: i * 0.25, ease: 'back.out(1.2)', transformOrigin: 'center', scrollTrigger: { trigger: '#dev-stages', start: 'top 80%', toggleActions: 'play none none none' } });
+    });
+
+    // Dev: composer rings breathe
+    const comp = document.querySelector('[data-stage="composer"]');
+    if (comp) {
+      comp.querySelectorAll('circle:not([filter])').forEach((r, i) => {
+        if (i === 0) return;
+        gsap.to(r, { attr: { r: parseInt(r.getAttribute('r')) + 3 }, strokeOpacity: '+=0.05', duration: 2.5 + i * 0.5, ease: 'sine.inOut', repeat: -1, yoyo: true });
+      });
+    }
+
+    // CTA hover
+    document.querySelectorAll('.cta-btn').forEach(b => {
+      b.addEventListener('mouseenter', () => { b.style.borderColor = 'rgba(255,165,101,0.6)'; b.style.background = 'rgba(255,165,101,0.05)'; });
+      b.addEventListener('mouseleave', () => { b.style.borderColor = 'rgba(255,165,101,0.3)'; b.style.background = 'transparent'; });
+    });
+
+    // Hamburger menu
+    const hb = document.getElementById('hamburger'), ov = document.getElementById('navOverlay');
+    if (hb && ov) {
+      hb.addEventListener('click', e => { e.stopPropagation(); hb.classList.toggle('active'); ov.classList.toggle('open'); document.body.style.overflow = ov.classList.contains('open') ? 'hidden' : ''; });
+      ov.addEventListener('click', e => { if (e.target === ov || e.target.tagName === 'A') { hb.classList.remove('active'); ov.classList.remove('open'); document.body.style.overflow = ''; } });
+    }
+  })();
+</script>
+
+</body>
+</html>

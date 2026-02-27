@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BASEWAVES — Dynamic SPACE Visual</title>
+  <meta name="description" content="Interactive visualization of SPACE conditions and the 7-to-1 perception ratio in Spatial Strength Training.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=IBM+Plex+Mono:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --base-blue: #0E1220;
+      --deep-blue: #080B14;
+      --lighter-blue: #141B2E;
+      --primary-text: #E8E3FF;
+      --secondary-text: #9994B8;
+      --dim-text: #5A5672;
+      --turquoise: #58FCC8;
+      --coral: #FFA565;
+      --turq-glow: rgba(88, 252, 200, 0.25);
+      --coral-glow: rgba(255, 165, 101, 0.25);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--deep-blue);
+      color: var(--primary-text);
+      font-family: 'IBM Plex Mono', monospace;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .starfield {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      z-index: 0;
+      background: radial-gradient(1px 1px at 10% 15%, rgba(232,227,255,0.4), transparent),
+                  radial-gradient(1px 1px at 70% 22%, rgba(88,252,200,0.12), transparent);
+    }
+
+    /* ═══════════════════════════════════════════
+       COCKPIT / UI
+       ═══════════════════════════════════════════ */
+    .cockpit {
+      position: fixed;
+      left: 20px;
+      top: 20px;
+      width: 300px;
+      background: rgba(14, 18, 32, 0.9);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(90, 86, 114, 0.4);
+      padding: 24px;
+      z-index: 100;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+      border-radius: 2px;
+    }
+
+    .cockpit h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 16px;
+      letter-spacing: 0.15em;
+      margin-bottom: 24px;
+      color: var(--primary-text);
+      border-bottom: 1px solid rgba(90, 86, 114, 0.3);
+      padding-bottom: 12px;
+    }
+
+    .control-group {
+      margin-bottom: 20px;
+    }
+
+    .control-label {
+      display: flex;
+      justify-content: space-between;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 8px;
+      color: var(--secondary-text);
+    }
+
+    .control-label span.val {
+      color: var(--turquoise);
+      font-weight: 700;
+    }
+
+    input[type=range] {
+      width: 100%;
+      background: transparent;
+      -webkit-appearance: none;
+    }
+
+    input[type=range]::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 2px;
+      background: rgba(90, 86, 114, 0.4);
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 14px;
+      width: 14px;
+      border-radius: 50%;
+      background: var(--turquoise);
+      cursor: pointer;
+      margin-top: -6px;
+      box-shadow: 0 0 15px var(--turq-glow);
+      transition: transform 0.2s ease;
+    }
+
+    input[type=range]:active::-webkit-slider-thumb {
+      transform: scale(1.3);
+    }
+
+    .toggle-group {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(90, 86, 114, 0.3);
+    }
+
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+    }
+
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: var(--dim-text);
+      transition: .4s;
+      border-radius: 24px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider { background-color: var(--turquoise); }
+    input:checked + .slider:before { transform: translateX(20px); }
+
+    .formula-box {
+      margin-top: 24px;
+      padding: 16px;
+      background: rgba(0,0,0,0.4);
+      border: 1px solid rgba(90, 86, 114, 0.2);
+    }
+
+    .formula-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      color: var(--dim-text);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .formula-display {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      color: var(--primary-text);
+      line-height: 1.5;
+    }
+
+    /* ═══════════════════════════════════════════
+       VISUAL FIELD
+       ═══════════════════════════════════════════ */
+    .field-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 60px;
+      z-index: 1;
+      transition: filter 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .grasping-mode .field-container {
+      filter: grayscale(1) blur(4px) contrast(0.7);
+    }
+
+    .wave-field-svg {
+      width: 100%;
+      max-width: 1100px;
+      height: auto;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .wave-path {
+      fill: none;
+      stroke: var(--dim-text);
+      stroke-miterlimit: 10;
+      transition: stroke 0.8s ease, stroke-width 0.4s ease, opacity 0.8s ease;
+      stroke-dasharray: 2000;
+      stroke-dashoffset: 2000;
+    }
+
+    @keyframes pulse-signal {
+      from { stroke-dashoffset: 2000; }
+      to { stroke-dashoffset: 0; }
+    }
+
+    .wave-path.active {
+      animation: pulse-signal var(--pulse-dur, 3s) linear infinite;
+    }
+
+    /* Territorial Labels */
+    .labels-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+    }
+
+    .territory-label {
+      position: absolute;
+      font-family: 'Cinzel', serif;
+      font-size: clamp(12px, 1.5vw, 18px);
+      letter-spacing: 0.25em;
+      opacity: 0.4;
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .label-intero { bottom: 15%; left: 15%; color: var(--turquoise); }
+    .label-proprio { top: 15%; right: 15%; color: var(--coral); }
+
+    .territory-label small {
+      display: block;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6em;
+      letter-spacing: 0.1em;
+      margin-top: 8px;
+      opacity: 0.7;
+    }
+
+    .mastery-rank {
+      position: fixed;
+      right: 40px;
+      bottom: 40px;
+      text-align: right;
+      z-index: 100;
+    }
+
+    .mastery-rank p {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.4em;
+      color: var(--dim-text);
+      margin-bottom: 8px;
+    }
+
+    .mastery-rank h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(48px, 6vw, 72px);
+      color: var(--turquoise);
+      line-height: 1;
+      text-shadow: 0 0 30px var(--turq-glow);
+      transition: color 0.5s ease;
+    }
+
+    /* ═══════════════════════════════════════════
+       RESPONSIVE
+       ═══════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .cockpit { width: 260px; padding: 16px; }
+      .field-container { padding: 40px; }
+    }
+
+    @media (max-width: 768px) {
+      body { flex-direction: column-reverse; }
+      .cockpit { position: relative; width: 100%; left: 0; top: 0; box-shadow: none; border: none; border-top: 1px solid rgba(90, 86, 114, 0.3); }
+      .field-container { min-height: 50vh; }
+      .mastery-rank { top: 20px; right: 20px; bottom: auto; }
+    }
+  </style>
+</head>
+<body class="exploring-mode">
+  <div class="starfield"></div>
+
+  <!-- Cockpit UI -->
+  <aside class="cockpit">
+    <h2>SPACE Cockpit</h2>
+    
+    <div class="control-group">
+      <div class="control-label">Salience (S) <span class="val" id="valS">5</span></div>
+      <input type="range" id="sliderS" min="1" max="10" value="5">
+    </div>
+
+    <div class="control-group">
+      <div class="control-label">Pitch (P) <span class="val" id="valP">5</span></div>
+      <input type="range" id="sliderP" min="1" max="10" value="5">
+    </div>
+
+    <div class="control-group">
+      <div class="control-label">Ambiance (A) <span class="val" id="valA">5</span></div>
+      <input type="range" id="sliderA" min="1" max="10" value="5">
+    </div>
+
+    <div class="control-group">
+      <div class="control-label">Estate (E) <span class="val" id="valE">5</span></div>
+      <input type="range" id="sliderE" min="1" max="10" value="5">
+    </div>
+
+    <div class="toggle-group">
+      <div class="control-label">Curiosity: <span id="curiosityText">Exploring</span></div>
+      <label class="toggle-switch">
+        <input type="checkbox" id="toggleC" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="formula-box">
+      <div class="formula-title">Signal Mastery Formula</div>
+      <div class="formula-display" id="formula">M = 0.5 × (5 × 0.2) × 5 = 2.5</div>
+    </div>
+  </aside>
+
+  <!-- Visual Field -->
+  <main class="field-container" id="field">
+    <svg class="wave-field-svg" viewBox="0 0 3978.47 2106.27" xmlns="http://www.w3.org/2000/svg">
+      <g id="pathsContainer">
+        <!-- THE 1: Proprioception (Paths 1-4) -->
+        <path class="wave-path proprio" d="M2532.89,322.95c148.43,369.82-122.32,738.34-1087.76,1474.19-116.5-380.4,80.32-712.01,1087.76-1474.19Z"/>
+        <path class="wave-path proprio" d="M2517.11,286.82c186.95,358.56-75.83,745.07-1056.21,1546.48-153.49-371.34,32.75-715.88,1056.21-1546.48h0Z"/>
+        <path class="wave-path proprio" d="M2497.46,251.88c227.42,344.65-25.45,748.55-1016.95,1616.39-192.5-359.73-18.57-716.42,1016.95-1616.39Z"/>
+        <path class="wave-path proprio" d="M2473.77,218.4c269.8,327.94,28.85,748.5-969.59,1683.39-233.46-345.43-73.66-713.38,969.59-1683.39h0Z"/>
+
+        <!-- THE 7: Interoception (Paths 5-31) -->
+        <path class="wave-path intero" d="M2445.85,186.65c314,308.33,87.08,744.66-913.76,1746.93-276.33-328.3-132.51-706.5,913.76-1746.93h0Z"/>
+        <path class="wave-path intero" d="M2413.52,156.92c359.93,285.67,149.27,736.78-849.11,1806.41-321.03-308.23-195.13-695.54,849.11-1806.41h0Z"/>
+        <path class="wave-path intero" d="M2376.6,129.53c407.51,259.87,215.37,724.57-775.31,1861.24-367.48-285.08-261.48-680.23,775.31-1861.24h0Z"/>
+        <path class="wave-path intero" d="M2334.95,104.77c456.61,230.81,285.37,707.78-692.03,1910.79-415.56-258.75-331.5-660.33,692.03-1910.79h0Z"/>
+        <path class="wave-path intero" d="M2288.42,82.98c507.09,198.39,359.19,686.15-598.98,1954.41-465.15-229.13-405.11-635.6,598.98-1954.41h0Z"/>
+        <path class="wave-path intero" d="M2236.88,64.49c558.81,162.54,436.75,659.42-495.9,1991.43-516.13-196.13-482.22-605.79,495.9-1991.43h0Z"/>
+        <path class="wave-path intero" d="M2180.2,49.64c611.6,123.16,517.94,627.35-382.56,2021.17-568.34-159.65-562.69-570.68,382.56-2021.17h0Z"/>
+        <path class="wave-path intero" d="M2118.29,38.78c665.27,80.2,602.62,589.69-258.75,2042.94-621.61-119.61-646.37-530.04,258.75-2042.94h0Z"/>
+        <path class="wave-path intero" d="M2051.07,32.27c719.62,33.6,690.64,546.22-124.31,2056.01-675.74-75.96-733.09-483.66,124.31-2056.01h0Z"/>
+        <path class="wave-path intero" d="M1978.47,30.46c774.42-16.68,781.78,496.71,20.87,2059.67-730.53-28.64-822.63-431.34-20.87-2059.67Z"/>
+        <path class="wave-path intero" d="M1900.47,33.72c829.43-70.66,875.83,440.97,176.88,2053.2-785.75,22.39-914.74-372.91-176.88-2053.2h0Z"/>
+        <path class="wave-path intero" d="M1817.04,42.41c884.39-128.35,972.54,378.8,343.73,2035.86-841.15,77.15-1009.17-308.19-343.73-2035.86h0Z"/>
+        <path class="wave-path intero" d="M1728.21,56.9c939.01-189.73,1071.6,310.03,521.41,2006.92-896.48,135.64-1105.6-237.04-521.41-2006.92h0Z"/>
+        <path class="wave-path intero" d="M1634.01,77.55c993-254.77,1172.71,234.53,709.82,1965.66-951.43,197.84-1203.7-159.34-709.82-1965.66Z"/>
+        <path class="wave-path intero" d="M1534.51,104.72c1046.03-323.42,1275.5,152.15,908.83,1911.36-1005.71,263.73-1303.1-74.99-908.83-1911.36h0Z"/>
+        <path class="wave-path intero" d="M1429.82,138.77c1097.76-395.6,1379.58,62.81,1118.22,1843.31-1059,333.24-1403.4,16.09-1118.22-1843.31h0Z"/>
+        <path class="wave-path intero" d="M1320.09,180.04c1147.84-471.21,1484.51-33.58,1337.72,1760.81-1110.94,406.3-1504.15,113.95-1337.72-1760.81h0Z"/>
+        <path class="wave-path intero" d="M1205.47,228.86c1195.89-550.13,1589.84-137.05,1566.98,1663.21-1161.17,482.8-1604.88,218.6-1566.98-1663.21h0Z"/>
+        <path class="wave-path intero" d="M1086.19,285.56c1241.51-632.21,1695.06-247.62,1805.57,1549.85-1209.32,562.63-1705.07,330.01-1805.57-1549.85h0Z"/>
+        <path class="wave-path intero" d="M962.5,350.43C2246.78-366.84,2762.14-14.83,3015.5,1770.55c-1254.97,645.61-1804.19,448.15-2053-1420.12h0Z"/>
+        <path class="wave-path intero" d="M834.68,423.79C2158.46-381.32,2737.66-66.12,3143.34,1697.25c-1297.72,731.58-1901.65,572.91-2308.66-1273.46h0Z"/>
+        <path class="wave-path intero" d="M703.09,505.87C2062.66-389.62,2707.58-115.59,3274.99,1615.18c-1337.12,820.33-1996.83,704.17-2571.9-1109.31h0Z"/>
+        <path class="wave-path intero" d="M568.09,596.94C1959.26-391.21,2671.59-162.83,3410.05,1524.14c-1372.73,911.6-2089.08,841.75-2841.96-927.2h0Z"/>
+        <path class="wave-path intero" d="M430.11,697.2C1848.23-385.59,2629.44-207.45,3548.08,1423.9c-1404.09,1005.14-2177.72,985.42-3117.97-726.7h0Z"/>
+        <path class="wave-path intero" d="M289.63,806.84C1729.56-372.23,2580.88-249.02,3688.63,1314.27c-1430.7,1100.63-2262.01,1134.93-3399-507.43h0Z"/>
+        <path class="wave-path intero" d="M147.16,926.02C1603.26-350.62,2525.67-287.1,3831.15,1195.11,2379.07,2392.86,1489.93,2485.07,147.16,926.02h0Z"/>
+        <path class="wave-path intero" d="M3.29,1054.84c1466.13-1375.11,2460.32-1376.08,3971.82,11.45C2507.37,2362.42,1560.56,2516.42,3.29,1054.84h0Z"/>
+      </g>
+    </svg>
+
+    <!-- UI Overlay Labels -->
+    <div class="labels-overlay">
+      <div class="territory-label label-intero">
+        SENSING &amp; ADAPTING
+        <small>Interoception (The 7)</small>
+      </div>
+      <div class="territory-label label-proprio">
+        THINKING &amp; POSITIONING
+        <small>Proprioception (The 1)</small>
+      </div>
+    </div>
+
+    <!-- Live Readout -->
+    <div class="mastery-rank">
+      <p>SIGNAL MASTERY INDEX</p>
+      <h1 id="rankDisplay">2.50</h1>
+    </div>
+  </main>
+
+  <script>
+    (function() {
+      const paths = document.querySelectorAll('.wave-path');
+      const body = document.body;
+      const rankDisplay = document.getElementById('rankDisplay');
+      const formulaDisplay = document.getElementById('formula');
+      const curiosityText = document.getElementById('curiosityText');
+      const field = document.getElementById('field');
+
+      const sliders = {
+        S: document.getElementById('sliderS'),
+        P: document.getElementById('sliderP'),
+        A: document.getElementById('sliderA'),
+        E: document.getElementById('sliderE'),
+        C: document.getElementById('toggleC')
+      };
+
+      const valDisplays = {
+        S: document.getElementById('valS'),
+        P: document.getElementById('valP'),
+        A: document.getElementById('valA'),
+        E: document.getElementById('valE')
+      };
+
+      function update() {
+        const s = parseInt(sliders.S.value);
+        const p = parseInt(sliders.P.value);
+        const a = parseInt(sliders.A.value);
+        const e = parseInt(sliders.E.value);
+        const c = sliders.C.checked ? 1 : 0;
+
+        // UI Updates
+        valDisplays.S.innerText = s;
+        valDisplays.P.innerText = p;
+        valDisplays.A.innerText = a;
+        valDisplays.E.innerText = e;
+        curiosityText.innerText = c ? "Exploring" : "Grasping";
+        curiosityText.style.color = c ? "var(--turquoise)" : "var(--coral)";
+
+        // Epistemic Gate: Curiosity
+        if (c === 0) {
+          body.classList.add('grasping-mode');
+          rankDisplay.innerText = "NULL";
+          rankDisplay.style.color = "var(--dim-text)";
+          formulaDisplay.innerText = "C = Grasping (Reading Invalid)";
+          return;
+        }
+
+        body.classList.remove('grasping-mode');
+        rankDisplay.style.color = "var(--turquoise)";
+
+        // Formula Calculation
+        const s_gate = s / 10;
+        const a_inv = 1 / a;
+        const mastery = (s_gate * (p * a_inv) * e).toFixed(2);
+
+        rankDisplay.innerText = mastery;
+        formulaDisplay.innerText = `M = ${s_gate} × (${p} × ${a_inv.toFixed(2)}) × ${e} = ${mastery}`;
+
+        // Visual Transformations
+        paths.forEach((path, index) => {
+          const isProprio = path.classList.contains('proprio');
+          
+          // Estate -> Path Weight
+          const baseWidth = isProprio ? 2 : 1;
+          const dynamicWidth = (baseWidth + (index * 0.1)) * (e / 5);
+          path.style.strokeWidth = `${dynamicWidth}px`;
+
+          // Salience -> Editorial Selection
+          // High S highlights specific "useful" paths
+          const highlightFreq = Math.max(1, 11 - s);
+          const isHighlighted = (index % highlightFreq) === 0;
+          
+          if (isHighlighted) {
+            path.classList.add('active');
+            path.style.stroke = isProprio ? 'var(--coral)' : 'var(--turquoise)';
+            path.style.opacity = (0.3 + (s / 15)).toFixed(2);
+            path.style.filter = `drop-shadow(0 0 ${s/2}px ${isProprio ? 'var(--coral-glow)' : 'var(--turq-glow)'})`;
+          } else {
+            path.classList.remove('active');
+            path.style.stroke = 'var(--dim-text)';
+            path.style.opacity = (0.1 * (s / 10)).toFixed(2);
+            path.style.filter = 'none';
+          }
+
+          // Pitch -> Pulse Duration (Tempo)
+          const pulseDur = (11 - p) * 0.4; // 1 = 4s, 10 = 0.4s
+          path.style.setProperty('--pulse-dur', `${pulseDur}s`);
+        });
+
+        // Ambiance -> Global Noise Floor (Blur)
+        const ambianceBlur = (a - 1) * 0.4;
+        field.style.filter = `blur(${ambianceBlur}px)`;
+      }
+
+      // Interaction listeners
+      Object.values(sliders).forEach(slider => {
+        slider.addEventListener('input', update);
+      });
+
+      // Initial state
+      update();
+
+      // Mouse parallax for immersion
+      document.addEventListener('mousemove', (e) => {
+        const x = (e.clientX / window.innerWidth - 0.5) * 20;
+        const y = (e.clientY / window.innerHeight - 0.5) * 10;
+        const svg = document.querySelector('.wave-field-svg');
+        if (svg) svg.style.transform = `translate(${x}px, ${y}px)`;
+      });
+
+    })();
+  </script>
+</body>
+</html>

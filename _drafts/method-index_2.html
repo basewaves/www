@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Method — BASEWAVES</title>
+  <meta name="description" content="The architecture of Spatial Strength Training. BASE directs attention. SPACE processes signal. WAVES emerges when interference clears.">
+  <meta property="og:title" content="METHOD | BASEWAVES">
+  <meta property="og:description" content="The architecture of Spatial Strength Training. BASE directs attention. SPACE processes signal. WAVES emerges when interference clears.">
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=IBM+Plex+Mono:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <style>
+    :root {
+      --base-blue: #0E1220;
+      --deep-blue: #080B14;
+      --lighter-blue: #141B2E;
+      --primary-text: #E8E3FF;
+      --secondary-text: #9994B8;
+      --dim-text: #5A5672;
+      --turquoise: #58FCC8;
+      --coral: #FFA565;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--deep-blue);
+      color: var(--primary-text);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 14px;
+      line-height: 1.7;
+      letter-spacing: 0.03em;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ========== STARFIELD ========== */
+    .starfield {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      z-index: 2;
+      background:
+        radial-gradient(1px 1px at 10% 15%, rgba(232,227,255,0.4), transparent),
+        radial-gradient(1px 1px at 25% 35%, rgba(232,227,255,0.25), transparent),
+        radial-gradient(1.5px 1.5px at 40% 8%, rgba(232,227,255,0.35), transparent),
+        radial-gradient(1px 1px at 55% 42%, rgba(232,227,255,0.2), transparent),
+        radial-gradient(1px 1px at 70% 22%, rgba(88,252,200,0.12), transparent),
+        radial-gradient(1.5px 1.5px at 85% 55%, rgba(232,227,255,0.3), transparent),
+        radial-gradient(1px 1px at 15% 65%, rgba(232,227,255,0.2), transparent),
+        radial-gradient(1px 1px at 35% 78%, rgba(232,227,255,0.35), transparent),
+        radial-gradient(1.5px 1.5px at 60% 72%, rgba(232,227,255,0.25), transparent),
+        radial-gradient(1px 1px at 80% 85%, rgba(232,227,255,0.3), transparent),
+        radial-gradient(1px 1px at 92% 12%, rgba(232,227,255,0.2), transparent),
+        radial-gradient(1px 1px at 48% 92%, rgba(88,252,200,0.1), transparent),
+        radial-gradient(1px 1px at 5% 48%, rgba(232,227,255,0.3), transparent),
+        radial-gradient(1.5px 1.5px at 72% 38%, rgba(232,227,255,0.2), transparent);
+    }
+
+    /* ========== NAVIGATION ========== */
+    .site-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.4s ease, backdrop-filter 0.4s ease;
+    }
+    .site-nav.scrolled {
+      background: rgba(14, 18, 32, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .logo-container { opacity: 0.7; transition: opacity 0.3s ease, filter 0.3s ease; }
+    .logo-container:hover { opacity: 1; filter: drop-shadow(0 0 12px #58FCC8) drop-shadow(0 0 24px rgba(88,252,200,0.4)); }
+    .nav-link { font-family: 'Space Mono', monospace; font-size: 14px; color: var(--secondary-text); text-decoration: none; letter-spacing: 0.05em; transition: color 0.3s ease; }
+    .nav-link:hover { color: var(--turquoise); }
+    .nav-link.active { color: var(--primary-text); }
+    .nav-separator { color: var(--dim-text); margin: 0 12px; }
+    .nav-desktop { display: flex; align-items: center; }
+    .nav-logo { height: 41px; width: auto; }
+
+    .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 28px; height: 28px; cursor: pointer; z-index: 60; background: none; border: none; padding: 0; }
+    .hamburger span { display: block; width: 100%; height: 1px; background: var(--secondary-text); transition: all 0.3s ease; }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+
+    .nav-overlay {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(8, 11, 20, 0.95);
+      z-index: 45;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center; gap: 32px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .nav-overlay.open { opacity: 1; pointer-events: all; }
+    .nav-overlay a { font-family: 'Space Mono', monospace; font-size: 18px; color: var(--secondary-text); text-decoration: none; letter-spacing: 0.1em; }
+    .nav-overlay a.active { color: var(--primary-text); }
+
+    /* ========== LAYOUT ========== */
+    .zone { position: relative; z-index: 3; }
+    .zone-inner { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+
+    .zone-label {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--primary-text);
+      margin-bottom: 8px;
+    }
+    .zone-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dim-text);
+      margin-bottom: 48px;
+    }
+    .zone-prose {
+      max-width: 640px;
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--secondary-text);
+      padding: 24px 28px;
+      border-left: 2px solid rgba(88,252,200,0.1);
+      margin-bottom: 48px;
+    }
+    .zone-prose em { color: var(--primary-text); font-style: normal; }
+
+    svg text { font-family: 'IBM Plex Mono', monospace; pointer-events: none; }
+    .svg-annotation {
+      font-size: 12px;
+      color: var(--dim-text);
+      max-width: 640px;
+      line-height: 1.6;
+      margin-top: 12px;
+    }
+    .svg-annotation em { color: var(--secondary-text); font-style: normal; }
+
+    /* ========== ZONE 0: SENSORIUM ========== */
+    .zone-entry {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: linear-gradient(180deg, var(--deep-blue) 0%, var(--base-blue) 100%);
+    }
+
+    .entry-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dim-text);
+      margin-bottom: 24px;
+    }
+    .entry-title {
+      font-family: 'Cinzel', serif;
+      font-weight: 400;
+      font-size: clamp(36px, 5vw, 56px);
+      letter-spacing: 0.1em;
+      color: var(--primary-text);
+      margin-bottom: 48px;
+    }
+    .entry-prose {
+      max-width: 560px;
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--secondary-text);
+      padding: 0 24px;
+    }
+    .entry-prose em { color: var(--primary-text); font-style: normal; }
+
+    .scroll-hint {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--dim-text);
+      margin-top: 80px;
+      animation: pulse-hint 2.5s ease infinite;
+    }
+    .scroll-hint::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(180deg, var(--dim-text), transparent);
+      margin: 12px auto 0;
+    }
+    @keyframes pulse-hint { 0%, 100% { opacity: 0.35; } 50% { opacity: 0.7; } }
+
+    /* ========== ZONE 1: THE PIVOT ========== */
+    .zone-pivot {
+      padding: 120px 0 80px;
+      background: var(--base-blue);
+    }
+
+    .pivot-grid {
+      display: grid;
+      grid-template-columns: 1fr 2px 1fr;
+      gap: 0;
+      margin-bottom: 48px;
+      max-width: 900px;
+    }
+    .pivot-side { padding: 32px 28px; }
+    .pivot-side.override {
+      text-align: right;
+      border-top: 2px solid rgba(255,165,101,0.2);
+      background: rgba(255,165,101,0.015);
+    }
+    .pivot-side.signal {
+      border-top: 2px solid rgba(88,252,200,0.25);
+      background: rgba(88,252,200,0.015);
+    }
+    .pivot-side .ps-label {
+      font-family: 'Cinzel', serif;
+      font-size: 18px;
+      letter-spacing: 0.06em;
+      margin-bottom: 20px;
+    }
+    .pivot-side.override .ps-label { color: rgba(255,165,101,0.7); }
+    .pivot-side.signal .ps-label { color: var(--turquoise); }
+    .pivot-side .ps-item { padding: 8px 0; font-size: 13px; line-height: 1.65; }
+    .pivot-side.override .ps-item { color: rgba(255,165,101,0.4); }
+    .pivot-side.signal .ps-item { color: var(--secondary-text); }
+    .pivot-side .ps-item em { color: var(--primary-text); font-style: normal; }
+    .pivot-divider {
+      background: linear-gradient(180deg, rgba(255,165,101,0.2), rgba(90,86,114,0.15), rgba(88,252,200,0.2));
+    }
+
+    /* 7:1 data territory */
+    .ratio-territory { margin-bottom: 48px; max-width: 700px; }
+    .ratio-label {
+      font-family: 'Cinzel', serif;
+      font-size: 16px;
+      letter-spacing: 0.06em;
+      color: var(--primary-text);
+      margin-bottom: 16px;
+    }
+    .ratio-visual { display: grid; grid-template-columns: 7fr 1fr; gap: 3px; margin-bottom: 16px; }
+    .ratio-bar {
+      height: 48px;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+    }
+    .ratio-bar.seven {
+      background: linear-gradient(90deg, rgba(88,252,200,0.12), rgba(88,252,200,0.03));
+      border-left: 3px solid rgba(88,252,200,0.4);
+      color: var(--turquoise);
+    }
+    .ratio-bar.one {
+      background: rgba(232,227,255,0.04);
+      border-left: 3px solid rgba(232,227,255,0.15);
+      color: var(--dim-text);
+      font-size: 10px;
+      justify-content: center;
+    }
+    .ratio-note { font-size: 12px; color: var(--dim-text); line-height: 1.7; }
+    .ratio-note em { color: var(--secondary-text); font-style: normal; }
+
+    /* ========== ZONE 2: THE ARCHITECTURE ========== */
+    .zone-architecture {
+      padding: 120px 0 80px;
+      background: var(--lighter-blue);
+    }
+
+    .arch-blocks {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2px;
+      margin-bottom: 48px;
+    }
+    .arch-block {
+      padding: 28px 24px;
+      border-top: 2px solid;
+      min-height: 200px;
+    }
+    .arch-block.base { border-color: rgba(88,252,200,0.3); background: rgba(88,252,200,0.015); }
+    .arch-block.space { border-color: rgba(232,227,255,0.25); background: rgba(232,227,255,0.015); }
+    .arch-block.waves { border-color: rgba(88,252,200,0.25); background: rgba(88,252,200,0.015); }
+
+    .arch-block .ab-tag { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim-text); margin-bottom: 4px; }
+    .arch-block .ab-name { font-family: 'Cinzel', serif; font-size: 20px; letter-spacing: 0.06em; margin-bottom: 12px; }
+    .arch-block.base .ab-name { color: var(--turquoise); }
+    .arch-block.space .ab-name { color: var(--primary-text); }
+    .arch-block.waves .ab-name { color: var(--turquoise); }
+    .arch-block .ab-desc { font-size: 12px; color: var(--secondary-text); line-height: 1.65; margin-bottom: 16px; }
+    .arch-block .ab-desc em { color: var(--primary-text); font-style: normal; }
+    .arch-block .ab-dims { font-size: 11px; color: var(--dim-text); line-height: 1.8; }
+    .arch-block .ab-dims em { color: var(--secondary-text); font-style: normal; }
+
+    /* Curiosity gate */
+    .curiosity-gate {
+      margin-bottom: 48px;
+      max-width: 700px;
+      padding: 28px;
+      border: 1px solid rgba(232,227,255,0.08);
+      background: rgba(232,227,255,0.01);
+    }
+    .cg-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--dim-text);
+      margin-bottom: 12px;
+    }
+    .cg-grid {
+      display: grid;
+      grid-template-columns: 1fr 40px 1fr;
+      gap: 0;
+      align-items: center;
+    }
+    .cg-state { padding: 16px; font-size: 12px; line-height: 1.6; }
+    .cg-state.grasping {
+      text-align: right;
+      color: rgba(255,165,101,0.5);
+      border-right: 1px solid rgba(90,86,114,0.1);
+    }
+    .cg-state.exploring {
+      color: var(--turquoise);
+      opacity: 0.7;
+      border-left: 1px solid rgba(90,86,114,0.1);
+    }
+    .cg-or { font-size: 10px; color: var(--dim-text); text-align: center; letter-spacing: 0.08em; }
+    .cg-note { font-size: 11px; color: var(--dim-text); margin-top: 12px; line-height: 1.6; }
+    .cg-note em { color: var(--secondary-text); font-style: normal; }
+
+    /* ========== ZONE 3: THE MECHANISM ========== */
+    .zone-mechanism {
+      padding: 120px 0 80px;
+      background: var(--base-blue);
+    }
+
+    .mechanism-flow-wrap { max-width: 1000px; margin: 0 auto 24px; }
+
+    /* Mechanism Flow SVG interactivity */
+    .mech-node { cursor: pointer; }
+    .mech-node .node-ring { transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .mech-node .node-core { transition: all 0.3s ease; }
+    .mech-node .node-label { transition: fill-opacity 0.3s ease; }
+    .mech-node .node-detail { opacity: 0; transition: opacity 0.4s ease 0.1s; }
+    .mech-node .node-pulse { opacity: 0; }
+
+    .mech-node:hover .node-ring { r: 38; stroke-opacity: 0.5; }
+    .mech-node:hover .node-core { r: 6; }
+    .mech-node:hover .node-label { fill-opacity: 1; }
+    .mech-node:hover .node-detail { opacity: 1; }
+    .mech-node:hover .node-pulse { opacity: 1; animation: node-pulse-out 1.8s ease-out infinite; }
+
+    .mech-block { cursor: pointer; }
+    .mech-block .block-rect { transition: all 0.4s ease; }
+    .mech-block .block-label { transition: fill-opacity 0.3s ease; }
+    .mech-block .block-detail { opacity: 0; transition: opacity 0.4s ease 0.1s; }
+    .mech-block .block-glow { opacity: 0; transition: opacity 0.4s ease; }
+
+    .mech-block:hover .block-rect { stroke-opacity: 0.45; }
+    .mech-block:hover .block-label { fill-opacity: 0.8; }
+    .mech-block:hover .block-detail { opacity: 1; }
+    .mech-block:hover .block-glow { opacity: 1; }
+
+    @keyframes node-pulse-out { 0% { r: 10; opacity: 0.3; } 100% { r: 50; opacity: 0; } }
+
+    /* Callout */
+    .mechanism-callout {
+      max-width: 640px;
+      padding: 28px;
+      border: 1px solid rgba(88,252,200,0.1);
+      background: rgba(88,252,200,0.01);
+      margin-top: 48px;
+      margin-bottom: 48px;
+    }
+    .mc-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--turquoise);
+      opacity: 0.5;
+      margin-bottom: 12px;
+    }
+    .mc-text { font-size: 14px; line-height: 1.85; color: var(--secondary-text); }
+    .mc-text em { color: var(--primary-text); font-style: normal; }
+
+    .mechanism-note {
+      font-size: 12px;
+      color: var(--dim-text);
+      max-width: 640px;
+      line-height: 1.7;
+    }
+
+    /* ========== ZONE 4: THREE CHANNELS ========== */
+    .zone-channels {
+      padding: 100px 0 80px;
+      background: var(--lighter-blue);
+    }
+
+    .channel-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2px;
+      margin-bottom: 48px;
+    }
+    .channel-block {
+      padding: 28px 24px;
+      border-top: 2px solid rgba(88,252,200,0.2);
+      background: rgba(88,252,200,0.01);
+    }
+    .channel-block .cb-name { font-family: 'Cinzel', serif; font-size: 17px; letter-spacing: 0.05em; color: var(--turquoise); margin-bottom: 4px; }
+    .channel-block .cb-role { font-size: 11px; color: var(--dim-text); margin-bottom: 12px; letter-spacing: 0.06em; }
+    .channel-block .cb-holds { font-size: 12px; color: var(--secondary-text); line-height: 1.65; margin-bottom: 8px; }
+    .channel-block .cb-holds em { color: var(--primary-text); font-style: normal; }
+    .channel-block .cb-signal { font-size: 11px; color: var(--dim-text); font-style: italic; }
+
+    .channel-note { font-size: 12px; color: var(--dim-text); line-height: 1.7; max-width: 640px; }
+    .channel-note em { color: var(--secondary-text); font-style: normal; }
+
+    /* ========== ZONE 5: DEVELOPMENTAL TERRAIN ========== */
+    .zone-development {
+      padding: 120px 0 80px;
+      background: var(--base-blue);
+    }
+
+    .dev-terrain-wrap { max-width: 900px; margin: 0 auto 24px; }
+
+    /* Developmental Terrain SVG interactivity */
+    .dev-stage { cursor: pointer; }
+    .dev-stage .stage-node { transition: all 0.4s ease; }
+    .dev-stage .stage-label { transition: fill-opacity 0.4s ease; }
+    .dev-stage .stage-question { transition: fill-opacity 0.4s ease; }
+    .dev-stage .stage-detail { opacity: 0; transition: opacity 0.4s ease 0.1s; }
+    .dev-stage .stage-pulse { opacity: 0; transition: opacity 0.3s ease; }
+    .dev-stage .stage-scaffolding { transition: opacity 0.4s ease; }
+
+    .dev-stage:hover .stage-node { r: 8; }
+    .dev-stage:hover .stage-label { fill-opacity: 1; }
+    .dev-stage:hover .stage-question { fill-opacity: 0.8; }
+    .dev-stage:hover .stage-detail { opacity: 1; }
+    .dev-stage:hover .stage-pulse { opacity: 1; animation: stage-pulse-anim 2s ease-out infinite; }
+    .dev-stage:hover .stage-scaffolding { opacity: 0.25; }
+
+    @keyframes stage-pulse-anim { 0% { r: 10; opacity: 0.3; } 100% { r: 40; opacity: 0; } }
+
+    /* Self-canceling callout */
+    .self-cancel {
+      max-width: 640px;
+      text-align: center;
+      margin: 48px auto 0;
+      padding: 32px;
+      border: 1px solid rgba(232,227,255,0.06);
+    }
+    .self-cancel .sc-text { font-size: 14px; line-height: 1.85; color: var(--secondary-text); }
+    .self-cancel .sc-text em { color: var(--primary-text); font-style: normal; }
+
+    /* ========== ZONE 6: MAKING WAVES + CLOSE ========== */
+    .zone-close {
+      padding: 100px 0 100px;
+      background: linear-gradient(180deg, var(--lighter-blue) 0%, var(--deep-blue) 100%);
+    }
+
+    .waves-statement {
+      max-width: 640px;
+      margin-bottom: 60px;
+    }
+    .waves-statement .ws-head {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(20px, 2.5vw, 28px);
+      letter-spacing: 0.06em;
+      color: var(--primary-text);
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+    .waves-statement .ws-text {
+      font-size: 14px;
+      line-height: 1.85;
+      color: var(--secondary-text);
+      margin-bottom: 16px;
+    }
+    .waves-statement .ws-text em { color: var(--primary-text); font-style: normal; }
+
+    .close-divider {
+      width: 60px;
+      height: 1px;
+      background: var(--turquoise);
+      opacity: 0.4;
+      margin: 56px 0;
+    }
+    .close-tagline {
+      font-size: 13px;
+      color: var(--dim-text);
+      letter-spacing: 0.1em;
+      margin-bottom: 40px;
+    }
+    .close-anchor {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(24px, 3.5vw, 40px);
+      letter-spacing: 0.08em;
+      margin-bottom: 48px;
+    }
+    .close-anchor .faded { opacity: 0.6; }
+
+    .close-cta {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--coral);
+      text-decoration: none;
+      padding: 14px 32px;
+      border: 1px solid rgba(255,165,101,0.35);
+      transition: all 0.3s ease;
+      margin-bottom: 24px;
+    }
+    .close-cta:hover { border-color: var(--coral); background: rgba(255,165,101,0.05); }
+
+    .close-contact { font-size: 12px; color: var(--dim-text); margin-bottom: 48px; }
+    .close-contact a { color: var(--turquoise); text-decoration: none; border-bottom: 1px solid rgba(88,252,200,0.2); }
+    .close-contact a:hover { border-color: var(--turquoise); }
+
+    .nav-links { display: flex; gap: 40px; }
+    .nav-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--turquoise);
+      text-decoration: none;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(88,252,200,0.2);
+      transition: border-color 0.3s ease;
+    }
+    .nav-links a:hover { border-color: var(--turquoise); }
+
+    /* ========== FOOTER ========== */
+    .site-footer {
+      padding: 80px 40px 48px;
+      text-align: center;
+      background: var(--deep-blue);
+    }
+    .footer-logo { height: 46px; opacity: 0.5; margin: 0 auto 32px; display: block; }
+    .footer-nav { display: flex; justify-content: center; gap: 48px; margin-bottom: 24px; }
+    .footer-nav a { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: var(--secondary-text); text-decoration: none; transition: color 0.3s ease; }
+    .footer-nav a:hover { color: var(--primary-text); }
+    .footer-contact { font-size: 12px; letter-spacing: 0.05em; color: var(--dim-text); margin-bottom: 16px; }
+    .footer-contact a { color: var(--dim-text); text-decoration: none; transition: color 0.3s ease; }
+    .footer-contact a:hover { color: var(--secondary-text); }
+    .footer-sep { margin: 0 12px; color: var(--dim-text); }
+    .footer-tagline { font-size: 14px; letter-spacing: 0.05em; color: var(--dim-text); margin-bottom: 16px; }
+    .footer-copyright { font-size: 12px; letter-spacing: 0.05em; color: var(--dim-text); }
+
+    /* ========== SCROLL REVEAL ========== */
+    .reveal { opacity: 0; transform: translateY(24px); }
+    .reveal-delay-1 { transition-delay: 0.12s; }
+    .reveal-delay-2 { transition-delay: 0.24s; }
+    .reveal-delay-3 { transition-delay: 0.36s; }
+    .reveal-delay-4 { transition-delay: 0.48s; }
+
+    /* ========== RESPONSIVE SVG SCROLL ========== */
+    .svg-scroll-container {
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(90,86,114,0.2) transparent;
+    }
+    .svg-scroll-container::-webkit-scrollbar { height: 4px; }
+    .svg-scroll-container::-webkit-scrollbar-track { background: transparent; }
+    .svg-scroll-container::-webkit-scrollbar-thumb { background: rgba(90,86,114,0.2); border-radius: 2px; }
+
+    .svg-scroll-hint {
+      display: none;
+      text-align: center;
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--dim-text);
+      padding: 6px 0;
+      opacity: 0.5;
+      transition: opacity 0.5s ease;
+    }
+    .svg-scroll-hint.faded { opacity: 0; }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 900px) {
+      .zone-inner { padding: 0 24px; }
+      .pivot-grid { grid-template-columns: 1fr; gap: 16px; }
+      .pivot-divider { display: none; }
+      .pivot-side.override { text-align: left; }
+      .arch-blocks, .channel-grid { grid-template-columns: 1fr; gap: 16px; }
+      .arch-block { min-height: auto; }
+      .cg-grid { grid-template-columns: 1fr; gap: 8px; }
+      .cg-state.grasping { text-align: left; border-right: none; border-bottom: 1px solid rgba(90,86,114,0.1); }
+      .cg-state.exploring { border-left: none; }
+      .cg-or { display: none; }
+      .nav-links { flex-direction: column; gap: 16px; }
+      .nav-desktop { display: none; }
+      .hamburger { display: flex; }
+      .footer-nav { flex-direction: column; gap: 16px; align-items: center; }
+    }
+
+    @media (max-width: 768px) {
+      .svg-scroll-hint { display: block; }
+      .mechanism-flow-wrap { min-width: 760px; }
+      .dev-terrain-wrap { min-width: 600px; }
+      .reveal { transform: none !important; }
+    }
+
+    .no-js .reveal { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<div class="starfield"></div>
+
+<!-- ==================== NAVIGATION ==================== -->
+<nav class="site-nav" id="siteNav">
+  <a href="/" class="logo-container">
+    <img src="../assets/Basewaves_logo.svg" alt="BASEWAVES" class="nav-logo">
+  </a>
+  <div class="nav-desktop">
+    <a href="/" class="nav-link">HOME</a>
+    <span class="nav-separator">|</span>
+    <a href="/origin/" class="nav-link">ORIGIN</a>
+    <span class="nav-separator">|</span>
+    <a href="/method/" class="nav-link active">METHOD</a>
+    <span class="nav-separator">|</span>
+    <a href="/signals/" class="nav-link">SIGNALS</a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-overlay" id="navOverlay">
+  <a href="/">HOME</a>
+  <a href="/origin/">ORIGIN</a>
+  <a href="/method/" class="active">METHOD</a>
+  <a href="/signals/">SIGNALS</a>
+</div>
+
+
+<!-- ==================== ZONE 0: SENSORIUM ==================== -->
+<section class="zone zone-entry">
+  <div class="zone-inner">
+    <div class="entry-tag reveal">BASEWAVES</div>
+    <h1 class="entry-title reveal reveal-delay-1">Method</h1>
+    <p class="entry-prose reveal reveal-delay-2">
+      Third rep. The bar settles across your traps and something quiets. Not the weight — that's heavier than last week. The noise. Under this load, your prefrontal cortex can't maintain its grip. It starves. And in that metabolic silence, something else comes online. Your left foot shifts — not because you decided to shift it, but because a signal arrived from somewhere below conscious thought. <em>You didn't think that. You received it.</em> That reception is the capacity this method develops.
+    </p>
+    <div class="scroll-hint reveal reveal-delay-4">Navigate the architecture</div>
+  </div>
+</section>
+
+<!-- ==================== ZONE 1: THE PIVOT ==================== -->
+<section class="zone zone-pivot">
+  <div class="zone-inner">
+    <div class="zone-label reveal">The Pivot</div>
+    <div class="zone-tag reveal reveal-delay-1">What training has been — and what it becomes</div>
+
+    <div class="pivot-grid reveal">
+      <div class="pivot-side override">
+        <div class="ps-label">Override Culture</div>
+        <div class="ps-item">Push through discomfort</div>
+        <div class="ps-item">Chase the metric</div>
+        <div class="ps-item">The body is a machine to program</div>
+        <div class="ps-item">Discomfort = progress</div>
+        <div class="ps-item">Silence the signal</div>
+      </div>
+      <div class="pivot-divider"></div>
+      <div class="pivot-side signal">
+        <div class="ps-label">Signal Literacy</div>
+        <div class="ps-item"><em>Receive the signal</em></div>
+        <div class="ps-item"><em>Read the pattern</em></div>
+        <div class="ps-item"><em>The body is competent material</em></div>
+        <div class="ps-item"><em>Signal = information</em></div>
+        <div class="ps-item"><em>Clear the interference</em></div>
+      </div>
+    </div>
+
+    <div class="ratio-territory reveal">
+      <div class="ratio-label">The 7:1 Ratio</div>
+      <div class="ratio-visual">
+        <div class="ratio-bar seven">7 interoceptive · "How do I feel?"</div>
+        <div class="ratio-bar one">1</div>
+      </div>
+      <div class="ratio-note">Your fascial tissue contains <em>7 interoceptive nerve endings</em> for every <em>1 proprioceptive ending</em>. You're biologically wired for sensing state, not tracking position. Traditional training inverts this ratio. BASEWAVES restores it.</div>
+    </div>
+
+    <div class="zone-prose reveal">
+      The body sends information constantly — fatigue, compensation, misalignment, readiness, capacity, interference. Override culture's response: suppress it. Signal literacy's response: <em>read it.</em> The methodology begins the moment training stops being performance and starts being perception.
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ZONE 2: THE ARCHITECTURE ==================== -->
+<section class="zone zone-architecture">
+  <div class="zone-inner">
+    <div class="zone-label reveal">The Architecture</div>
+    <div class="zone-tag reveal reveal-delay-1">BASE → SPACE → WAVES</div>
+
+    <div class="arch-blocks reveal">
+      <div class="arch-block base">
+        <div class="ab-tag">Attention framework</div>
+        <div class="ab-name">BASE</div>
+        <div class="ab-desc"><em>Directs attention to signal.</em> Four domains scanned in sequence — where is equilibrium, what's my structural organization, where does force originate, what is attention perceiving.</div>
+        <div class="ab-dims"><em>B</em> — Balancing · <em>A</em> — Aligning · <em>S</em> — Sourcing · <em>E</em> — Engaging</div>
+      </div>
+      <div class="arch-block space">
+        <div class="ab-tag">Processing mechanism</div>
+        <div class="ab-name">SPACE</div>
+        <div class="ab-desc"><em>Processes signal.</em> Five dimensions assessing the current state of the system — what's getting through, what's the tempo, what's the noise floor, which orientation, how deep the reserves.</div>
+        <div class="ab-dims"><em>S</em> — Salience · <em>P</em> — Pitch · <em>A</em> — Ambiance · <em>C</em> — Curiosity · <em>E</em> — Endurance</div>
+      </div>
+      <div class="arch-block waves">
+        <div class="ab-tag">Emergent intention</div>
+        <div class="ab-name">WAVES</div>
+        <div class="ab-desc"><em>Reflects what emerges.</em> Not constructed. Not forced. Multi-timeline integration — the body's response across rep, set, session, week, month. Grace under pressure.</div>
+        <div class="ab-dims">Emergence, not construction. The framework dissolves here.</div>
+      </div>
+    </div>
+
+    <div class="curiosity-gate reveal">
+      <div class="cg-label">Curiosity — the system validity check</div>
+      <div class="cg-grid">
+        <div class="cg-state grasping">GRASPING<br>External seeking<br>PFC-driven<br>Top-down projection<br>System offline</div>
+        <div class="cg-or">or</div>
+        <div class="cg-state exploring">EXPLORING<br>Internal inquiry<br>Bottom-up reception<br>Direct perception<br>System online</div>
+      </div>
+      <div class="cg-note"><em>Curiosity is not a gradient. It is binary.</em> If grasping, no other SPACE dimension functions. Always check Curiosity first.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ZONE 3: THE MECHANISM ==================== -->
+<section class="zone zone-mechanism">
+  <div class="zone-inner">
+    <div class="zone-label reveal">The Mechanism</div>
+    <div class="zone-tag reveal reveal-delay-1">Load → Tension → Signal → Processing → Emergence</div>
+
+    <div class="mechanism-flow-wrap reveal">
+      <svg viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arr-c" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+            <path d="M 0 0 L 6 3 L 0 6" fill="none" stroke="#FFA565" stroke-width="0.8" opacity="0.4"/>
+          </marker>
+          <marker id="arr-t" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+            <path d="M 0 0 L 6 3 L 0 6" fill="none" stroke="#58FCC8" stroke-width="0.8" opacity="0.4"/>
+          </marker>
+          <marker id="arr-s" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+            <path d="M 0 0 L 6 3 L 0 6" fill="none" stroke="#E8E3FF" stroke-width="0.8" opacity="0.25"/>
+          </marker>
+        </defs>
+
+        <path d="M 100 140 C 160 140, 175 85, 230 85" fill="none" stroke="#FFA565" stroke-width="1" stroke-opacity="0.25" marker-end="url(#arr-c)"/>
+        <path d="M 255 85 C 310 85, 330 140, 390 140" fill="none" stroke="#FFA565" stroke-width="1" stroke-opacity="0.2" marker-end="url(#arr-c)"/>
+        <path d="M 415 140 C 470 140, 490 85, 545 85" fill="none" stroke="#58FCC8" stroke-width="1" stroke-opacity="0.25" marker-end="url(#arr-t)"/>
+        <path d="M 575 85 C 625 85, 645 140, 700 140" fill="none" stroke="#E8E3FF" stroke-width="1" stroke-opacity="0.15" marker-end="url(#arr-s)"/>
+        <path d="M 730 140 C 785 140, 805 85, 865 85" fill="none" stroke="#58FCC8" stroke-width="1" stroke-opacity="0.25" marker-end="url(#arr-t)"/>
+
+        <path d="M 878 100 C 920 170, 900 225, 820 235 C 600 255, 300 255, 140 235 C 70 225, 60 185, 90 155"
+              fill="none" stroke="#58FCC8" stroke-width="0.6" stroke-opacity="0.1" stroke-dasharray="4,6" marker-end="url(#arr-t)"/>
+        <text x="500" y="270" fill="#58FCC8" opacity="0.18" font-size="8" text-anchor="middle" letter-spacing="0.1em">SIGNAL FEEDS BACK · LOOP CONTINUES</text>
+
+        <g class="mech-node" transform="translate(85, 140)">
+          <circle class="node-pulse" cx="0" cy="0" fill="none" stroke="#FFA565" stroke-width="0.8"/>
+          <circle class="node-ring" cx="0" cy="0" r="28" fill="none" stroke="#FFA565" stroke-width="1" stroke-opacity="0.3"/>
+          <circle class="node-core" cx="0" cy="0" r="4" fill="#FFA565" fill-opacity="0.6"/>
+          <text class="node-label" x="0" y="-14" fill="#FFA565" fill-opacity="0.65" font-size="10" text-anchor="middle" letter-spacing="0.08em">LOAD</text>
+          <text x="0" y="24" fill="#5A5672" font-size="7" text-anchor="middle">external force</text>
+          <text class="node-detail" x="0" y="38" fill="#FFA565" font-size="7" text-anchor="middle" opacity="0.5">Objective · Measurable · The constraint arrives</text>
+        </g>
+
+        <g class="mech-node" transform="translate(242, 85)">
+          <circle class="node-pulse" cx="0" cy="0" fill="none" stroke="#FFA565" stroke-width="0.8"/>
+          <circle class="node-ring" cx="0" cy="0" r="25" fill="none" stroke="#FFA565" stroke-width="1" stroke-opacity="0.25"/>
+          <circle class="node-core" cx="0" cy="0" r="3.5" fill="#FFA565" fill-opacity="0.5"/>
+          <text class="node-label" x="0" y="-12" fill="#FFA565" fill-opacity="0.55" font-size="10" text-anchor="middle" letter-spacing="0.08em">TENSION</text>
+          <text x="0" y="22" fill="#5A5672" font-size="7" text-anchor="middle">force meets structure</text>
+          <text class="node-detail" x="0" y="36" fill="#FFA565" font-size="7" text-anchor="middle" opacity="0.5">Relational · Emergent · Not the load itself</text>
+        </g>
+
+        <g class="mech-node" transform="translate(400, 140)">
+          <circle class="node-pulse" cx="0" cy="0" fill="none" stroke="#58FCC8" stroke-width="0.8"/>
+          <circle class="node-ring" cx="0" cy="0" r="28" fill="none" stroke="#58FCC8" stroke-width="1" stroke-opacity="0.28"/>
+          <circle class="node-core" cx="0" cy="0" r="4" fill="#58FCC8" fill-opacity="0.55"/>
+          <text class="node-label" x="0" y="-14" fill="#58FCC8" fill-opacity="0.6" font-size="10" text-anchor="middle" letter-spacing="0.08em">SIGNAL</text>
+          <text x="0" y="24" fill="#5A5672" font-size="7" text-anchor="middle">felt sense</text>
+          <text class="node-detail" x="0" y="38" fill="#58FCC8" font-size="7" text-anchor="middle" opacity="0.5">Neuromuscular · The body communicates</text>
+        </g>
+
+        <g class="mech-block" transform="translate(560, 85)">
+          <rect class="block-glow" x="-36" y="-28" width="72" height="56" rx="3" fill="#E8E3FF" fill-opacity="0.02"/>
+          <rect class="block-rect" x="-30" y="-24" width="60" height="48" rx="2" fill="none" stroke="#E8E3FF" stroke-width="0.8" stroke-opacity="0.18"/>
+          <text class="block-label" x="0" y="-4" fill="#E8E3FF" fill-opacity="0.4" font-size="10" text-anchor="middle" letter-spacing="0.08em">BASE</text>
+          <text x="0" y="12" fill="#5A5672" font-size="7" text-anchor="middle">directs attention</text>
+          <text class="block-detail" x="0" y="42" fill="#E8E3FF" font-size="7" text-anchor="middle" opacity="0.4">B · A · S · E — Where is signal?</text>
+        </g>
+
+        <g class="mech-block" transform="translate(715, 140)">
+          <rect class="block-glow" x="-36" y="-28" width="72" height="56" rx="3" fill="#E8E3FF" fill-opacity="0.02"/>
+          <rect class="block-rect" x="-30" y="-24" width="60" height="48" rx="2" fill="none" stroke="#E8E3FF" stroke-width="0.8" stroke-opacity="0.18"/>
+          <text class="block-label" x="0" y="-4" fill="#E8E3FF" fill-opacity="0.4" font-size="10" text-anchor="middle" letter-spacing="0.08em">SPACE</text>
+          <text x="0" y="12" fill="#5A5672" font-size="7" text-anchor="middle">processes signal</text>
+          <text class="block-detail" x="0" y="42" fill="#E8E3FF" font-size="7" text-anchor="middle" opacity="0.4">Curiosity first — exploring or grasping?</text>
+        </g>
+
+        <g class="mech-node" transform="translate(870, 85)">
+          <circle class="node-pulse" cx="0" cy="0" fill="none" stroke="#58FCC8" stroke-width="0.8"/>
+          <circle class="node-ring" cx="0" cy="0" r="28" fill="none" stroke="#58FCC8" stroke-width="1" stroke-opacity="0.28"/>
+          <circle class="node-core" cx="0" cy="0" r="4" fill="#58FCC8" fill-opacity="0.55"/>
+          <text class="node-label" x="0" y="-14" fill="#58FCC8" fill-opacity="0.6" font-size="10" text-anchor="middle" letter-spacing="0.08em">WAVES</text>
+          <text x="0" y="24" fill="#5A5672" font-size="7" text-anchor="middle">emergence</text>
+          <text class="node-detail" x="0" y="38" fill="#58FCC8" font-size="7" text-anchor="middle" opacity="0.5">Not constructed · Reflected · Grace under pressure</text>
+        </g>
+      </svg>
+    </div>
+    <div class="svg-annotation reveal">Each node responds to attention — <em>expand, pulse, reveal.</em> The chain loops. Load arrives, signal emerges, processing happens, emergence reflects, signal feeds back. Continuous, not episodic.</div>
+
+    <div class="mechanism-callout reveal">
+      <div class="mc-label">Competent material</div>
+      <div class="mc-text">Your body is competent material. Every cell collectively knows what to build, when to stop, how to adapt. Training doesn't tell your body what to do — <em>it communicates goals.</em> The barbell provides a constraint. Your cellular collectives navigate toward coherence within that constraint. You don't build capacity. You remove obstacles to capacity that was already present.</div>
+    </div>
+
+    <p class="mechanism-note reveal">
+      The mechanism may involve bioelectric signaling — cellular collectives communicating through voltage gradients, establishing goal-states at tissue scale. This is the frontier where training science meets developmental biology.
+    </p>
+  </div>
+</section>
+
+<!-- ==================== ZONE 4: THREE CHANNELS ==================== -->
+<section class="zone zone-channels">
+  <div class="zone-inner">
+    <div class="zone-label reveal">Three Channels</div>
+    <div class="zone-tag reveal reveal-delay-1">Signal travels through three domains simultaneously</div>
+
+    <div class="channel-grid reveal">
+      <div class="channel-block">
+        <div class="cb-name">Metabolism</div>
+        <div class="cb-role">THE FUEL</div>
+        <div class="cb-holds"><em>Substrate, energy systems, recovery.</em> What powers the signal. What gets depleted and restored. The metabolic state determines what processing is possible.</div>
+        <div class="cb-signal">Signal: capacity, depletion, readiness</div>
+      </div>
+      <div class="channel-block">
+        <div class="cb-name">Movement</div>
+        <div class="cb-role">THE MEDIUM</div>
+        <div class="cb-holds"><em>Kinetic expression, motor patterns, force.</em> How the signal moves. Where force originates, how it transfers, where compensation hides.</div>
+        <div class="cb-signal">Signal: pattern, compensation, efficiency</div>
+      </div>
+      <div class="channel-block">
+        <div class="cb-name">Matrix</div>
+        <div class="cb-role">THE FIELD</div>
+        <div class="cb-holds"><em>Processing environment, distributed intelligence, patterns.</em> The body's own architecture for making sense of signal. Not metaphor — the extracellular matrix, the fascial web, the field in which signal propagates.</div>
+        <div class="cb-signal">Signal: coherence, interference, integration</div>
+      </div>
+    </div>
+
+    <div class="channel-note reveal"><em>Metabolism, Movement, Matrix — the Three Ms.</em> Not separate systems. Three aspects of a single signal moving through the body simultaneously. Training that addresses only one channel produces strength without literacy.</div>
+  </div>
+</section>
+
+<!-- ==================== ZONE 5: DEVELOPMENTAL TERRAIN ==================== -->
+<section class="zone zone-development">
+  <div class="zone-inner">
+    <div class="zone-label reveal">Developmental Terrain</div>
+    <div class="zone-tag reveal reveal-delay-1">The framework succeeds when you no longer think about it</div>
+
+    <div class="dev-terrain-wrap reveal">
+      <svg viewBox="0 0 900 320" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="terrain-fill" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#FFA565" stop-opacity="0.04"/>
+            <stop offset="50%" stop-color="#E8E3FF" stop-opacity="0.03"/>
+            <stop offset="100%" stop-color="#58FCC8" stop-opacity="0.04"/>
+          </linearGradient>
+        </defs>
+
+        <path d="M 40 260 C 100 258, 140 250, 180 240 C 240 225, 280 200, 340 180 C 400 160, 440 130, 500 110 C 560 90, 600 70, 660 55 C 720 42, 780 35, 860 30"
+              fill="none" stroke="#5A5672" stroke-width="1" opacity="0.3"/>
+        <path d="M 40 260 C 100 258, 140 250, 180 240 C 240 225, 280 200, 340 180 C 400 160, 440 130, 500 110 C 560 90, 600 70, 660 55 C 720 42, 780 35, 860 30 L 860 300 L 40 300 Z"
+              fill="url(#terrain-fill)"/>
+        <path d="M 40 268 C 100 266, 140 260, 200 255 C 300 245, 400 220, 500 195 C 600 170, 700 148, 860 140"
+              fill="none" stroke="#5A5672" stroke-width="0.3" opacity="0.15"/>
+        <path d="M 40 276 C 100 275, 160 270, 240 268 C 380 262, 500 250, 600 235 C 700 220, 800 210, 860 205"
+              fill="none" stroke="#5A5672" stroke-width="0.3" opacity="0.1"/>
+
+        <text x="22" y="260" fill="#5A5672" font-size="7" opacity="0.3" text-anchor="middle" transform="rotate(-90, 22, 200)" letter-spacing="0.1em">SIGNAL RESOLUTION →</text>
+
+        <g class="dev-stage">
+          <g class="stage-scaffolding" opacity="0.15" stroke="#FFA565" stroke-width="0.5">
+            <line x1="80" y1="252" x2="200" y2="252"/>
+            <line x1="90" y1="258" x2="190" y2="258"/>
+            <line x1="100" y1="264" x2="180" y2="264"/>
+          </g>
+          <circle class="stage-pulse" cx="140" cy="248" fill="none" stroke="#FFA565" stroke-width="0.6"/>
+          <circle class="stage-node" cx="140" cy="248" r="5" fill="#FFA565" fill-opacity="0.4"/>
+          <text class="stage-label" x="140" y="228" fill="#FFA565" fill-opacity="0.6" font-size="12" text-anchor="middle" font-family="Cinzel, serif" letter-spacing="0.06em">Conductor</text>
+          <text class="stage-question" x="140" y="282" fill="#5A5672" fill-opacity="0.6" font-size="7" text-anchor="middle" letter-spacing="0.06em">"Am I doing this right?"</text>
+          <text class="stage-detail" x="140" y="296" fill="#FFA565" font-size="6" text-anchor="middle" letter-spacing="0.06em" opacity="0.5">Follows instructions · External cueing · Framework visible</text>
+          <rect x="60" y="215" width="160" height="90" fill="transparent" cursor="pointer"/>
+        </g>
+
+        <g class="dev-stage">
+          <g class="stage-scaffolding" opacity="0.08" stroke="#E8E3FF" stroke-width="0.5" stroke-dasharray="3,5">
+            <line x1="380" y1="155" x2="500" y2="155"/>
+            <line x1="400" y1="161" x2="480" y2="161"/>
+          </g>
+          <circle class="stage-pulse" cx="440" cy="148" fill="none" stroke="#E8E3FF" stroke-width="0.6"/>
+          <circle class="stage-node" cx="440" cy="148" r="5" fill="#E8E3FF" fill-opacity="0.35"/>
+          <text class="stage-label" x="440" y="128" fill="#E8E3FF" fill-opacity="0.5" font-size="12" text-anchor="middle" font-family="Cinzel, serif" letter-spacing="0.06em">Musician</text>
+          <text class="stage-question" x="440" y="178" fill="#5A5672" fill-opacity="0.6" font-size="7" text-anchor="middle" letter-spacing="0.06em">"What am I noticing?"</text>
+          <text class="stage-detail" x="440" y="192" fill="#E8E3FF" font-size="6" text-anchor="middle" letter-spacing="0.06em" opacity="0.4">Adapts patterns · Internal monitoring · Framework translucent</text>
+          <rect x="360" y="115" width="160" height="90" fill="transparent" cursor="pointer"/>
+        </g>
+
+        <g class="dev-stage">
+          <circle class="stage-pulse" cx="760" cy="38" fill="none" stroke="#58FCC8" stroke-width="0.6"/>
+          <circle cx="760" cy="38" r="14" fill="none" stroke="#58FCC8" stroke-width="0.5" opacity="0.15"/>
+          <circle class="stage-node" cx="760" cy="38" r="5" fill="#58FCC8" fill-opacity="0.5"/>
+          <text class="stage-label" x="760" y="16" fill="#58FCC8" fill-opacity="0.6" font-size="12" text-anchor="middle" font-family="Cinzel, serif" letter-spacing="0.06em">Composer</text>
+          <text class="stage-question" x="760" y="66" fill="#5A5672" fill-opacity="0.6" font-size="7" text-anchor="middle" letter-spacing="0.06em">"The movement wants this."</text>
+          <text class="stage-detail" x="760" y="80" fill="#58FCC8" font-size="6" text-anchor="middle" letter-spacing="0.06em" opacity="0.4">Creates variations · Autonomous recognition · Framework dissolved</text>
+          <rect x="680" y="5" width="160" height="85" fill="transparent" cursor="pointer"/>
+        </g>
+      </svg>
+    </div>
+    <div class="svg-annotation reveal">Hover each stage. <em>The scaffolding is visible at low elevation, translucent at mid, dissolved at high.</em> The terrain encodes the self-canceling principle — the framework succeeds when it disappears.</div>
+
+    <div class="self-cancel reveal">
+      <div class="sc-text">BASEWAVES uses left-hemisphere structure to restore right-hemisphere primacy. <em>The analytical scaffolding is designed to dissolve analytical primacy.</em> A beginner needs the B→A→S→E sequence. A Composer attends to all domains simultaneously, fluidly, without conscious sequencing. The scaffolding becomes invisible.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ZONE 6: MAKING WAVES + CLOSE ==================== -->
+<section class="zone zone-close">
+  <div class="zone-inner">
+    <div class="waves-statement reveal">
+      <div class="ws-head">Making WAVES</div>
+      <div class="ws-text">Not disruption. Emergence. Grace under pressure — not because you override harder, but because you've cleared the architecture to metabolize what arrives.</div>
+      <div class="ws-text"><em>The phrase inverts.</em> You don't make waves by forcing them. You make waves by becoming the medium through which they propagate. The capacity was always there. You cleared what was blocking it.</div>
+    </div>
+
+    <div class="close-divider reveal"></div>
+
+    <p class="close-tagline reveal">THE INTELLIGENCE WAS ALWAYS THERE</p>
+
+    <h2 class="close-anchor reveal">Teasing my prisms,<br><span class="faded">with silent rhythms.</span></h2>
+
+    <div class="reveal">
+      <a href="mailto:greg@basewaves.com?subject=State%20Transition%20Session" class="close-cta">Schedule a State Transition Session</a>
+    </div>
+
+    <div class="close-contact reveal">
+      <a href="mailto:greg@basewaves.com">greg@basewaves.com</a>&nbsp;&nbsp;·&nbsp;&nbsp;512.585.3400
+    </div>
+
+    <div class="nav-links reveal">
+      <a href="/origin/">How this began →</a>
+      <a href="/signals/">Depth readings →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="zone site-footer">
+  <img src="../assets/Basewaves_logo.svg" alt="BASEWAVES" class="footer-logo">
+  <nav class="footer-nav">
+    <a href="/">HOME</a><a href="/origin/">ORIGIN</a><a href="/method/">METHOD</a><a href="/signals/">SIGNALS</a>
+  </nav>
+  <p class="footer-contact">
+    <a href="mailto:greg@basewaves.com">greg@basewaves.com</a>
+    <span class="footer-sep">|</span>
+    <a href="tel:+15125853400">512.585.3400</a>
+  </p>
+  <p class="footer-tagline">Spatial Strength Training&#8482;</p>
+  <p class="footer-copyright">&copy; 2026 BASEWAVES</p>
+</footer>
+
+
+<!-- ==================== GSAP SCROLL CONTROLLER ==================== -->
+<script>
+  (function() {
+    const gsapOk = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
+    const isMobile = window.innerWidth < 768;
+
+    if (!gsapOk) {
+      document.querySelectorAll('.reveal').forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; });
+      return;
+    }
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Nav blur on scroll
+    const nav = document.getElementById('siteNav');
+    ScrollTrigger.create({ start: 'top -80', onUpdate: s => nav.classList.toggle('scrolled', s.scroll() > 80) });
+
+    // Sensorium entry — staggered
+    document.querySelectorAll('.zone-entry .reveal').forEach((el, i) => {
+      gsap.fromTo(el,
+        { opacity: 0, y: isMobile ? 0 : 24 },
+        { opacity: 1, y: 0, duration: 0.8, delay: 0.5 + i * 0.2, ease: 'power2.out' }
+      );
+    });
+
+    // All other reveals
+    document.querySelectorAll('.reveal').forEach(el => {
+      if (el.closest('.zone-entry')) return;
+      gsap.fromTo(el,
+        { opacity: 0, y: isMobile ? 0 : 24 },
+        { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out',
+          scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' }
+        }
+      );
+    });
+
+    // Hamburger menu
+    const hb = document.getElementById('hamburger'), ov = document.getElementById('navOverlay');
+    if (hb && ov) {
+      hb.addEventListener('click', e => { e.stopPropagation(); hb.classList.toggle('active'); ov.classList.toggle('open'); document.body.style.overflow = ov.classList.contains('open') ? 'hidden' : ''; });
+      ov.addEventListener('click', e => { if (e.target === ov || e.target.tagName === 'A') { hb.classList.remove('active'); ov.classList.remove('open'); document.body.style.overflow = ''; } });
+    }
+
+    // Responsive SVG: wrap in scroll containers on mobile
+    if (isMobile) {
+      document.querySelectorAll('.mechanism-flow-wrap, .dev-terrain-wrap').forEach(wrap => {
+        if (wrap.parentElement.classList.contains('svg-scroll-container')) return;
+        const sc = document.createElement('div');
+        sc.className = 'svg-scroll-container';
+        const hint = document.createElement('div');
+        hint.className = 'svg-scroll-hint';
+        hint.textContent = '\u2190 scroll to explore \u2192';
+        wrap.parentElement.insertBefore(sc, wrap);
+        sc.appendChild(wrap);
+        sc.parentElement.insertBefore(hint, sc.nextSibling);
+        sc.addEventListener('scroll', function h() { hint.classList.add('faded'); sc.removeEventListener('scroll', h); }, { passive: true });
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>

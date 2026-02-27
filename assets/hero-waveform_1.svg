@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1600 400">
+  <!-- Generator: Adobe Illustrator 30.3.0, SVG Export Plug-In . SVG Version: 2.1.3 Build 157)  -->
+  <defs>
+    <style>
+      .st0 {
+        stroke-width: .6px;
+      }
+
+      .st0, .st1, .st2, .st3, .st4, .st5 {
+        fill: none;
+      }
+
+      .st0, .st4 {
+        stroke: #5a5672;
+      }
+
+      .st6 {
+        fill: url(#linear-gradient1);
+      }
+
+      .st7 {
+        opacity: .15;
+      }
+
+      .st1 {
+        stroke-width: .5px;
+      }
+
+      .st1, .st2 {
+        stroke: #9994b8;
+      }
+
+      .st2 {
+        stroke-width: .4px;
+      }
+
+      .st8 {
+        filter: url(#noiseBlur);
+        opacity: .18;
+      }
+
+      .st9 {
+        filter: url(#noiseBlur1);
+        opacity: .12;
+      }
+
+      .st10 {
+        fill: #9994b8;
+      }
+
+      .st11 {
+        fill: #5a5672;
+      }
+
+      .st3 {
+        stroke-width: 1.5px;
+      }
+
+      .st3, .st5 {
+        stroke: #58fcc8;
+      }
+
+      .st12 {
+        filter: url(#signalBlur);
+        opacity: .1;
+      }
+
+      .st13 {
+        filter: url(#signalBlur1);
+        opacity: .06;
+      }
+
+      .st4 {
+        stroke-width: .8px;
+      }
+
+      .st14 {
+        fill: url(#linear-gradient);
+      }
+
+      .st5 {
+        stroke-width: 2px;
+      }
+
+      .st15 {
+        opacity: .08;
+      }
+    </style>
+    <filter id="signalBlur">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+    <filter id="signalBlur1" data-name="signalBlur">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+    <filter id="noiseBlur">
+      <feGaussianBlur stdDeviation="0.8"/>
+    </filter>
+    <filter id="noiseBlur1" data-name="noiseBlur">
+      <feGaussianBlur stdDeviation="0.8"/>
+    </filter>
+    <linearGradient id="linear-gradient" x1="727.55" y1="271.82" x2="728.55" y2="271.82" gradientTransform="translate(-1164072 108928) scale(1600 -400)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0e1220"/>
+      <stop offset=".08" stop-color="#0e1220" stop-opacity="0"/>
+      <stop offset=".92" stop-color="#0e1220" stop-opacity="0"/>
+      <stop offset="1" stop-color="#0e1220"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient1" x1="728.05" y1="272.32" x2="728.05" y2="271.32" gradientTransform="translate(-1164072 108928) scale(1600 -400)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0e1220" stop-opacity=".8"/>
+      <stop offset=".25" stop-color="#0e1220" stop-opacity="0"/>
+      <stop offset=".75" stop-color="#0e1220" stop-opacity="0"/>
+      <stop offset="1" stop-color="#0e1220" stop-opacity=".8"/>
+    </linearGradient>
+  </defs>
+  <g class="st12">
+    <path class="st5" d="M0,200c40,0,60-30,100-32s60,17,100,22,60-15,100-25,60,5,100,15,60-5,100-18,60,3,100,16,60,2,100-10,60,0,100,14,60,3,100-10,60-2,100,13,60,3,100-11,60-4,100,10,60,2,100-12,60-4,100,10,60,2,100-8,70,4,100,11"/>
+  </g>
+  <g class="st13">
+    <path class="st3" d="M0,210c50-5,80,15,120,18s70-13,110-20,70,10,110,22,60-5,100-18,80,3,120,16,70-3,110-18,80,5,120,18,70-3,110-16,80,3,120,13,70-5,110-17,80,4,120,14,70-4,110-14,80,6,120,16,70-4,120-14"/>
+  </g>
+  <g class="st8">
+    <path class="st4" d="M0,195l18-3,6,6,11-10,7,13,14-15,7,11,15-14,7,16,13-9,14,14,8-17,15,9,13-14,7,18,15-9,12,14,13-17,13,10,10-14,14,18,13-13,13,6,12-12,15,20,13-13,12,8,15-13,13,16,12-13,15,8,13-14,14,22,13-14,13,8,12-12,15,14,13-12,14,8,13-12,13,18,14-12,13,8,13-12,14,15,13-13,13,8,14-13,13,17,13-8,14,6,13-13,13,17,14-13,13,8,13-13,14,17,13-11,13,8,14-12,13,14,13-12,14,8,13-13,13,18,14-11,13,8,13-13,14,18,13-14,13,8,14-13,13,17,13-11,14,8,13-12,13,14,14-12,13,8,13-12,14,18,13-13,13,8,14-12,13,16,13-11,14,8,13-12,13,14,14-12,13,8,13-13,14,19,13-13,13,8,14-12,13,16,13-11,14,8,13-12,13,14,14-12,13,8,13-12,14,18,13-13,13,8,14-12,13,16,13-11,14,8,13-12,13,14,14-12,13,8,13-13,14,19,13-13,13,8,14-12,13,16,13-11,14,8,8-6"/>
+  </g>
+  <g class="st9">
+    <path class="st0" d="M0,208l15,6,13-11,12,13,15-10,13,12,14-16,13,10,13-12,14,15,13-10,13,13,14-15,13,10,13-13,14,16,13-11,13,10,14-13,13,12,13-10,14,14,13-13,13,8,14-13,13,15,13-12,14,13,13-11,13,9,14-13,13,11,13-12,14,16,13-11,13,10,14-12,13,11,13-12,14,15,13-12,13,8,14-12,13,14,13-11,14,12,13-11,13,8,14-12,13,14,13-12,14,14,13-12,13,8,14-13,13,14,13-11,14,13,13-11,13,8,14-12,13,14,13-11,14,12,13-11,13,8,14-12,13,14,13-12,14,14,13-12,13,8,14-13,13,14,13-11,14,13,13-11,13,8,14-12,13,14,13-11,14,12,13-11,13,8,14-12,13,14,13-12,14,14,13-12,13,8,14-13,13,14,13-11,14,13,13-11,13,8,14-12,13,14,13-11,14,12,13-11,13,8,14-12,13,14,13-12,14,14,13-12,13,8,14-13,13,14,13-11,14,13,13-11,13,8,14-12,13,14,13-11,14,12,13-11,13,8,12-5"/>
+  </g>
+  <g class="st7">
+    <line class="st1" x1="85" y1="195" x2="88" y2="172"/>
+    <line class="st2" x1="142" y1="200" x2="145" y2="220"/>
+    <line class="st1" x1="235" y1="192" x2="237" y2="175"/>
+    <line class="st2" x1="318" y1="198" x2="320" y2="218"/>
+    <line class="st1" x1="405" y1="195" x2="408" y2="170"/>
+    <line class="st2" x1="492" y1="202" x2="494" y2="222"/>
+    <line class="st1" x1="578" y1="190" x2="581" y2="168"/>
+    <line class="st2" x1="665" y1="198" x2="667" y2="218"/>
+    <line class="st1" x1="748" y1="195" x2="751" y2="172"/>
+    <line class="st2" x1="835" y1="200" x2="837" y2="222"/>
+    <line class="st1" x1="922" y1="192" x2="924" y2="170"/>
+    <line class="st2" x1="1008" y1="198" x2="1010" y2="220"/>
+    <line class="st1" x1="1095" y1="195" x2="1098" y2="172"/>
+    <line class="st2" x1="1182" y1="202" x2="1184" y2="222"/>
+    <line class="st1" x1="1268" y1="190" x2="1271" y2="168"/>
+    <line class="st2" x1="1355" y1="198" x2="1357" y2="218"/>
+    <line class="st1" x1="1442" y1="195" x2="1445" y2="172"/>
+    <line class="st2" x1="1528" y1="200" x2="1530" y2="220"/>
+  </g>
+  <g class="st15">
+    <circle class="st10" cx="65" cy="178" r="1"/>
+    <circle class="st11" cx="180" cy="215" r="1.5"/>
+    <circle class="st10" cx="290" cy="175" r="1"/>
+    <circle class="st11" cx="420" cy="220" r="1"/>
+    <circle class="st10" cx="530" cy="180" r="1.5"/>
+    <circle class="st11" cx="650" cy="222" r="1"/>
+    <circle class="st10" cx="760" cy="176" r="1"/>
+    <circle class="st11" cx="870" cy="218" r="1.5"/>
+    <circle class="st10" cx="990" cy="178" r="1"/>
+    <circle class="st11" cx="1100" cy="220" r="1"/>
+    <circle class="st10" cx="1220" cy="176" r="1.5"/>
+    <circle class="st11" cx="1340" cy="218" r="1"/>
+    <circle class="st10" cx="1460" cy="180" r="1"/>
+    <circle class="st11" cx="1560" cy="215" r="1.5"/>
+  </g>
+  <rect class="st14" width="1600" height="400"/>
+  <rect class="st6" width="1600" height="400"/>
+</svg>
