@@ -1,960 +1,298 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ORIGIN | BASEWAVES — Signal Literacy Through Strength</title>
-  <meta name="description" content="The neurological origin of BASEWAVES. How signal literacy became a methodology for restoring what override culture buried.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why Strength Training Develops More Than Muscle | BASEWAVES</title>
+<meta name="description" content="Your body has 7 sensors for feeling state for every 1 tracking position. Most training ignores the 7. BASEWAVES is strength training that works with your full nervous system. Austin, TX.">
+<meta property="og:title" content="Why Strength Training Develops More Than Muscle | BASEWAVES">
+<meta property="og:description" content="Your body has 7 sensors for feeling state for every 1 tracking position. Most training ignores the 7. BASEWAVES is strength training that works with your full nervous system.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&amp;family=IBM+Plex+Mono:wght@300;400;500&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+  :root { --base-blue: #0E1220; --deep-blue: #080B14; --lighter-blue: #141B2E; --primary-text: #E8E3FF; --secondary-text: #9994B8; --dim-text: #5A5672; --turquoise: #58FCC8; --coral: #FFA565; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--deep-blue); color: var(--primary-text); font-family: 'IBM Plex Mono', monospace; font-size: 14px; line-height: 1.7; letter-spacing: 0.03em; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+  .starfield { position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 0; background: radial-gradient(1px 1px at 10% 15%, rgba(232,227,255,0.4), transparent), radial-gradient(1px 1px at 25% 35%, rgba(232,227,255,0.25), transparent), radial-gradient(1.5px 1.5px at 40% 8%, rgba(232,227,255,0.35), transparent), radial-gradient(1px 1px at 55% 42%, rgba(232,227,255,0.2), transparent), radial-gradient(1px 1px at 70% 22%, rgba(88,252,200,0.12), transparent), radial-gradient(1.5px 1.5px at 85% 55%, rgba(232,227,255,0.3), transparent), radial-gradient(1px 1px at 15% 65%, rgba(232,227,255,0.2), transparent), radial-gradient(1px 1px at 35% 78%, rgba(232,227,255,0.35), transparent), radial-gradient(1.5px 1.5px at 60% 72%, rgba(232,227,255,0.25), transparent), radial-gradient(1px 1px at 80% 85%, rgba(232,227,255,0.3), transparent), radial-gradient(1px 1px at 92% 12%, rgba(232,227,255,0.2), transparent), radial-gradient(1px 1px at 48% 92%, rgba(88,252,200,0.1), transparent), radial-gradient(1px 1px at 5% 48%, rgba(232,227,255,0.3), transparent), radial-gradient(1.5px 1.5px at 72% 38%, rgba(232,227,255,0.2), transparent); animation: starfield-breathe 12s ease-in-out infinite; }
+  @keyframes starfield-breathe { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+  .zone { position: relative; z-index: 1; }
+  .zone-inner { max-width: 900px; margin: 0 auto; padding: 0 48px; }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.12s; } .reveal-delay-2 { transition-delay: 0.24s; } .reveal-delay-3 { transition-delay: 0.36s; }
+  .site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; transition: background 0.4s ease, backdrop-filter 0.4s ease; }
+  .site-nav.scrolled { background: rgba(14, 18, 32, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+  .logo-container { display: block; opacity: 0.7; transition: opacity 0.3s ease, filter 0.3s ease; }
+  .logo-container:hover { opacity: 1; filter: drop-shadow(0 0 12px var(--turquoise)) drop-shadow(0 0 24px rgba(88, 252, 200, 0.4)); }
+  .nav-logo { height: 41px; width: auto; }
+  .nav-link { font-family: 'Space Mono', monospace; font-size: 15px; color: var(--secondary-text); text-decoration: none; letter-spacing: 0.05em; transition: color 0.3s ease; }
+  .nav-link:hover { color: var(--turquoise); } .nav-link.active { color: var(--primary-text); }
+  .nav-separator { color: var(--dim-text); margin: 0 12px; } .nav-desktop { display: flex; align-items: center; }
+  .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 28px; height: 28px; cursor: pointer; z-index: 60; background: none; border: none; padding: 0; }
+  .hamburger span { display: block; width: 100%; height: 2px; background-color: var(--primary-text); transition: transform 0.3s ease, opacity 0.3s ease; }
+  .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .nav-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(14, 18, 32, 0.92); z-index: 55; flex-direction: column; justify-content: center; align-items: center; gap: 40px; opacity: 0; transition: opacity 0.3s ease; }
+  .nav-overlay.open { display: flex; opacity: 1; }
+  .nav-overlay a { font-family: 'Space Mono', monospace; font-size: 18px; letter-spacing: 0.15em; color: var(--secondary-text); text-decoration: none; transition: color 0.3s ease; }
+  .nav-overlay a:hover { color: var(--turquoise); } .nav-overlay a.active { color: var(--primary-text); }
+  @media (max-width: 1023px) { .nav-logo { height: 32px; } .hamburger { display: flex; } .nav-desktop { display: none; } }
+  @media (min-width: 1024px) { .nav-overlay { display: none !important; } }
+  .zone-hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: transparent; padding: 60px 48px; }
+  .hero-headline { font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(28px, 4.5vw, 48px); letter-spacing: 0.08em; color: var(--primary-text); margin-bottom: 40px; line-height: 1.3; }
+  .hero-prose { max-width: 660px; font-size: 14px; line-height: 1.9; color: var(--secondary-text); margin-bottom: 60px; }
+  .hero-prose em { color: var(--primary-text); font-style: normal; }
+  .page-subtitle { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 400; color: var(--dim-text); margin-top: 0; margin-bottom: 20px; }
+  .scroll-hint { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dim-text); animation: pulse 2.5s ease infinite; }
+  .scroll-hint::after { content: ''; display: block; width: 1px; height: 40px; background: linear-gradient(180deg, var(--dim-text), transparent); margin: 12px auto 0; }
+  @keyframes pulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 0.7; } }
+  .zone-divider { height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(88,252,200,0.15) 20%, rgba(88,252,200,0.25) 50%, rgba(88,252,200,0.15) 80%, transparent 100%); position: relative; z-index: 1; }
+  .zone-section { padding: 100px 0 80px; }
+  .zone-headline { font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(22px, 3vw, 32px); letter-spacing: 0.06em; color: var(--primary-text); margin-bottom: 32px; line-height: 1.35; }
+  .body-prose { font-size: 14px; line-height: 1.85; color: var(--secondary-text); margin-bottom: 24px; }
+  .body-prose em { color: var(--primary-text); font-style: normal; }
+  .signal-line { font-size: 15px; line-height: 1.85; color: var(--primary-text); margin-bottom: 24px; }
+  .turquoise-line { font-size: 15px; line-height: 1.85; color: var(--turquoise); margin-bottom: 24px; }
+  .indictment { padding: 48px 0; margin: 16px 0; }
+  .indictment-line { font-size: 15px; letter-spacing: 0.1em; line-height: 2.4; color: var(--dim-text); }
+  .ratio-territory { margin: 48px 0; }
+  .ratio-label { font-family: 'Cinzel', serif; font-size: 16px; letter-spacing: 0.06em; color: var(--primary-text); margin-bottom: 20px; }
+  .ratio-visual { display: grid; grid-template-columns: 7fr 1fr; gap: 3px; margin-bottom: 20px; }
+  .ratio-bar { height: 52px; display: flex; align-items: center; padding: 0 16px; font-size: 11px; letter-spacing: 0.04em; }
+  .ratio-bar.seven { background: linear-gradient(90deg, rgba(88,252,200,0.12), rgba(88,252,200,0.03)); border-left: 3px solid rgba(88,252,200,0.4); color: var(--turquoise); }
+  .ratio-bar.one { background: rgba(232,227,255,0.04); border-left: 3px solid rgba(232,227,255,0.15); color: var(--dim-text); font-size: 10px; justify-content: center; }
+  .ratio-annotation { font-size: 12px; line-height: 1.7; color: var(--dim-text); }
+  .ratio-annotation em { color: var(--secondary-text); font-style: normal; }
+  .loop-flow { margin: 48px 0; display: flex; flex-direction: column; gap: 0; }
+  .loop-step { padding: 20px 24px; border-left: 2px solid; }
+  .loop-step.base-step { border-color: rgba(88,252,200,0.25); } .loop-step.load-step { border-color: rgba(255,165,101,0.3); } .loop-step.space-step { border-color: rgba(232,227,255,0.2); } .loop-step.waves-step { border-color: rgba(88,252,200,0.35); } .loop-step.close-step { border-color: rgba(255,165,101,0.2); }
+  .loop-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 8px; }
+  .loop-step.base-step .loop-label { color: var(--turquoise); } .loop-step.load-step .loop-label { color: var(--coral); } .loop-step.space-step .loop-label { color: var(--primary-text); } .loop-step.waves-step .loop-label { color: var(--turquoise); } .loop-step.close-step .loop-label { color: var(--coral); }
+  .loop-desc { font-size: 13px; line-height: 1.75; color: var(--secondary-text); }
+  .loop-desc em { color: var(--primary-text); font-style: normal; }
+  .cta-link { display: inline-block; font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.08em; color: var(--turquoise); text-decoration: none; margin-top: 24px; transition: color 0.3s ease; }
+  .cta-link:hover { color: var(--primary-text); } .cta-link.coral { color: var(--coral); } .cta-link.coral:hover { color: var(--primary-text); }
+  .zone-footer { padding: 60px 0 80px; background: var(--deep-blue); border-top: 1px solid rgba(88,252,200,0.08); }
+  .footer-territory { display: flex; justify-content: space-between; align-items: start; }
+  .footer-left { max-width: 400px; }
+  .footer-statement { font-family: 'Cinzel', serif; font-size: 15px; color: var(--primary-text); letter-spacing: 0.04em; line-height: 1.5; margin-bottom: 8px; }
+  .footer-sub { font-size: 12px; color: var(--dim-text); line-height: 1.6; }
+  .footer-right { text-align: right; }
+  .footer-cta { display: inline-block; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--coral); text-decoration: none; padding: 12px 28px; border: 1px solid rgba(255,165,101,0.3); transition: all 0.3s ease; margin-bottom: 16px; }
+  .footer-cta:hover { border-color: var(--coral); background: rgba(255,165,101,0.05); }
+  .footer-contact { font-size: 11px; color: var(--dim-text); line-height: 1.8; }
+  .footer-contact a { color: var(--turquoise); text-decoration: none; border-bottom: 1px solid rgba(88,252,200,0.15); }
+  .footer-contact a:hover { border-color: var(--turquoise); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; }
+  .footer-logo { width: 36px; height: 24px; opacity: 0.25; } .footer-logo path { fill: var(--primary-text); }
+  .footer-tm { font-size: 10px; color: rgba(90,86,114,0.4); letter-spacing: 0.06em; }
+  @media (max-width: 900px) { .zone-inner { padding: 0 24px; } .zone-hero { padding: 60px 24px; } .ratio-visual { grid-template-columns: 1fr; gap: 4px; } .ratio-bar.one { justify-content: flex-start; padding: 0 16px; } .footer-territory { flex-direction: column; gap: 40px; } .footer-right { text-align: left; } .footer-bottom { flex-direction: column; gap: 12px; align-items: flex-start; } }
+  .no-js .reveal { opacity: 1; transform: none; }
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="ORIGIN | BASEWAVES">
-  <meta property="og:description" content="The neurological origin of BASEWAVES. How signal literacy became a methodology for restoring what override culture buried.">
-  <meta property="og:type" content="website">
-
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Google Fonts: Option B Typography -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-
-  <!-- GSAP + ScrollTrigger CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'base-bg': '#0E1220',
-            'base-bg-dark': '#080B14',
-            'turquoise': '#58FCC8',
-            'coral': '#FFA565',
-            'text-primary': '#E8E3FF',
-            'text-secondary': '#9994B8',
-            'text-dim': '#5A5672',
-          },
-          fontFamily: {
-            'cinzel': ['Cinzel', 'serif'],
-            'ibm': ['IBM Plex Mono', 'monospace'],
-            'mono': ['Space Mono', 'monospace'],
-          }
-        }
-      }
+  /* Competent Material figure + prose layout */
+  .competent-figure-grid {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 48px;
+    align-items: start;
+    margin-bottom: 24px;
+  }
+  .competent-figure-grid .figure-wrap {
+    position: sticky;
+    top: 100px;
+  }
+  .competent-figure-grid .figure-wrap img {
+    width: 100%;
+    height: auto;
+    opacity: 0.6;
+    transition: opacity 0.5s ease;
+  }
+  .competent-figure-grid .figure-wrap img:hover {
+    opacity: 0.85;
+  }
+  .competent-figure-grid .figure-prose p {
+    font-size: 14px;
+    line-height: 1.85;
+    color: var(--secondary-text);
+    margin-bottom: 24px;
+  }
+  .competent-figure-grid .figure-prose p em {
+    color: var(--primary-text);
+    font-style: normal;
+  }
+  @media (max-width: 900px) {
+    .competent-figure-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
     }
-  </script>
-
-  <style>
-    /* ═══════════════════════════════════════════
-       RESET
-       ═══════════════════════════════════════════ */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html, body {
-      background-color: transparent;
-      color: #E8E3FF;
-      overflow-x: hidden;
-    }
-
-    /* ═══════════════════════════════════════════
-       ENVIRONMENTAL LAYERS (z-index stack)
-       -5: base color
-       -4: neural scaffolding texture
-       -3: grain overlay
-       -1: mobile darken (mobile only)
-        0+: content
-       ═══════════════════════════════════════════ */
-    .bg-base-color {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-color: #0E1220;
-      z-index: -5;
-    }
-
-    .bg-neural {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 120%;
-      background-image: url('../assets/neural_scaffolding_base.png');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      z-index: -4;
-      will-change: transform, filter, opacity;
-      filter: blur(10px);
-      opacity: 0.25;
-    }
-
-    .grain-overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-image: url('../assets/grain.png');
-      background-repeat: repeat;
-      mix-blend-mode: overlay;
-      z-index: -3;
-      pointer-events: none;
-      will-change: opacity;
-      opacity: 0.08;
-    }
-
-    .mobile-darken {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-color: #0E1220;
-      z-index: -1;
-      pointer-events: none;
-      will-change: opacity;
-      opacity: 0;
-    }
-
-    @media (max-width: 767px) {
-      .mobile-darken { display: block; }
-    }
-
-    /* ═══════════════════════════════════════════
-       GLOBAL TYPOGRAPHY: Option B — The Architect
-       ═══════════════════════════════════════════ */
-    h1, h2, h3, .headline {
-      font-family: 'Cinzel', serif;
-      font-weight: 400;
-    }
-
-    .body-text, p {
-      font-family: 'IBM Plex Mono', monospace;
-      letter-spacing: 0.15em;
-    }
-
-    /* ═══════════════════════════════════════════
-       NAVIGATION
-       ═══════════════════════════════════════════ */
-    .logo-container {
-      opacity: 0.7;
-      transition: opacity 0.3s ease, filter 0.3s ease;
-    }
-
-    .logo-container:hover {
-      opacity: 1;
-      filter: drop-shadow(0 0 12px #58FCC8) drop-shadow(0 0 24px rgba(88, 252, 200, 0.4));
-    }
-
-    .nav-link {
-      font-family: 'Space Mono', monospace;
-      font-size: 14px;
-      color: #9994B8;
-      text-decoration: none;
-      letter-spacing: 0.05em;
-      transition: color 0.3s ease;
-    }
-
-    .nav-link:hover { color: #58FCC8; }
-
-    .nav-link.active {
-      color: #E8E3FF;
-    }
-
-    .nav-separator {
-      color: #5A5672;
-      margin: 0 12px;
-    }
-
-    /* ═══ HAMBURGER MENU (<1024px) ═══ */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      gap: 5px;
-      width: 28px;
-      height: 28px;
-      cursor: pointer;
-      z-index: 60;
-      background: none;
-      border: none;
-      padding: 0;
-    }
-
-    .hamburger span {
-      display: block;
-      width: 100%;
-      height: 2px;
-      background-color: #E8E3FF;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-    }
-
-    .hamburger.active span:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
-    }
-
-    .hamburger.active span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .hamburger.active span:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
-    }
-
-    .nav-desktop {
-      display: flex;
-      align-items: center;
-    }
-
-    .nav-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(14, 18, 32, 0.85);
-      z-index: 55;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 40px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .nav-overlay.open {
-      display: flex;
-      opacity: 1;
-    }
-
-    .nav-overlay a {
-      font-family: 'Space Mono', monospace;
-      font-size: 18px;
-      letter-spacing: 0.15em;
-      color: #9994B8;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .nav-overlay a:hover {
-      color: #58FCC8;
-    }
-
-    .nav-overlay a.active {
-      color: #E8E3FF;
-    }
-
-    @media (max-width: 1023px) {
-      .nav-logo {
-        height: 32px;
-      }
-
-      .hamburger {
-        display: flex;
-      }
-
-      .nav-desktop {
-        display: none;
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .nav-overlay {
-        display: none !important;
-      }
-    }
-
-    /* ═══════════════════════════════════════════
-       CONTENT SECTIONS
-       ═══════════════════════════════════════════ */
-    .content-column {
-      max-width: 900px;
+    .competent-figure-grid .figure-wrap {
+      position: static;
+      max-width: 200px;
       margin: 0 auto;
-      padding-left: 40px;
-      padding-right: 40px;
     }
-
-    /* Movement 1: Sensorium Opening */
-    .sensorium-section {
-      padding: 30vh 0 16vh 0;
-    }
-
-    .sensorium-section h1 {
-      font-size: clamp(28px, 4vw, 42px);
-      line-height: 1.35;
-      color: #E8E3FF;
-      margin-bottom: 48px;
-    }
-
-    .body-copy {
-      font-size: 15px;
-      letter-spacing: 0.05em;
-      line-height: 1.8;
-      color: #9994B8;
-      margin-bottom: 32px;
-    }
-
-    .signal-line {
-      font-size: 15px;
-      letter-spacing: 0.05em;
-      line-height: 1.8;
-      color: #E8E3FF;
-      margin-bottom: 32px;
-    }
-
-    .turquoise-accent {
-      font-size: 15px;
-      letter-spacing: 0.05em;
-      line-height: 1.8;
-      color: #58FCC8;
-      margin-bottom: 32px;
-    }
-
-    /* Movement sections */
-    .movement-section {
-      padding: 16vh 0;
-    }
-
-    .movement-section h2 {
-      font-size: clamp(22px, 3vw, 32px);
-      line-height: 1.4;
-      color: #E8E3FF;
-      margin-bottom: 40px;
-    }
-
-    /* Indictment block */
-    .indictment {
-      padding: 48px 0;
-      margin: 40px 0;
-    }
-
-    .indictment-line {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 15px;
-      letter-spacing: 0.1em;
-      line-height: 2.4;
-      color: #5A5672;
-    }
-
-    /* Figure container */
-    .figure-container {
-      width: 70%;
-      margin: 64px auto;
-      background: none;
-      border-radius: 0;
-      padding: 0;
-    }
-
-    .figure-container img {
-      width: 100%;
-      height: auto;
-      border-radius: 0;
-      display: block;
-    }
-
-    /* Movement 5: Bio link */
-    .bio-link {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 14px;
-      letter-spacing: 0.15em;
-      color: #58FCC8;
-      text-decoration: none;
-      transition: color 0.3s ease, text-shadow 0.3s ease;
-    }
-
-    .bio-link:hover {
-      color: #ffffff;
-      text-shadow: 0 0 20px rgba(88, 252, 200, 0.6);
-    }
-
-    /* Movement 6: Filter lines */
-    .filter-line {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 16px;
-      letter-spacing: 0.05em;
-      line-height: 2.2;
-      color: #E8E3FF;
-      margin-bottom: 16px;
-    }
-
-    .method-link {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 14px;
-      letter-spacing: 0.15em;
-      color: #58FCC8;
-      text-decoration: none;
-      transition: color 0.3s ease, text-shadow 0.3s ease;
-    }
-
-    .method-link:hover {
-      color: #ffffff;
-      text-shadow: 0 0 20px rgba(88, 252, 200, 0.6);
-    }
-
-    /* ═══════════════════════════════════════════
-       FOOTER
-       ═══════════════════════════════════════════ */
-    .site-footer {
-      padding: 80px 40px 48px 40px;
-      text-align: center;
-    }
-
-    .footer-logo {
-      height: 46px;
-      opacity: 0.5;
-      margin-bottom: 32px;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .nav-logo {
-      height: 41px;
-      width: auto;
-    }
-
-    .footer-nav {
-      display: flex;
-      justify-content: center;
-      gap: 48px;
-      margin-bottom: 24px;
-    }
-
-    .footer-nav a {
-      font-family: 'Space Mono', monospace;
-      font-size: 12px;
-      letter-spacing: 0.1em;
-      color: #9994B8;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .footer-nav a:hover { color: #E8E3FF; }
-
-    .footer-contact {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 12px;
-      letter-spacing: 0.05em;
-      color: #5A5672;
-      margin-bottom: 16px;
-    }
-
-    .footer-contact a {
-      color: #5A5672;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .footer-contact a:hover { color: #9994B8; }
-
-    .footer-tagline {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 14px;
-      letter-spacing: 0.05em;
-      color: #5A5672;
-      margin-bottom: 16px;
-    }
-
-    .footer-copyright {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 12px;
-      letter-spacing: 0.05em;
-      color: #5A5672;
-    }
-
-    /* ═══════════════════════════════════════════
-       SCROLL REVEAL
-       ═══════════════════════════════════════════ */
-    .reveal {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ═══════════════════════════════════════════
-       MOBILE (<768px)
-       ═══════════════════════════════════════════ */
-    @media (max-width: 767px) {
-      /* Disable all blur on mobile */
-      .bg-neural {
-        filter: none !important;
-        opacity: 0.08 !important;
-      }
-
-      .grain-overlay {
-        opacity: 0.02 !important;
-      }
-
-      .content-column {
-        padding: 0 24px;
-      }
-
-      .sensorium-section {
-        padding: 25vh 0 12vh 0;
-      }
-
-      .sensorium-section h1 {
-        font-size: clamp(1.75rem, 5vw, 2.5rem);
-      }
-
-      .movement-section {
-        padding: 10vh 0;
-      }
-
-      body {
-        font-size: 16px;
-        line-height: 1.75;
-      }
-
-      .figure-container {
-        width: 90%;
-        margin: 48px auto;
-        padding: 0;
-        border-radius: 0;
-      }
-
-      /* Footer */
-      .site-footer {
-        padding: 48px 24px;
-      }
-
-      .footer-nav {
-        flex-direction: column;
-        gap: 16px;
-      }
-    }
-
-    @media (min-width: 768px) and (max-width: 1024px) {
-      .content-column {
-        padding: 0 30px;
-      }
-    }
-
-    /* ═══════════════════════════════════════════
-       FALLBACK (no JS)
-       ═══════════════════════════════════════════ */
-    .no-js .bg-neural {
-      filter: blur(0px);
-      opacity: 0.08;
-    }
-
-    .no-js .grain-overlay {
-      opacity: 0.02;
-    }
-
-    .no-js .reveal {
-      opacity: 1;
-      transform: none;
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
-  <!-- ═══════════════════════════════════════════
-       ENVIRONMENTAL LAYERS
-       ═══════════════════════════════════════════ -->
-  <div class="bg-base-color"></div>
-  <div class="bg-neural" id="bgNeural"></div>
-  <div class="grain-overlay" id="grainOverlay"></div>
-  <div class="mobile-darken" id="mobileDarken"></div>
+<nav class="site-nav" id="siteNav"><a href="/" class="logo-container"><img src="../assets/Basewaves_logo.svg" alt="BASEWAVES" class="nav-logo"></a><div class="nav-desktop"><a href="/" class="nav-link">HOME</a><span class="nav-separator">|</span><a href="/origin/" class="nav-link active">ORIGIN</a><span class="nav-separator">|</span><a href="/portal/" class="nav-link">PORTAL</a><span class="nav-separator">|</span><a href="/signals/" class="nav-link">SIGNALS</a></div><button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button></nav>
+<div class="nav-overlay" id="navOverlay"><a href="/">HOME</a><a href="/origin/" class="active">ORIGIN</a><a href="/portal/">PORTAL</a><a href="/signals/">SIGNALS</a></div>
+<div class="starfield"></div>
 
-  <!-- ═══════════════════════════════════════════
-       NAVIGATION
-       ═══════════════════════════════════════════ -->
-  <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-5 flex justify-between items-center">
-    <a href="/" class="logo-container block">
-      <img src="../assets/Basewaves_logo.svg" alt="BASEWAVES" class="nav-logo">
-    </a>
+<!-- ===================================================================
+     HERO
+     =================================================================== -->
+<section class="zone zone-hero">
+  <p class="page-subtitle reveal">Why strength training develops more than muscle</p>
+  <h1 class="hero-headline reveal reveal-delay-1">Something fires before the word forms.</h1>
+  <p class="hero-prose reveal reveal-delay-1">You feel tension, a collective pressure. You sense a shift but can't find the words. A subtle discomfort, an abnormal state, with no explanation. Your chest tightens. You check your surroundings. The room hasn't changed. <em>Your body has.</em></p>
+  <div class="scroll-hint reveal reveal-delay-3">Enter</div>
+</section>
+<div class="zone-divider"></div>
 
-    <div class="nav-desktop">
-      <a href="/" class="nav-link">HOME</a>
-      <span class="nav-separator">|</span>
-      <a href="/origin/" class="nav-link active">ORIGIN</a>
-      <span class="nav-separator">|</span>
-      <a href="/method/" class="nav-link">METHOD</a>
-      <span class="nav-separator">|</span>
-      <a href="/signals/" class="nav-link">SIGNALS</a>
+<!-- ===================================================================
+     THE RATIO YOU WERE NEVER TOLD ABOUT (base-blue)
+     =================================================================== -->
+<section class="zone zone-section" style="background: var(--base-blue);">
+  <div class="zone-inner">
+    <h2 class="zone-headline reveal">The Ratio You Were Never Told About</h2>
+    <p class="body-prose reveal">You've felt this before. The moment between normal and sensing something is different. Not wrong. Not right. Different. A signal arriving before the cognitive interpretation.</p>
+    <p class="body-prose reveal">You've been taught to override it. Reach for the phone, check the time, label the pressure as anxiety and move on. The signal dissolves into distraction, gets absorbed by life noise. Eventually, your mind stops receiving what you've trained yourself to ignore.</p>
+    <p class="signal-line reveal">But your body doesn't stop signaling.</p>
+    <p class="body-prose reveal">Right now, beneath every conscious thought, your body runs a signaling operation of staggering complexity. Your fascia carries seven interoceptive nerve endings for every one proprioceptive nerve ending. Seven channels sensing conditions for&nbsp; <em>how you feel</em> for every one tracking metrics for&nbsp; <em>where you are.</em></p>
+    <div class="ratio-territory reveal">
+      <div class="ratio-label">The 7:1 Ratio</div>
+      <div class="ratio-visual"><div class="ratio-bar seven">7 interoceptive &middot; "How do I feel?"</div><div class="ratio-bar one">1</div></div>
+      <div class="ratio-annotation">Your tissue contains <em>7 interoceptive nerve endings</em> for every <em>1 proprioceptive ending</em>. Seven channels sensing state. One tracking position. You are biologically wired for feeling over locating. Traditional training inverts this.</div>
     </div>
-
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </nav>
-
-  <!-- Mobile Nav Overlay -->
-  <div class="nav-overlay" id="navOverlay">
-    <a href="/">HOME</a>
-    <a href="/origin/" class="active">ORIGIN</a>
-    <a href="/method/">METHOD</a>
-    <a href="/signals/">SIGNALS</a>
+    <p class="body-prose reveal">Your cognitive default has been the one. The seven have been running without you.</p>
+    <p class="turquoise-line reveal">You are wired 7-to-1 for state over position. And nobody told you.</p>
   </div>
+</section>
+<div class="zone-divider"></div>
 
-  <!-- ═══════════════════════════════════════════
-       MOVEMENT 1: SENSORIUM
-       ═══════════════════════════════════════════ -->
-  <section class="sensorium-section">
-    <div class="content-column">
-      <h1 class="reveal">Something fires before the word forms.</h1>
+<!-- ===================================================================
+     THE FRONTIER NOBODY NAMED (lighter-blue) — NEW
+     =================================================================== -->
+<section class="zone zone-section" style="background: var(--lighter-blue);">
+  <div class="zone-inner">
+    <h2 class="zone-headline reveal">The Frontier Nobody Named</h2>
+    <p class="body-prose reveal">A Stanford neuroscientist spent two decades building machines that navigate external space &mdash; robots that see rooms, estimate distance, interact with physical environments. She called it spatial intelligence and named it the next frontier beyond language. She's right. But she's looking in only one direction.</p>
+    <p class="body-prose reveal">While the world races to build machines that model external 3D space, nobody is systematically training humans to navigate internal biological space &mdash; the neural territory where your seven interoceptive channels sense state, process stress, regulate adaptation, and compose response. <em>Internal spatial intelligence</em> is the capacity to consciously access and navigate your own somatic signaling architecture. Not as metaphor. As trainable skill. Developed through load, refined through signal literacy, expressed as adaptive capacity that transfers far beyond the session.</p>
+    <p class="body-prose reveal">BASEWAVES trains the other direction. Proactive collaboration with your own biology rather than reactive dependence on external systems. Preventative signal capacity developed at a fraction of what crisis intervention costs &mdash; because the vulnerable moments will arrive, and the question is whether your only available response is external.</p>
+    <p class="turquoise-line reveal">The ratio was always there. The frontier was always internal. Nobody named it because the very capacity required to see it &mdash; internal spatial intelligence &mdash; was the thing that had gone untrained.</p>
+  </div>
+</section>
+<div class="zone-divider"></div>
 
-      <p class="body-copy reveal">You feel tension, a collective pressure. You sense a shift but you can't find the words to describe it. A subtle discomfort, an abnormal state, with no explanation. Your chest tightens. You check your surroundings. The room hasn't changed. The body has.</p>
+<!-- ===================================================================
+     COMPETENT MATERIAL (base-blue)
+     =================================================================== -->
+<section class="zone zone-section" style="background: var(--base-blue);">
+  <div class="zone-inner">
+    <h2 class="zone-headline reveal">Competent Material</h2>
+    <p class="body-prose reveal">Your body is not a machine that needs programming. It is an intelligent system that needs communication.</p>
+    <p class="body-prose reveal">Every cell participates in a collective intelligence that knows how to build, repair, adapt, and respond &mdash; without your conscious instruction. Your immune system solves problems you can't articulate. Your wounds heal through coordination you never orchestrate. Your bones remodel along lines of force without being told which lines matter.</p>
+    <p class="signal-line reveal">You are made of competent material.</p>
 
-      <p class="body-copy reveal">You've felt this before. The moment between normal and sensing something is different. Not wrong. Not right. Different. A signal arriving before the interpretation.</p>
-
-      <p class="body-copy reveal">You've been taught to override it. Reach for the phone, check the time, label the pressure as anxiety and move on. The signal dissolves into distraction, gets absorbed by life noise. Eventually, your mind stops receiving what you've trained yourself to ignore.</p>
-
-      <p class="signal-line reveal">But your body doesn't stop signaling.</p>
-
-      <p class="body-copy reveal">Right now, beneath every conscious thought you're having, your body is running a signaling operation of staggering complexity. Your fascia — the entangled web of connective tissue that wraps every muscle, organ, and nerve — carries seven interoceptive nerve endings for every one proprioceptive nerve ending. Seven channels sensing how you feel for every one tracking where you are.</p>
-
-      <p class="turquoise-accent reveal">You are wired 7-to-1 for state over position.</p>
-
-      <p class="body-copy reveal">This isn't a metaphor. It's histology. Your body allocates seven times more neural architecture to sensing its own condition than to tracking its location in space. Seven channels of signal, reporting continuously — tension, temperature, pressure, stretch, chemical balance, force, vibration — and one channel of position.</p>
-
-      <p class="body-copy reveal">Your cognitive default has been the one. The seven have been running without you. Your mind's default is distracted, no longer tuned-in to your body's signaling symphony.</p>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════
-       MOVEMENT 2: WHAT WAS BURIED
-       ═══════════════════════════════════════════ -->
-  <section class="movement-section">
-    <div class="content-column">
-      <h2 class="reveal">What Was Buried</h2>
-
-      <p class="body-copy reveal">Somewhere between the stopwatch and the spreadsheet, training became override practice.</p>
-
-      <div class="indictment reveal">
-        <p class="indictment-line">Push through.</p>
-        <p class="indictment-line">Ignore signals.</p>
-        <p class="indictment-line">Chase metrics.</p>
-        <p class="indictment-line">Override what the body sends.</p>
-        <p class="indictment-line">Repeat until numb.</p>
+    <div class="competent-figure-grid reveal">
+      <div class="figure-wrap">
+        <img src="../assets/neural_pathways_on.svg" alt="Neural pathway figure — signal architecture under load" loading="lazy">
       </div>
-
-      <p class="body-copy reveal">This ongoing PR quest is the buoy you swim toward. Not because you chose it — because it's the only option anyone presented. The body sends information constantly: fatigue, compensation, misalignment, readiness, capacity, rhythm. The cultural response to all of it became identical: work harder.</p>
-
-      <p class="body-copy reveal">Discomfort meant progress. Silence meant weakness. The person who could override the loudest won.</p>
-
-      <p class="body-copy reveal">And for most people, it worked well enough. Until it didn't. Until the volume accumulated without the capacity. Until the effort increased without the clarity. Until the programs kept failing and the answer was always a different program.</p>
-
-      <p class="body-copy reveal">The cost was never injury — injury is the dramatic version, the one people notice. The cost was literacy. The quiet erosion of your capacity to read what your own body sends. Not because the signal weakened. Because you were trained to produce noise louder than the signal could survive.</p>
-
-      <p class="turquoise-accent reveal">Override culture didn't break your body. It broke your ability to hear it.</p>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════
-       MOVEMENT 3: COMPETENT MATERIAL
-       ═══════════════════════════════════════════ -->
-  <section class="movement-section">
-    <div class="content-column">
-      <h2 class="reveal">Competent Material</h2>
-
-      <p class="body-copy reveal">Your body is not a machine that needs programming. It is an intelligent system that needs communication.</p>
-
-      <p class="body-copy reveal">Every cell in your body participates in a collective intelligence that knows how to build, repair, adapt, and respond — without your conscious instruction. Your immune system solves problems you can't articulate. Your wounds heal through coordination you never orchestrate. Your bones remodel along lines of force without being told which lines matter.</p>
-
-      <p class="signal-line reveal">You are made of competent material.</p>
-
-      <p class="body-copy reveal">This is not poetry. Bioelectric research has demonstrated that cellular collectives store pattern memories, navigate toward goal states, and solve problems in high-dimensional spaces that would overwhelm any conscious calculation. Your body doesn't wait for you to figure out the answer. It is already computing.</p>
-
-      <p class="body-copy reveal">What it needs from you is not instruction. It's signal.</p>
-
-      <p class="body-copy reveal">When you place your hands on a dumbbell and lower into a squat, you are not telling your muscles what to do. You are communicating a constraint — a goal state — to a cellular collective that has been solving movement problems since before you had language. The dumbbell doesn't build you. It speaks to something in you that already knows how to respond.</p>
-
-      <p class="body-copy reveal">Every rep is a signal sent. Every set is a pattern heard. Every session is a conversation between you and competent material — navigating toward coherence within the constraint you've provided.</p>
-
-      <p class="body-copy reveal">You don't build capacity. You clear the interference that prevented capacity from expressing. The capacity was already there. The signal was blocked.</p>
-
-      <p class="signal-line reveal">The dumbbell is not a tool. It is a portal.</p>
-
-      <p class="body-copy reveal">And the things you were told to chase — the muscle, the fat loss, the physical transformation — those aren't the goal. They're the side effect. When you solve the actual problem — signal clarity between you and your own cellular intelligence — the body handles the rest the way it handles wound healing and immune response and bone remodeling: without being told how. You don't pursue the aesthetic. You restore the communication. The aesthetic resolves on its own, the way every downstream problem resolves when you address what's upstream.</p>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════
-       MOVEMENT 4: THE PORTAL
-       ═══════════════════════════════════════════ -->
-  <section class="movement-section">
-    <div class="content-column">
-      <h2 class="reveal">The Portal</h2>
-
-      <p class="body-copy reveal">At bodyweight, you can perform a squat while mentally reviewing your to-do list. At significant load, you cannot. This is not willpower. This is metabolic forcing.</p>
-
-      <p class="body-copy reveal">Under heavy resistance, your brain must shunt glucose and oxygen away from the prefrontal cortex — the region responsible for planning, projecting, worrying, seeking external answers — and redirect it to the motor and sensory systems actually handling the load. The part of your brain that grasps for certainty runs out of fuel. What remains is direct perception.</p>
-
-      <p class="body-copy reveal">You stop calculating and start sensing. The seven come online. The noise floor drops. Signals that were always present become perceptible because the machinery that was generating noise has been metabolically silenced.</p>
-
-      <p class="body-copy reveal">This is the mechanism by which physical training produces what meditation invites. Not through willpower. Not through concentration. Through metabolic constraint that makes the prefrontal override biologically impossible.</p>
-
-      <p class="body-copy reveal">Your mind quiets not because you told it to. It quiets because the dumbbell starved it.</p>
-
-      <div class="figure-container reveal">
-        <img src="../assets/neural-pathway-figure.png" alt="Body under load with neural signal pathways visible">
+      <div class="figure-prose">
+        <p>When you place your hands on a dumbbell and lower into a squat, you are not telling your muscles what to do. You are communicating a constraint &mdash; a goal state &mdash; to a cellular collective that has been solving movement problems since before you had language. The dumbbell doesn't build you. It speaks to something in you that already knows how to respond.</p>
+        <p>You don't build capacity. You clear the interference that prevented capacity from expressing. The capacity was already there. The signal was blocked.</p>
+        <p>When the interference clears, physical adaptation follows. Load tolerance increases. Compensation patterns resolve. Force production becomes coherent across the whole kinetic chain rather than leaking through structures that weren't designed to bear it. You get stronger &mdash; not because you chased strength as a metric, but because your system became organized enough to express it.</p>
+        <p>This requires metabolic readiness. The body adapts under load only when the substrate supports adaptation &mdash; adequate fuel, adequate sleep, manageable stress. Train against your metabolic rhythm and you produce breakdown without adaptation. Train with it and every session compounds. The signal cascade runs: metabolic state determines what your brain can process, which determines what your body can organize, which determines whether load produces growth or depletion.</p>
       </div>
-
-      <p class="body-copy reveal">And in that quiet — in the space between the effort and the interpretation — your body's own intelligence becomes audible. Tension patterns you've been carrying for years. Compensation strategies your nervous system built around old injuries. The precise moment where force transfers cleanly and the moment where it leaks. All of it was always broadcasting. You just couldn't hear it over the noise.</p>
-
-      <p class="body-copy reveal">This is what we mean by signal literacy. Not a concept to understand. A capacity to restore. The ability to read what your body has been sending all along — because load created the conditions where the override couldn't sustain itself and the signal finally got through.</p>
     </div>
-  </section>
+  </div>
+</section>
+<div class="zone-divider"></div>
 
-  <!-- ═══════════════════════════════════════════
-       MOVEMENT 5: AUTOBIOGRAPHY (No headline)
-       ═══════════════════════════════════════════ -->
-  <section class="movement-section">
-    <div class="content-column">
-      <p class="body-copy reveal">This methodology didn't emerge from theory. It emerged from a nervous system that never had the luxury of override.</p>
+<!-- ===================================================================
+     THE GAP NOBODY BUILT FOR (lighter-blue)
+     =================================================================== -->
+<section class="zone zone-section" style="background: var(--lighter-blue);">
+  <div class="zone-inner">
+    <h2 class="zone-headline reveal">The Gap Nobody Built For</h2>
+    <p class="body-prose reveal">Somewhere between the stopwatch and the spreadsheet, training became override practice. Push through. Ignore signals. Chase metrics. The body sends information constantly &mdash; fatigue, compensation, misalignment, readiness, capacity, rhythm &mdash; and the cultural response to all of it became identical: work harder.</p>
+    <p class="body-prose reveal">The cost was never injury. Injury is the dramatic version. The cost was literacy &mdash; the quiet erosion of your capacity to read what your own body sends. Not because the signal weakened. Because you were trained to produce noise louder than the signal could survive.</p>
+    <p class="body-prose reveal">Meanwhile, the science already exists. Researchers have documented kinetic scaling, metabolic signaling, interoceptive amplification under load. The data is there. But the institutional architecture rewards fragmentation over integration. Medicine divided the body into specialties &mdash; the endocrinologist reads hormones, the neurologist reads the brain, the orthopedist reads the joint. Each reads one channel. Nobody reads the field.</p>
+    <p class="body-prose reveal">Fitness did the same thing from the other direction. Nutrition in one silo. Training in another. Recovery as an afterthought. Three dimensions of the same system &mdash; fragmented into three industries, each selling you their slice. Knowledge processing &mdash; the 1 &mdash; stacked higher and higher. Signal processing &mdash; the 7 &mdash; remained untouched.</p>
+    <p class="turquoise-line reveal">The gap isn't scientific. It's structural. No specialty owns the bridge between what medicine identified and what fitness can deliver.</p>
+    <p class="body-prose reveal">There's no billing code for teaching someone to read their own signals under load. No certification for the space between endocrinology, neurology, and exercise science. No funding model that rewards integration over fragmentation. The research exists on both shores. Nobody built the span &mdash; because the span falls between everything that has a name.</p>
+    <p class="body-prose reveal">Strength training turns out to be the mechanism that fills it. Not medicine. Not therapy. Not conventional fitness. Load is binary &mdash; you either lifted it or you didn't. Metabolic demand is measurable. The barbell doesn't need a billing code or a referral. It creates undeniable tension, and that tension becomes signal when you learn to read it. Every session is a feedback loop that develops the very capacity the gap left untrained.</p>
+    <p class="turquoise-line reveal">The container was never built because it falls between everything that has a name. BASEWAVES is the container.</p>
+  </div>
+</section>
+<div class="zone-divider"></div>
 
-      <p class="body-copy reveal">Temporal lobe epilepsy. Two craniotomies. Two hemispheres. A brain that was forced to choose — during critical developmental windows — between tracking the external world and reading its own internal signals. It chose to read itself. What emerged from that allocation was spatial intelligence so precise it has managed epilepsy for twenty-five years without medication.</p>
-
-      <p class="body-copy reveal">What necessity carved into one nervous system, methodology now teaches to any nervous system willing to listen. The adaptation was specific. The capacity it revealed is universal.</p>
-
-      <a href="/origin/" class="bio-link reveal" style="display: inline-block; margin-top: 24px;">The full story lives here →</a>
+<!-- ===================================================================
+     HOW THE CHANNEL SHIFTS (base-blue)
+     =================================================================== -->
+<section class="zone zone-section" style="background: var(--base-blue);">
+  <div class="zone-inner">
+    <h2 class="zone-headline reveal">How the Channel Shifts</h2>
+    <p class="body-prose reveal">This is not a concept to understand. It is a process to enter. The BASEWAVES feedback loop &mdash; experienced, not explained:</p>
+    <div class="loop-flow reveal">
+      <div class="loop-step base-step"><div class="loop-label">BASE-line</div><div class="loop-desc">You arrive with your noisy narratives &mdash; data, obligations, efficiency loops, the cognitive churn of the positioning brain. Knowledge accumulated but passive. This is where most people live: <em>swimming in the noise without knowing it's noise.</em></div></div>
+      <div class="loop-step base-step"><div class="loop-label">B &rarr; A &rarr; S &rarr; E</div><div class="loop-desc">You begin processing <em>how</em> you're processing. Balancing. Aligning. Sourcing. Engaging. A drift and shift toward a more finely tuned cognitive state &mdash; one in accordance with your biorhythms and neuro-physio bandwidth. Not forced. Not willpowered. You slowly realize you've been swimming in the noise. That recognition is the first signal.</div></div>
+      <div class="loop-step load-step"><div class="loop-label">Load Arrives</div><div class="loop-desc">You exercise your orchestra of collaborative muscle and calibrated movement patterns synced within an evolving matrix of intensity &mdash; <em>attention and tension braided together.</em> Under sufficient load, your brain shunts fuel from the prefrontal cortex to the motor cortex. The manager goes quiet. Not through willpower. Through metabolic demand.</div></div>
+      <div class="loop-step space-step"><div class="loop-label">The Sensorium Opens &mdash; SPACE</div><div class="loop-desc">Wavelengths coalesce throughout your inner symphonies &mdash; neurological wiring, biological fascia, the whole system singing rather than individual muscles shouting. <em>SPACE humbles your mind.</em> You perceive currents and flows within those wavelengths &mdash; things that were always broadcasting but drowned by BASE-line noise. This is internal spatial intelligence becoming accessible. Not built. Cleared into view.</div></div>
+      <div class="loop-step waves-step"><div class="loop-label">W &rarr; A &rarr; V &rarr; E &rarr; S</div><div class="loop-desc">You start refining, exploring &mdash; composing to complete the BASEWAVES feedback loop. <em>Embodied cognitive processing while performing strength training from a broader spatial state.</em> The framework succeeds when you no longer think about the framework.</div></div>
+      <div class="loop-step close-step"><div class="loop-label">The Loop Closes</div><div class="loop-desc">All that knowledge, metrics, external stimuli that were part of the noisy narrative in BASE &mdash; they get slowly recalibrated. Not eliminated. Given <em>different meaning, deeper expression.</em> Because you now have a better internal receiver of the same external signals. This is the core inversion: the external doesn't change. Your reception of it does. And that changes everything downstream &mdash; how you eat, how you hold stress, how you navigate uncertainty, how you compose rather than merely react.</div></div>
     </div>
-  </section>
+  </div>
+</section>
+<div class="zone-divider"></div>
 
-  <!-- ═══════════════════════════════════════════
-       MOVEMENT 6: THE INVITATION (No headline)
-       ═══════════════════════════════════════════ -->
-  <section class="movement-section">
-    <div class="content-column">
-      <div class="reveal" style="margin-bottom: 48px;">
-        <p class="filter-line">If the templates keep failing.</p>
-        <p class="filter-line">If you've accumulated volume without accumulating clarity.</p>
-        <p class="filter-line">If you've been told to push harder when pushing harder is what buried the signal in the first place.</p>
-      </div>
-
-      <p class="body-copy reveal">The disconnect between effort and results is not a motivation problem. It is a signal-to-noise problem. The signal was always there. The noise was trained.</p>
-
-      <p class="body-copy reveal">You are not broken. You are not undertrained. You are not lacking discipline or the right program or a better coach. You are made of competent material that has been receiving incompetent communication.</p>
-
-      <p class="turquoise-accent reveal">The dumbbell is waiting. Not to build you into something you're not. To clear the interference between you and what you already are.</p>
-
-      <a href="/method/" class="method-link reveal" style="display: inline-block; margin-top: 24px;">The method is spatial. It begins with attention. →</a>
+<!-- ===================================================================
+     CLOSING (lighter-blue)
+     =================================================================== -->
+<section class="zone zone-section" style="background: var(--lighter-blue);">
+  <div class="zone-inner">
+    <div class="reveal" style="margin-bottom: 40px;">
+      <p class="indictment-line">If the templates keep failing.</p><p class="indictment-line">If you've accumulated volume without accumulating clarity.</p><p class="indictment-line">If you've been told to push harder when pushing harder is what buried the signal in the first place.</p>
     </div>
-  </section>
+    <p class="body-prose reveal">The disconnect between effort and results is not a motivation problem. It is a signal-to-noise problem. The signal was always there. The noise was trained.</p>
+    <p class="body-prose reveal">You are not broken. You are not undertrained. You are not lacking discipline or the right program or a better coach. You are made of competent material that has been receiving incompetent communication.</p>
+    <p class="turquoise-line reveal">The dumbbell is waiting. Not to build you into something you're not. To clear the interference between you and what you already are.</p>
+    <div class="reveal" style="margin-top: 48px; display: flex; gap: 48px; flex-wrap: wrap;">
+      <a href="/portal/" class="cta-link">The architecture is spatial. Enter the Portal &rarr;</a>
+      <a href="/signals/" class="cta-link coral">Go deeper. Enter the Signals &rarr;</a>
+    </div>
+  </div>
+</section>
 
-  <!-- ═══════════════════════════════════════════
-       FOOTER
-       ═══════════════════════════════════════════ -->
-  <footer class="site-footer">
-    <img src="../assets/Basewaves_logo.svg" alt="BASEWAVES" class="footer-logo">
+<!-- ===================================================================
+     FOOTER
+     =================================================================== -->
+<section class="zone zone-footer">
+  <div class="zone-inner">
+    <div class="footer-territory">
+      <div class="footer-left reveal"><div class="footer-statement">You cannot think your way out of a sensing problem.</div><div class="footer-sub">BASEWAVES identifies the person who already knows something was lost. Recognition over conversion. Signal over noise.</div></div>
+      <div class="footer-right reveal reveal-delay-1"><a href="mailto:greg@basewaves.com?subject=State%20Assessment" class="footer-cta">Schedule a State Assessment</a><div class="footer-contact"><a href="mailto:greg@basewaves.com">greg@basewaves.com</a><br>512.585.3400</div></div>
+    </div>
+    <div class="footer-bottom reveal reveal-delay-2">
+      <svg class="footer-logo" viewBox="0 0 337.62 220.73" preserveAspectRatio="xMidYMid meet"><path d="M188.26,87.4c-8.54-2.09-18.2-6.13-18.04-13.69.16-9.34,4.67-13.54,7.41-15.31,9.83-4.35,16.76-14.18,16.76-25.45,0-15.15-12.25-27.39-27.39-27.39s-27.39,12.25-27.39,27.39c0,11.43,7.09,21.42,17.08,25.45,2.9,1.77,7.08,6.13,7.08,15.31,0,7.57-8.7,11.6-16.59,13.69-15.95,1.77-26.9,5.64-26.9,10.15,0,6.28,21.27,11.27,47.53,11.27s47.53-5,47.53-11.27c0-4.51-11.12-8.39-27.06-10.15h-.02ZM160.06,17.65c-3.87,1.6-6.92,4.67-8.54,8.54-.48,1.28-1.93,1.93-3.06,1.28-1.28-.31-1.93-1.77-1.44-3.06,1.93-5.17,6.13-9.18,11.11-11.28,1.29-.47,2.57.16,3.22,1.29.48,1.28-.16,2.57-1.29,3.22h0ZM92.72,96.27c0,9.99,34,18.04,75.89,18.04s75.89-8.05,75.89-18.04-30.61-17.24-69.6-18.04c-.48-.65-.65-1.13-.97-1.78,53.66.65,96.18,11.28,96.18,24.17s-45.43,24.17-101.5,24.17-101.5-10.8-101.5-24.17,40.92-23.04,93.12-24.01c-.16.65-.48,1.13-.81,1.78-37.54.97-66.7,8.7-66.7,17.88ZM329.72,104.65c0-20.63-69.45-37.38-156.12-37.86-.16.65-.16,1.29-.16,1.93,69.76.48,125.67,14.03,125.67,30.62s-57.99,30.78-129.7,30.78-129.7-13.7-129.7-30.62,53.49-29.65,120.99-30.62c0-.64-.16-1.28-.16-2.09-84.4,1.13-151.43,17.72-151.43,37.86s68.16,37.06,153.54,37.86c.81,1.29,1.13,2.9,1.13,4.51,0,9.18-4.19,13.37-7.08,15.31-9.99,4.03-17.08,13.86-17.08,25.45,0,15.15,12.25,27.39,27.39,27.39s27.39-12.25,27.39-27.39c0-11.27-6.93-21.11-16.76-25.3-2.73-1.77-7.25-5.96-7.41-15.3,0-1.78.48-3.22,1.28-4.68,87.65-.32,158.22-17.07,158.22-37.86h0ZM161.35,205.02c-.48,1.29-1.93,1.77-3.22,1.29-5.16-2.1-9.18-6.13-11.11-11.28-.48-1.28.16-2.57,1.28-3.06,1.29-.47,2.58.16,3.06,1.29,1.45,3.87,4.68,7.09,8.54,8.54,1.45.65,1.94,2.09,1.45,3.22h0Z"/></svg>
+      <div class="footer-tm">&copy; BASEWAVES &middot; Spatial Strength Training&trade; &middot; Austin, TX</div>
+    </div>
+  </div>
+</section>
 
-    <nav class="footer-nav">
-      <a href="/">HOME</a>
-      <a href="/origin/">ORIGIN</a>
-      <a href="/method/">METHOD</a>
-      <a href="/signals/">SIGNALS</a>
-    </nav>
-
-    <p class="footer-contact">
-      <a href="mailto:greg@basewaves.com">greg@basewaves.com</a>
-      <span style="margin: 0 12px; color: #5A5672;">|</span>
-      <a href="tel:+15125853400">512.585.3400</a>
-    </p>
-
-    <p class="footer-tagline">You cannot think your way out of a sensing problem.</p>
-
-    <p class="footer-copyright">&copy; 2026 BASEWAVES</p>
-  </footer>
-
-  <!-- ═══════════════════════════════════════════
-       GSAP SCROLL CONTROLLER
-       ═══════════════════════════════════════════ -->
-  <script>
-    (function() {
-      const bgNeural = document.getElementById('bgNeural');
-      const grainOverlay = document.getElementById('grainOverlay');
-      const mobileDarken = document.getElementById('mobileDarken');
-
-      const gsapAvailable = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
-      const isMobile = window.innerWidth < 768;
-
-      // Scroll reveal observer
-      const revealElements = document.querySelectorAll('.reveal');
-      const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      }, { threshold: 0.15 });
-
-      revealElements.forEach(el => revealObserver.observe(el));
-
-      if (gsapAvailable && !isMobile) {
-        // DESKTOP: GSAP animations
-        gsap.registerPlugin(ScrollTrigger);
-
-        // Master timeline for opacity and grain (full scroll range)
-        const masterTL = gsap.timeline({
-          scrollTrigger: {
-            trigger: 'body',
-            start: 'top top',
-            end: 'bottom bottom',
-            scrub: 1
-          }
-        });
-
-        // Background opacity: full scroll range (0.25 → 0.05)
-        masterTL.fromTo(bgNeural,
-          { opacity: 0.25 },
-          { opacity: 0.05, ease: 'none' },
-          0
-        );
-
-        // Grain opacity: full scroll range (0.08 → 0.02)
-        masterTL.fromTo(grainOverlay,
-          { opacity: 0.08 },
-          { opacity: 0.02, ease: 'none' },
-          0
-        );
-
-        // BLUR: Completes in first 33% of scroll
-        gsap.fromTo(bgNeural,
-          { filter: 'blur(10px)' },
-          {
-            filter: 'blur(0px)',
-            ease: 'none',
-            scrollTrigger: {
-              trigger: 'body',
-              start: 'top top',
-              end: '33% top',
-              scrub: 1
-            }
-          }
-        );
-
-        // Parallax: full scroll range
-        gsap.to(bgNeural, {
-          yPercent: -20,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: 'body',
-            start: 'top top',
-            end: 'bottom bottom',
-            scrub: true
-          }
-        });
-
-        // COLOR EMERGENCE: navy → dark teal in final 40% (60-100%)
-        gsap.to('.bg-base-color', {
-          backgroundColor: '#0C1A22',
-          ease: 'power2.inOut',
-          scrollTrigger: {
-            trigger: 'body',
-            start: '60% top',
-            end: '100% bottom',
-            scrub: 1
-          }
-        });
-
-      } else if (gsapAvailable && isMobile) {
-        // MOBILE: GSAP animations with darken overlay
-        gsap.registerPlugin(ScrollTrigger);
-
-        // No blur on mobile
-        bgNeural.style.filter = 'blur(0px)';
-
-        // Background opacity: full scroll range
-        gsap.fromTo(bgNeural,
-          { opacity: 0.25 },
-          {
-            opacity: 0.05,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: 'body',
-              start: 'top top',
-              end: 'bottom bottom',
-              scrub: 1
-            }
-          }
-        );
-
-        // Grain opacity: full scroll range
-        gsap.fromTo(grainOverlay,
-          { opacity: 0.08 },
-          {
-            opacity: 0.02,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: 'body',
-              start: 'top top',
-              end: 'bottom bottom',
-              scrub: 1
-            }
-          }
-        );
-
-        // MOBILE DARKEN: 0 for first 33%, then 0 → 0.7
-        gsap.fromTo(mobileDarken,
-          { opacity: 0 },
-          {
-            opacity: 0.7,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: 'body',
-              start: '33% top',
-              end: 'bottom bottom',
-              scrub: 1
-            }
-          }
-        );
-
-        // COLOR EMERGENCE (MOBILE): navy → dark teal in final 40%
-        gsap.to('.bg-base-color', {
-          backgroundColor: '#0C1A22',
-          ease: 'power2.inOut',
-          scrollTrigger: {
-            trigger: 'body',
-            start: '60% top',
-            end: '100% bottom',
-            scrub: 1
-          }
-        });
-
-      } else {
-        // FALLBACK: No GSAP
-        bgNeural.style.filter = 'blur(0px)';
-        bgNeural.style.opacity = '0.08';
-        grainOverlay.style.opacity = '0.02';
-      }
-
-    // Hamburger menu toggle
-    const hamburger = document.getElementById('hamburger');
-    const navOverlay = document.getElementById('navOverlay');
-
-    if (hamburger && navOverlay) {
-      hamburger.addEventListener('click', function(e) {
-        e.stopPropagation();
-        hamburger.classList.toggle('active');
-        navOverlay.classList.toggle('open');
-        document.body.style.overflow = navOverlay.classList.contains('open') ? 'hidden' : '';
-      });
-
-      navOverlay.addEventListener('click', function(e) {
-        if (e.target === navOverlay || e.target.tagName === 'A') {
-          hamburger.classList.remove('active');
-          navOverlay.classList.remove('open');
-          document.body.style.overflow = '';
-        }
-      });
-
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && navOverlay.classList.contains('open')) {
-          hamburger.classList.remove('active');
-          navOverlay.classList.remove('open');
-          document.body.style.overflow = '';
-        }
-      });
-    }
-
-    })();
-  </script>
+<script>
+const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+const nav = document.getElementById('siteNav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 80));
+const hb = document.getElementById('hamburger'), ov = document.getElementById('navOverlay');
+hb.addEventListener('click', (e) => { e.stopPropagation(); hb.classList.toggle('active'); ov.classList.toggle('open'); document.body.style.overflow = ov.classList.contains('open') ? 'hidden' : ''; });
+ov.addEventListener('click', (e) => { if (e.target === ov || e.target.tagName === 'A') { hb.classList.remove('active'); ov.classList.remove('open'); document.body.style.overflow = ''; } });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && ov.classList.contains('open')) { hb.classList.remove('active'); ov.classList.remove('open'); document.body.style.overflow = ''; } });
+</script>
 </body>
 </html>

@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BASEWAVES — Spatial Strength Training™</title>
-  <meta name="description" content="Signal literacy through strength. BASEWAVES develops the internal navigation system that override culture buried.">
+  <title>BASEWAVES | Strength Training Austin TX</title>
+  <meta name="description" content="Personal strength training in Austin. Your body has 7 sensors for internal state for every 1 tracking position. Most training ignores the 7. This one doesn't.">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="BASEWAVES — Spatial Strength Training™">
-  <meta property="og:description" content="Signal literacy through strength. BASEWAVES develops the internal navigation system that override culture buried.">
+  <meta property="og:title" content="BASEWAVES | Strength Training Austin TX">
+  <meta property="og:description" content="Personal strength training in Austin. Your body has 7 sensors for internal state for every 1 tracking position. Most training ignores the 7. This one doesn't.">
   <meta property="og:type" content="website">
 
   <!-- Google Fonts: Cinzel + IBM Plex Mono (incl. 300) + Space Mono -->
@@ -38,7 +38,7 @@
     html { scroll-behavior: smooth; }
 
     body {
-      background: var(--base-blue);
+      background: var(--deep-blue);
       color: var(--primary-text);
       font-family: 'IBM Plex Mono', monospace;
       font-size: 15px;
@@ -46,6 +46,37 @@
       letter-spacing: 0.03em;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
+    }
+
+    /* ═══════════════════════════════════════════
+       STARFIELD — fixed CSS dot pattern
+       ═══════════════════════════════════════════ */
+    .starfield {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(1px 1px at 10% 15%, rgba(232,227,255,0.4), transparent),
+        radial-gradient(1px 1px at 25% 35%, rgba(232,227,255,0.25), transparent),
+        radial-gradient(1.5px 1.5px at 40% 8%, rgba(232,227,255,0.35), transparent),
+        radial-gradient(1px 1px at 55% 42%, rgba(232,227,255,0.2), transparent),
+        radial-gradient(1px 1px at 70% 22%, rgba(88,252,200,0.12), transparent),
+        radial-gradient(1.5px 1.5px at 85% 55%, rgba(232,227,255,0.3), transparent),
+        radial-gradient(1px 1px at 15% 65%, rgba(232,227,255,0.2), transparent),
+        radial-gradient(1px 1px at 35% 78%, rgba(232,227,255,0.35), transparent),
+        radial-gradient(1.5px 1.5px at 60% 72%, rgba(232,227,255,0.25), transparent),
+        radial-gradient(1px 1px at 80% 85%, rgba(232,227,255,0.3), transparent),
+        radial-gradient(1px 1px at 92% 12%, rgba(232,227,255,0.2), transparent),
+        radial-gradient(1px 1px at 48% 92%, rgba(88,252,200,0.1), transparent),
+        radial-gradient(1px 1px at 5% 48%, rgba(232,227,255,0.3), transparent),
+        radial-gradient(1.5px 1.5px at 72% 38%, rgba(232,227,255,0.2), transparent);
+      animation: starfield-breathe 12s ease-in-out infinite;
+    }
+
+    @keyframes starfield-breathe {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
     }
 
     /* ═══════════════════════════════════════════
@@ -63,6 +94,18 @@
       font-size: 15px;
       line-height: 1.85;
     }
+
+    .page-subtitle {
+      font-family: 'Cinzel', serif;
+      font-size: 15px;
+      letter-spacing: 0.08em;
+      text-transform: none;
+      font-weight: 400;
+      color: var(--dim-text);
+      margin-top: 16px;
+      margin-bottom: 0;
+    }
+
 
     /* ═══════════════════════════════════════════
        NAVIGATION
@@ -204,6 +247,10 @@
       padding: 0 40px;
     }
 
+    .zone-hero .zone-content {
+      max-width: 1100px;
+    }
+
     .zone-content-wide {
       position: relative;
       z-index: 3;
@@ -267,18 +314,18 @@
        ═══════════════════════════════════════════ */
     .rhythm-strip {
       width: 100vw;
-      max-height: 50px;
+      max-height: 85px;
       margin-left: calc(-50vw + 50%);
       margin-right: calc(-50vw + 50%);
       margin-top: 48px;
-      margin-bottom: 56px;
+      margin-bottom: 48px;
       overflow: hidden;
     }
 
     .rhythm-strip img {
       width: 100%;
       height: auto;
-      max-height: 50px;
+      max-height: 85px;
       object-fit: contain;
       display: block;
       opacity: 0.55;
@@ -335,7 +382,7 @@
        ZONE BACKGROUNDS
        Gradients live ONLY in bridge elements
        ═══════════════════════════════════════════ */
-    .zone-reframe      { background: var(--base-blue); }
+    .zone-reframe      { background: var(--base-blue); padding-bottom: 0; }
     .zone-close        { background: var(--deep-blue); }
 
     /* ═══════════════════════════════════════════
@@ -351,7 +398,7 @@
       z-index: 3;
       text-align: center;
       padding: 48px 40px;
-      max-width: 640px;
+      max-width: 840px;
       margin: 0 auto;
     }
 
@@ -360,7 +407,7 @@
       font-weight: 300;
       font-size: 14px;
       letter-spacing: 0.05em;
-      color: var(--dim-text);
+      color: var(--secondary-text);
       line-height: 1.8;
     }
 
@@ -382,11 +429,10 @@
        ZONE DIVIDER (within consolidated sections)
        ═══════════════════════════════════════════ */
     .zone-divider {
-      width: 60px;
       height: 1px;
-      background: var(--dim-text);
-      opacity: 0.3;
-      margin: 80px 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(88,252,200,0.15) 20%, rgba(88,252,200,0.25) 50%, rgba(88,252,200,0.15) 80%, transparent 100%);
+      position: relative;
+      z-index: 1;
     }
 
     /* ═══════════════════════════════════════════
@@ -405,57 +451,243 @@
        Inner 4 petals: proprioceptive (bright)
        Outer 27 petals: interoceptive (dim → reveal)
        ═══════════════════════════════════════════ */
-    .density-field-wrap {
-      max-width: 700px;
+    /* ═══════════════════════════════════════════
+       THREE Ms VISUAL — Pathway Map Style
+       (Metabolism, Movement, Matrix)
+       ═══════════════════════════════════════════ */
+    .three-ms-wrap {
+      max-width: 900px;
       margin: 0 auto;
-      padding: 24px 0 0 0;
+      padding: 32px 0 0 0;
     }
 
-    .density-field {
+    .three-ms-field {
       width: 100%;
+      position: relative;
     }
 
-    .density-field svg {
+    .three-ms-field svg {
       width: 100%;
       height: auto;
       display: block;
     }
 
-    .density-labels {
-      display: flex;
-      justify-content: space-between;
-      padding: 16px 40px 0 40px;
+    .three-ms-field svg text {
+      pointer-events: none;
     }
 
-    .density-label {
+    /* Territory hit areas */
+    .ms-hit {
+      fill: transparent;
+      cursor: pointer;
+    }
+
+    /* ---- METABOLISM territory (coral) ---- */
+    .territory-metabolism .contour-outer {
+      transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .territory-metabolism .contour-mid {
+      transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s;
+    }
+    .territory-metabolism .contour-inner {
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s;
+    }
+    .territory-metabolism .core-node {
+      transition: all 0.3s ease;
+    }
+    .territory-metabolism .territory-desc {
+      opacity: 0;
+      transition: opacity 0.5s ease 0.15s;
+    }
+    .territory-metabolism .pulse-ring {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .territory-metabolism:hover .contour-outer {
+      rx: 148; ry: 138;
+      stroke-opacity: 0.35;
+    }
+    .territory-metabolism:hover .contour-mid {
+      rx: 118; ry: 108;
+      stroke-opacity: 0.22;
+    }
+    .territory-metabolism:hover .contour-inner {
+      rx: 82; ry: 72;
+      stroke-opacity: 0.15;
+    }
+    .territory-metabolism:hover .core-node {
+      r: 6;
+      fill-opacity: 0.8;
+    }
+    .territory-metabolism:hover .territory-desc {
+      opacity: 1;
+    }
+    .territory-metabolism:hover .pulse-ring {
+      opacity: 1;
+      animation: ms-pulse-coral 2s ease-out infinite;
+    }
+
+    /* ---- MOVEMENT territory (turquoise) ---- */
+    .territory-movement .contour-outer {
+      transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .territory-movement .contour-mid {
+      transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s;
+    }
+    .territory-movement .contour-inner {
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s;
+    }
+    .territory-movement .core-node {
+      transition: all 0.3s ease;
+    }
+    .territory-movement .territory-desc {
+      opacity: 0;
+      transition: opacity 0.5s ease 0.15s;
+    }
+    .territory-movement .pulse-ring {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .territory-movement:hover .contour-outer {
+      rx: 158; ry: 143;
+      stroke-opacity: 0.35;
+    }
+    .territory-movement:hover .contour-mid {
+      rx: 126; ry: 113;
+      stroke-opacity: 0.22;
+    }
+    .territory-movement:hover .contour-inner {
+      rx: 90; ry: 78;
+      stroke-opacity: 0.15;
+    }
+    .territory-movement:hover .core-node {
+      r: 7;
+      fill-opacity: 0.8;
+    }
+    .territory-movement:hover .territory-desc {
+      opacity: 1;
+    }
+    .territory-movement:hover .pulse-ring {
+      opacity: 1;
+      animation: ms-pulse-turq 2s ease-out infinite;
+    }
+
+    /* ---- MATRIX territory (turquoise, dimmer) ---- */
+    .territory-matrix .contour-outer {
+      transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .territory-matrix .contour-mid {
+      transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s;
+    }
+    .territory-matrix .contour-inner {
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s;
+    }
+    .territory-matrix .core-node {
+      transition: all 0.3s ease;
+    }
+    .territory-matrix .territory-desc {
+      opacity: 0;
+      transition: opacity 0.5s ease 0.15s;
+    }
+    .territory-matrix .pulse-ring {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .territory-matrix:hover .contour-outer {
+      rx: 240; ry: 240;
+      stroke-opacity: 0.25;
+    }
+    .territory-matrix:hover .contour-mid {
+      rx: 190; ry: 190;
+      stroke-opacity: 0.15;
+    }
+    .territory-matrix:hover .contour-inner {
+      rx: 125; ry: 125;
+      stroke-opacity: 0.08;
+    }
+    .territory-matrix:hover .core-node {
+      r: 7;
+      fill-opacity: 0.8;
+    }
+    .territory-matrix:hover .territory-desc {
+      opacity: 1;
+    }
+    .territory-matrix:hover .pulse-ring {
+      opacity: 1;
+      animation: ms-pulse-turq-dim 2s ease-out infinite;
+    }
+
+    /* Connection paths illuminate on hover */
+    .ms-connection {
+      transition: stroke-opacity 0.5s ease, stroke 0.5s ease;
+    }
+    .territory-metabolism:hover ~ .conn-metab-move,
+    .territory-movement:hover ~ .conn-metab-move {
+      stroke-opacity: 0.35 !important;
+    }
+    .territory-movement:hover ~ .conn-move-matrix,
+    .territory-matrix:hover ~ .conn-move-matrix {
+      stroke-opacity: 0.35 !important;
+    }
+    .territory-metabolism:hover ~ .conn-metab-matrix,
+    .territory-matrix:hover ~ .conn-metab-matrix {
+      stroke-opacity: 0.3 !important;
+    }
+
+    /* Matrix hover lights ALL connections — it organizes both */
+    .territory-matrix:hover ~ .conn-metab-move {
+      stroke-opacity: 0.35 !important;
+      stroke: #58FCC8 !important;
+    }
+    .territory-matrix:hover ~ .conn-move-matrix,
+    .territory-matrix:hover ~ .conn-metab-matrix {
+      stroke: #58FCC8 !important;
+    }
+
+    /* Center integration label — hidden until Matrix hover */
+    .ms-integration-label {
+      opacity: 0;
+      transition: opacity 0.6s ease 0.15s;
+    }
+    .territory-matrix:hover ~ .ms-integration-label {
+      opacity: 1;
+    }
+
+    /* Pulse animations */
+    @keyframes ms-pulse-coral {
+      0% { r: 8; opacity: 0.4; }
+      100% { r: 40; opacity: 0; }
+    }
+    @keyframes ms-pulse-turq {
+      0% { r: 8; opacity: 0.35; }
+      100% { r: 45; opacity: 0; }
+    }
+    @keyframes ms-pulse-turq-dim {
+      0% { r: 8; opacity: 0.3; }
+      100% { r: 38; opacity: 0; }
+    }
+
+    /* Three Ms tagline below visual */
+    .three-ms-tagline {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      padding: 40px 0 0 0;
+    }
+
+    .ms-tag {
       font-family: 'IBM Plex Mono', monospace;
       font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--dim-text);
+    }
+
+    .ms-tag em {
       color: var(--secondary-text);
-      opacity: 0.45;
-    }
-
-    /* Petal transitions */
-    .proprio-petal,
-    .intero-petal {
-      transition: stroke-opacity 0.6s ease;
-    }
-
-    /* Hover states — hover-capable devices only */
-    @media (hover: hover) {
-      /* Whole-field hover — interoceptive field becomes dominant */
-      .density-field:hover .intero-near  { stroke-opacity: 1.0 !important; }
-      .density-field:hover .intero-mid   { stroke-opacity: 0.95 !important; }
-      .density-field:hover .intero-far   { stroke-opacity: 0.88 !important; }
-      .density-field:hover .intero-edge  { stroke-opacity: 0.80 !important; }
-
-      /* Proprioceptive recedes */
-      .density-field:hover .proprio-petal { stroke-opacity: 0.45 !important; }
-
-      /* Individual petal hover — full brightness */
-      .density-field:hover .intero-petal:hover { stroke-opacity: 1.0 !important; }
-      .density-field:hover .proprio-petal:hover { stroke-opacity: 0.60 !important; }
+      font-style: normal;
     }
 
     /* ═══════════════════════════════════════════
@@ -467,6 +699,16 @@
       letter-spacing: 0.03em;
       line-height: 2.2;
       color: var(--primary-text);
+      margin-bottom: 16px;
+    }
+
+    .filter-resolve {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 16px;
+      letter-spacing: 0.03em;
+      line-height: 2.2;
+      color: var(--accent-coral);
+      margin-top: 32px;
       margin-bottom: 16px;
     }
 
@@ -630,26 +872,27 @@
        RESPONSIVE
        ═══════════════════════════════════════════ */
     @media (max-width: 767px) {
-      .density-field-wrap {
+      .three-ms-wrap {
         max-width: 100%;
+        padding: 16px 0 0 0;
       }
 
-      .density-labels {
-        padding: 12px 16px 0 16px;
+      .three-ms-tagline {
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: center;
       }
 
-      .density-label {
-        font-size: 9px;
-      }
+      .ms-tag { font-size: 9px; }
 
       .rhythm-strip {
-        max-height: 32px;
+        max-height: 60px;
         margin-top: 32px;
         margin-bottom: 40px;
       }
 
       .rhythm-strip img {
-        max-height: 32px;
+        max-height: 60px;
       }
 
       .zone-content,
@@ -716,11 +959,11 @@
 
     @media (min-width: 768px) and (max-width: 1024px) {
       .rhythm-strip {
-        max-height: 40px;
+        max-height: 72px;
       }
 
       .rhythm-strip img {
-        max-height: 40px;
+        max-height: 72px;
       }
 
       .zone-content,
@@ -739,12 +982,15 @@
   </style>
 </head>
 <body>
+  <!-- Starfield background -->
+  <div class="starfield"></div>
+
   <!-- ═══════════════════════════════════════════
        NAVIGATION
        ═══════════════════════════════════════════ -->
   <nav class="site-nav" id="siteNav">
     <a href="/" class="logo-container">
-      <img src="/assets/Basewaves_logo.svg" alt="BASEWAVES" class="nav-logo">
+      <img src="assets/Basewaves_logo.svg" alt="BASEWAVES" class="nav-logo">
     </a>
 
     <div class="nav-desktop">
@@ -784,7 +1030,7 @@
   <div class="hero-container">
     <!-- Hero Waveform (environmental, behind content) -->
     <div class="hero-waveform">
-      <img src="/assets/hero-waveform.svg" alt="" role="presentation">
+      <img src="assets/hero-waveform_1.svg" alt="" role="presentation">
     </div>
 
     <section class="zone-hero">
@@ -793,14 +1039,14 @@
 
         <!-- Rhythm pattern — full width, breaks out of content column -->
         <div class="rhythm-strip reveal reveal-delay-1">
-          <img src="/assets/bw_rhythms_off.svg" alt="" role="presentation">
+          <img src="assets/bw_rhythms_off.svg" alt="" role="presentation">
         </div>
 
-        <p class="body-copy reveal reveal-delay-2">You train. You push. You follow the program. And somewhere between the effort and the result, there's a gap you can't close. Not injury. Not laziness. Something quieter. A flatness where response should be. A sense that the volume keeps increasing but the signal isn't getting clearer.</p>
+        <p class="body-copy reveal reveal-delay-2">You train. You exercise. You follow the program. And somewhere between the effort and the result, there's a gap you can't close. Not injury. Not laziness. Something quieter. A void in your body's response. A sense that the volume keeps increasing but the signal isn't getting clearer.</p>
 
         <p class="body-copy reveal reveal-delay-3">You've tried more structure. More discipline. More information. None of it closed the gap — because the gap was never about effort.</p>
 
-        <p class="turquoise-accent reveal reveal-delay-4">The problem was never what you were doing. It was what you couldn't hear while you were doing it.</p>
+        <p class="turquoise-accent reveal reveal-delay-4">The problem was never what you were doing. It was what you couldn't hear inside while you were doing it.</p>
 
         <div class="reveal reveal-delay-4" style="text-align: center; padding-top: 48px;">
           <span class="scroll-arrow">↓</span>
@@ -809,10 +1055,8 @@
     </section>
   </div>
 
-  <!-- Bridge: Hero → Reframe -->
-  <div class="zone-bridge-wrap" style="background: linear-gradient(to bottom, var(--base-blue), var(--base-blue));">
-    <div class="zone-bridge"></div>
-  </div>
+  <!-- Divider: Hero → Reframe -->
+  <div class="zone-divider"></div>
 
   <!-- ═══════════════════════════════════════════
        MOVE 2: REFRAME
@@ -832,75 +1076,120 @@
     </div>
 
     <div class="zone-content">
-      <div class="density-field-wrap reveal">
-        <div class="density-field">
-          <svg viewBox="350 900 4250 3200" xmlns="http://www.w3.org/2000/svg" role="presentation" aria-hidden="true">
+      <div class="three-ms-wrap reveal">
+        <div class="three-ms-field">
+          <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three Ms: Metabolism fuels, Movement carries, Matrix organizes">
+            <defs>
+              <radialGradient id="glow-coral-ms" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#FFA565" stop-opacity="0.06"/>
+                <stop offset="80%" stop-color="#FFA565" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="glow-turq-ms" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#58FCC8" stop-opacity="0.05"/>
+                <stop offset="80%" stop-color="#58FCC8" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
 
-            <!-- PROPRIOCEPTIVE FIELD — the known (inner 4 petals) -->
-            <g class="proprio-field">
-              <path class="proprio-petal" d="M3036.41,1762.75c148.43,369.82-122.32,738.34-1087.76,1474.19-116.5-380.4,80.32-712.01,1087.76-1474.19Z" fill="none" stroke="#58FCC8" stroke-opacity="1.0" stroke-width="1.51" stroke-miterlimit="10"/>
-              <path class="proprio-petal" d="M3020.63,1726.62c186.95,358.56-75.83,745.07-1056.21,1546.48-153.49-371.34,32.75-715.88,1056.21-1546.48h0Z" fill="none" stroke="#58FCC8" stroke-opacity="0.95" stroke-width="1.57" stroke-miterlimit="10"/>
-              <path class="proprio-petal" d="M3000.98,1691.68c227.42,344.65-25.45,748.55-1016.95,1616.39-192.5-359.73-18.57-716.42,1016.95-1616.39Z" fill="none" stroke="#58FCC8" stroke-opacity="0.90" stroke-width="1.63" stroke-miterlimit="10"/>
-              <path class="proprio-petal" d="M2977.29,1658.2c269.8,327.94,28.85,748.5-969.59,1683.39-233.46-345.43-73.66-713.38,969.59-1683.39h0Z" fill="none" stroke="#58FCC8" stroke-opacity="0.85" stroke-width="1.69" stroke-miterlimit="10"/>
+            <!-- METABOLISM territory (coral — top left) -->
+            <g class="territory-metabolism">
+              <ellipse cx="210" cy="150" rx="130" ry="120" fill="url(#glow-coral-ms)"/>
+              <ellipse class="contour-outer" cx="210" cy="150" rx="130" ry="120" fill="none" stroke="#FFA565" stroke-width="0.6" stroke-opacity="0.18"/>
+              <ellipse class="contour-mid" cx="210" cy="150" rx="100" ry="90" fill="none" stroke="#FFA565" stroke-width="0.4" stroke-opacity="0.1"/>
+              <ellipse class="contour-inner" cx="210" cy="150" rx="65" ry="55" fill="none" stroke="#FFA565" stroke-width="0.3" stroke-opacity="0.06"/>
+
+              <circle class="pulse-ring" cx="210" cy="150" fill="none" stroke="#FFA565" stroke-width="0.8"/>
+              <circle class="core-node" cx="210" cy="150" r="4" fill="#FFA565" fill-opacity="0.55"/>
+
+              <text x="210" y="128" fill="#FFA565" opacity="0.65" font-size="24" text-anchor="middle" font-family="Cinzel, serif" letter-spacing="0.08em">METABOLISM</text>
+              <text x="210" y="170" fill="#5A5672" font-size="14" text-anchor="middle" letter-spacing="0.08em">THE FUEL</text>
+
+              <text class="territory-desc" x="210" y="206" fill="#FFA565" font-size="12" text-anchor="middle" letter-spacing="0.04em" opacity="0.5">What powers the signal.</text>
+              <text class="territory-desc" x="210" y="226" fill="#FFA565" font-size="12" text-anchor="middle" letter-spacing="0.04em" opacity="0.4">capacity &middot; depletion &middot; readiness</text>
+
+              <ellipse class="ms-hit" cx="210" cy="150" rx="130" ry="120"/>
             </g>
 
-            <!-- INTEROCEPTIVE FIELD — the unheard (outer 27 petals) -->
-            <g class="intero-field">
-              <!-- Near (5–10) -->
-              <path class="intero-petal intero-near" d="M2949.37,1626.45c314,308.33,87.08,744.66-913.76,1746.93-276.33-328.3-132.51-706.5,913.76-1746.93h0Z" fill="none" stroke="#58FCC8" stroke-opacity="0.22" stroke-width="1.75" stroke-miterlimit="10"/>
-              <path class="intero-petal intero-near" d="M2917.04,1596.72c359.93,285.67,149.27,736.78-849.11,1806.41-321.03-308.23-195.13-695.54,849.11-1806.41h0Z" fill="none" stroke="#58FCC8" stroke-opacity="0.22" stroke-width="1.82" stroke-miterlimit="10"/>
-              <path class="intero-petal intero-near" d="M2880.12,1569.33c407.51,259.87,215.37,724.57-775.31,1861.24-367.48-285.08-261.48-680.23,775.31-1861.24h0Z" fill="none" stroke="#58FCC8" stroke-opacity="0.22" stroke-width="1.88" stroke-miterlimit="10"/>
-              <path class="intero-petal intero-near" d="M2838.47,1544.57c456.61,230.81,285.37,707.78-692.03,1910.79-415.56-258.75-331.5-660.33,692.03-1910.79h0Z" fill="none" stroke="#58FCC8" stroke-opacity="0.22" stroke-width="1.95" stroke-miterlimit="10"/>
-              <path class="intero-petal intero-near" d="M2791.94,1522.78c507.09,198.39,359.19,686.15-598.98,1954.41-465.15-229.13-405.11-635.6,598.98-1954.41h0Z" fill="none" stroke="#58FCC8" stroke-opacity="0.22" stroke-width="2.02" stroke-miterlimit="10"/>
-              <path class="intero-petal intero-near" d="M2740.4,1504.29c558.81,162.54,436.75,659.42-495.9,1991.43-516.13-196.13-482.22-605.79,495.9-1991.43h0Z" fill="none" stroke="#58FCC8" stroke-opacity="0.22" stroke-width="2.10" stroke-miterlimit="10"/>
+            <!-- MOVEMENT territory (turquoise — top right) -->
+            <g class="territory-movement">
+              <ellipse cx="590" cy="150" rx="140" ry="125" fill="url(#glow-turq-ms)"/>
+              <ellipse class="contour-outer" cx="590" cy="150" rx="140" ry="125" fill="none" stroke="#58FCC8" stroke-width="0.6" stroke-opacity="0.18"/>
+              <ellipse class="contour-mid" cx="590" cy="150" rx="108" ry="95" fill="none" stroke="#58FCC8" stroke-width="0.4" stroke-opacity="0.1"/>
+              <ellipse class="contour-inner" cx="590" cy="150" rx="72" ry="60" fill="none" stroke="#58FCC8" stroke-width="0.3" stroke-opacity="0.06"/>
 
-              <!-- Mid (11–18) -->
-              <path class="intero-petal intero-mid" d="M2683.72,1489.44c611.6,123.16,517.94,627.35-382.56,2021.17-568.34-159.65-562.69-570.68,382.56-2021.17h0Z" fill="none" stroke="#58FCC8" stroke-opacity="0.20" stroke-width="2.18" stroke-miterlimit="10"/>
-              <path class="intero-petal intero-mid" d="M2621.81,1478.58c665.27,80.2,602.62,589.69-258.75,2042.94-621.61-119.61-646.37-530.04,258.75-2042.94h0Z" fill="none" stroke="#58FCC8" stroke-opacity="0.20" stroke-width="2.26" stroke-miterlimit="10"/>
-              <path class="intero-petal intero-mid" d="M2554.59,1472.07c719.62,33.6,690.64,546.22-124.31,2056.01-675.74-75.96-733.09-483.66,124.31-2056.01h0Z" fill="none" stroke="#58FCC8" stroke-opacity="0.20" stroke-width="2.34" stroke-miterlimit="10"/>
-              <path class="intero-petal intero-mid" d="M2481.99,1470.26c774.42-16.68,781.78,496.71,20.87,2059.67-730.53-28.64-822.63-431.34-20.87-2059.67Z" fill="none" stroke="#58FCC8" stroke-opacity="0.20" stroke-width="2.43" stroke-miterlimit="10"/>
-              <path class="intero-petal intero-mid" d="M2403.99,1473.52c829.43-70.66,875.83,440.97,176.88,2053.2-785.75,22.39-914.74-372.91-176.88-2053.2h0Z" fill="none" stroke="#58FCC8" stroke-opacity="0.20" stroke-width="2.52" stroke-miterlimit="10"/>
-              <path class="intero-petal intero-mid" d="M2320.56,1482.21c884.39-128.35,972.54,378.8,343.73,2035.86-841.15,77.15-1009.17-308.19-343.73-2035.86h0Z" fill="none" stroke="#58FCC8" stroke-opacity="0.20" stroke-width="2.61" stroke-miterlimit="10"/>
-              <path class="intero-petal intero-mid" d="M2231.73,1496.7c939.01-189.73,1071.6,310.03,521.41,2006.92-896.48,135.64-1105.6-237.04-521.41-2006.92h0Z" fill="none" stroke="#58FCC8" stroke-opacity="0.20" stroke-width="2.71" stroke-miterlimit="10"/>
-              <path class="intero-petal intero-mid" d="M2137.53,1517.35c993-254.77,1172.71,234.53,709.82,1965.66-951.43,197.84-1203.7-159.34-709.82-1965.66Z" fill="none" stroke="#58FCC8" stroke-opacity="0.20" stroke-width="2.81" stroke-miterlimit="10"/>
+              <circle class="pulse-ring" cx="590" cy="150" fill="none" stroke="#58FCC8" stroke-width="0.8"/>
+              <circle class="core-node" cx="590" cy="150" r="4.5" fill="#58FCC8" fill-opacity="0.55"/>
 
-              <!-- Far (19–25) -->
-              <path class="intero-petal intero-far" d="M2038.03,1544.52c1046.03-323.42,1275.5,152.15,908.83,1911.36-1005.71,263.73-1303.1-74.99-908.83-1911.36h0Z" fill="none" stroke="#58FCC8" stroke-opacity="0.18" stroke-width="2.91" stroke-miterlimit="10"/>
-              <path class="intero-petal intero-far" d="M1933.34,1578.57c1097.76-395.6,1379.58,62.81,1118.22,1843.31-1059,333.24-1403.4,16.09-1118.22-1843.31h0Z" fill="none" stroke="#58FCC8" stroke-opacity="0.18" stroke-width="3.02" stroke-miterlimit="10"/>
-              <path class="intero-petal intero-far" d="M1823.61,1619.84c1147.84-471.21,1484.51-33.58,1337.72,1760.81-1110.94,406.3-1504.15,113.95-1337.72-1760.81h0Z" fill="none" stroke="#58FCC8" stroke-opacity="0.18" stroke-width="3.13" stroke-miterlimit="10"/>
-              <path class="intero-petal intero-far" d="M1708.99,1668.66c1195.89-550.13,1589.84-137.05,1566.98,1663.21-1161.17,482.8-1604.88,218.6-1566.98-1663.21h0Z" fill="none" stroke="#58FCC8" stroke-opacity="0.18" stroke-width="3.24" stroke-miterlimit="10"/>
-              <path class="intero-petal intero-far" d="M1589.71,1725.36c1241.51-632.21,1695.06-247.62,1805.57,1549.85-1209.32,562.63-1705.07,330.01-1805.57-1549.85h0Z" fill="none" stroke="#58FCC8" stroke-opacity="0.18" stroke-width="3.36" stroke-miterlimit="10"/>
-              <path class="intero-petal intero-far" d="M1466.02,1790.23c1284.28-717.27,1799.64-365.26,2053,1420.12-1254.97,645.61-1804.19,448.15-2053-1420.12h0Z" fill="none" stroke="#58FCC8" stroke-opacity="0.18" stroke-width="3.49" stroke-miterlimit="10"/>
-              <path class="intero-petal intero-far" d="M1338.2,1863.59c1323.78-805.11,1902.98-489.91,2308.66,1273.46-1297.72,731.58-1901.65,572.91-2308.66-1273.46h0Z" fill="none" stroke="#58FCC8" stroke-opacity="0.18" stroke-width="3.62" stroke-miterlimit="10"/>
+              <text x="590" y="128" fill="#58FCC8" opacity="0.65" font-size="24" text-anchor="middle" font-family="Cinzel, serif" letter-spacing="0.08em">MOVEMENT</text>
+              <text x="590" y="170" fill="#5A5672" font-size="14" text-anchor="middle" letter-spacing="0.08em">THE MEDIUM</text>
 
-              <!-- Edge (26–31) -->
-              <path class="intero-petal intero-edge" d="M1206.61,1945.67c1359.57-895.49,2004.49-621.46,2571.9,1109.31-1337.12,820.33-1996.83,704.17-2571.9-1109.31h0Z" fill="none" stroke="#58FCC8" stroke-opacity="0.16" stroke-width="3.75" stroke-miterlimit="10"/>
-              <path class="intero-petal intero-edge" d="M1071.61,2036.74c1391.17-988.15,2103.5-759.77,2841.96,927.2-1372.73,911.6-2089.08,841.75-2841.96-927.2h0Z" fill="none" stroke="#58FCC8" stroke-opacity="0.16" stroke-width="3.89" stroke-miterlimit="10"/>
-              <path class="intero-petal intero-edge" d="M933.63,2137c1418.12-1082.79,2199.33-904.65,3117.97,726.7-1404.09,1005.14-2177.72,985.42-3117.97-726.7h0Z" fill="none" stroke="#58FCC8" stroke-opacity="0.16" stroke-width="4.03" stroke-miterlimit="10"/>
-              <path class="intero-petal intero-edge" d="M793.15,2246.64c1439.93-1179.07,2291.25-1055.86,3399,507.43-1430.7,1100.63-2262.01,1134.93-3399-507.43h0Z" fill="none" stroke="#58FCC8" stroke-opacity="0.16" stroke-width="4.18" stroke-miterlimit="10"/>
-              <path class="intero-petal intero-edge" d="M650.68,2365.82c1456.1-1276.64,2378.51-1213.12,3683.99,269.09-1452.08,1197.75-2341.22,1289.96-3683.99-269.09h0Z" fill="none" stroke="#58FCC8" stroke-opacity="0.16" stroke-width="4.34" stroke-miterlimit="10"/>
-              <path class="intero-petal intero-edge" d="M506.81,2494.64c1466.13-1375.11,2460.32-1376.08,3971.82,11.45-1467.74,1296.13-2414.55,1450.13-3971.82-11.45h0Z" fill="none" stroke="#58FCC8" stroke-opacity="0.16" stroke-width="4.50" stroke-miterlimit="10"/>
+              <text class="territory-desc" x="590" y="206" fill="#58FCC8" font-size="12" text-anchor="middle" letter-spacing="0.04em" opacity="0.5">Where force originates and transfers.</text>
+              <text class="territory-desc" x="590" y="226" fill="#58FCC8" font-size="12" text-anchor="middle" letter-spacing="0.04em" opacity="0.4">force &middot; kinetic chain &middot; load</text>
+
+              <ellipse class="ms-hit" cx="590" cy="150" rx="140" ry="125"/>
             </g>
+
+            <!-- MATRIX territory (turquoise dimmer — bottom center) -->
+            <g class="territory-matrix">
+              <ellipse cx="400" cy="340" rx="130" ry="120" fill="url(#glow-turq-ms)"/>
+              <ellipse class="contour-outer" cx="400" cy="340" rx="130" ry="120" fill="none" stroke="#58FCC8" stroke-width="0.6" stroke-opacity="0.15"/>
+              <ellipse class="contour-mid" cx="400" cy="340" rx="100" ry="90" fill="none" stroke="#58FCC8" stroke-width="0.4" stroke-opacity="0.08"/>
+              <ellipse class="contour-inner" cx="400" cy="340" rx="65" ry="55" fill="none" stroke="#58FCC8" stroke-width="0.3" stroke-opacity="0.05"/>
+
+              <circle class="pulse-ring" cx="400" cy="340" fill="none" stroke="#58FCC8" stroke-width="0.8"/>
+              <circle class="core-node" cx="400" cy="340" r="4" fill="#58FCC8" fill-opacity="0.45"/>
+
+              <text x="400" y="318" fill="#58FCC8" opacity="0.55" font-size="24" text-anchor="middle" font-family="Cinzel, serif" letter-spacing="0.08em">MATRIX</text>
+              <text x="400" y="360" fill="#5A5672" font-size="14" text-anchor="middle" letter-spacing="0.08em">THE TERRITORY</text>
+
+              <text class="territory-desc" x="400" y="396" fill="#58FCC8" font-size="12" text-anchor="middle" letter-spacing="0.04em" opacity="0.4">How your body organizes under pressure.</text>
+              <text class="territory-desc" x="400" y="416" fill="#58FCC8" font-size="12" text-anchor="middle" letter-spacing="0.04em" opacity="0.35">compensation &middot; coordination &middot; pattern</text>
+
+              <ellipse class="ms-hit" cx="400" cy="340" rx="130" ry="120"/>
+            </g>
+
+            <!-- Connection paths (after groups for CSS sibling selectors) -->
+            <path class="ms-connection conn-metab-move" d="M 330 115 Q 400 85 460 115" fill="none" stroke="#5A5672" stroke-width="0.8" stroke-opacity="0.12" stroke-dasharray="3,6"/>
+            <path class="ms-connection conn-move-matrix" d="M 530 240 Q 510 300 460 320" fill="none" stroke="#5A5672" stroke-width="0.8" stroke-opacity="0.1" stroke-dasharray="3,6"/>
+            <path class="ms-connection conn-metab-matrix" d="M 270 240 Q 290 300 340 320" fill="none" stroke="#5A5672" stroke-width="0.6" stroke-opacity="0.08" stroke-dasharray="3,8"/>
+
+            <!-- Center integration label — appears on Matrix hover -->
+            <g class="ms-integration-label">
+              <text x="400" y="218" fill="#58FCC8" opacity="0.8" font-size="16" text-anchor="middle" font-family="Cinzel, serif" letter-spacing="0.12em">BASEWAVES</text>
+              <text x="400" y="242" fill="#9994B8" font-size="12" text-anchor="middle" letter-spacing="0.08em">connects the signals</text>
+            </g>
+
           </svg>
         </div>
-        <div class="density-labels">
-          <span class="density-label label-inner">proprioceptive — position</span>
-          <span class="density-label label-outer">interoceptive — condition</span>
-        </div>
+ 
       </div>
     </div>
+    <div class="zone-content" style="padding-top: 32px;">
+      <p class="body-copy reveal">Most strength training addresses one channel — movement. Reps, sets, load. BASEWAVES reads three channels simultaneously: the metabolic state that fuels your processing, the movement patterns that carry your force, and your organizational intelligence that determines how both express. <br>
+<br>
+<strong> Metabolism</strong> fuels. <strong>Movement</strong> carries. <strong>Matrix</strong> organizes. <br>
+<br>
+These channels were never separate inside your biology. The programming was.</p>
+    </div>
 
-    <div class="zone-content">
-      <div class="rhythm-strip rhythm-strip-full reveal">
-        <img src="/assets/bw_rhythms.svg" alt="" role="presentation">
-      </div>
+    <div class="rhythm-strip rhythm-strip-full reveal" style="margin-bottom: 0;">
+      <img src="assets/bw_rhythms.svg" alt="" role="presentation">
     </div>
   </section>
 
   <!-- Bridge: Reframe → Pull -->
-  <div class="zone-bridge-wrap" style="background: linear-gradient(to bottom, var(--base-blue), var(--deep-blue));">
-    <div class="zone-bridge reveal"><p>You've been solving the wrong problem.</p></div>
+  <div class="zone-bridge-wrap" style="background: var(--base-blue); background: linear-gradient(to bottom, var(--base-blue), var(--deep-blue));">
+    <div class="zone-bridge reveal">
+      <h3>You've been solving the wrong problem.</h3>
+    <p style="margin-top: 1.2em; font-family: 'IBM Plex Mono', monospace; font-size: 0.95rem; color: var(--secondary-text); max-width: 640px; margin-left: auto; margin-right: auto; line-height: 1.7;">More effort won’t fix what was never an effort problem.<br>
+      <br>
+Your body processes muscle gains and fat loss through the same channels it processes stress, fuel, and uncertainty. <br>
+<br>
+How you channel stress is the problem. Not the program. Not the load. Not the exercise.</p>
+    </div>
   </div>
+
+  <!-- Divider: Bridge → Close -->
+  <div class="zone-divider"></div>
 
   <!-- ═══════════════════════════════════════════
        MOVE 3: PULL
@@ -908,16 +1197,21 @@
        ═══════════════════════════════════════════ -->
   <section class="zone zone-close">
     <div class="zone-content">
-      <p class="filter-line reveal">If more effort stopped being the answer a long time ago.</p>
-      <p class="filter-line reveal reveal-delay-1">If you've been told to push harder when pushing harder is what dulled the signal.</p>
+      <p class="filter-line reveal reveal-delay-1">If you've been told to push harder when pushing harder drains you.</p>
       <p class="filter-line reveal reveal-delay-2">If you sense the problem lives upstream of every program you've tried.</p>
+      <p class="filter-line reveal reveal-delay-3">If your body gets stronger some weeks and stalls  others and nobody can explain why.</p>
 
-      <div class="pull-links reveal reveal-delay-3">
+      <p class="filter-resolve reveal reveal-delay-4">Then you're not looking for another program. You're looking at fine-tuning your other channels.</p>
+
+      <div class="pull-links reveal reveal-delay-5">
         <a href="/origin/" class="portal-link">Where this came from →</a>
         <a href="/portal/" class="portal-link">Where this leads →</a>
       </div>
     </div>
   </section>
+
+  <!-- Divider: Close → Footer -->
+  <div class="zone-divider"></div>
 
   <!-- ═══════════════════════════════════════════
        FOOTER (split two-column)
@@ -925,7 +1219,7 @@
   <footer class="site-footer">
     <div class="footer-grid">
       <div class="footer-left">
-        <img src="/assets/Basewaves_logo.svg" alt="BASEWAVES" class="footer-logo">
+        <img src="assets/Basewaves_logo.svg" alt="BASEWAVES" class="footer-logo">
         <p class="footer-tagline">You cannot think your way out of a sensing problem.</p>
         <p class="footer-copyright">&copy; 2026 BASEWAVES</p>
       </div>
