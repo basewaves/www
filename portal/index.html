@@ -269,6 +269,12 @@
   /* ========== SVGs ========== */
   .svg-container { width: 100%; margin: 48px 0; display: flex; justify-content: center; }
   .svg-container svg { width: 100%; max-width: 900px; height: auto; overflow: visible; }
+  .svg-mobile { display: none; }
+  @media (max-width: 900px) {
+    .svg-container:not(.svg-mobile) { display: none; }
+    .svg-mobile { display: flex; }
+    .svg-mobile svg { max-width: 300px; }
+  }
   svg text { font-family: 'IBM Plex Mono', monospace; pointer-events: none; }
 
   /* ========== DEV STAGES: PIPELINE STYLE (matches base-perception) ========== */
@@ -844,6 +850,86 @@
               d="M 320 205 C 280 265, 220 265, 250 190"
               fill="none" stroke="#9994B8" stroke-width="1.2" stroke-opacity="0.2"
               marker-end="url(#flow-arr)"/>
+      </svg>
+    </div>
+
+    <!-- MOBILE: vertical layout -->
+    <div class="svg-container svg-mobile reveal">
+      <svg id="dev-stages-mobile" viewBox="0 0 300 900" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="m-glow-cond" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#58FCC8" stop-opacity="0.06"/>
+            <stop offset="80%" stop-color="#58FCC8" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="m-glow-mus" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#E8E3FF" stop-opacity="0.04"/>
+            <stop offset="80%" stop-color="#E8E3FF" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="m-glow-comp" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#58FCC8" stop-opacity="0.06"/>
+            <stop offset="80%" stop-color="#58FCC8" stop-opacity="0"/>
+          </radialGradient>
+          <marker id="m-flow-arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+            <path d="M 0 0.5 L 9 4 L 0 7.5" fill="none" stroke="#9994B8" stroke-width="1" opacity="0.6"/>
+          </marker>
+        </defs>
+
+        <!-- Conductor -->
+        <g class="territory-conductor">
+          <ellipse cx="150" cy="150" rx="120" ry="110" fill="url(#m-glow-cond)"/>
+          <ellipse class="contour-outer" cx="150" cy="150" rx="120" ry="110" fill="none" stroke="#58FCC8" stroke-width="0.6" stroke-opacity="0.18"/>
+          <ellipse class="contour-mid" cx="150" cy="150" rx="90" ry="80" fill="none" stroke="#58FCC8" stroke-width="0.4" stroke-opacity="0.1"/>
+          <ellipse class="contour-inner" cx="150" cy="150" rx="55" ry="45" fill="none" stroke="#58FCC8" stroke-width="0.3" stroke-opacity="0.06"/>
+          <circle class="core-node" cx="150" cy="150" r="4" fill="#58FCC8" fill-opacity="0.55"/>
+          <text x="150" y="130" fill="#58FCC8" opacity="0.65" font-size="22" text-anchor="middle" font-family="Cinzel, serif" letter-spacing="0.08em">CONDUCTOR</text>
+          <text x="150" y="168" fill="#5A5672" font-size="13" text-anchor="middle" letter-spacing="0.08em">FOLLOWS INSTRUCTIONS</text>
+          <text x="150" y="200" fill="#58FCC8" font-size="11" text-anchor="middle" letter-spacing="0.04em" opacity="0.5">Establishing signal literacy</text>
+          <text x="150" y="218" fill="#58FCC8" font-size="11" text-anchor="middle" letter-spacing="0.04em" opacity="0.4">external cues · structured protocol</text>
+        </g>
+
+        <!-- Arrow: Conductor → Musician (down-right) -->
+        <path d="M 170 265 C 200 310, 200 330, 170 345"
+              fill="none" stroke="#9994B8" stroke-width="1.2" stroke-opacity="0.2"
+              marker-end="url(#m-flow-arr)"/>
+        <!-- Arrow: Musician → Conductor (down-left, regression) -->
+        <path d="M 130 345 C 100 330, 100 310, 130 265"
+              fill="none" stroke="#9994B8" stroke-width="1.2" stroke-opacity="0.2"
+              marker-end="url(#m-flow-arr)"/>
+
+        <!-- Musician -->
+        <g class="territory-musician">
+          <ellipse cx="150" cy="450" rx="130" ry="115" fill="url(#m-glow-mus)"/>
+          <ellipse class="contour-outer" cx="150" cy="450" rx="130" ry="115" fill="none" stroke="#E8E3FF" stroke-width="0.6" stroke-opacity="0.14"/>
+          <ellipse class="contour-mid" cx="150" cy="450" rx="100" ry="85" fill="none" stroke="#E8E3FF" stroke-width="0.4" stroke-opacity="0.08"/>
+          <ellipse class="contour-inner" cx="150" cy="450" rx="65" ry="50" fill="none" stroke="#E8E3FF" stroke-width="0.3" stroke-opacity="0.05"/>
+          <circle class="core-node" cx="150" cy="450" r="4.5" fill="#E8E3FF" fill-opacity="0.45"/>
+          <text x="150" y="430" fill="#E8E3FF" opacity="0.55" font-size="22" text-anchor="middle" font-family="Cinzel, serif" letter-spacing="0.08em">MUSICIAN</text>
+          <text x="150" y="468" fill="#5A5672" font-size="13" text-anchor="middle" letter-spacing="0.08em">ADAPTS PATTERNS</text>
+          <text x="150" y="500" fill="#E8E3FF" font-size="11" text-anchor="middle" letter-spacing="0.04em" opacity="0.5">Consolidating capacity · Self-correction</text>
+          <text x="150" y="518" fill="#E8E3FF" font-size="11" text-anchor="middle" letter-spacing="0.04em" opacity="0.4">felt sense emerging · internal feedback</text>
+        </g>
+
+        <!-- Arrow: Musician → Composer (down-right) -->
+        <path d="M 170 568 C 200 610, 200 630, 170 648"
+              fill="none" stroke="#9994B8" stroke-width="1.2" stroke-opacity="0.2"
+              marker-end="url(#m-flow-arr)"/>
+        <!-- Arrow: Composer → Musician (down-left, regression) -->
+        <path d="M 130 648 C 100 630, 100 610, 130 568"
+              fill="none" stroke="#9994B8" stroke-width="1.2" stroke-opacity="0.2"
+              marker-end="url(#m-flow-arr)"/>
+
+        <!-- Composer -->
+        <g class="territory-composer">
+          <ellipse cx="150" cy="750" rx="115" ry="105" fill="url(#m-glow-comp)"/>
+          <ellipse class="contour-outer" cx="150" cy="750" rx="115" ry="105" fill="none" stroke="#58FCC8" stroke-width="0.6" stroke-opacity="0.15"/>
+          <ellipse class="contour-mid" cx="150" cy="750" rx="85" ry="75" fill="none" stroke="#58FCC8" stroke-width="0.4" stroke-opacity="0.08"/>
+          <ellipse class="contour-inner" cx="150" cy="750" rx="50" ry="40" fill="none" stroke="#58FCC8" stroke-width="0.3" stroke-opacity="0.05"/>
+          <circle class="core-node" cx="150" cy="750" r="4" fill="#58FCC8" fill-opacity="0.45"/>
+          <text x="150" y="730" fill="#58FCC8" opacity="0.55" font-size="22" text-anchor="middle" font-family="Cinzel, serif" letter-spacing="0.08em">COMPOSER</text>
+          <text x="150" y="768" fill="#5A5672" font-size="13" text-anchor="middle" letter-spacing="0.08em">CREATES VARIATIONS</text>
+          <text x="150" y="800" fill="#58FCC8" font-size="11" text-anchor="middle" letter-spacing="0.04em" opacity="0.4">Framework dissolved into capacity</text>
+          <text x="150" y="818" fill="#58FCC8" font-size="11" text-anchor="middle" letter-spacing="0.04em" opacity="0.35">autonomous expression · creative emergence</text>
+        </g>
       </svg>
     </div>
   </div>
