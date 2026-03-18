@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Signals — Readings in Signal Literacy | BASEWAVES</title>
-<meta name="description" content="Essays on what strength training develops beyond muscle. Initiatory content that earns its complexity. Spatial Strength Training, Austin TX.">
-<meta property="og:title" content="Signals — Readings in Signal Literacy | BASEWAVES">
-<meta property="og:description" content="Essays on what strength training develops beyond muscle. Initiatory content that earns its complexity.">
-<meta property="og:type" content="website">
+<title>Pressured Dialogue | BASEWAVES Signals</title>
+<meta name="description" content="That's not dialogue. That's ventriloquism. An essay on what happens when load replaces language as the medium of communication.">
+<meta property="og:title" content="Pressured Dialogue | BASEWAVES Signals">
+<meta property="og:description" content="That's not dialogue. That's ventriloquism. An essay on what happens when load replaces language as the medium of communication.">
+<meta property="og:type" content="article">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=IBM+Plex+Mono:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Serif:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root { --base-blue: #0E1220; --deep-blue: #080B14; --lighter-blue: #141B2E; --primary-text: #E8E3FF; --secondary-text: #9994B8; --dim-text: #5A5672; --turquoise: #58FCC8; --coral: #FFA565; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -22,7 +22,7 @@
   .zone-inner { max-width: 720px; margin: 0 auto; padding: 0 48px; }
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
-  .reveal-delay-1 { transition-delay: 0.12s; } .reveal-delay-2 { transition-delay: 0.24s; } .reveal-delay-3 { transition-delay: 0.36s; }
+  .reveal-delay-1 { transition-delay: 0.12s; } .reveal-delay-2 { transition-delay: 0.24s; }
 
   /* Nav */
   .site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; transition: background 0.4s ease, backdrop-filter 0.4s ease; }
@@ -45,50 +45,32 @@
   @media (max-width: 1023px) { .nav-logo { height: 32px; } .hamburger { display: flex; } .nav-desktop { display: none; } }
   @media (min-width: 1024px) { .nav-overlay { display: none !important; } }
 
-  /* Hero */
-  .zone-hero { min-height: 70vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: transparent; padding: 140px 48px 80px; }
-  .hero-label { font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--secondary-text); margin-bottom: 20px; }
-  .hero-title { font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(36px, 5vw, 56px); letter-spacing: 0.08em; color: var(--primary-text); margin-bottom: 16px; line-height: 1.2; }
-  .hero-subtitle { font-family: 'Cinzel', serif; font-weight: 400; font-size: 16px; letter-spacing: 0.06em; color: var(--dim-text); margin-bottom: 32px; }
-  .hero-positioning { max-width: 600px; font-size: 13px; line-height: 1.85; color: var(--secondary-text); }
+  /* Essay header */
+  .essay-header { padding: 160px 0 60px; text-align: center; }
+  .essay-label { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--secondary-text); margin-bottom: 24px; }
+  .essay-label a { color: var(--secondary-text); text-decoration: none; transition: color 0.3s ease; }
+  .essay-label a:hover { color: var(--turquoise); }
+  .essay-title { font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(28px, 4vw, 44px); letter-spacing: 0.06em; color: var(--primary-text); margin-bottom: 16px; line-height: 1.3; }
+  .essay-provocation { font-family: 'IBM Plex Serif', serif; font-size: 17px; font-style: italic; color: var(--secondary-text); margin-bottom: 16px; }
+  .essay-meta { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--dim-text); letter-spacing: 0.08em; }
 
   /* Zone divider */
   .zone-divider { height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(88,252,200,0.15) 20%, rgba(88,252,200,0.25) 50%, rgba(88,252,200,0.15) 80%, transparent 100%); position: relative; z-index: 1; }
 
-  /* Reading list */
-  .reading-list { padding: 80px 0 60px; }
-  .reading-entry { display: flex; align-items: baseline; gap: 24px; padding: 32px 0; border-bottom: 1px solid rgba(90,86,114,0.12); }
-  .reading-entry:first-child { border-top: 1px solid rgba(90,86,114,0.12); }
+  /* Essay body */
+  .essay-body { padding: 60px 0 80px; }
+  .essay-body p { font-family: 'IBM Plex Serif', serif; font-size: 16px; line-height: 1.85; color: var(--secondary-text); margin-bottom: 28px; letter-spacing: 0.01em; }
+  .essay-body p em { color: var(--primary-text); font-style: normal; }
+  .essay-body p strong { color: var(--primary-text); font-weight: 500; }
+  .essay-body .section-break { height: 48px; display: flex; align-items: center; justify-content: center; margin: 12px 0; }
+  .essay-body .section-break::before { content: ''; width: 40px; height: 1px; background: linear-gradient(90deg, transparent, rgba(88,252,200,0.25), transparent); }
+  .essay-body .signal-line { font-family: 'IBM Plex Serif', serif; font-size: 17px; line-height: 1.85; color: var(--primary-text); margin-bottom: 28px; }
+  .essay-body .turquoise-line { font-family: 'IBM Plex Serif', serif; font-size: 17px; line-height: 1.85; color: var(--turquoise); margin-bottom: 28px; }
 
-  /* Published entry */
-  .reading-entry.published { text-decoration: none; transition: border-color 0.3s ease; cursor: pointer; }
-  .reading-entry.published:hover { border-color: rgba(88,252,200,0.2); }
-  .reading-entry.published:hover .entry-title { color: var(--turquoise); }
-
-  /* Unpublished entry */
-  .reading-entry.unpublished { cursor: default; }
-  .reading-entry.unpublished .entry-title { color: var(--dim-text); }
-  .reading-entry.unpublished .entry-provocation { color: rgba(90,86,114,0.6); }
-
-  .entry-number { font-family: 'Space Mono', monospace; font-size: 13px; color: var(--secondary-text); min-width: 28px; flex-shrink: 0; }
-  .reading-entry.unpublished .entry-number { color: var(--dim-text); }
-
-  .entry-content { flex-grow: 1; }
-  .entry-title { font-family: 'Cinzel', serif; font-weight: 400; font-size: 18px; letter-spacing: 0.04em; color: var(--primary-text); margin-bottom: 6px; line-height: 1.35; transition: color 0.3s ease; }
-  .entry-provocation { font-size: 14px; line-height: 1.7; color: var(--secondary-text); font-style: italic; }
-
-  .entry-meta { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--secondary-text); flex-shrink: 0; letter-spacing: 0.06em; white-space: nowrap; }
-  .entry-meta .read-arrow { color: rgba(88,252,200,0.5); transition: color 0.3s ease; margin-left: 8px; }
-  .reading-entry.published:hover .read-arrow { color: var(--turquoise); }
-
-  .entry-coming { font-family: 'Space Mono', monospace; font-size: 11px; color: rgba(90,86,114,0.4); flex-shrink: 0; letter-spacing: 0.08em; text-transform: lowercase; }
-
-  /* CTA */
-  .cta-section { padding: 80px 0; text-align: center; }
-  .cta-statement { font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(20px, 2.5vw, 28px); color: var(--primary-text); letter-spacing: 0.04em; line-height: 1.5; margin-bottom: 12px; }
-  .cta-sub { font-size: 14px; color: var(--secondary-text); line-height: 1.75; margin-bottom: 32px; max-width: 520px; margin-left: auto; margin-right: auto; }
-  .cta-button { display: inline-block; font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--coral); text-decoration: none; padding: 14px 32px; border: 1px solid rgba(255,165,101,0.3); transition: all 0.3s ease; }
-  .cta-button:hover { border-color: var(--coral); background: rgba(255,165,101,0.05); }
+  /* Essay end navigation */
+  .essay-end { padding: 40px 0 80px; text-align: center; }
+  .essay-back { font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.08em; color: var(--turquoise); text-decoration: none; transition: color 0.3s ease; }
+  .essay-back:hover { color: var(--primary-text); }
 
   /* Footer */
   .zone-footer { padding: 60px 0 80px; background: var(--deep-blue); border-top: 1px solid rgba(88,252,200,0.08); }
@@ -110,9 +92,7 @@
   /* Responsive */
   @media (max-width: 900px) {
     .zone-inner { padding: 0 24px; }
-    .zone-hero { padding: 120px 24px 60px; }
-    .reading-entry { flex-direction: column; gap: 8px; }
-    .entry-meta, .entry-coming { align-self: flex-start; }
+    .essay-header { padding: 120px 0 40px; }
     .footer-territory { flex-direction: column; gap: 40px; }
     .footer-right { text-align: left; }
     .footer-bottom { flex-direction: column; gap: 12px; align-items: flex-start; }
@@ -122,111 +102,44 @@
 </style>
 </head>
 <body>
-<nav class="site-nav" id="siteNav"><a href="/" class="logo-container"><img src="../assets/Basewaves_logo.svg" alt="BASEWAVES" class="nav-logo"></a><div class="nav-desktop"><a href="/" class="nav-link">HOME</a><span class="nav-separator">|</span><a href="/origin/" class="nav-link">ORIGIN</a><span class="nav-separator">|</span><a href="/portal/" class="nav-link">PORTAL</a><span class="nav-separator">|</span><a href="/signals/" class="nav-link active">SIGNALS</a></div><button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button></nav>
+<nav class="site-nav" id="siteNav"><a href="/" class="logo-container"><img src="../../assets/Basewaves_logo.svg" alt="BASEWAVES" class="nav-logo"></a><div class="nav-desktop"><a href="/" class="nav-link">HOME</a><span class="nav-separator">|</span><a href="/origin/" class="nav-link">ORIGIN</a><span class="nav-separator">|</span><a href="/portal/" class="nav-link">PORTAL</a><span class="nav-separator">|</span><a href="/signals/" class="nav-link active">SIGNALS</a></div><button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button></nav>
 <div class="nav-overlay" id="navOverlay"><a href="/">HOME</a><a href="/origin/">ORIGIN</a><a href="/portal/">PORTAL</a><a href="/signals/" class="active">SIGNALS</a></div>
 <div class="starfield"></div>
 
 <!-- ===================================================================
-     HERO
+     ESSAY HEADER
      =================================================================== -->
-<section class="zone zone-hero">
-  <div class="hero-label reveal">Readings in Signal Literacy</div>
-  <h1 class="hero-title reveal reveal-delay-1">Signals</h1>
-  <p class="hero-subtitle reveal reveal-delay-2">Where the mechanism becomes felt</p>
-  <p class="hero-positioning reveal reveal-delay-3">The Portal showed you what happens under load. These essays put you inside it. Initiatory content that earns its complexity &mdash; for those who want substrate beneath the mechanism.</p>
-</section>
-<div class="zone-divider"></div>
-
-<!-- ===================================================================
-     READING LIST
-     =================================================================== -->
-<section class="zone reading-list">
+<section class="zone essay-header">
   <div class="zone-inner">
-
-    <a href="/signals/pressured-dialogue/" class="reading-entry published reveal">
-      <span class="entry-number">01</span>
-      <div class="entry-content">
-        <div class="entry-title">Pressured Dialogue</div>
-        <div class="entry-provocation">"That's not dialogue. That's ventriloquism."</div>
-      </div>
-      <span class="entry-meta">8 min<span class="read-arrow">&rarr;</span></span>
-    </a>
-
-    <div class="reading-entry unpublished reveal">
-      <span class="entry-number">02</span>
-      <div class="entry-content">
-        <div class="entry-title">The Space Between</div>
-        <div class="entry-provocation">"The signal was always there. The reception wasn't."</div>
-      </div>
-      <span class="entry-coming">coming</span>
-    </div>
-
-    <div class="reading-entry unpublished reveal">
-      <span class="entry-number">03</span>
-      <div class="entry-content">
-        <div class="entry-title">Finding Your BASE</div>
-        <div class="entry-provocation">"You've been broadcasting this information your entire life. Nobody taught you to listen."</div>
-      </div>
-      <span class="entry-coming">coming</span>
-    </div>
-
-    <div class="reading-entry unpublished reveal">
-      <span class="entry-number">04</span>
-      <div class="entry-content">
-        <div class="entry-title">Making WAVES</div>
-        <div class="entry-provocation">"You don't make waves by pushing harder."</div>
-      </div>
-      <span class="entry-coming">coming</span>
-    </div>
-
-    <div class="reading-entry unpublished reveal">
-      <span class="entry-number">05</span>
-      <div class="entry-content">
-        <div class="entry-title">The 7:1 Ratio</div>
-        <div class="entry-provocation">"You're 87% wired for a capacity nobody trained."</div>
-      </div>
-      <span class="entry-coming">coming</span>
-    </div>
-
-    <div class="reading-entry unpublished reveal">
-      <span class="entry-number">06</span>
-      <div class="entry-content">
-        <div class="entry-title">Grace Under Pressure</div>
-        <div class="entry-provocation">"Grace isn't the absence of pressure. It's what pressure produces when the architecture is in place."</div>
-      </div>
-      <span class="entry-coming">coming</span>
-    </div>
-
-    <div class="reading-entry unpublished reveal">
-      <span class="entry-number">07</span>
-      <div class="entry-content">
-        <div class="entry-title">Competent Material</div>
-        <div class="entry-provocation">"You don't know how to build muscle. Your body does."</div>
-      </div>
-      <span class="entry-coming">coming</span>
-    </div>
-
-    <div class="reading-entry unpublished reveal">
-      <span class="entry-number">08</span>
-      <div class="entry-content">
-        <div class="entry-title">Goal-Seeking Systems</div>
-        <div class="entry-provocation">"Stagnation isn't failure to progress. It's the system losing interest."</div>
-      </div>
-      <span class="entry-coming">coming</span>
-    </div>
-
+    <div class="essay-label reveal"><a href="/signals/">&larr; Signals</a> &middot; 01</div>
+    <h1 class="essay-title reveal reveal-delay-1">Pressured Dialogue</h1>
+    <p class="essay-provocation reveal reveal-delay-1">"That's not dialogue. That's ventriloquism."</p>
+    <div class="essay-meta reveal reveal-delay-2">8 min read</div>
   </div>
 </section>
 <div class="zone-divider"></div>
 
 <!-- ===================================================================
-     BOTTOM CTA
+     ESSAY BODY — Replace placeholder with v5 content
      =================================================================== -->
-<section class="zone cta-section">
+<section class="zone essay-body">
+  <div class="zone-inner">
+
+    <p class="reveal">Essay content will be placed here. Each paragraph uses the <code style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--turquoise);">&lt;p&gt;</code> tag. Section breaks from the essay's <code style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--turquoise);">---</code> markers use:</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">Use <code style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--turquoise);">&lt;em&gt;</code> for emphasis (renders as primary-text, not italic). Use <code style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--turquoise);">class="signal-line"</code> for primary-text weight lines. Use <code style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--turquoise);">class="turquoise-line"</code> for turquoise accent lines.</p>
+
+  </div>
+</section>
+
+<!-- ===================================================================
+     ESSAY END NAV
+     =================================================================== -->
+<section class="zone essay-end">
   <div class="zone-inner reveal">
-    <div class="cta-statement">Reading is reconnaissance. The territory is felt.</div>
-    <p class="cta-sub">When the substrate makes sense and you're ready to feel it under load &mdash; your BASE is where sessions begin.</p>
-    <a href="mailto:greg@basewaves.com?subject=State Transition Session" class="cta-button">Schedule a State Transition Session</a>
+    <a href="/signals/" class="essay-back">&larr; Back to Signals</a>
   </div>
 </section>
 
