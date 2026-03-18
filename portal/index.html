@@ -269,12 +269,8 @@
   /* ========== SVGs ========== */
   .svg-container { width: 100%; margin: 48px 0; display: flex; justify-content: center; }
   .svg-container svg { width: 100%; max-width: 900px; height: auto; overflow: visible; }
-  .svg-mobile { display: none; }
-  @media (max-width: 900px) {
-    .svg-container:not(.svg-mobile) { display: none; }
-    .svg-mobile { display: flex; }
-    .svg-mobile svg { max-width: 300px; }
-  }
+  .svg-mobile { display: none !important; }
+  .svg-desktop { display: flex; }
   svg text { font-family: 'IBM Plex Mono', monospace; pointer-events: none; }
 
   /* ========== DEV STAGES: PIPELINE STYLE (matches base-perception) ========== */
@@ -379,6 +375,9 @@
     .arch-block { min-height: auto; }
     .arch-block::after { content: none; }
     .svg-container svg { max-width: 100%; }
+    .svg-desktop { display: none !important; }
+    .svg-mobile { display: flex !important; }
+    .svg-mobile svg { max-width: 300px; }
     .footer-territory { flex-direction: column; gap: 40px; }
     .footer-right { text-align: left; }
     .footer-bottom { flex-direction: column; gap: 12px; align-items: flex-start; }
@@ -763,7 +762,7 @@
   </div>
 
   <div class="zone-content-wide">
-    <div class="svg-container reveal">
+    <div class="svg-container svg-desktop reveal">
       <svg id="dev-stages" viewBox="0 0 900 340" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <radialGradient id="glow-cond" cx="50%" cy="50%" r="50%">
