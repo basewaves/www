@@ -137,7 +137,13 @@
   .zone-content-wide { position: relative; z-index: 3; max-width: 1100px; margin: 0 auto; padding: 0 40px; }
   .zone-title { text-align: left; margin-bottom: 48px; }
   .zone-title h2 { font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(24px, 3.5vw, 36px); color: #E8E3FF; letter-spacing: 0.06em; margin: 0 0 12px 0; line-height: 1.2; }
-  .zone-title .zone-subtag { font-family: 'Space Mono', monospace; font-size: 13px; color: #5A5672; letter-spacing: 0.1em; text-transform: uppercase; }
+  .zone-title .zone-subtag {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    color: #635F7E;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
 
   .zone-bridge { position: relative; z-index: 3; text-align: center; padding: 48px 40px; max-width: 640px; margin: 0 auto; }
   .zone-bridge p { font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: 14px; letter-spacing: 0.05em; color: #5A5672; line-height: 1.8; }
@@ -178,38 +184,38 @@
   .arch-block::after { content: '\2192'; position: absolute; right: -12px; top: 30px; color: var(--dim-text); font-size: 16px; z-index: 3; }
   .arch-block.intention::after { content: none; }
 
-  .arch-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dim-text); margin-bottom: 8px; }
-  .arch-name { font-family: 'Cinzel', serif; font-size: 20px; letter-spacing: 0.06em; margin-bottom: 6px; }
+  .arch-label { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--secondary-text); margin-bottom: 8px; }
+  .arch-name { font-family: 'Cinzel', serif; font-size: 22px; letter-spacing: 0.06em; margin-bottom: 6px; }
   .arch-block.attention .arch-name { color: var(--turquoise); }
   .arch-block.channel .arch-name { color: var(--primary-text); }
   .arch-block.intention .arch-name { color: var(--turquoise); }
-  .arch-role { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--secondary-text); letter-spacing: 0.03em; margin-bottom: 16px; }
-  .arch-desc { font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: 13px; line-height: 1.7; color: var(--secondary-text); }
+  .arch-role { font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--primary-text); opacity: 0.8; letter-spacing: 0.03em; margin-bottom: 16px; }
+  .arch-desc { font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: 14px; line-height: 1.75; color: var(--secondary-text); }
   .arch-desc em { color: var(--primary-text); font-style: normal; }
   .arch-dims { margin-top: 12px; }
-  .arch-dim { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--dim-text); margin-bottom: 4px; }
-  .arch-dim span { color: var(--secondary-text); }
-  .arch-annotation { font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: 14px; line-height: 1.85; color: var(--dim-text); font-style: italic; }
-  .arch-annotation em { color: var(--secondary-text); font-style: normal; }
+  .arch-dim { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--secondary-text); margin-bottom: 4px; }
+  .arch-dim span { color: var(--primary-text); }
+  .arch-annotation { font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: 15px; line-height: 1.85; color: var(--secondary-text); font-style: italic; }
+  .arch-annotation em { color: var(--primary-text); font-style: normal; }
 
   /* ========== TRANSFER EVIDENCE CARDS ========== */
   .transfer-territory { margin-top: 20px; }
   .transfer-card { display: grid; grid-template-columns: 180px 2px 1fr; gap: 0; margin-bottom: 48px; position: relative; }
   .transfer-sidebar { padding: 20px 24px 20px 0; text-align: right; }
   .transfer-sidebar .t-duration { font-family: 'IBM Plex Mono', monospace; font-size: 20px; font-weight: 300; color: var(--primary-text); letter-spacing: 0.02em; margin-bottom: 2px; }
-  .transfer-sidebar .t-freq { font-size: 11px; color: var(--dim-text); letter-spacing: 0.08em; margin-bottom: 16px; }
-  .transfer-sidebar .t-stage { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; }
+  .transfer-sidebar .t-freq { font-size: 13px; color: var(--secondary-text); letter-spacing: 0.08em; margin-bottom: 16px; }
+  .transfer-sidebar .t-stage { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; }
   .transfer-sidebar .t-stage.composer { color: var(--turquoise); }
   .transfer-sidebar .t-stage.musician { color: rgba(88,252,200,0.6); }
   .transfer-sidebar .t-stage.co-researcher { color: var(--coral); }
   .transfer-rail { background: rgba(88,252,200,0.15); position: relative; }
   .transfer-rail::before { content: ''; position: absolute; top: 24px; left: -4px; width: 10px; height: 10px; border-radius: 50%; background: rgba(88,252,200,0.5); }
   .transfer-content { padding: 20px 0 20px 28px; }
-  .transfer-entry { font-size: 12px; color: var(--dim-text); margin-bottom: 12px; letter-spacing: 0.04em; }
+  .transfer-entry { font-size: 14px; color: var(--secondary-text); margin-bottom: 12px; letter-spacing: 0.04em; line-height: 1.7; }
   .transfer-breakthrough { font-size: 14px; color: var(--primary-text); line-height: 1.75; margin-bottom: 12px; max-width: 600px; }
-  .transfer-evidence { font-size: 12px; color: var(--turquoise); opacity: 0.6; font-style: italic; margin-bottom: 16px; }
-  .transfer-contrib { font-size: 11px; color: var(--dim-text); padding-top: 12px; border-top: 1px solid rgba(90,86,114,0.12); line-height: 1.6; }
-  .transfer-contrib span.label { letter-spacing: 0.08em; text-transform: uppercase; font-size: 10px; display: block; margin-bottom: 4px; }
+  .transfer-evidence { font-size: 13px; color: var(--turquoise); opacity: 0.85; font-style: italic; margin-bottom: 16px; }
+  .transfer-contrib { font-size: 13px; color: var(--secondary-text); padding-top: 12px; border-top: 1px solid rgba(90,86,114,0.18); line-height: 1.7; }
+  .transfer-contrib span.label { letter-spacing: 0.08em; text-transform: uppercase; font-size: 11px; display: block; margin-bottom: 4px; color: var(--dim-text); }
 
   /* ========== TERRITORY / ENTRY TIERS ========== */
   .territory-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
@@ -222,43 +228,43 @@
   /* ========== MECHANISM VISUALIZATION ========== */
   .mech-load { margin-bottom: 48px; }
   .mech-load-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 4px; }
-  .mech-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dim-text); }
+  .mech-label { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--secondary-text); }
   .mech-load-value { font-family: 'Cinzel', serif; font-size: clamp(24px, 3vw, 36px); color: var(--primary-text); letter-spacing: 0.04em; }
-  .mech-firing { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--turquoise); opacity: 0.7; margin-bottom: 20px; letter-spacing: 0.03em; }
+  .mech-firing { font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--turquoise); opacity: 0.9; margin-bottom: 20px; letter-spacing: 0.03em; }
   .mech-slider-wrap { max-width: 600px; margin-bottom: 20px; }
   .mech-slider { -webkit-appearance: none; appearance: none; width: 100%; height: 2px; background: rgba(88,252,200,0.15); outline: none; border-radius: 1px; cursor: pointer; }
   .mech-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 14px; height: 14px; border-radius: 50%; background: var(--turquoise); cursor: pointer; box-shadow: 0 0 12px rgba(88,252,200,0.3); }
   .mech-slider::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: var(--turquoise); cursor: pointer; border: none; box-shadow: 0 0 12px rgba(88,252,200,0.3); }
-  .mech-slider-labels { display: flex; justify-content: space-between; margin-top: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--dim-text); letter-spacing: 0.06em; }
-  .mech-state { font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-style: italic; color: var(--secondary-text); opacity: 0.7; line-height: 1.7; max-width: 600px; }
+  .mech-slider-labels { display: flex; justify-content: space-between; margin-top: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--secondary-text); letter-spacing: 0.06em; }
+  .mech-state { font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-style: italic; color: var(--primary-text); opacity: 0.8; line-height: 1.7; max-width: 600px; }
 
   .mech-ratio { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 64px; }
   .mech-panel { padding: 28px; border: 1px solid rgba(90,86,114,0.15); background: rgba(14,18,32,0.5); }
   .mech-panel-title { font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 500; color: var(--primary-text); margin-bottom: 4px; }
-  .mech-panel-sub { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--dim-text); letter-spacing: 0.06em; margin-bottom: 20px; }
+  .mech-panel-sub { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--secondary-text); letter-spacing: 0.06em; margin-bottom: 20px; }
   .mech-bars { display: flex; flex-direction: column; gap: 10px; }
   .mech-bar-row { display: flex; align-items: center; gap: 12px; }
-  .mech-bar-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--dim-text); min-width: 140px; text-align: right; flex-shrink: 0; letter-spacing: 0.02em; }
-  .mech-bar-track { flex: 1; height: 8px; background: rgba(90,86,114,0.1); border-radius: 1px; overflow: hidden; }
+  .mech-bar-label { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--secondary-text); min-width: 140px; text-align: right; flex-shrink: 0; letter-spacing: 0.02em; }
+  .mech-bar-track { flex: 1; height: 10px; background: rgba(90,86,114,0.15); border-radius: 1px; overflow: hidden; }
   .mech-bar-fill { height: 100%; border-radius: 1px; transition: width 0.5s ease; }
-  .mech-bar-fill.one { background: var(--coral); opacity: 0.8; }
-  .mech-bar-fill.seven { background: var(--turquoise); opacity: 0.8; }
+  .mech-bar-fill.one { background: var(--coral); opacity: 0.9; }
+  .mech-bar-fill.seven { background: var(--turquoise); opacity: 0.9; }
 
   .mech-panel-seven { position: relative; overflow: hidden; }
   .mech-pulse { position: absolute; top: 50%; left: 50%; width: 0; height: 0; border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; background: var(--turquoise); display: none; animation: mech-pulse-ring 2s ease-out infinite; }
   @keyframes mech-pulse-ring { 0% { width: 0; height: 0; opacity: 0.25; } 100% { width: 200px; height: 200px; opacity: 0; } }
 
   .mech-lang { margin-bottom: 64px; }
-  .mech-lang-title { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim-text); margin-bottom: 32px; }
+  .mech-lang-title { font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--secondary-text); margin-bottom: 32px; }
   .mech-lang-stage { border-left: 2px solid transparent; padding: 16px 24px; margin-bottom: 24px; transition: opacity 0.5s ease, border-color 0.5s ease; opacity: 0.15; }
   .mech-lang-stage.active { opacity: 1; border-left-color: var(--coral); }
   .mech-lang-quote { font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-style: italic; color: var(--primary-text); line-height: 1.75; margin-bottom: 8px; }
-  .mech-lang-annotation { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--dim-text); letter-spacing: 0.04em; }
+  .mech-lang-annotation { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--secondary-text); letter-spacing: 0.04em; }
 
   .mech-transfer-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
   .mech-transfer-col { border-top: 2px solid rgba(90,86,114,0.15); padding-top: 16px; }
-  .mech-transfer-domain { font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
-  .mech-transfer-col p { font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 300; color: var(--secondary-text); line-height: 1.7; }
+  .mech-transfer-domain { font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+  .mech-transfer-col p { font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 300; color: var(--primary-text); opacity: 0.8; line-height: 1.75; }
 
   /* ========== SVGs ========== */
   .svg-container { width: 100%; margin: 48px 0; display: flex; justify-content: center; }
@@ -376,7 +382,16 @@
     .transfer-content { padding: 0 0 16px; border-left: 2px solid rgba(88,252,200,0.15); padding-left: 20px; }
     .reveal { transform: none !important; }
   }
-  .page-subtitle { font-family: "Cinzel", serif; font-size: 15px; letter-spacing: 0.08em; text-transform: none; font-weight: 400; color: var(--dim-text); margin-top: 16px; margin-bottom: 0; }
+  .page-subtitle {
+    font-family: "Cinzel", serif;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: none;
+    font-weight: 500;
+    color: var(--dim-text);
+    margin-top: 16px;
+    margin-bottom: 0;
+}
 </style>
 </head>
 <body>
@@ -417,13 +432,15 @@
   <div style="position: relative; z-index: 3;">
     <div class="entry-tag reveal">BASEWAVES</div>
     <h1 class="entry-title reveal reveal-delay-1">Portal</h1>
-    <p class="page-subtitle reveal reveal-delay-1">Personal strength training in Austin, TX &mdash; working with stress, weight, and what the body already knows</p>
+    <p class="page-subtitle reveal reveal-delay-1">Personal strength training in Austin, TX — <br>
+    where load reveals what programs miss.</p>
     <div class="entry-prose reveal reveal-delay-2">
-      <p>The bar is on your back. Not metaphorically.</p>
-      <p>Weight pressing into the trapezius fibers, loading the thoracic spine, compressing the whole column toward ground.</p>
+      <p>&nbsp;</p>
+      <p>The load is on. Not metaphorically.</p>
+<p>Tension pressing through your grip, into your shoulders, down the spine — your whole system organizing against something that won't yield.</p>
       <p>Something in you wants to think. To manage. To calculate exit strategies.</p>
-      <p>But the bar doesn't negotiate.</p>
-      <p>Under sufficient load, your mind's micro-manager goes quiet. What remains isn't performance — <em>it's signal.</em></p>
+      <p>But load doesn't negotiate.</p>
+      <p>Under sufficient resistance, your mind's micro-manager goes quiet. What remains isn't performance &mdash; <em>it's signal.</em></p>
     </div>
     <div class="scroll-hint reveal reveal-delay-3">Enter</div>
   </div>
@@ -665,7 +682,7 @@
 
       <div class="transfer-card reveal">
         <div class="transfer-sidebar">
-          <div class="t-duration">4 months</div>
+          <div class="t-duration">6 months</div>
           <div class="t-freq">1&times;/week</div>
           <div class="t-stage co-researcher">Co-Researcher</div>
         </div>
@@ -684,7 +701,7 @@
 
       <div class="transfer-card reveal">
         <div class="transfer-sidebar">
-          <div class="t-duration">6 months</div>
+          <div class="t-duration">8 months</div>
           <div class="t-freq">2&times;/week</div>
           <div class="t-stage musician">Musician</div>
         </div>
@@ -692,7 +709,7 @@
         <div class="transfer-content">
           <div class="transfer-entry">Post-PT. Zero testosterone. Lifelong back pain. 15-year pattern of quitting physical programs within 8 weeks.</div>
           <div class="transfer-breakthrough">Stopped mid-set &mdash; no instruction. The signal told her to, and for the first time, she heard it. &ldquo;Not a single muscle burned. I stopped because of <em>overall pressure.</em>&rdquo; Six years of conventional training taught her to wait for the burn. The burn was noise. When the actual signal came through &mdash; the whole system speaking rather than a single muscle shouting &mdash; she recognized it immediately. Deadlift progression 12kg&rarr;20kg with zero hormonal support.</div>
-          <p style="font-size: 13px; line-height: 1.75; color: var(--secondary-text); margin: 12px 0;">In three months she tripled her unilateral squat load &mdash; at zero testosterone. Not through muscle hypertrophy. Through neural efficiency: the nervous system learning to recruit motor units in coordinated patterns rather than fragmented ones. The strength was always available. The signal was blocked.</p>
+          <p style="font-size: 13px; line-height: 1.75; color: var(--secondary-text); margin: 12px 0;">In three months she tripled her split squat load — at zero testosterone. Not through muscle hypertrophy. Through neural efficiency: the nervous system learning to recruit motor units in coordinated patterns rather than fragmented ones. The strength was always available. The signal was blocked.</p>
           <div class="transfer-evidence">The capacity was always there &mdash; the signal was blocked</div>
           <div class="transfer-contrib">
             <span class="label">Research contributions</span>
@@ -849,19 +866,19 @@
     </p>
 
     <div class="reveal" style="display: flex; gap: 48px; margin-bottom: 48px; flex-wrap: wrap;">
-      <div style="flex: 1; min-width: 240px; padding: 24px; border-left: 2px solid rgba(90, 86, 114, 0.3);">
-        <p style="font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 14px; color: #5A5672; letter-spacing: 0.08em; margin-bottom: 8px;">GRASPING</p>
-        <p style="font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: 14px; color: #5A5672; line-height: 1.75;">Arriving for transformation language. Outcome promises. A framework to add to your collection. The portal won't open. Not as withholding. As physics.</p>
+      <div style="flex: 1; min-width: 240px; padding: 24px; border-left: 2px solid rgba(90, 86, 114, 0.4);">
+        <p style="font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 15px; color: #7A7594; letter-spacing: 0.08em; margin-bottom: 8px;">GRASPING</p>
+        <p style="font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: 15px; color: #7A7594; line-height: 1.75;">Arriving for transformation language. Outcome promises. A framework to add to your collection. The portal won't open. Not as withholding. As physics.</p>
       </div>
-      <div style="flex: 1; min-width: 240px; padding: 24px; border-left: 2px solid rgba(88, 252, 200, 0.2);">
-        <p style="font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 14px; color: #58FCC8; letter-spacing: 0.08em; margin-bottom: 8px;">EXPLORING</p>
-        <p style="font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: 14px; color: #9994B8; line-height: 1.75;">Arriving curious. Uncertain. Sensing that something in you already knows what you've been overriding. You're already through.</p>
+      <div style="flex: 1; min-width: 240px; padding: 24px; border-left: 2px solid rgba(88, 252, 200, 0.3);">
+        <p style="font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 15px; color: #58FCC8; letter-spacing: 0.08em; margin-bottom: 8px;">EXPLORING</p>
+        <p style="font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: 15px; color: #E8E3FF; line-height: 1.75;">Arriving curious. Uncertain. Sensing that something in you already knows what you've been overriding. You're already through.</p>
       </div>
     </div>
 
     <div class="divider-coral reveal"></div>
 
-    <p class="reveal prose" style="color: #5A5672; font-size: 14px;">
+    <p class="reveal prose" style="color: #9994B8; font-size: 15px;">
       No progress photos. No before/after sequencing. What gets tracked: language evolution. The moment &ldquo;I think I feel my glutes&rdquo; becomes &ldquo;I feel glutes firing.&rdquo; The moment a client stops mid-set without instruction. The moment training becomes energizing rather than depleting. Load progression, recovery patterns, and compensation resolution are documented &mdash; but the leading indicators are always perceptual. Physical adaptation follows signal clarity, not the reverse. These are the markers. They consolidate between sessions or they don&rsquo;t. Consolidation is the diagnostic.
     </p>
   </div>
@@ -881,7 +898,7 @@
     </h2>
 
     <p class="reveal prose" style="color: #9994B8; margin: 0 auto 32px; max-width: 560px;">
-      The nervous system reading yours has 37 years of embodied practice and a neurological history that made internal spatial intelligence a survival necessity &mdash; not an intellectual interest. The methodology didn&rsquo;t come from research. It came from a brain that had to rebuild its own signal architecture after the analytical paths were damaged. That&rsquo;s who&rsquo;s in the room.
+      The nervous system reading yours has 37 years of embodied practice and a neurological history that made internal spatial intelligence a survival necessity — not an intellectual interest. The methodology didn’t come from research. It came from a brain that had to rebuild its own signal architecture after the analytical paths were damaged. That’s who’s in the room with you.
     </p>
 
     <p class="reveal prose" style="color: #9994B8; margin: 0 auto 48px; max-width: 560px;">

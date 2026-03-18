@@ -482,7 +482,7 @@
       cursor: pointer;
     }
 
-    /* ---- METABOLISM territory (coral) ---- */
+    /* ---- METABOLISM territory (turquoise) ---- */
     .territory-metabolism .contour-outer {
       transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
@@ -525,7 +525,7 @@
     }
     .territory-metabolism:hover .pulse-ring {
       opacity: 1;
-      animation: ms-pulse-coral 2s ease-out infinite;
+      animation: ms-pulse-amber 2s ease-out infinite;
     }
 
     /* ---- MOVEMENT territory (turquoise) ---- */
@@ -571,7 +571,7 @@
     }
     .territory-movement:hover .pulse-ring {
       opacity: 1;
-      animation: ms-pulse-turq 2s ease-out infinite;
+      animation: ms-pulse-amber 2s ease-out infinite;
     }
 
     /* ---- MATRIX territory (turquoise, dimmer) ---- */
@@ -617,7 +617,7 @@
     }
     .territory-matrix:hover .pulse-ring {
       opacity: 1;
-      animation: ms-pulse-turq-dim 2s ease-out infinite;
+      animation: ms-pulse-amber 2s ease-out infinite;
     }
 
     /* Connection paths illuminate on hover */
@@ -657,17 +657,9 @@
     }
 
     /* Pulse animations */
-    @keyframes ms-pulse-coral {
+    @keyframes ms-pulse-amber {
       0% { r: 8; opacity: 0.4; }
-      100% { r: 40; opacity: 0; }
-    }
-    @keyframes ms-pulse-turq {
-      0% { r: 8; opacity: 0.35; }
-      100% { r: 45; opacity: 0; }
-    }
-    @keyframes ms-pulse-turq-dim {
-      0% { r: 8; opacity: 0.3; }
-      100% { r: 38; opacity: 0; }
+      100% { r: 42; opacity: 0; }
     }
 
     /* Three Ms tagline below visual */
@@ -754,100 +746,35 @@
     }
 
     /* ═══════════════════════════════════════════
-       FOOTER (split two-column)
+       FOOTER
        ═══════════════════════════════════════════ */
-    .site-footer {
+    .zone-inner { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+    .zone-footer {
       position: relative;
       z-index: 1;
-      padding: 80px 40px 48px;
+      padding: 60px 0 80px;
       background: var(--deep-blue);
+      border-top: 1px solid rgba(88,252,200,0.08);
     }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      max-width: 900px;
-      margin: 0 auto;
-      align-items: start;
-    }
-
-    .footer-left { text-align: left; }
+    .footer-territory { display: flex; justify-content: space-between; align-items: start; }
+    .footer-left { max-width: 400px; }
+    .footer-statement { font-family: 'Cinzel', serif; font-size: 15px; color: var(--primary-text); letter-spacing: 0.04em; line-height: 1.5; margin-bottom: 8px; }
+    .footer-sub { font-size: 12px; color: var(--dim-text); line-height: 1.6; }
     .footer-right { text-align: right; }
-
-    .footer-logo {
-      height: 46px;
-      opacity: 0.5;
-      margin-bottom: 24px;
-      display: block;
-    }
-
-    .footer-nav {
-      display: flex;
-      justify-content: flex-end;
-      gap: 32px;
-      margin-bottom: 24px;
-    }
-
-    .footer-nav a {
-      font-family: 'Space Mono', monospace;
-      font-size: 12px;
-      letter-spacing: 0.1em;
-      color: var(--secondary-text);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .footer-nav a:hover { color: var(--primary-text); }
-
     .footer-cta {
-      display: inline-block;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 13px;
-      letter-spacing: 0.08em;
-      color: var(--coral);
-      border: 1px solid var(--coral);
-      padding: 12px 24px;
-      text-decoration: none;
-      margin-bottom: 24px;
-      transition: background 0.3s ease, color 0.3s ease;
+      display: inline-block; font-family: 'Space Mono', monospace; font-size: 11px;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--coral);
+      text-decoration: none; padding: 12px 28px; border: 1px solid rgba(255,165,101,0.3);
+      transition: all 0.3s ease; margin-bottom: 16px;
     }
-
-    .footer-cta:hover {
-      background: var(--coral);
-      color: var(--deep-blue);
-    }
-
-    .footer-contact {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 12px;
-      letter-spacing: 0.05em;
-      color: var(--dim-text);
-      line-height: 2;
-    }
-
-    .footer-contact a {
-      color: var(--dim-text);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .footer-contact a:hover { color: var(--secondary-text); }
-
-    .footer-tagline {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 14px;
-      letter-spacing: 0.05em;
-      color: var(--dim-text);
-      margin-bottom: 16px;
-    }
-
-    .footer-copyright {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 12px;
-      letter-spacing: 0.05em;
-      color: var(--dim-text);
-    }
+    .footer-cta:hover { border-color: var(--coral); background: rgba(255,165,101,0.05); }
+    .footer-contact { font-size: 11px; color: var(--dim-text); line-height: 1.8; }
+    .footer-contact a { color: var(--turquoise); text-decoration: none; border-bottom: 1px solid rgba(88,252,200,0.15); }
+    .footer-contact a:hover { border-color: var(--turquoise); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; }
+    .footer-logo { width: 36px; height: 24px; opacity: 0.25; }
+    .footer-logo path { fill: var(--primary-text); }
+    .footer-tm { font-size: 10px; color: rgba(90,86,114,0.4); letter-spacing: 0.06em; }
 
     /* ═══════════════════════════════════════════
        SCROLL REVEAL + STAGGER
@@ -920,37 +847,9 @@
         align-items: center;
       }
 
-      .site-footer {
-        padding: 48px 24px;
-      }
-
-      .footer-grid {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-
-      .footer-left { text-align: center; }
-      .footer-right { text-align: center; }
-
-      .footer-logo {
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .footer-nav {
-        justify-content: center;
-        flex-direction: column;
-        gap: 16px;
-      }
-
-      .footer-cta {
-        display: block;
-        text-align: center;
-      }
-
-      .footer-tagline {
-        font-size: 13px;
-      }
+      .footer-territory { flex-direction: column; gap: 40px; }
+      .footer-right { text-align: left; }
+      .footer-bottom { flex-direction: column; gap: 12px; align-items: flex-start; }
 
       .reveal {
         transform: none !important;
@@ -1090,21 +989,21 @@
               </radialGradient>
             </defs>
 
-            <!-- METABOLISM territory (coral — top left) -->
+            <!-- METABOLISM territory (turquoise — top left) -->
             <g class="territory-metabolism">
-              <ellipse cx="210" cy="150" rx="130" ry="120" fill="url(#glow-coral-ms)"/>
-              <ellipse class="contour-outer" cx="210" cy="150" rx="130" ry="120" fill="none" stroke="#FFA565" stroke-width="0.6" stroke-opacity="0.18"/>
-              <ellipse class="contour-mid" cx="210" cy="150" rx="100" ry="90" fill="none" stroke="#FFA565" stroke-width="0.4" stroke-opacity="0.1"/>
-              <ellipse class="contour-inner" cx="210" cy="150" rx="65" ry="55" fill="none" stroke="#FFA565" stroke-width="0.3" stroke-opacity="0.06"/>
+              <ellipse cx="210" cy="150" rx="130" ry="120" fill="url(#glow-turq-ms)"/>
+              <ellipse class="contour-outer" cx="210" cy="150" rx="130" ry="120" fill="none" stroke="#58FCC8" stroke-width="0.6" stroke-opacity="0.18"/>
+              <ellipse class="contour-mid" cx="210" cy="150" rx="100" ry="90" fill="none" stroke="#58FCC8" stroke-width="0.4" stroke-opacity="0.1"/>
+              <ellipse class="contour-inner" cx="210" cy="150" rx="65" ry="55" fill="none" stroke="#58FCC8" stroke-width="0.3" stroke-opacity="0.06"/>
 
               <circle class="pulse-ring" cx="210" cy="150" fill="none" stroke="#FFA565" stroke-width="0.8"/>
-              <circle class="core-node" cx="210" cy="150" r="4" fill="#FFA565" fill-opacity="0.55"/>
+              <circle class="core-node" cx="210" cy="150" r="4" fill="#58FCC8" fill-opacity="0.55"/>
 
-              <text x="210" y="128" fill="#FFA565" opacity="0.65" font-size="24" text-anchor="middle" font-family="Cinzel, serif" letter-spacing="0.08em">METABOLISM</text>
+              <text x="210" y="128" fill="#58FCC8" opacity="0.65" font-size="24" text-anchor="middle" font-family="Cinzel, serif" letter-spacing="0.08em">METABOLISM</text>
               <text x="210" y="170" fill="#5A5672" font-size="14" text-anchor="middle" letter-spacing="0.08em">THE FUEL</text>
 
-              <text class="territory-desc" x="210" y="206" fill="#FFA565" font-size="12" text-anchor="middle" letter-spacing="0.04em" opacity="0.5">What powers the signal.</text>
-              <text class="territory-desc" x="210" y="226" fill="#FFA565" font-size="12" text-anchor="middle" letter-spacing="0.04em" opacity="0.4">capacity &middot; depletion &middot; readiness</text>
+              <text class="territory-desc" x="210" y="206" fill="#58FCC8" font-size="12" text-anchor="middle" letter-spacing="0.04em" opacity="0.5">What powers the signal.</text>
+              <text class="territory-desc" x="210" y="226" fill="#58FCC8" font-size="12" text-anchor="middle" letter-spacing="0.04em" opacity="0.4">capacity &middot; depletion &middot; readiness</text>
 
               <ellipse class="ms-hit" cx="210" cy="150" rx="130" ry="120"/>
             </g>
@@ -1116,7 +1015,7 @@
               <ellipse class="contour-mid" cx="590" cy="150" rx="108" ry="95" fill="none" stroke="#58FCC8" stroke-width="0.4" stroke-opacity="0.1"/>
               <ellipse class="contour-inner" cx="590" cy="150" rx="72" ry="60" fill="none" stroke="#58FCC8" stroke-width="0.3" stroke-opacity="0.06"/>
 
-              <circle class="pulse-ring" cx="590" cy="150" fill="none" stroke="#58FCC8" stroke-width="0.8"/>
+              <circle class="pulse-ring" cx="590" cy="150" fill="none" stroke="#FFA565" stroke-width="0.8"/>
               <circle class="core-node" cx="590" cy="150" r="4.5" fill="#58FCC8" fill-opacity="0.55"/>
 
               <text x="590" y="128" fill="#58FCC8" opacity="0.65" font-size="24" text-anchor="middle" font-family="Cinzel, serif" letter-spacing="0.08em">MOVEMENT</text>
@@ -1135,7 +1034,7 @@
               <ellipse class="contour-mid" cx="400" cy="340" rx="100" ry="90" fill="none" stroke="#58FCC8" stroke-width="0.4" stroke-opacity="0.08"/>
               <ellipse class="contour-inner" cx="400" cy="340" rx="65" ry="55" fill="none" stroke="#58FCC8" stroke-width="0.3" stroke-opacity="0.05"/>
 
-              <circle class="pulse-ring" cx="400" cy="340" fill="none" stroke="#58FCC8" stroke-width="0.8"/>
+              <circle class="pulse-ring" cx="400" cy="340" fill="none" stroke="#FFA565" stroke-width="0.8"/>
               <circle class="core-node" cx="400" cy="340" r="4" fill="#58FCC8" fill-opacity="0.45"/>
 
               <text x="400" y="318" fill="#58FCC8" opacity="0.55" font-size="24" text-anchor="middle" font-family="Cinzel, serif" letter-spacing="0.08em">MATRIX</text>
@@ -1214,30 +1113,36 @@ How you channel stress is the problem. Not the program. Not the load. Not the ex
   <div class="zone-divider"></div>
 
   <!-- ═══════════════════════════════════════════
-       FOOTER (split two-column)
+       FOOTER
        ═══════════════════════════════════════════ -->
-  <footer class="site-footer">
-    <div class="footer-grid">
-      <div class="footer-left">
-        <img src="assets/Basewaves_logo.svg" alt="BASEWAVES" class="footer-logo">
-        <p class="footer-tagline">You cannot think your way out of a sensing problem.</p>
-        <p class="footer-copyright">&copy; 2026 BASEWAVES</p>
+  <section class="zone zone-footer">
+    <div class="zone-inner">
+      <div class="footer-territory">
+
+        <div class="footer-left reveal">
+          <div class="footer-statement">Signal over noise. Curiosity over volume.</div>
+          <div class="footer-sub">BASEWAVES identifies the person who already knows something was lost.</div>
+        </div>
+
+        <div class="footer-right reveal reveal-delay-1">
+          <a href="mailto:greg@basewaves.com?subject=State%20Assessment" class="footer-cta">Schedule a State Assessment</a>
+          <div class="footer-contact">
+            <a href="mailto:greg@basewaves.com">greg@basewaves.com</a><br>
+            512.585.3400
+          </div>
+        </div>
+
       </div>
-      <div class="footer-right">
-        <nav class="footer-nav">
-          <a href="/">HOME</a>
-          <a href="/origin/">ORIGIN</a>
-          <a href="/portal/">PORTAL</a>
-          <a href="/signals/">SIGNALS</a>
-        </nav>
-        <a href="/portal/#assessment" class="footer-cta">Schedule a State Assessment</a>
-        <p class="footer-contact">
-          <a href="mailto:info@basewaves.co">info@basewaves.co</a><br>
-          <a href="tel:+15125853400">512.585.3400</a>
-        </p>
+
+      <div class="footer-bottom reveal reveal-delay-2">
+        <svg class="footer-logo" viewBox="0 0 337.62 220.73" preserveAspectRatio="xMidYMid meet">
+          <path d="M188.26,87.4c-8.54-2.09-18.2-6.13-18.04-13.69.16-9.34,4.67-13.54,7.41-15.31,9.83-4.35,16.76-14.18,16.76-25.45,0-15.15-12.25-27.39-27.39-27.39s-27.39,12.25-27.39,27.39c0,11.43,7.09,21.42,17.08,25.45,2.9,1.77,7.08,6.13,7.08,15.31,0,7.57-8.7,11.6-16.59,13.69-15.95,1.77-26.9,5.64-26.9,10.15,0,6.28,21.27,11.27,47.53,11.27s47.53-5,47.53-11.27c0-4.51-11.12-8.39-27.06-10.15h-.02ZM160.06,17.65c-3.87,1.6-6.92,4.67-8.54,8.54-.48,1.28-1.93,1.93-3.06,1.28-1.28-.31-1.93-1.77-1.44-3.06,1.93-5.17,6.13-9.18,11.11-11.28,1.29-.47,2.57.16,3.22,1.29.48,1.28-.16,2.57-1.29,3.22h0ZM92.72,96.27c0,9.99,34,18.04,75.89,18.04s75.89-8.05,75.89-18.04-30.61-17.24-69.6-18.04c-.48-.65-.65-1.13-.97-1.78,53.66.65,96.18,11.28,96.18,24.17s-45.43,24.17-101.5,24.17-101.5-10.8-101.5-24.17,40.92-23.04,93.12-24.01c-.16.65-.48,1.13-.81,1.78-37.54.97-66.7,8.7-66.7,17.88ZM329.72,104.65c0-20.63-69.45-37.38-156.12-37.86-.16.65-.16,1.29-.16,1.93,69.76.48,125.67,14.03,125.67,30.62s-57.99,30.78-129.7,30.78-129.7-13.7-129.7-30.62,53.49-29.65,120.99-30.62c0-.64-.16-1.28-.16-2.09-84.4,1.13-151.43,17.72-151.43,37.86s68.16,37.06,153.54,37.86c.81,1.29,1.13,2.9,1.13,4.51,0,9.18-4.19,13.37-7.08,15.31-9.99,4.03-17.08,13.86-17.08,25.45,0,15.15,12.25,27.39,27.39,27.39s27.39-12.25,27.39-27.39c0-11.27-6.93-21.11-16.76-25.3-2.73-1.77-7.25-5.96-7.41-15.3,0-1.78.48-3.22,1.28-4.68,87.65-.32,158.22-17.07,158.22-37.86h0ZM161.35,205.02c-.48,1.29-1.93,1.77-3.22,1.29-5.16-2.1-9.18-6.13-11.11-11.28-.48-1.28.16-2.57,1.28-3.06,1.29-.47,2.58.16,3.06,1.29,1.45,3.87,4.68,7.09,8.54,8.54,1.45.65,1.94,2.09,1.45,3.22h0Z"/>
+        </svg>
+        <div class="footer-tm">&copy; BASEWAVES &middot; Spatial Strength Training&trade; &middot; Austin, TX</div>
       </div>
+
     </div>
-  </footer>
+  </section>
 
   <!-- ═══════════════════════════════════════════
        SCROLL CONTROLLER (vanilla)
