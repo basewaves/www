@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Biorhythmic Case | BASEWAVES Signals</title>
+<meta name="description" content="Your body adapted to survive your program. That's the problem. An essay on the intelligence that conventional training overrides.">
+<meta property="og:title" content="The Biorhythmic Case | BASEWAVES Signals">
+<meta property="og:description" content="Your body adapted to survive your program. That's the problem. An essay on the intelligence that conventional training overrides.">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Serif:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root { --base-blue: #0E1220; --deep-blue: #080B14; --lighter-blue: #141B2E; --primary-text: #E8E3FF; --secondary-text: #9994B8; --dim-text: #5A5672; --turquoise: #58FCC8; --coral: #FFA565; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--deep-blue); color: var(--primary-text); font-family: 'IBM Plex Mono', monospace; font-size: 14px; line-height: 1.7; letter-spacing: 0.03em; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+  .starfield { position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 0; background: radial-gradient(1px 1px at 10% 15%, rgba(232,227,255,0.4), transparent), radial-gradient(1px 1px at 25% 35%, rgba(232,227,255,0.25), transparent), radial-gradient(1.5px 1.5px at 40% 8%, rgba(232,227,255,0.35), transparent), radial-gradient(1px 1px at 55% 42%, rgba(232,227,255,0.2), transparent), radial-gradient(1px 1px at 70% 22%, rgba(88,252,200,0.12), transparent), radial-gradient(1.5px 1.5px at 85% 55%, rgba(232,227,255,0.3), transparent), radial-gradient(1px 1px at 15% 65%, rgba(232,227,255,0.2), transparent), radial-gradient(1px 1px at 35% 78%, rgba(232,227,255,0.35), transparent), radial-gradient(1.5px 1.5px at 60% 72%, rgba(232,227,255,0.25), transparent), radial-gradient(1px 1px at 80% 85%, rgba(232,227,255,0.3), transparent), radial-gradient(1px 1px at 92% 12%, rgba(232,227,255,0.2), transparent), radial-gradient(1px 1px at 48% 92%, rgba(88,252,200,0.1), transparent), radial-gradient(1px 1px at 5% 48%, rgba(232,227,255,0.3), transparent), radial-gradient(1.5px 1.5px at 72% 38%, rgba(232,227,255,0.2), transparent); animation: starfield-breathe 12s ease-in-out infinite; }
+  @keyframes starfield-breathe { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+  .zone { position: relative; z-index: 1; }
+  .zone-inner { max-width: 720px; margin: 0 auto; padding: 0 48px; }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.12s; } .reveal-delay-2 { transition-delay: 0.24s; }
+
+  /* Nav */
+  .site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; transition: background 0.4s ease, backdrop-filter 0.4s ease; }
+  .site-nav.scrolled { background: rgba(14, 18, 32, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+  .logo-container { display: block; opacity: 0.7; transition: opacity 0.3s ease, filter 0.3s ease; }
+  .logo-container:hover { opacity: 1; filter: drop-shadow(0 0 12px var(--turquoise)) drop-shadow(0 0 24px rgba(88, 252, 200, 0.4)); }
+  .nav-logo { height: 41px; width: auto; }
+  .nav-link { font-family: 'Space Mono', monospace; font-size: 15px; color: var(--secondary-text); text-decoration: none; letter-spacing: 0.05em; transition: color 0.3s ease; }
+  .nav-link:hover { color: var(--turquoise); } .nav-link.active { color: var(--primary-text); }
+  .nav-separator { color: var(--dim-text); margin: 0 12px; } .nav-desktop { display: flex; align-items: center; }
+  .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 28px; height: 28px; cursor: pointer; z-index: 60; background: none; border: none; padding: 0; }
+  .hamburger span { display: block; width: 100%; height: 2px; background-color: var(--primary-text); transition: transform 0.3s ease, opacity 0.3s ease; }
+  .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .nav-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(14, 18, 32, 0.92); z-index: 55; flex-direction: column; justify-content: center; align-items: center; gap: 40px; opacity: 0; transition: opacity 0.3s ease; }
+  .nav-overlay.open { display: flex; opacity: 1; }
+  .nav-overlay a { font-family: 'Space Mono', monospace; font-size: 18px; letter-spacing: 0.15em; color: var(--secondary-text); text-decoration: none; transition: color 0.3s ease; }
+  .nav-overlay a:hover { color: var(--turquoise); } .nav-overlay a.active { color: var(--primary-text); }
+  @media (max-width: 1023px) { .nav-logo { height: 32px; } .hamburger { display: flex; } .nav-desktop { display: none; } }
+  @media (min-width: 1024px) { .nav-overlay { display: none !important; } }
+
+  /* Essay header */
+  .essay-header { padding: 160px 0 60px; text-align: center; }
+  .essay-label { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--secondary-text); margin-bottom: 24px; }
+  .essay-label a { color: var(--secondary-text); text-decoration: none; transition: color 0.3s ease; }
+  .essay-label a:hover { color: var(--turquoise); }
+  .essay-title { font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(28px, 4vw, 44px); letter-spacing: 0.06em; color: var(--primary-text); margin-bottom: 16px; line-height: 1.3; }
+  .essay-provocation { font-family: 'IBM Plex Serif', serif; font-size: 17px; font-style: italic; color: var(--secondary-text); margin-bottom: 16px; }
+  .essay-meta { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--dim-text); letter-spacing: 0.08em; }
+
+  /* Zone divider */
+  .zone-divider { height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(88,252,200,0.15) 20%, rgba(88,252,200,0.25) 50%, rgba(88,252,200,0.15) 80%, transparent 100%); position: relative; z-index: 1; }
+
+  /* Essay body */
+  .essay-body { padding: 60px 0 80px; }
+  .essay-body p { font-family: 'IBM Plex Serif', serif; font-size: 16px; line-height: 1.85; color: var(--secondary-text); margin-bottom: 28px; letter-spacing: 0.01em; }
+  .essay-body p em { color: var(--primary-text); font-style: normal; }
+  .essay-body p strong { color: var(--primary-text); font-weight: 500; }
+  .essay-body .section-break { height: 48px; display: flex; align-items: center; justify-content: center; margin: 12px 0; }
+  .essay-body .section-break::before { content: ''; width: 40px; height: 1px; background: linear-gradient(90deg, transparent, rgba(88,252,200,0.25), transparent); }
+  .essay-body .signal-line { font-family: 'IBM Plex Serif', serif; font-size: 17px; line-height: 1.85; color: var(--primary-text); margin-bottom: 28px; }
+  .essay-body .turquoise-line { font-family: 'IBM Plex Serif', serif; font-size: 17px; line-height: 1.85; color: var(--turquoise); margin-bottom: 28px; }
+
+  /* Sources */
+  .sources { margin-top: 16px; padding-top: 24px; border-top: 1px solid rgba(88,252,200,0.08); }
+  .sources-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim-text); margin-bottom: 16px; }
+  .sources p:not(.sources-label) { font-family: 'IBM Plex Serif', serif; font-size: 13px; line-height: 1.7; color: var(--secondary-text); margin-bottom: 8px; }
+
+  /* Essay end navigation */
+  .essay-end { padding: 40px 0 80px; text-align: center; }
+  .essay-back { font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.08em; color: var(--turquoise); text-decoration: none; transition: color 0.3s ease; }
+  .essay-back:hover { color: var(--primary-text); }
+
+  /* Footer */
+  .zone-footer { padding: 60px 0 80px; background: var(--deep-blue); border-top: 1px solid rgba(88,252,200,0.08); }
+  .zone-footer .zone-inner { max-width: 900px; }
+  .footer-territory { display: flex; justify-content: space-between; align-items: start; }
+  .footer-left { max-width: 400px; }
+  .footer-statement { font-family: 'Cinzel', serif; font-size: 15px; color: var(--primary-text); letter-spacing: 0.04em; line-height: 1.5; margin-bottom: 8px; }
+  .footer-sub { font-family: 'IBM Plex Serif', serif; font-size: 13px; color: var(--secondary-text); line-height: 1.6; }
+  .footer-right { text-align: right; }
+  .footer-cta { display: inline-block; font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--coral); text-decoration: none; padding: 12px 28px; border: 1px solid rgba(255,165,101,0.3); transition: all 0.3s ease; margin-bottom: 16px; }
+  .footer-cta:hover { border-color: var(--coral); background: rgba(255,165,101,0.05); }
+  .footer-contact { font-size: 13px; color: var(--secondary-text); line-height: 1.8; }
+  .footer-contact a { color: var(--turquoise); text-decoration: none; border-bottom: 1px solid rgba(88,252,200,0.15); }
+  .footer-contact a:hover { border-color: var(--turquoise); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; }
+  .footer-logo { width: 36px; height: 24px; opacity: 0.25; } .footer-logo path { fill: var(--primary-text); }
+  .footer-tm { font-size: 12px; color: rgba(90,86,114,0.5); letter-spacing: 0.06em; }
+
+  /* Scroll progress */
+  .scroll-counter-wrap { position: fixed; bottom: 24px; right: 24px; z-index: 50; }
+  .scroll-indicator { font-family: 'Space Mono', monospace; font-size: 14px; color: var(--dim-text); letter-spacing: 0.1em; }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .zone-inner { padding: 0 24px; }
+    .essay-header { padding: 120px 0 40px; }
+    .footer-territory { flex-direction: column; gap: 40px; }
+    .footer-right { text-align: left; }
+    .footer-bottom { flex-direction: column; gap: 12px; align-items: flex-start; }
+  }
+
+  .no-js .reveal { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+<nav class="site-nav" id="siteNav"><a href="/" class="logo-container"><img src="../../assets/Basewaves_logo.svg" alt="BASEWAVES" class="nav-logo"></a><div class="nav-desktop"><a href="/" class="nav-link">HOME</a><span class="nav-separator">|</span><a href="/origin/" class="nav-link">ORIGIN</a><span class="nav-separator">|</span><a href="/portal/" class="nav-link">PORTAL</a><span class="nav-separator">|</span><a href="/signals/" class="nav-link active">SIGNALS</a></div><button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button></nav>
+<div class="nav-overlay" id="navOverlay"><a href="/">HOME</a><a href="/origin/">ORIGIN</a><a href="/portal/">PORTAL</a><a href="/signals/" class="active">SIGNALS</a></div>
+<div class="starfield"></div>
+
+<!-- ===================================================================
+     ESSAY HEADER
+     =================================================================== -->
+<section class="zone essay-header">
+  <div class="zone-inner">
+    <div class="essay-label reveal"><a href="/signals/">&larr; Signals</a> &middot; 09</div>
+    <h1 class="essay-title reveal reveal-delay-1">The Biorhythmic Case</h1>
+    <p class="essay-provocation reveal reveal-delay-1">&ldquo;Your body adapted to survive your program. That&rsquo;s the problem.&rdquo;</p>
+    <div class="essay-meta reveal reveal-delay-2">11 min read</div>
+  </div>
+</section>
+<div class="zone-divider"></div>
+
+<!-- ===================================================================
+     ESSAY BODY
+     =================================================================== -->
+<section class="zone essay-body">
+  <div class="zone-inner">
+
+    <p class="reveal">Same weight. Same rack position. Same grip width. Same stance you&rsquo;ve taken a hundred times.</p>
+
+    <p class="reveal">Today it&rsquo;s wrong.</p>
+
+    <p class="reveal">Not heavier &mdash; that you could handle. <em>Wrong.</em> The weight sits in your hands and your body has already computed something your mind hasn&rsquo;t caught up to. The bar path that felt grooved last Thursday now feels unfamiliar. Your brace is there but the pressure behind it is shallow. Your foot pressure has drifted forward without anyone cueing it. Everything that was automatic last session is requiring management today, and the management itself is consuming the bandwidth the movement needs.</p>
+
+    <p class="reveal">You haven&rsquo;t lost fitness. You haven&rsquo;t regressed. Nothing is broken.</p>
+
+    <p class="turquoise-line reveal">Your body is not the same body it was last Thursday. It was never going to be.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">The fitness industry operates on an assumption so embedded it&rsquo;s invisible: that the body executing today&rsquo;s program is the same body that executed last week&rsquo;s. Same person. Same anatomy. Same capacity. Therefore same stimulus should produce same response, and progressive overload means adding load on a stable platform.</p>
+
+    <p class="reveal">The platform is not stable. It was never stable. Your body is a confluence of rhythms, and those rhythms shift hour to hour, day to day, week to week. The same weight at Monday 6 a.m. after eight hours of sleep is a fundamentally different biological event than the same weight at Wednesday 6 p.m. after two nights of five-hour sleep. Not approximately different. <em>Fundamentally.</em> The hormonal cascade is different. The neural readiness is different. The inflammatory load is different. The threat computation is different.</p>
+
+    <p class="signal-line reveal">You are not progressing a machine. You are communicating with a rhythm.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">The rhythms are not metaphor. They are documented physiology.</p>
+
+    <p class="reveal">You already know this. Monday morning, the weight that moved clean on Friday now requires conscious management of every position. That&rsquo;s not regression. That&rsquo;s a three-to-eight percent circadian variation in maximal strength &mdash; peaking when your core temperature peaks in late afternoon, dropping when the nervous system is still transitioning from recovery to readiness. The same motor units fire differently at 6 a.m. than at 4 p.m. Your body knew this before the research confirmed it. You felt it every time a morning session required effort that an afternoon session didn&rsquo;t.</p>
+
+    <p class="reveal">You know this one too. The session after a bad night&rsquo;s sleep where the movement felt foggy &mdash; not just tired but <em>unsharp.</em> As if the body had lost a step of coordination it usually runs without asking. It had. Growth hormone pulses during deep sleep. Motor learning consolidates during REM. Strength and skill acquisition correlate not with how long you slept but with whether your body completed its full repair and consolidation sequence. Disrupt that architecture and the cellular machinery that converts training stimulus into adaptation is literally running at reduced capacity. You didn&rsquo;t just feel foggy. You were foggy &mdash; at the level of tissue repair.</p>
+
+    <p class="reveal">And the weeks when everything is harder for no reason you can name. The weight is manageable. The sleep was adequate. But your body is carrying something &mdash; accumulated stress that the nervous system tracks even when the mind doesn&rsquo;t. Cortisol follows its own circadian arc, but chronic stress flattens that curve, elevating baseline cortisol and blunting the anabolic response that training depends on. Inflammatory markers from sleep debt, poor nutrition, or psychological pressure affect muscle protein synthesis directly. The body isn&rsquo;t being difficult. It is processing a load the program didn&rsquo;t prescribe &mdash; and adapting to that load instead of yours.</p>
+
+    <p class="turquoise-line reveal">These rhythms don&rsquo;t pause for your program. They are the program. The body is always adapting. The question is: adapting to what?</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">I watched this happen with a client. High-stress professional. Analytical mind. Committed to the process. During an intensity phase, his weight climbed nine pounds over four weeks. Not muscle. The body was holding.</p>
+
+    <p class="reveal">Traditional diagnosis: caloric surplus. Eat less. Train harder. Create a bigger deficit.</p>
+
+    <p class="reveal">But I was reading two channels &mdash; what he said and how he moved. His language had flattened. Sessions that used to produce specific observations (&ldquo;my left side felt stable today,&rdquo; &ldquo;I sourced from the ground on that last set&rdquo;) were producing global reports (&ldquo;everything&rsquo;s heavy,&rdquo; &ldquo;something&rsquo;s off&rdquo;). His movement had gone mechanical &mdash; executing the reps but without the micro-adjustments, the self-corrections, the textured quality that signals the nervous system is actually engaged. The somatic channel was saying what the verbal channel confirmed: this body was defending, not adapting.</p>
+
+    <p class="reveal">His tissue could handle the load. His nervous system couldn&rsquo;t. Life stress was high. Sleep was disrupted. And I had layered training intensity on top of an already-saturated system. The body computed correctly: more demand on top of existing threat. Crisis mode. Conserve resources. Hold weight as metabolic armor against a perceived emergency that had nothing to do with the session and everything to do with the accumulated load his nervous system was already carrying.</p>
+
+    <p class="signal-line reveal">The body didn&rsquo;t fail the program. The body adapted to survive the program. That adaptation &mdash; protective, intelligent, exactly what a threat-detection system is designed to do &mdash; was the opposite of what the program intended.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">The intervention was not harder. It was quieter.</p>
+
+    <p class="reveal">I didn&rsquo;t reduce the load on his tissues &mdash; they were ready. I reduced the load on his nervous system. Lower-complexity movements. Breathwork between sets. Parasympathetic activation prioritized over metabolic demand. The session became a safety signal instead of another threat the body had to survive.</p>
+
+    <p class="reveal">Within six weeks, the weight released. Not through a bigger deficit. Through a different conversation. Sleep improved. Stress ratings dropped. And one day he walked in and said “I feel amazing” — not because the circumstances of his life had changed but because his body had stopped computing those circumstances as crisis. The nervous system reclassified the environment from threat to manageable. The weight was no longer needed as armor.</p>
+
+    <p class="turquoise-line reveal">He didn&rsquo;t lose weight by burning more. He lost weight by signaling safety.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">This is the biorhythmic case against fixed programming. Not that programs are wrong. That programs are deaf.</p>
+
+    <p class="reveal">A program prescribes stimulus without reading state. It delivers the same signal regardless of what the body is reporting about its current capacity to receive it. On a day when your rhythms align &mdash; adequate sleep, manageable stress, estate replenished, parasympathetic access available &mdash; the stimulus lands as signal. The competent material that the previous essay described receives a clear question and navigates toward adaptation. Load becomes conversation.</p>
+
+    <p class="reveal">On a day when your rhythms conflict &mdash; sleep disrupted, cortisol flattened, inflammatory load elevated, the nervous system already managing more demand than it can absorb &mdash; the same stimulus lands as noise. The body doesn&rsquo;t hear a question. It hears another threat. And it does what competent material always does: it adapts. But it adapts to survive the threat, not to answer the question. The adaptation goes defensive. Protective. In exactly the opposite direction the program intended.</p>
+
+    <p class="signal-line reveal">Same load. Different nervous system. Completely different biological event.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">Progressive overload assumes the platform is constant. Add weight to the bar each week because the body underneath the bar is the same body it was last week, only slightly adapted. But the body is a moving rhythm. It was not the same body last week. It is not the same body across the day. Its circadian state shifted. Its sleep architecture varied. Its cortisol curve responded to stressors that had nothing to do with training. Its inflammatory markers fluctuated with nutrition, hydration, emotional load, and a hundred other variables that the program doesn&rsquo;t account for because the program can&rsquo;t read them.</p>
+
+    <p class="reveal">I can.</p>
+
+    <p class="reveal">Not through devices &mdash; though heart rate variability, sleep metrics, and resting heart rate all provide useful data. I read the body&rsquo;s biorhythmic state through the same two channels this methodology has developed across every essay in this series: what the person says and how the person moves. Language resolution predicts session quality. Global language (&ldquo;I&rsquo;m tired,&rdquo; &ldquo;everything&rsquo;s off&rdquo;) signals a nervous system in defensive mode &mdash; signals undifferentiated, threat computation running high. Specific language (&ldquo;my left hip felt stable today,&rdquo; &ldquo;I sourced from the ground on that last set&rdquo;) signals a nervous system in receptive mode &mdash; signals clear, adaptation available. The movement tells the same story. Mechanical execution without micro-adjustments means the body is running on autopilot, executing from memory rather than sensing in real time. Textured movement &mdash; small corrections, breath married to exertion, the quality this series has called grace &mdash; means the body is actually present. The architecture is online. The question will be heard.</p>
+
+    <p class="turquoise-line reveal">The coach who reads mechanics sees inconsistency. The coach who reads biorhythmic state sees a body telling the truth about its current capacity.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">The same pattern runs through every domain the body manages.</p>
+
+    <p class="reveal">The person who applies the same coping strategy to every stressor regardless of their current state is running a fixed program against shifting rhythms. The executive who works the same twelve-hour days whether they slept eight hours or five is overriding the same biorhythmic signals that the client on the session floor overrides. The parent who gives the same emotional response whether their nervous system is regulated or saturated is delivering fixed stimulus into variable conditions and wondering why the outcome is inconsistent.</p>
+
+    <p class="reveal">I&rsquo;ve watched people develop the ability to read their own biorhythmic state under load and then begin reading it everywhere else. Not because I taught them a transferable technique. Because the body&rsquo;s capacity to assess its own state &mdash; the 7:1 interoceptive architecture that was always there &mdash; was no longer being overridden. Once they stopped forcing fixed programs through variable conditions in the session, they stopped doing it at work. At home. In conversation. The reading became continuous. The adaptation became responsive. Not because they learned something new. Because they stopped ignoring what the body was always reporting.</p>
+
+    <p class="signal-line reveal">The body never stopped broadcasting. The program was just louder than the signal.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">You walked in today and the weight felt wrong. That wrongness is not weakness. It is the most sophisticated assessment system you own &mdash; seven interoceptive sensors for every proprioceptive one &mdash; delivering a report on your current biorhythmic state. Your circadian position. Your sleep debt. Your inflammatory load. Your accumulated stress. Your estate. All of it computed below consciousness and expressed as a felt sense that the weight is <em>off</em> today.</p>
+
+    <p class="reveal">The program says push through. The body says listen.</p>
+
+    <p class="reveal">Everything this series has built &mdash; the pressured dialogue, the space between, the BASE channels, the SPACE dimensions, the 7:1 architecture, the waves, the grace, the competent material &mdash; all of it was preparation for this moment. The moment when the signal and the program disagree, and you have to choose which one to trust.</p>
+
+    <p class="turquoise-line reveal">The body was never inconsistent. It was responding to rhythms the program couldn&rsquo;t hear. When you learn to hear them too, the inconsistency disappears. What remains is a body adapting &mdash; not to survive your program, but to answer your actual question.</p>
+
+    <div class="section-break reveal"></div>
+
+    <div class="sources reveal">
+      <p class="sources-label">Sources</p>
+      <p>Reilly, T., &amp; Waterhouse, J. (2000). Sports performance: Is there evidence that the body clock plays a role? <em>European Journal of Applied Physiology</em>, 83(4&ndash;5), 321&ndash;332.</p>
+      <p>Dattilo, M., et al. (2011). Sleep and muscle recovery: Endocrinological and molecular basis for a new and promising hypothesis. <em>Medical Hypotheses</em>, 77(2), 220&ndash;222.</p>
+      <p>Plews, D. J., et al. (2013). Training adaptation and heart rate variability in elite endurance athletes: Opening the door to effective monitoring. <em>Sports Medicine</em>, 43(9), 773&ndash;781.</p>
+      <p>McEwen, B. S. (1998). Stress, adaptation, and disease: Allostasis and allostatic load. <em>Annals of the New York Academy of Sciences</em>, 840(1), 33&ndash;44.</p>
+      <p>Pedersen, B. K., &amp; Hoffman-Goetz, L. (2000). Exercise and the immune system: Regulation, integration, and adaptation. <em>Physiological Reviews</em>, 80(3), 1055&ndash;1081.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================================================================
+     ESSAY END NAV
+     =================================================================== -->
+<section class="zone essay-end">
+  <div class="zone-inner reveal">
+    <a href="/signals/" class="essay-back">&larr; Back to Signals</a>
+  </div>
+</section>
+
+<!-- ===================================================================
+     FOOTER
+     =================================================================== -->
+<section class="zone zone-footer">
+  <div class="zone-inner">
+    <div class="footer-territory">
+      <div class="footer-left reveal"><div class="footer-statement">You cannot think your way out of a sensing problem.</div><div class="footer-sub">BASEWAVES identifies the person who already knows something was lost.</div></div>
+      <div class="footer-right reveal reveal-delay-1"><a href="mailto:greg@basewaves.com?subject=State%20Transition%20Session" class="footer-cta">Schedule a State Transition Session</a><div class="footer-contact"><a href="mailto:greg@basewaves.com">greg@basewaves.com</a><br>512.585.3400</div></div>
+    </div>
+    <div class="footer-bottom reveal reveal-delay-2">
+      <svg class="footer-logo" viewBox="0 0 337.62 220.73" preserveAspectRatio="xMidYMid meet"><path d="M188.26,87.4c-8.54-2.09-18.2-6.13-18.04-13.69.16-9.34,4.67-13.54,7.41-15.31,9.83-4.35,16.76-14.18,16.76-25.45,0-15.15-12.25-27.39-27.39-27.39s-27.39,12.25-27.39,27.39c0,11.43,7.09,21.42,17.08,25.45,2.9,1.77,7.08,6.13,7.08,15.31,0,7.57-8.7,11.6-16.59,13.69-15.95,1.77-26.9,5.64-26.9,10.15,0,6.28,21.27,11.27,47.53,11.27s47.53-5,47.53-11.27c0-4.51-11.12-8.39-27.06-10.15h-.02ZM160.06,17.65c-3.87,1.6-6.92,4.67-8.54,8.54-.48,1.28-1.93,1.93-3.06,1.28-1.28-.31-1.93-1.77-1.44-3.06,1.93-5.17,6.13-9.18,11.11-11.28,1.29-.47,2.57.16,3.22,1.29.48,1.28-.16,2.57-1.29,3.22h0ZM92.72,96.27c0,9.99,34,18.04,75.89,18.04s75.89-8.05,75.89-18.04-30.61-17.24-69.6-18.04c-.48-.65-.65-1.13-.97-1.78,53.66.65,96.18,11.28,96.18,24.17s-45.43,24.17-101.5,24.17-101.5-10.8-101.5-24.17,40.92-23.04,93.12-24.01c-.16.65-.48,1.13-.81,1.78-37.54.97-66.7,8.7-66.7,17.88ZM329.72,104.65c0-20.63-69.45-37.38-156.12-37.86-.16.65-.16,1.29-.16,1.93,69.76.48,125.67,14.03,125.67,30.62s-57.99,30.78-129.7,30.78-129.7-13.7-129.7-30.62,53.49-29.65,120.99-30.62c0-.64-.16-1.28-.16-2.09-84.4,1.13-151.43,17.72-151.43,37.86s68.16,37.06,153.54,37.86c.81,1.29,1.13,2.9,1.13,4.51,0,9.18-4.19,13.37-7.08,15.31-9.99,4.03-17.08,13.86-17.08,25.45,0,15.15,12.25,27.39,27.39,27.39s27.39-12.25,27.39-27.39c0-11.27-6.93-21.11-16.76-25.3-2.73-1.77-7.25-5.96-7.41-15.3,0-1.78.48-3.22,1.28-4.68,87.65-.32,158.22-17.07,158.22-37.86h0ZM161.35,205.02c-.48,1.29-1.93,1.77-3.22,1.29-5.16-2.1-9.18-6.13-11.11-11.28-.48-1.28.16-2.57,1.28-3.06,1.29-.47,2.58.16,3.06,1.29,1.45,3.87,4.68,7.09,8.54,8.54,1.45.65,1.94,2.09,1.45,3.22h0Z"/></svg>
+      <div class="footer-tm">&copy; BASEWAVES &middot; Spatial Strength Training&trade; &middot; Austin, TX</div>
+    </div>
+  </div>
+</section>
+
+<!-- Scroll Progress Indicator -->
+<div class="scroll-counter-wrap"><span class="scroll-indicator" id="scrollCounter">000</span></div>
+
+<script>
+const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+const nav = document.getElementById('siteNav');
+const counter = document.getElementById('scrollCounter');
+window.addEventListener('scroll', function() { var y = window.scrollY; var max = document.documentElement.scrollHeight - window.innerHeight; counter.textContent = String(max > 0 ? Math.round((y / max) * 100) : 0).padStart(3, '0'); nav.classList.toggle('scrolled', y > 80); });
+const hb = document.getElementById('hamburger'), ov = document.getElementById('navOverlay');
+hb.addEventListener('click', (e) => { e.stopPropagation(); hb.classList.toggle('active'); ov.classList.toggle('open'); document.body.style.overflow = ov.classList.contains('open') ? 'hidden' : ''; });
+ov.addEventListener('click', (e) => { if (e.target === ov || e.target.tagName === 'A') { hb.classList.remove('active'); ov.classList.remove('open'); document.body.style.overflow = ''; } });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && ov.classList.contains('open')) { hb.classList.remove('active'); ov.classList.remove('open'); document.body.style.overflow = ''; } });
+</script>
+</body>
+</html>

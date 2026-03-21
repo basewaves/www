@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finding Your BASE | BASEWAVES Signals</title>
+<meta name="description" content="You've been broadcasting this information your entire life. Nobody taught you to listen. An essay on the four channels your body already runs.">
+<meta property="og:title" content="Finding Your BASE | BASEWAVES Signals">
+<meta property="og:description" content="You've been broadcasting this information your entire life. Nobody taught you to listen. An essay on the four channels your body already runs.">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Serif:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root { --base-blue: #0E1220; --deep-blue: #080B14; --lighter-blue: #141B2E; --primary-text: #E8E3FF; --secondary-text: #9994B8; --dim-text: #5A5672; --turquoise: #58FCC8; --coral: #FFA565; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--deep-blue); color: var(--primary-text); font-family: 'IBM Plex Mono', monospace; font-size: 14px; line-height: 1.7; letter-spacing: 0.03em; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+  .starfield { position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 0; background: radial-gradient(1px 1px at 10% 15%, rgba(232,227,255,0.4), transparent), radial-gradient(1px 1px at 25% 35%, rgba(232,227,255,0.25), transparent), radial-gradient(1.5px 1.5px at 40% 8%, rgba(232,227,255,0.35), transparent), radial-gradient(1px 1px at 55% 42%, rgba(232,227,255,0.2), transparent), radial-gradient(1px 1px at 70% 22%, rgba(88,252,200,0.12), transparent), radial-gradient(1.5px 1.5px at 85% 55%, rgba(232,227,255,0.3), transparent), radial-gradient(1px 1px at 15% 65%, rgba(232,227,255,0.2), transparent), radial-gradient(1px 1px at 35% 78%, rgba(232,227,255,0.35), transparent), radial-gradient(1.5px 1.5px at 60% 72%, rgba(232,227,255,0.25), transparent), radial-gradient(1px 1px at 80% 85%, rgba(232,227,255,0.3), transparent), radial-gradient(1px 1px at 92% 12%, rgba(232,227,255,0.2), transparent), radial-gradient(1px 1px at 48% 92%, rgba(88,252,200,0.1), transparent), radial-gradient(1px 1px at 5% 48%, rgba(232,227,255,0.3), transparent), radial-gradient(1.5px 1.5px at 72% 38%, rgba(232,227,255,0.2), transparent); animation: starfield-breathe 12s ease-in-out infinite; }
+  @keyframes starfield-breathe { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+  .zone { position: relative; z-index: 1; }
+  .zone-inner { max-width: 720px; margin: 0 auto; padding: 0 48px; }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.12s; } .reveal-delay-2 { transition-delay: 0.24s; }
+
+  /* Nav */
+  .site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; transition: background 0.4s ease, backdrop-filter 0.4s ease; }
+  .site-nav.scrolled { background: rgba(14, 18, 32, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+  .logo-container { display: block; opacity: 0.7; transition: opacity 0.3s ease, filter 0.3s ease; }
+  .logo-container:hover { opacity: 1; filter: drop-shadow(0 0 12px var(--turquoise)) drop-shadow(0 0 24px rgba(88, 252, 200, 0.4)); }
+  .nav-logo { height: 41px; width: auto; }
+  .nav-link { font-family: 'Space Mono', monospace; font-size: 15px; color: var(--secondary-text); text-decoration: none; letter-spacing: 0.05em; transition: color 0.3s ease; }
+  .nav-link:hover { color: var(--turquoise); } .nav-link.active { color: var(--primary-text); }
+  .nav-separator { color: var(--dim-text); margin: 0 12px; } .nav-desktop { display: flex; align-items: center; }
+  .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 28px; height: 28px; cursor: pointer; z-index: 60; background: none; border: none; padding: 0; }
+  .hamburger span { display: block; width: 100%; height: 2px; background-color: var(--primary-text); transition: transform 0.3s ease, opacity 0.3s ease; }
+  .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .nav-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(14, 18, 32, 0.92); z-index: 55; flex-direction: column; justify-content: center; align-items: center; gap: 40px; opacity: 0; transition: opacity 0.3s ease; }
+  .nav-overlay.open { display: flex; opacity: 1; }
+  .nav-overlay a { font-family: 'Space Mono', monospace; font-size: 18px; letter-spacing: 0.15em; color: var(--secondary-text); text-decoration: none; transition: color 0.3s ease; }
+  .nav-overlay a:hover { color: var(--turquoise); } .nav-overlay a.active { color: var(--primary-text); }
+  @media (max-width: 1023px) { .nav-logo { height: 32px; } .hamburger { display: flex; } .nav-desktop { display: none; } }
+  @media (min-width: 1024px) { .nav-overlay { display: none !important; } }
+
+  /* Essay header */
+  .essay-header { padding: 160px 0 60px; text-align: center; }
+  .essay-label { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--secondary-text); margin-bottom: 24px; }
+  .essay-label a { color: var(--secondary-text); text-decoration: none; transition: color 0.3s ease; }
+  .essay-label a:hover { color: var(--turquoise); }
+  .essay-title { font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(28px, 4vw, 44px); letter-spacing: 0.06em; color: var(--primary-text); margin-bottom: 16px; line-height: 1.3; }
+  .essay-provocation { font-family: 'IBM Plex Serif', serif; font-size: 17px; font-style: italic; color: var(--secondary-text); margin-bottom: 16px; }
+  .essay-meta { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--dim-text); letter-spacing: 0.08em; }
+
+  /* Zone divider */
+  .zone-divider { height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(88,252,200,0.15) 20%, rgba(88,252,200,0.25) 50%, rgba(88,252,200,0.15) 80%, transparent 100%); position: relative; z-index: 1; }
+
+  /* Essay body */
+  .essay-body { padding: 60px 0 80px; }
+  .essay-body p { font-family: 'IBM Plex Serif', serif; font-size: 16px; line-height: 1.85; color: var(--secondary-text); margin-bottom: 28px; letter-spacing: 0.01em; }
+  .essay-body p em { color: var(--primary-text); font-style: normal; }
+  .essay-body p strong { color: var(--primary-text); font-weight: 500; }
+  .essay-body .section-break { height: 48px; display: flex; align-items: center; justify-content: center; margin: 12px 0; }
+  .essay-body .section-break::before { content: ''; width: 40px; height: 1px; background: linear-gradient(90deg, transparent, rgba(88,252,200,0.25), transparent); }
+  .essay-body .signal-line { font-family: 'IBM Plex Serif', serif; font-size: 17px; line-height: 1.85; color: var(--primary-text); margin-bottom: 28px; }
+  .essay-body .turquoise-line { font-family: 'IBM Plex Serif', serif; font-size: 17px; line-height: 1.85; color: var(--turquoise); margin-bottom: 28px; }
+
+  /* Sources */
+  .sources { margin-top: 16px; padding-top: 24px; border-top: 1px solid rgba(88,252,200,0.08); }
+  .sources-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim-text); margin-bottom: 16px; }
+  .sources p:not(.sources-label) { font-family: 'IBM Plex Serif', serif; font-size: 13px; line-height: 1.7; color: var(--secondary-text); margin-bottom: 8px; }
+
+  /* Essay end navigation */
+  .essay-end { padding: 40px 0 80px; text-align: center; }
+  .essay-back { font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.08em; color: var(--turquoise); text-decoration: none; transition: color 0.3s ease; }
+  .essay-back:hover { color: var(--primary-text); }
+
+  /* Footer */
+  .zone-footer { padding: 60px 0 80px; background: var(--deep-blue); border-top: 1px solid rgba(88,252,200,0.08); }
+  .zone-footer .zone-inner { max-width: 900px; }
+  .footer-territory { display: flex; justify-content: space-between; align-items: start; }
+  .footer-left { max-width: 400px; }
+  .footer-statement { font-family: 'Cinzel', serif; font-size: 15px; color: var(--primary-text); letter-spacing: 0.04em; line-height: 1.5; margin-bottom: 8px; }
+  .footer-sub { font-family: 'IBM Plex Serif', serif; font-size: 13px; color: var(--secondary-text); line-height: 1.6; }
+  .footer-right { text-align: right; }
+  .footer-cta { display: inline-block; font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--coral); text-decoration: none; padding: 12px 28px; border: 1px solid rgba(255,165,101,0.3); transition: all 0.3s ease; margin-bottom: 16px; }
+  .footer-cta:hover { border-color: var(--coral); background: rgba(255,165,101,0.05); }
+  .footer-contact { font-size: 13px; color: var(--secondary-text); line-height: 1.8; }
+  .footer-contact a { color: var(--turquoise); text-decoration: none; border-bottom: 1px solid rgba(88,252,200,0.15); }
+  .footer-contact a:hover { border-color: var(--turquoise); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; }
+  .footer-logo { width: 36px; height: 24px; opacity: 0.25; } .footer-logo path { fill: var(--primary-text); }
+  .footer-tm { font-size: 12px; color: rgba(90,86,114,0.5); letter-spacing: 0.06em; }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .zone-inner { padding: 0 24px; }
+    .essay-header { padding: 120px 0 40px; }
+    .footer-territory { flex-direction: column; gap: 40px; }
+    .footer-right { text-align: left; }
+    .footer-bottom { flex-direction: column; gap: 12px; align-items: flex-start; }
+  }
+
+  .no-js .reveal { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+<nav class="site-nav" id="siteNav"><a href="/" class="logo-container"><img src="../../assets/Basewaves_logo.svg" alt="BASEWAVES" class="nav-logo"></a><div class="nav-desktop"><a href="/" class="nav-link">HOME</a><span class="nav-separator">|</span><a href="/origin/" class="nav-link">ORIGIN</a><span class="nav-separator">|</span><a href="/portal/" class="nav-link">PORTAL</a><span class="nav-separator">|</span><a href="/signals/" class="nav-link active">SIGNALS</a></div><button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button></nav>
+<div class="nav-overlay" id="navOverlay"><a href="/">HOME</a><a href="/origin/">ORIGIN</a><a href="/portal/">PORTAL</a><a href="/signals/" class="active">SIGNALS</a></div>
+<div class="starfield"></div>
+
+<!-- ===================================================================
+     ESSAY HEADER
+     =================================================================== -->
+<section class="zone essay-header">
+  <div class="zone-inner">
+    <div class="essay-label reveal"><a href="/signals/">&larr; Signals</a> &middot; 03</div>
+    <h1 class="essay-title reveal reveal-delay-1">Finding Your BASE</h1>
+    <p class="essay-provocation reveal reveal-delay-1">"You've been broadcasting this information your entire life. Nobody taught you to listen."</p>
+    <div class="essay-meta reveal reveal-delay-2">9 min read</div>
+  </div>
+</section>
+<div class="zone-divider"></div>
+
+<!-- ===================================================================
+     ESSAY BODY
+     =================================================================== -->
+<section class="zone essay-body">
+  <div class="zone-inner">
+
+    <p class="reveal">Stand in the room. Dumbbells on the rack. Kettlebell on the floor. Bands hanging from the rig. Don't pick anything up yet.</p>
+
+    <p class="signal-line reveal">Feel your feet.</p>
+
+    <p class="reveal">Not the idea of your feet. The actual pressure against the floor. Heel. Ball. Inside edge. Outside edge. The way your weight shifts without permission &mdash; a constant micro-negotiation between gravity and your nervous system that's been happening since you first stood up as a toddler and never stopped.</p>
+
+    <p class="turquoise-line reveal">That negotiation is information. You've been receiving it your entire life. Nobody taught you to read it.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="signal-line reveal">Now feel your structure.</p>
+
+    <p class="reveal">Not posture. Not what the mirror says. The internal sensation of how your skeleton is organized under gravity right now. Ribs stacked over pelvis or drifting forward. Spine long or compressed. Head floating on top of the stack or pulling the whole thing anteriorly.</p>
+
+    <p class="reveal">You can feel this. Always could. The signal was always there &mdash; you just had no reason to listen, because every training system you've ever encountered told you what position to achieve rather than asking what position you're actually <em>in.</em></p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">Now &mdash; before you've picked up a thing &mdash; ask where power lives today.</p>
+
+    <p class="reveal">Not where it should live according to the textbook. Where it <em>actually</em> lives.</p>
+
+    <p class="reveal">Some days the hips are loaded and ready, the posterior chain like a coiled spring waiting to release. Other days the power sits in the quads, the lower back, the grip &mdash; compensations running so long they feel normal.</p>
+
+    <p class="reveal">You can sense the difference. You've just never been asked to.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="signal-line reveal">And finally. Are you here?</p>
+
+    <p class="reveal">Not &ldquo;are you focused.&rdquo; Focus is easy to fake. Are you actually <em>perceiving,</em> or running a rehearsal of the movement you're about to perform? Is attention operating, or on autopilot while your mind plays a highlight reel of what this set should look like?</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">Four questions. You didn't need a single weight to answer any of them. You needed someone to point out that your body was already answering &mdash; continuously, in real time, in four distinct channels &mdash; and that nobody had ever suggested you tune in.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">This is what I mean by BASE. Four places to point your attention. Not a program. Not a sequence of exercises. Not a checklist to memorize and apply.</p>
+
+    <p class="signal-line reveal">Balancing. Aligning. Sourcing. Engaging.</p>
+
+    <p class="reveal">Four domains of awareness your body is already broadcasting in, whether you're reading the signal or not.</p>
+
+    <p class="reveal">The instinct &mdash; I've watched it hundreds of times &mdash; is to hear those words and immediately convert them into things to <em>do.</em> Balance on one leg. Align my spine. Source from my glutes. Engage my core. The mind grabs each word and turns it into a task, because that's what the mind does with training information: it converts perception into prescription.</p>
+
+    <p class="turquoise-line reveal">But these aren't things to do. They're places to listen.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="signal-line reveal">Balancing.</p>
+
+    <p class="reveal">Not achieving stability. Perceiving where stability already lives.</p>
+
+    <p class="reveal">Dynamic equilibrium. Your nervous system maintaining it without your help. Constant micro-oscillation that <em>is</em> balance &mdash; not a deviation from it.</p>
+
+    <p class="reveal">When I say &ldquo;drift and shift before the lift,&rdquo; I'm not telling you to wobble. I'm telling you to feel the wobble that's already happening. Your brainstem and cerebellum handle balance &mdash; your analytical mind cannot improve on their work, it can only interfere with it.</p>
+
+    <p class="reveal">Balancing as attention means getting out of the way. Sensing what your subcortical systems are already doing.</p>
+
+    <p class="turquoise-line reveal">Not forcing position. Finding the space between collapse and rigidity. Where the body holds itself up. Without trying.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="signal-line reveal">Aligning.</p>
+
+    <p class="reveal">Not achieving correct posture. Sensing how force travels through your structure right now.</p>
+
+    <p class="reveal">Where joints are stacked and load passes cleanly through bone. Where it's leaking sideways into soft tissue compensation.</p>
+
+    <p class="reveal">The clean force path feels effortless at the structural level &mdash; bones bearing load, muscles free to move. The compensated path feels like work even before the weight starts moving. You can feel the difference. That sensation is information.</p>
+
+    <p class="turquoise-line reveal">The space between rigid and sloppy. Where structure wants to organize itself.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="signal-line reveal">Sourcing.</p>
+
+    <p class="reveal">Not activating the right muscles. Perceiving where power actually originates.</p>
+
+    <p class="reveal">&ldquo;Feel your glutes before you move&rdquo; isn't an activation cue. It's a perceptual question: are they participating, or asleep while your lower back does their job? The difference between glute-driven hip extension and back-driven hip extension isn't subtle under load. It's obvious &mdash; once someone asks you to notice.</p>
+
+    <p class="reveal">Not generating power. Discovering it. Not pushing. Releasing. The ground as spring &mdash; load it on descent, release it on ascent. Waiting for the ground to give the energy rather than forcing it.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="signal-line reveal">Engaging.</p>
+
+    <p class="reveal">Not trying harder. The meta-skill &mdash; attention directed at attention itself.</p>
+
+    <p class="reveal">Are you actually perceiving, or executing a rehearsal? Inside the movement, or watching it from the control booth? The difference between a mechanical rep and a conscious one isn't intensity or effort. It's whether you're present to what's happening or absent while it happens around you.</p>
+
+    <p class="reveal">Engaging converts the other three from concepts into lived experience. Without it, you can know about balance, alignment, and sourcing without ever actually <em>perceiving</em> them.</p>
+
+    <p class="turquoise-line reveal">The space between fully activated and forcing. Where engagement becomes expression.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">Four channels. Four broadcasts. Running continuously, whether you're reading them or not.</p>
+
+    <p class="reveal">BASE isn't information you need to add to your training. It's information that's already there &mdash; organizing into patterns, revealing compensations, broadcasting readiness and fatigue and capacity &mdash; all beneath the threshold of your awareness because no one ever pointed out it was worth listening to.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">Here's what conventional training does instead. It tells you where your feet should be &mdash; shoulder width apart, toes at thirty degrees, weight in the heels. It tells you how your spine should organize &mdash; neutral, braced, don't round. It tells you where power should originate &mdash; drive through the floor, squeeze your glutes, push your knees out. It tells you to focus.</p>
+
+    <p class="reveal">None of this is wrong. All of it is external.</p>
+
+    <p class="reveal">External cueing works the way a GPS works &mdash; it gets you to the destination, but you don't learn the route. You can squat with textbook form for ten years and never develop the ability to feel where your weight actually sits on your feet, because you were never asked to feel it. You were told where to put it.</p>
+
+    <p class="reveal">The body under GPS instruction is compliant but mute. It receives and executes. It doesn't participate. You can lift for decades and never realize that the reason Tuesday felt &ldquo;off&rdquo; and Thursday felt &ldquo;on&rdquo; had nothing to do with sleep or caffeine or motivation &mdash; it had to do with your balance being two centimeters further forward than usual, shifting the entire force path, loading your quads instead of your posterior chain, creating a compression pattern in your lumbar spine that your conscious mind registered as &ldquo;feels heavy today.&rdquo;</p>
+
+    <p class="turquoise-line reveal">Two centimeters. That's the resolution of the signal you've been broadcasting. The entire fitness industry rounds it off to &ldquo;good day&rdquo; or &ldquo;bad day.&rdquo;</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="signal-line reveal">The part that sounds paradoxical: this framework is designed to make itself unnecessary.</p>
+
+    <p class="reveal">When you first encounter BASE, you need the sequence. Balance first &mdash; sense your equilibrium. Then alignment &mdash; feel your structure. Then sourcing &mdash; locate your power. Then engagement &mdash; check whether you're actually present. Step by step. Analytical. Deliberate. Left-hemisphere scaffolding for a right-hemisphere capacity.</p>
+
+    <p class="reveal">The early version sounds like this in your head: <em>Okay, feet &mdash; where's my weight? Slightly forward. Now spine &mdash; am I stacked? Mostly. Ribs drifting. Now power &mdash; where does it live? Hips loaded. Good. Am I present? Am I actually feeling this or just checking boxes?</em></p>
+
+    <p class="reveal">Conductor stage. Following the score. Exactly right.</p>
+
+    <p class="reveal">What happens over weeks and months is that the checking dissolves &mdash; not because you stopped paying attention, but because the attention internalized. The conscious check becomes a felt sense. You walk up to the weight and you <em>know</em> your weight is forward today without having to ask. You feel the rib drift without scanning for it. You sense the hip load without sourcing deliberately. The sequence collapses into a single moment of perceptual contact with your own body, and inside that moment, all four channels are reporting simultaneously.</p>
+
+    <p class="reveal">Composer stage. Not following the score. Writing it.</p>
+
+    <p class="reveal">I've watched people make this transition. The moment is unmistakable. Their language changes. &ldquo;Am I doing this right?&rdquo; becomes &ldquo;I feel my hamstring jumping in.&rdquo; &ldquo;How was that set?&rdquo; becomes &ldquo;My left hip wasn't stable &mdash; I need to go back to ground.&rdquo; They stop asking and start reporting. The external check has become an internal broadcast. The scaffolding kicked away.</p>
+
+    <p class="reveal">The framework used analytical structure to build intuitive capacity. Then it got out of the way. Most training systems can't do this &mdash; their business model depends on your continued dependence. The program that develops your ability to program yourself is a program that eliminates the need for programs. Left-hemisphere scaffolding restoring right-hemisphere primacy. The analytical serving the intuitive. The analytical dissolving once the intuitive is back online.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="signal-line reveal">One more thing that needs saying: you never graduate from BASE.</p>
+
+    <p class="reveal">That Composer who senses all four channels simultaneously and adjusts in real time without thinking? Give them a new movement pattern and they're back to Conductor. Increase complexity beyond current capacity and they need the sequence again. Accumulate enough life stress and the felt sense degrades &mdash; the noise floor rises, the signals get muddy, and they have to slow down and check. Balance. Alignment. Sourcing. Engagement. Step by step. Scaffolding back up.</p>
+
+    <p class="reveal">Not failure. Not regression. How biological systems learn. Spiral development &mdash; same territory revisited at higher resolution. Every return to the sequence deepens the foundation. Every return to direct sensing operates from a higher baseline than the last time.</p>
+
+    <p class="turquoise-line reveal">BASE isn't a stage you pass through. It's a place you return to &mdash; every session, every week, every time complexity exceeds capacity. The return isn't regression. It's the body gathering force for its next emergence.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">Your body has been broadcasting this information your entire life &mdash; four channels, running continuously, reporting on balance, structure, power, and presence with a resolution that would embarrass most laboratory instruments.</p>
+
+    <p class="reveal">Nobody taught you to listen. Not because the signal was hidden. Because every system you encountered was too busy talking to hear it.</p>
+
+    <p class="turquoise-line reveal">The signal is there. It was always there. BASE is the moment you stop transmitting long enough to receive.</p>
+
+    <div class="section-break reveal"></div>
+
+    <div class="sources reveal">
+      <p class="sources-label">Sources</p>
+      <p>Proske, U., &amp; Gandevia, S. C. (2012). Proprioceptive senses: Their roles in signaling body shape, body position and movement, and muscle force. <em>Physiological Reviews</em>, 92(4), 1651&ndash;1697.</p>
+      <p>Schleip, R. (2003). Fascial plasticity&mdash;a new neurobiological explanation. <em>Journal of Bodywork and Movement Therapies</em>, 7(1), 11&ndash;19.</p>
+      <p>McGilchrist, I. (2009). <em>The Master and His Emissary: The Divided Brain and the Making of the Western World.</em> Yale University Press.</p>
+      <p>Fitts, P. M., &amp; Posner, M. I. (1967). <em>Human Performance.</em> Brooks Cole.</p>
+      <p>Wulf, G. (2013). Attentional focus and motor learning: A review of 15 years. <em>International Review of Sport and Exercise Psychology</em>, 6(1), 77&ndash;104.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================================================================
+     ESSAY END NAV
+     =================================================================== -->
+<section class="zone essay-end">
+  <div class="zone-inner reveal">
+    <a href="/signals/" class="essay-back">&larr; Back to Signals</a>
+  </div>
+</section>
+
+<!-- ===================================================================
+     FOOTER
+     =================================================================== -->
+<section class="zone zone-footer">
+  <div class="zone-inner">
+    <div class="footer-territory">
+      <div class="footer-left reveal"><div class="footer-statement">You cannot think your way out of a sensing problem.</div><div class="footer-sub">BASEWAVES identifies the person who already knows something was lost.</div></div>
+      <div class="footer-right reveal reveal-delay-1"><a href="mailto:greg@basewaves.com?subject=State%20Transition%20Session" class="footer-cta">Schedule a State Transition Session</a><div class="footer-contact"><a href="mailto:greg@basewaves.com">greg@basewaves.com</a><br>512.585.3400</div></div>
+    </div>
+    <div class="footer-bottom reveal reveal-delay-2">
+      <svg class="footer-logo" viewBox="0 0 337.62 220.73" preserveAspectRatio="xMidYMid meet"><path d="M188.26,87.4c-8.54-2.09-18.2-6.13-18.04-13.69.16-9.34,4.67-13.54,7.41-15.31,9.83-4.35,16.76-14.18,16.76-25.45,0-15.15-12.25-27.39-27.39-27.39s-27.39,12.25-27.39,27.39c0,11.43,7.09,21.42,17.08,25.45,2.9,1.77,7.08,6.13,7.08,15.31,0,7.57-8.7,11.6-16.59,13.69-15.95,1.77-26.9,5.64-26.9,10.15,0,6.28,21.27,11.27,47.53,11.27s47.53-5,47.53-11.27c0-4.51-11.12-8.39-27.06-10.15h-.02ZM160.06,17.65c-3.87,1.6-6.92,4.67-8.54,8.54-.48,1.28-1.93,1.93-3.06,1.28-1.28-.31-1.93-1.77-1.44-3.06,1.93-5.17,6.13-9.18,11.11-11.28,1.29-.47,2.57.16,3.22,1.29.48,1.28-.16,2.57-1.29,3.22h0ZM92.72,96.27c0,9.99,34,18.04,75.89,18.04s75.89-8.05,75.89-18.04-30.61-17.24-69.6-18.04c-.48-.65-.65-1.13-.97-1.78,53.66.65,96.18,11.28,96.18,24.17s-45.43,24.17-101.5,24.17-101.5-10.8-101.5-24.17,40.92-23.04,93.12-24.01c-.16.65-.48,1.13-.81,1.78-37.54.97-66.7,8.7-66.7,17.88ZM329.72,104.65c0-20.63-69.45-37.38-156.12-37.86-.16.65-.16,1.29-.16,1.93,69.76.48,125.67,14.03,125.67,30.62s-57.99,30.78-129.7,30.78-129.7-13.7-129.7-30.62,53.49-29.65,120.99-30.62c0-.64-.16-1.28-.16-2.09-84.4,1.13-151.43,17.72-151.43,37.86s68.16,37.06,153.54,37.86c.81,1.29,1.13,2.9,1.13,4.51,0,9.18-4.19,13.37-7.08,15.31-9.99,4.03-17.08,13.86-17.08,25.45,0,15.15,12.25,27.39,27.39,27.39s27.39-12.25,27.39-27.39c0-11.27-6.93-21.11-16.76-25.3-2.73-1.77-7.25-5.96-7.41-15.3,0-1.78.48-3.22,1.28-4.68,87.65-.32,158.22-17.07,158.22-37.86h0ZM161.35,205.02c-.48,1.29-1.93,1.77-3.22,1.29-5.16-2.1-9.18-6.13-11.11-11.28-.48-1.28.16-2.57,1.28-3.06,1.29-.47,2.58.16,3.06,1.29,1.45,3.87,4.68,7.09,8.54,8.54,1.45.65,1.94,2.09,1.45,3.22h0Z"/></svg>
+      <div class="footer-tm">&copy; BASEWAVES &middot; Spatial Strength Training&trade; &middot; Austin, TX</div>
+    </div>
+  </div>
+</section>
+
+<script>
+const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+const nav = document.getElementById('siteNav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 80));
+const hb = document.getElementById('hamburger'), ov = document.getElementById('navOverlay');
+hb.addEventListener('click', (e) => { e.stopPropagation(); hb.classList.toggle('active'); ov.classList.toggle('open'); document.body.style.overflow = ov.classList.contains('open') ? 'hidden' : ''; });
+ov.addEventListener('click', (e) => { if (e.target === ov || e.target.tagName === 'A') { hb.classList.remove('active'); ov.classList.remove('open'); document.body.style.overflow = ''; } });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && ov.classList.contains('open')) { hb.classList.remove('active'); ov.classList.remove('open'); document.body.style.overflow = ''; } });
+</script>
+</body>
+</html>

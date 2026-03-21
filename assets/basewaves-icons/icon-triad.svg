@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" stroke="#58FCC8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Three concentric arcs, ~240° each, open at the top -->
+  <path d="M14.4 12.4 A16 16 0 1 1 33.6 12.4" />
+  <path d="M17.2 16.2 A11 11 0 1 1 30.8 16.2" />
+  <path d="M20 20 A6 6 0 1 1 28 20" />
+</svg>

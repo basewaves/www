@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" stroke="#58FCC8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Outer circle — dashed to suggest peripheral fading -->
+  <circle cx="24" cy="24" r="18" stroke-dasharray="4 3" />
+  <!-- Middle circle -->
+  <circle cx="24" cy="24" r="11" />
+  <!-- Inner circle -->
+  <circle cx="24" cy="24" r="5" />
+  <!-- Center dot — filled -->
+  <circle cx="24" cy="24" r="1.5" fill="#58FCC8" stroke="none" />
+</svg>

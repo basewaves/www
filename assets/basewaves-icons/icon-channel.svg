@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" stroke="#58FCC8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Five horizontal lines, diamond/lens profile: short-medium-long-medium-short -->
+  <line x1="18" y1="12" x2="30" y2="12" />
+  <line x1="14" y1="19" x2="34" y2="19" />
+  <line x1="10" y1="26" x2="38" y2="26" />
+  <line x1="14" y1="33" x2="34" y2="33" />
+  <line x1="18" y1="40" x2="30" y2="40" />
+</svg>

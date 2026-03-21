@@ -67,23 +67,6 @@
   .ratio-bar.one { background: rgba(232,227,255,0.04); border-left: 3px solid rgba(232,227,255,0.15); color: var(--secondary-text); font-size: 12px; justify-content: center; }
   .ratio-annotation { font-size: 14px; line-height: 1.75; color: var(--secondary-text); }
   .ratio-annotation em { color: var(--secondary-text); font-style: normal; }
-  .loop-flow { margin: 48px 0; display: flex; flex-direction: column; gap: 0; }
-  .loop-step { padding: 28px 24px; border-left: 2px solid; display: flex; flex-direction: column; align-items: center; text-align: center; }
-  .loop-icon { width: 340px; height: 340px; margin-bottom: 0; opacity: 0.75; transition: opacity 0.4s ease; }
-  .loop-step:hover .loop-icon { opacity: 1; }
-  @media (max-width: 640px) { .loop-icon { width: 180px; height: 180px; } }
-  .loop-step.noise-step { border-color: rgba(90,86,114,0.25); } .loop-step.base-step { border-color: rgba(255,165,101,0.3); } .loop-step.load-step { border-color: rgba(255,165,101,0.25); } .loop-step.space-step { border-color: rgba(232,227,255,0.2); } .loop-step.waves-step { border-color: rgba(88,252,200,0.35); } .loop-step.close-step { border-color: rgba(172,208,190,0.25); }
-  .loop-channel { width: 1px; height: 32px; margin: 0 auto 6px; }
-  .noise-step .loop-channel { background: linear-gradient(to bottom, rgba(90,86,114,0.4), rgba(90,86,114,0.1)); }
-  .base-step .loop-channel { background: linear-gradient(to bottom, rgba(255,165,101,0.5), rgba(255,165,101,0.1)); }
-  .load-step .loop-channel { background: linear-gradient(to bottom, rgba(255,165,101,0.4), rgba(255,165,101,0.1)); }
-  .space-step .loop-channel { background: linear-gradient(to bottom, rgba(232,227,255,0.35), rgba(232,227,255,0.08)); }
-  .waves-step .loop-channel { background: linear-gradient(to bottom, rgba(88,252,200,0.5), rgba(88,252,200,0.1)); }
-  .close-step .loop-channel { background: linear-gradient(to bottom, rgba(172,208,190,0.4), rgba(172,208,190,0.1)); }
-  .loop-label { font-family: 'Space Mono', monospace; font-size: 14px; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 12px; }
-  .loop-step.noise-step .loop-label { color: var(--secondary-text); } .loop-step.base-step .loop-label { color: var(--coral); } .loop-step.load-step .loop-label { color: var(--coral); } .loop-step.space-step .loop-label { color: var(--primary-text); } .loop-step.waves-step .loop-label { color: var(--turquoise); } .loop-step.close-step .loop-label { color: var(--secondary-text); }
-  .loop-desc { font-size: 14px; line-height: 1.75; color: var(--secondary-text); }
-  .loop-desc em { color: var(--primary-text); font-style: normal; }
   .cta-link { display: inline-block; font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.08em; color: var(--turquoise); text-decoration: none; margin-top: 24px; transition: color 0.3s ease; }
   .cta-link:hover { color: var(--primary-text); } .cta-link.coral { color: var(--coral); } .cta-link.coral:hover { color: var(--primary-text); }
   .zone-footer { padding: 60px 0 80px; background: var(--deep-blue); border-top: 1px solid rgba(88,252,200,0.08); }
@@ -145,6 +128,8 @@
       margin: 0 auto;
     }
   }
+  .scroll-counter-wrap { position: fixed; bottom: 24px; right: 24px; z-index: 50; }
+  .scroll-indicator { font-family: 'Space Mono', monospace; font-size: 14px; color: var(--dim-text); letter-spacing: 0.1em; }
 </style>
 </head>
 <body>
@@ -216,7 +201,7 @@
         <p>When you place your hands on a dumbbell and lower into a squat, you are not telling your muscles what to do. You are communicating a constraint &mdash; a goal state &mdash; to a cellular collective that has been solving movement problems since before you had language. The dumbbell doesn't build you. It speaks to something in you that already knows how to respond.</p>
         <p>You don't build capacity. You clear the interference that prevented capacity from expressing. The capacity was already there. The signal was blocked.</p>
         <p>When the interference clears, physical adaptation follows. Load tolerance increases. Compensation patterns resolve. Force production becomes coherent across the whole kinetic chain rather than leaking through structures that weren't designed to bear it. You get stronger &mdash; not because you chased strength as a metric, but because your system became organized enough to express it.</p>
-        <p>This requires metabolic readiness. The body adapts under load only when the substrate supports adaptation &mdash; adequate fuel, adequate sleep, manageable stress. Train against your metabolic rhythm and you produce breakdown without adaptation. Train with it and every session compounds. The signal cascade runs: metabolic state determines what your brain can process, which determines what your body can organize, which determines whether load produces growth or depletion.</p>
+        <p>This requires metabolic readiness. The body adapts under load only when the metabolic estate supports adaptation &mdash; adequate fuel, adequate sleep, manageable stress. Train against your metabolic rhythm and you produce breakdown without adaptation. Train with it and every session compounds. The signal cascade runs: metabolic state determines what your brain can process, which determines what your body can organize, which determines whether load produces growth or depletion.</p>
       </div>
     </div>
   </div>
@@ -242,81 +227,92 @@
 <div class="zone-divider"></div>
 
 <!-- ===================================================================
-     HOW THE CHANNEL SHIFTS (base-blue)
+     MOVEMENT 2: THE INTERNAL WORLD MODEL
+     One nervous system's forced passage through the gap.
+     =================================================================== -->
+
+<!-- ===================================================================
+     THE REDIRECTION (base-blue)
      =================================================================== -->
 <section class="zone zone-section" style="background: var(--base-blue);">
   <div class="zone-inner">
-    <h2 class="zone-headline reveal">How the Channel Shifts</h2>
-    <p class="body-prose reveal">This is not a concept to understand. It is a process to enter. The BASEWAVES feedback loop &mdash; experienced, not explained:</p>
-    <div class="loop-flow reveal">
-      <!-- 1. BASE-line: chaotic entanglements, no structure -->
-      <div class="loop-step noise-step">
-        <svg class="loop-icon" viewBox="0 0 88 88" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20,55 C25,30 35,70 42,35 C49,0 30,65 55,40 C80,15 15,50 60,55 C105,60 35,25 30,60" fill="none" stroke="#9994B8" stroke-width="1.2" opacity="0.4"/>
-          <path d="M35,65 C40,20 60,75 50,30 C40,-15 70,60 25,45 C-20,30 65,70 45,25" fill="none" stroke="#9994B8" stroke-width="0.8" opacity="0.3"/>
-          <path d="M55,50 C20,35 65,15 30,50 C-5,85 70,30 40,65 C10,100 60,40 50,70" fill="none" stroke="#FFA565" stroke-width="0.9" opacity="0.2"/>
-          <path d="M15,40 C45,60 25,20 55,55 C85,90 30,35 65,45 C100,55 20,65 45,35" fill="none" stroke="#FFA565" stroke-width="0.7" opacity="0.15"/>
-          <path d="M48,30 C30,55 62,40 38,60 C14,80 56,20 44,50" fill="none" stroke="#5A5672" stroke-width="1" opacity="0.25"/>
-        </svg>
-        <div class="loop-channel"></div>
-        <div class="loop-label">BASE-line NOISE</div><div class="loop-desc">You arrive with your noisy narratives — data, obligations, efficiency loops, the cognitive churn of your competitive, positioning brain. Knowledge accumulated but passive. This is where most people live: <em>swimming in the noise without knowing it's noise.</em></div>
-      </div>
-
-      <!-- 2. B→A→S→E: coral signal lines -->
-      <div class="loop-step base-step">
-        <img class="loop-icon" src="../assets/icon_signal_base.svg" alt="BASE signal forming">
-        <div class="loop-channel"></div>
-        <div class="loop-label">B &rarr; A &rarr; S &rarr; E</div><div class="loop-desc">You begin processing <em>how</em> you're processing. Balancing. Aligning. Sourcing. Engaging. A drift and shift toward a more finely tuned cognitive state &mdash; one in accordance with your biorhythms and neuro-physio bandwidth. Not forced. Not willpowered. You slowly realize you've been swimming in the noise. That recognition is the first signal.</div>
-      </div>
-
-      <!-- 3. Load Arrives: BASE arch framing -->
-      <div class="loop-step load-step">
-        <img class="loop-icon" src="../assets/icon_base_frame.svg" alt="BASE arch forming under load">
-        <div class="loop-channel"></div>
-        <div class="loop-label">Load Arrives</div><div class="loop-desc">You exercise your orchestra of collaborative muscle and calibrated movement patterns synced within an evolving matrix of intensity &mdash; <em>attention and tension braided together.</em> Under sufficient load, your brain shunts fuel from the prefrontal cortex to the motor cortex. The micro-manager goes quiet. Not through willpower. Through metabolic demand.</div>
-      </div>
-
-      <!-- 4. SPACE: crescent void between arcs -->
-      <div class="loop-step space-step">
-        <img class="loop-icon" src="../assets/icon_space_multi.svg" alt="SPACE channel forming between arcs">
-        <div class="loop-channel"></div>
-        <div class="loop-label">The Sensorium Opens &mdash; SPACE</div><div class="loop-desc">Wavelengths coalesce throughout your inner symphonies &mdash; neurological wiring, biological fascia, the whole system singing rather than individual muscles shouting. <em>SPACE humbles your mind.</em> You perceive currents and flows within those wavelengths &mdash; things that were always broadcasting but drowned by BASE-line noise. This is internal spatial intelligence becoming accessible. Not built. Cleared into view.</div>
-      </div>
-
-      <!-- 5. WAVES: turquoise signal lines forming -->
-      <div class="loop-step waves-step">
-        <img class="loop-icon" src="../assets/icon_signal_waves.svg" alt="WAVES signal emerging">
-        <div class="loop-channel"></div>
-        <div class="loop-label">W &rarr; A &rarr; V &rarr; E &rarr; S</div><div class="loop-desc">You start refining, exploring &mdash; composing to complete the BASEWAVES feedback loop. <em>Embodied cognitive processing while performing strength training from a broader spatial state.</em> The framework succeeds when you no longer think about the framework.</div>
-      </div>
-
-      <!-- 6. Loop Closes: WAVES arch completing the loop -->
-      <div class="loop-step close-step">
-        <img class="loop-icon" src="../assets/icon_waves_frame.svg" alt="WAVES arch completing the feedback loop">
-        <div class="loop-channel"></div>
-        <div class="loop-label">The Loop Closes</div><div class="loop-desc">All that knowledge, metrics, external stimuli that were part of the noisy narrative in your mind — they get slowly recalibrated. Not eliminated. Given <em>different meaning, deeper expression.</em> Because you now have a better internal receiver of the same external signals. This is the core inversion: the external world doesn't change. Your reception of it does. And that changes everything downstream — how you eat, how you process stress, how you navigate uncertainty, how you compose rather than merely react.</div>
-      </div>
-    </div>
+    <h2 class="zone-headline reveal">The Redirection</h2>
+    <p class="body-prose reveal">Before I had words, I had wheels.</p>
+    <p class="body-prose reveal">Ages two through five &mdash; face pressed against car windows on the highway, demanding my parents speed up or slow down to pace alongside eighteen-wheelers. Not the trucks. The rotation. The contact patch where circular motion became forward movement. Hubcap geometry. Axle architecture. How does something that massive glide?</p>
+    <p class="body-prose reveal">I didn&rsquo;t know I was studying spatial processing. I didn&rsquo;t have that sentence. The fascination was running pre-verbally, years before language arrived to name it.</p>
+    <p class="body-prose reveal">My father’s call sign was Sandman. Virginia Beach — sitting in F-14 cockpits, standing on carrier flight decks, feeling afterburner ignition not as sound but as proprioceptive event. Pressure waves through chest, gut, soles of my feet. Same fascination as the wheels, scaled up: how does this massive object navigate three-dimensional space?</p>
+    <p class="body-prose reveal">I was going to fly. The spatial intelligence had been training itself since before I could speak.</p>
+    <p class="body-prose reveal">Then my vision started degrading. Aviators need uncorrected 20/20. Between thirteen and sixteen, the fighter pilot dreams died. Then we moved. New town, new school, the dream fading. Three years of searching for what replaces the thing you can’t have.</p>
+    <p class="signal-line reveal">The spatial intelligence didn&rsquo;t stop. Its attention turned inward &mdash; cockpit becoming fascia, flight deck becoming nervous system, instruments becoming interoceptive awareness.</p>
+    <p class="turquoise-line reveal">First seizure: spring 1989. I was sixteen.</p>
+    <p class="body-prose reveal">Temporal lobe epilepsy &mdash; quickly increasing to fifteen seizures a month.</p>
+    <p class="body-prose reveal">Each seizure gave three seconds of warning. An aura — a pre-ictal signal that meant I had three seconds to decide whether I’d be standing or on the floor. Three seconds of internal surveillance more focused than anything a cockpit ever demanded. I learned to track metabolic triggers, sleep patterns, pre-ictal signatures. Not because I wanted to study neuroscience. Because missing the signal meant my brain going offline, my body freezing up.</p>
+    <p class="body-prose reveal">Reading comprehension broken. Sequential text processing fragmented — I couldn’t track a paragraph from beginning to end. The brain's defaults rerouted: navigation by pattern instead of sequence, by spatial recognition instead of linear tracking. The seven taking over because the one couldn’t hold.</p>
+    <p class="body-prose reveal">At nineteen, they measured what my seizures had carved. UNC Chapel Hill, October 1991.</p>
+    <p class="signal-line reveal">Visuospatial memory: 99th percentile. <br>
+    Visuospatial skills: 91st.<br>
+    Math calculations: 91st.
+    </p>
+    <p class="signal-line reveal">Verbal fluency: 5th percentile.<br>
+Fine motor skills: 2nd. <br>
+    Confrontation naming: &lt; 1st.</p>
+    <p class="body-prose reveal">They showed me a funnel to identify. I said “flask.” Then “filter.” Then: “Gosh, I know what that is. I just used one yesterday to put oil in my car.”</p>
+    <p class="turquoise-line reveal">The gift and the cost &mdash; welded together. The 7-to-1 ratio is not a metaphor. It is this brain&rsquo;s actual wiring, documented in clinical data before I turned twenty.</p>
   </div>
 </section>
 <div class="zone-divider"></div>
 
 <!-- ===================================================================
-     CLOSING (lighter-blue)
+     THE PASSAGE (lighter-blue)
      =================================================================== -->
 <section class="zone zone-section" style="background: var(--lighter-blue);">
   <div class="zone-inner">
-    <div class="reveal" style="margin-bottom: 40px;">
-      <p class="indictment-line">If your programs are lagging.</p>
-      <p class="indictment-line">If you've invested effort without gaining clarity.</p>
-      <p class="indictment-line">If the gains come and go but the patterns underneath never change.</p>
-    </div>
-    <p class="body-prose reveal">The disconnect between effort and results is not a motivation problem. It is a signal-vs-noise problem. The signal was always there. The noise was trained to override it.</p>
-    <p class="body-prose reveal">You are not broken. You are not lacking discipline or the right program or a better coach. You are made of competent material that has been receiving incompetent noise.</p>
-    <p class="turquoise-line reveal">The dumbbell is waiting. Not to build you into something you're not. To clear the interference between you and what you already are.</p>
+    <h2 class="zone-headline reveal">The Passage</h2>
+	  <p class="body-prose reveal">Shortly after my epilepsy diagnosis, the storms compounded.</p> 
+    <p class="body-prose reveal">Meningitis at seventeen — intracranial pressure at eighty-four, normal below twenty. Emergency ventriculostomy, drilled bedside. I stopped breathing on day two.</p>
+    <p class="body-prose reveal">Lobectomy at twenty-one. My brain's left temporal lobe, left amygdala, left hippocampus — removed. Back in class two weeks later.</p>
+    <p class="body-prose reveal">Five more seizures after surgery. The last in 2000. But the auras never fully stopped &mdash; the body&rsquo;s warning signals still arriving, demanding the same internal surveillance the seizures had trained.</p>
+    <p class="body-prose reveal">The gym became the other half of that practice. Decades of quiet work that had no audience &mdash; progressive resistance revealing what post-surgical neural reorganization looked like from the inside. The auras kept the internal surveillance running. The load gave it somewhere to deepen. Both channels operating concurrently, neither one named.</p>
+    <p class="body-prose reveal">I was practicing Balancing. Aligning. Sourcing. Engaging &mdash; every session, for years, without names. The principles ran daily, unnamed, embodied, running beneath any capacity to articulate them.</p>
+    <p class="body-prose reveal">Anti-seizure medication constrained the translation. Decades of anticonvulsants laid a prefrontal fog between the felt sense and the words. I could do it. I could feel it. I could coach it. I couldn&rsquo;t say it.</p>
+    <p class="signal-line reveal">In 2016, at forty-four, I stopped all medication. The fog lifted.</p>
+    <p class="body-prose reveal">Thirty years of spatial modeling &mdash; suddenly available for linguistic translation. Not new capacity arriving. Existing capacity becoming expressible. The bridge from felt sense to teachable framework opened because the chemical interference between experience and language finally cleared.</p>
+    <p class="turquoise-line reveal">The spatial intelligence was always running. Language arrived last.</p>
+  </div>
+</section>
+<div class="zone-divider"></div>
+
+<!-- ===================================================================
+     WHAT PRACTICE NAMED (base-blue)
+     =================================================================== -->
+<section class="zone zone-section" style="background: var(--base-blue);">
+  <div class="zone-inner">
+    <h2 class="zone-headline reveal">What Practice Named</h2>
+    <p class="body-prose reveal"><em>1989&ndash;2000.</em> Internal surveillance under seizure conditions. Pattern recognition through metabolic necessity. Signal reading without vocabulary.</p>
+    <p class="body-prose reveal"><em>2000&ndash;2016.</em> Load as laboratory. Progressive resistance as diagnostic instrument &mdash; at bodyweight, compensations hide. Under load, only truth emerges. The discovery: load doesn&rsquo;t add stress to a calm system. It provides structured containment for stress already present.</p>
+    <p class="body-prose reveal"><em>2016.</em> Medication stops. The practiced becomes nameable.</p>
+    <p class="body-prose reveal"><em>2022.</em> BASE crystallizes. Balancing &rarr; Aligning &rarr; Sourcing &rarr; Engaging &mdash; the attention framework named from existing practice. Not invented. Recognized.</p>
+    <p class="body-prose reveal"><em>2023&ndash;2024.</em> Teaching begins. First clients train using BASE. SPACE emerges — the processing mechanism. WAVES follows. The framework expanded through contact with other nervous systems. Clients didn’t just receive it — they revealed dimensions I also encountered myself but hadn’t articulated.</p>
+    <p class="body-prose reveal"><em>2025.</em> BASEWAVES formalized. Clients developing signal literacy at a pace that took the creator decades to discover alone.</p>
+    <p class="turquoise-line reveal">Twenty-eight years unnamed. Eight years translatable. Three years crystallizing. The capacity for BASEWAVES was always running.</p>
+  </div>
+</section>
+<div class="zone-divider"></div>
+
+<!-- ===================================================================
+     THE PATTERN THAT TRANSFERS (lighter-blue)
+     =================================================================== -->
+<section class="zone zone-section" style="background: var(--lighter-blue);">
+  <div class="zone-inner">
+    <h2 class="zone-headline reveal">The Pattern That Transfers</h2>
+    <p class="body-prose reveal">My trigger was neurological damage. Yours might be burnout. Injury. A life transition that finally broke the override you&rsquo;d been running. Aging. Loss. The moment your analytical machinery exhausted itself and your body got a word in.</p>
+    <p class="body-prose reveal">Different triggers. Same pattern: the cognitive override gets disrupted, and the body&rsquo;s native signaling &mdash; the seven channels that were running without you &mdash; becomes audible.</p>
+    <p class="body-prose reveal">My timeline was extreme. Decades of internal navigation before the vocabulary existed. You don&rsquo;t need the extreme version. The map exists now. The framework is built. The language is developed. What took decades to build takes months to enter.</p>
+    <p class="signal-line reveal">My analytical paths were damaged at twenty-one. Yours are probably intact &mdash; just overloaded. The methodology works either way. The architecture is the same. The trigger is different. The capacity was always there.</p>
     <div class="reveal" style="margin-top: 48px; display: flex; gap: 48px; flex-wrap: wrap;">
-      <a href="/portal/" class="cta-link">The architecture is spatial. Enter the Portal &rarr;</a>
-      <a href="/signals/" class="cta-link coral">Go deeper. Enter the Signals &rarr;</a>
+      <a href="/portal/" class="cta-link">See the evidence &rarr;</a>
+      <a href="/signals/" class="cta-link">Go deeper &rarr;</a>
+      <a href="mailto:greg@basewaves.com?subject=State%20Transition%20Session" class="cta-link coral">Schedule a State Transition Session &rarr;</a>
     </div>
   </div>
 </section>
@@ -328,7 +324,7 @@
   <div class="zone-inner">
     <div class="footer-territory">
       <div class="footer-left reveal"><div class="footer-statement">You cannot think your way out of a sensing problem.</div><div class="footer-sub">BASEWAVES identifies the person who already knows something was lost.</div></div>
-      <div class="footer-right reveal reveal-delay-1"><a href="mailto:greg@basewaves.com?subject=State%20Assessment" class="footer-cta">Schedule a State Assessment</a><div class="footer-contact"><a href="mailto:greg@basewaves.com">greg@basewaves.com</a><br>512.585.3400</div></div>
+      <div class="footer-right reveal reveal-delay-1"><a href="mailto:greg@basewaves.com?subject=State%20Transition%20Session" class="footer-cta">Schedule a State Transition Session</a><div class="footer-contact"><a href="mailto:greg@basewaves.com">greg@basewaves.com</a><br>512.585.3400</div></div>
     </div>
     <div class="footer-bottom reveal reveal-delay-2">
       <svg class="footer-logo" viewBox="0 0 337.62 220.73" preserveAspectRatio="xMidYMid meet"><path d="M188.26,87.4c-8.54-2.09-18.2-6.13-18.04-13.69.16-9.34,4.67-13.54,7.41-15.31,9.83-4.35,16.76-14.18,16.76-25.45,0-15.15-12.25-27.39-27.39-27.39s-27.39,12.25-27.39,27.39c0,11.43,7.09,21.42,17.08,25.45,2.9,1.77,7.08,6.13,7.08,15.31,0,7.57-8.7,11.6-16.59,13.69-15.95,1.77-26.9,5.64-26.9,10.15,0,6.28,21.27,11.27,47.53,11.27s47.53-5,47.53-11.27c0-4.51-11.12-8.39-27.06-10.15h-.02ZM160.06,17.65c-3.87,1.6-6.92,4.67-8.54,8.54-.48,1.28-1.93,1.93-3.06,1.28-1.28-.31-1.93-1.77-1.44-3.06,1.93-5.17,6.13-9.18,11.11-11.28,1.29-.47,2.57.16,3.22,1.29.48,1.28-.16,2.57-1.29,3.22h0ZM92.72,96.27c0,9.99,34,18.04,75.89,18.04s75.89-8.05,75.89-18.04-30.61-17.24-69.6-18.04c-.48-.65-.65-1.13-.97-1.78,53.66.65,96.18,11.28,96.18,24.17s-45.43,24.17-101.5,24.17-101.5-10.8-101.5-24.17,40.92-23.04,93.12-24.01c-.16.65-.48,1.13-.81,1.78-37.54.97-66.7,8.7-66.7,17.88ZM329.72,104.65c0-20.63-69.45-37.38-156.12-37.86-.16.65-.16,1.29-.16,1.93,69.76.48,125.67,14.03,125.67,30.62s-57.99,30.78-129.7,30.78-129.7-13.7-129.7-30.62,53.49-29.65,120.99-30.62c0-.64-.16-1.28-.16-2.09-84.4,1.13-151.43,17.72-151.43,37.86s68.16,37.06,153.54,37.86c.81,1.29,1.13,2.9,1.13,4.51,0,9.18-4.19,13.37-7.08,15.31-9.99,4.03-17.08,13.86-17.08,25.45,0,15.15,12.25,27.39,27.39,27.39s27.39-12.25,27.39-27.39c0-11.27-6.93-21.11-16.76-25.3-2.73-1.77-7.25-5.96-7.41-15.3,0-1.78.48-3.22,1.28-4.68,87.65-.32,158.22-17.07,158.22-37.86h0ZM161.35,205.02c-.48,1.29-1.93,1.77-3.22,1.29-5.16-2.1-9.18-6.13-11.11-11.28-.48-1.28.16-2.57,1.28-3.06,1.29-.47,2.58.16,3.06,1.29,1.45,3.87,4.68,7.09,8.54,8.54,1.45.65,1.94,2.09,1.45,3.22h0Z"/></svg>
@@ -337,11 +333,15 @@
   </div>
 </section>
 
+<!-- Scroll Progress Indicator -->
+<div class="scroll-counter-wrap"><span class="scroll-indicator" id="scrollCounter">000</span></div>
+
 <script>
 const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 const nav = document.getElementById('siteNav');
-window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 80));
+const counter = document.getElementById('scrollCounter');
+window.addEventListener('scroll', function() { var y = window.scrollY; var max = document.documentElement.scrollHeight - window.innerHeight; counter.textContent = String(max > 0 ? Math.round((y / max) * 100) : 0).padStart(3, '0'); nav.classList.toggle('scrolled', y > 80); });
 const hb = document.getElementById('hamburger'), ov = document.getElementById('navOverlay');
 hb.addEventListener('click', (e) => { e.stopPropagation(); hb.classList.toggle('active'); ov.classList.toggle('open'); document.body.style.overflow = ov.classList.contains('open') ? 'hidden' : ''; });
 ov.addEventListener('click', (e) => { if (e.target === ov || e.target.tagName === 'A') { hb.classList.remove('active'); ov.classList.remove('open'); document.body.style.overflow = ''; } });

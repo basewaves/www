@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" stroke="#58FCC8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Flat baseline with sharp angular spike — ECG/EKG pulse -->
+  <polyline points="4,32 16,32 20,32 22,18 24,8 26,28 28,36 30,32 44,32" />
+</svg>

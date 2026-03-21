@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strength Training Essays & Research | BASEWAVES Signals</title>
+  <meta name="description" content="Writing on strength training, nervous system adaptation, and what conventional fitness gets wrong. Evidence-based. Austin, TX.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Strength Training Essays & Research | BASEWAVES Signals">
+  <meta property="og:description" content="Writing on strength training, nervous system adaptation, and what conventional fitness gets wrong. Evidence-based.">
+  <meta property="og:type" content="website">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&family=IBM+Plex+Serif:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- GSAP + ScrollTrigger CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'base-bg': '#0E1220',
+            'base-bg-dark': '#080B14',
+            'lighter-blue': '#141B2E',
+            'turquoise': '#58FCC8',
+            'coral': '#FFA565',
+            'text-primary': '#E8E3FF',
+            'text-secondary': '#9994B8',
+            'text-dim': '#5A5672',
+          },
+          fontFamily: {
+            'cinzel': ['Cinzel', 'serif'],
+            'ibm': ['IBM Plex Mono', 'monospace'],
+            'mono': ['Space Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* ═══════════════════════════════════════════
+       RESET
+       ═══════════════════════════════════════════ */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      background-color: #080B14;
+      color: #E8E3FF;
+      overflow-x: hidden;
+    }
+
+    /* ═══════════════════════════════════════════
+       STARFIELD — fixed CSS dot pattern
+       ═══════════════════════════════════════════ */
+    .starfield {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(1px 1px at 10% 15%, rgba(232,227,255,0.4), transparent),
+        radial-gradient(1px 1px at 25% 35%, rgba(232,227,255,0.25), transparent),
+        radial-gradient(1.5px 1.5px at 40% 8%, rgba(232,227,255,0.35), transparent),
+        radial-gradient(1px 1px at 55% 42%, rgba(232,227,255,0.2), transparent),
+        radial-gradient(1px 1px at 70% 22%, rgba(88,252,200,0.12), transparent),
+        radial-gradient(1.5px 1.5px at 85% 55%, rgba(232,227,255,0.3), transparent),
+        radial-gradient(1px 1px at 15% 65%, rgba(232,227,255,0.2), transparent),
+        radial-gradient(1px 1px at 35% 78%, rgba(232,227,255,0.35), transparent),
+        radial-gradient(1.5px 1.5px at 60% 72%, rgba(232,227,255,0.25), transparent),
+        radial-gradient(1px 1px at 80% 85%, rgba(232,227,255,0.3), transparent),
+        radial-gradient(1px 1px at 92% 12%, rgba(232,227,255,0.2), transparent),
+        radial-gradient(1px 1px at 48% 92%, rgba(88,252,200,0.1), transparent),
+        radial-gradient(1px 1px at 5% 48%, rgba(232,227,255,0.3), transparent),
+        radial-gradient(1.5px 1.5px at 72% 38%, rgba(232,227,255,0.2), transparent);
+      animation: starfield-breathe 12s ease-in-out infinite;
+    }
+
+    @keyframes starfield-breathe {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
+    /* ═══════════════════════════════════════════
+       GLOBAL TYPOGRAPHY
+       ═══════════════════════════════════════════ */
+    h1, h2, h3, .headline {
+      font-family: 'Cinzel', serif;
+      font-weight: 400;
+    }
+
+    .body-text, p {
+      font-family: 'IBM Plex Serif', serif;
+      letter-spacing: 0.01em;
+    }
+
+    em {
+      color: #E8E3FF;
+      font-style: normal;
+    }
+
+    /* ═══════════════════════════════════════════
+       NAVIGATION
+       ═══════════════════════════════════════════ */
+    .logo-container {
+      opacity: 0.7;
+      transition: opacity 0.3s ease, filter 0.3s ease;
+    }
+
+    .logo-container:hover {
+      opacity: 1;
+      filter: drop-shadow(0 0 12px #58FCC8) drop-shadow(0 0 24px rgba(88, 252, 200, 0.4));
+    }
+
+    .nav-link {
+      font-family: 'Space Mono', monospace;
+      font-size: 14px;
+      color: #9994B8;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link:hover { color: #58FCC8; }
+
+    .nav-link.active {
+      color: #E8E3FF;
+    }
+
+    .nav-separator {
+      color: #5A5672;
+      margin: 0 12px;
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      z-index: 60;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: #E8E3FF;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .nav-desktop { display: flex; align-items: center; }
+
+    .nav-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(14, 18, 32, 0.92);
+      z-index: 55;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav-overlay.open { display: flex; opacity: 1; }
+
+    .nav-overlay a {
+      font-family: 'Space Mono', monospace;
+      font-size: 18px;
+      letter-spacing: 0.15em;
+      color: #9994B8;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-overlay a:hover { color: #58FCC8; }
+    .nav-overlay a.active { color: #E8E3FF; }
+
+    @media (max-width: 1023px) {
+      .nav-logo { height: 32px; }
+      .hamburger { display: flex; }
+      .nav-desktop { display: none; }
+    }
+
+    @media (min-width: 1024px) {
+      .nav-overlay { display: none !important; }
+    }
+
+    /* ═══════════════════════════════════════════
+       CONTENT SECTIONS
+       ═══════════════════════════════════════════ */
+    .content-max {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* ═══════════════════════════════════════════
+       HERO
+       ═══════════════════════════════════════════ */
+    .signals-hero {
+      min-height: 50vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-top: 140px;
+      padding-bottom: 80px;
+    }
+
+    .hero-icon {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 20px;
+      opacity: 0.7;
+    }
+
+    .hero-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #9994B8;
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 4vw, 52px);
+      line-height: 1.25;
+      color: #E8E3FF;
+      letter-spacing: 0.04em;
+      margin-bottom: 24px;
+    }
+
+    .hero-desc {
+      font-family: 'IBM Plex Serif', serif;
+      font-size: 16px;
+      line-height: 1.85;
+      color: #9994B8;
+      max-width: 640px;
+      letter-spacing: 0.01em;
+    }
+
+    /* ═══════════════════════════════════════════
+       DIVIDER
+       ═══════════════════════════════════════════ */
+    .zone-divider {
+      height: 1px;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(88,252,200,0.15) 20%,
+        rgba(88,252,200,0.25) 50%,
+        rgba(88,252,200,0.15) 80%,
+        transparent 100%
+      );
+    }
+
+    /* ═══════════════════════════════════════════
+       FEATURED READINGS (3 prominent cards)
+       ═══════════════════════════════════════════ */
+    .featured-section {
+      padding: 80px 0 60px;
+    }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #9994B8;
+      margin-bottom: 32px;
+    }
+
+    .featured-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2px;
+    }
+
+    .featured-card {
+      padding: 32px 28px;
+      border-top: 2px solid;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      min-height: 260px;
+      transition: background 0.3s ease;
+    }
+
+    .featured-card:hover {
+      background: rgba(232,227,255,0.02);
+    }
+
+    .featured-card.foundation { border-color: rgba(88,252,200,0.35); }
+    .featured-card.mechanism { border-color: rgba(232,227,255,0.2); }
+    .featured-card.philosophy { border-color: rgba(255,165,101,0.3); }
+
+    .fc-icon {
+      width: 28px;
+      height: 28px;
+      margin-bottom: 16px;
+      opacity: 0.6;
+    }
+
+    .fc-category {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #9994B8;
+      margin-bottom: 10px;
+    }
+
+    .fc-title {
+      font-family: 'Cinzel', serif;
+      font-size: 18px;
+      letter-spacing: 0.04em;
+      line-height: 1.35;
+      margin-bottom: 12px;
+    }
+
+    .featured-card.foundation .fc-title { color: #58FCC8; }
+    .featured-card.mechanism .fc-title { color: #E8E3FF; }
+    .featured-card.philosophy .fc-title { color: #FFA565; }
+
+    .fc-desc {
+      font-family: 'IBM Plex Serif', serif;
+      font-size: 14px;
+      line-height: 1.75;
+      color: #9994B8;
+      flex-grow: 1;
+    }
+
+    .fc-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: #9994B8;
+      margin-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .fc-link {
+      color: rgba(88,252,200,0.5);
+      transition: color 0.3s ease;
+    }
+
+    .featured-card:hover .fc-link { color: #58FCC8; }
+    .featured-card.philosophy .fc-link { color: rgba(255,165,101,0.5); }
+    .featured-card.philosophy:hover .fc-link { color: #FFA565; }
+
+    /* ═══════════════════════════════════════════
+       CATEGORY SECTIONS (with side panel)
+       ═══════════════════════════════════════════ */
+    .category-section {
+      padding: 80px 0;
+    }
+
+    .category-layout {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .category-icon {
+      width: 32px;
+      height: 32px;
+      opacity: 0.6;
+    }
+
+    .category-name {
+      font-family: 'Cinzel', serif;
+      font-size: 22px;
+      letter-spacing: 0.04em;
+      color: #E8E3FF;
+    }
+
+    .category-desc {
+      font-family: 'IBM Plex Serif', serif;
+      font-size: 15px;
+      line-height: 1.75;
+      color: #9994B8;
+      margin-bottom: 28px;
+      max-width: 600px;
+    }
+
+    /* Article tiles within a category */
+    .article-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .article-tile {
+      display: flex;
+      align-items: baseline;
+      gap: 20px;
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(90,86,114,0.1);
+      text-decoration: none;
+      transition: border-color 0.3s ease;
+    }
+
+    .article-tile:first-child {
+      border-top: 1px solid rgba(90,86,114,0.1);
+    }
+
+    .article-tile:hover {
+      border-color: rgba(88,252,200,0.15);
+    }
+
+    .at-number {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      color: #9994B8;
+      min-width: 24px;
+      flex-shrink: 0;
+    }
+
+    .at-content {
+      flex-grow: 1;
+    }
+
+    .at-title {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 14px;
+      font-weight: 500;
+      color: #E8E3FF;
+      margin-bottom: 4px;
+      letter-spacing: 0.02em;
+      transition: color 0.3s ease;
+    }
+
+    .article-tile:hover .at-title { color: #58FCC8; }
+
+    .at-subtitle {
+      font-family: 'IBM Plex Serif', serif;
+      font-size: 14px;
+      color: #9994B8;
+      line-height: 1.65;
+    }
+
+    .at-read {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      color: #9994B8;
+      flex-shrink: 0;
+      letter-spacing: 0.06em;
+    }
+
+    /* Side panel */
+    .side-panel {
+      position: sticky;
+      top: 100px;
+    }
+
+    .side-card {
+      padding: 24px;
+      border-top: 2px solid rgba(88,252,200,0.15);
+      margin-bottom: 24px;
+      background: rgba(88,252,200,0.015);
+    }
+
+    .side-card.coral-accent {
+      border-color: rgba(255,165,101,0.15);
+      background: rgba(255,165,101,0.015);
+    }
+
+    .sc-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #9994B8;
+      margin-bottom: 14px;
+    }
+
+    .sc-title {
+      font-family: 'Cinzel', serif;
+      font-size: 15px;
+      color: #E8E3FF;
+      letter-spacing: 0.04em;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+
+    .sc-text {
+      font-family: 'IBM Plex Serif', serif;
+      font-size: 13px;
+      line-height: 1.75;
+      color: #9994B8;
+    }
+
+    .sc-text em {
+      color: #E8E3FF;
+    }
+
+    .sc-link {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: rgba(88,252,200,0.5);
+      text-decoration: none;
+      margin-top: 12px;
+      transition: color 0.3s ease;
+    }
+
+    .sc-link:hover { color: #58FCC8; }
+
+    .sc-link.coral {
+      color: rgba(255,165,101,0.5);
+    }
+
+    .sc-link.coral:hover { color: #FFA565; }
+
+    .sc-divider {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .sc-dim-item {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      color: #9994B8;
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+      border-bottom: 1px solid rgba(90,86,114,0.08);
+    }
+
+    .sc-dim-label { color: #9994B8; }
+    .sc-dim-value { color: #9994B8; font-size: 12px; }
+
+    /* ═══════════════════════════════════════════
+       BOTTOM CTA
+       ═══════════════════════════════════════════ */
+    .cta-section {
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    .cta-statement {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(20px, 2.5vw, 28px);
+      color: #E8E3FF;
+      letter-spacing: 0.04em;
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+
+    .cta-sub {
+      font-family: 'IBM Plex Serif', serif;
+      font-size: 16px;
+      color: #9994B8;
+      line-height: 1.75;
+      margin-bottom: 32px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #FFA565;
+      text-decoration: none;
+      padding: 14px 32px;
+      border: 1px solid rgba(255,165,101,0.3);
+      transition: all 0.3s ease;
+    }
+
+    .cta-button:hover {
+      border-color: #FFA565;
+      background: rgba(255,165,101,0.05);
+    }
+
+    /* ═══════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════ */
+    .site-footer {
+      padding: 80px 40px 48px 40px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      height: 46px;
+      opacity: 0.5;
+      margin-bottom: 32px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .nav-logo {
+      height: 41px;
+      width: auto;
+    }
+
+    .footer-nav {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      margin-bottom: 24px;
+    }
+
+    .footer-nav a {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      color: #9994B8;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-nav a:hover { color: #E8E3FF; }
+
+    .footer-contact {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      color: #9994B8;
+      margin-bottom: 16px;
+    }
+
+    .footer-contact a {
+      color: #9994B8;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-contact a:hover { color: #9994B8; }
+
+    .footer-tagline {
+      font-family: 'IBM Plex Serif', serif;
+      font-size: 15px;
+      letter-spacing: 0.02em;
+      color: #9994B8;
+      margin-bottom: 16px;
+    }
+
+    .footer-copyright {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      color: #7A7594;
+    }
+
+    /* ═══════════════════════════════════════════
+       SCROLL REVEAL
+       ═══════════════════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.12s; }
+    .reveal-delay-2 { transition-delay: 0.24s; }
+    .reveal-delay-3 { transition-delay: 0.36s; }
+
+    /* ═══════════════════════════════════════════
+       RESPONSIVE
+       ═══════════════════════════════════════════ */
+    @media (max-width: 1023px) {
+      .category-layout {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .side-panel {
+        position: static;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      body {
+        font-size: 16px;
+        line-height: 1.75;
+      }
+
+      .content-max {
+        padding: 0 24px;
+      }
+
+      .signals-hero {
+        padding-top: 120px;
+        padding-bottom: 60px;
+      }
+
+      .featured-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .featured-card {
+        min-height: auto;
+      }
+
+      .article-tile {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .at-read {
+        align-self: flex-start;
+      }
+
+      .side-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .site-footer {
+        padding: 48px 24px;
+      }
+
+      .footer-nav {
+        flex-direction: column;
+        gap: 16px;
+      }
+    }
+
+    /* ═══════════════════════════════════════════
+       NO-JS FALLBACK
+       ═══════════════════════════════════════════ */
+    .no-js .reveal {
+      opacity: 1;
+      transform: none;
+    }
+      .page-subtitle { font-family: "Cinzel", serif; font-size: 15px; letter-spacing: 0.08em; text-transform: none; font-weight: 400; color: var(--dim-text); margin-top: 16px; margin-bottom: 0; }
+  </style>
+</head>
+<body>
+  <!-- Starfield background -->
+  <div class="starfield"></div>
+
+  <!-- ═══════════════════════════════════════════
+       NAVIGATION
+       ═══════════════════════════════════════════ -->
+  <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-5 flex justify-between items-center">
+    <a href="/" class="logo-container block">
+      <img src="../assets/Basewaves_logo.svg" alt="BASEWAVES" class="nav-logo">
+    </a>
+
+    <div class="nav-desktop">
+      <a href="/" class="nav-link">HOME</a>
+      <span class="nav-separator">|</span>
+      <a href="/origin/" class="nav-link">ORIGIN</a>
+      <span class="nav-separator">|</span>
+      <a href="/portal/" class="nav-link">PORTAL</a>
+      <span class="nav-separator">|</span>
+      <a href="/signals/" class="nav-link active">SIGNALS</a>
+    </div>
+
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Nav Overlay -->
+  <div class="nav-overlay" id="navOverlay">
+    <a href="/">HOME</a>
+    <a href="/origin/">ORIGIN</a>
+    <a href="/portal/">PORTAL</a>
+    <a href="/signals/" class="active">SIGNALS</a>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       HERO
+       ═══════════════════════════════════════════ -->
+  <section class="signals-hero content-max">
+
+    <!-- icon-signal.svg inline -->
+    <svg class="hero-icon reveal" viewBox="0 0 48 48" fill="none" stroke="#58FCC8" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="4,32 16,32 20,32 22,18 24,8 26,28 28,36 30,32 44,32" />
+    </svg>
+
+    <div class="hero-label reveal reveal-delay-1">Readings in Signal Literacy</div>
+
+    <h1 class="hero-title reveal reveal-delay-1">Signals</h1>
+    <p class="page-subtitle reveal reveal-delay-1">Essays on strength training, stress, nervous system science, and what the fitness industry misses</p>
+
+    <p class="hero-desc reveal reveal-delay-2">
+      Writing on what strength training actually develops beyond muscle, beyond metrics, beyond the standard conversation. For those who want substrate. The neuroscience behind what happens when the weight gets heavy enough to quiet the mental noise. The mechanism that lets resistance teach what discipline cannot. <em>Initiatory content that earns its complexity.</em>
+    </p>
+
+  </section>
+
+  <div class="zone-divider"></div>
+
+  <!-- ═══════════════════════════════════════════
+       FEATURED READINGS
+       ═══════════════════════════════════════════ -->
+  <section class="featured-section content-max">
+
+    <div class="section-label reveal">Start here</div>
+
+    <div class="featured-grid">
+
+      <a href="/signals/where-signal-becomes-signature/" class="featured-card foundation reveal">
+        <!-- icon-wave inline -->
+        <svg class="fc-icon" viewBox="0 0 48 48" fill="none" stroke="#58FCC8" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 24 C8 12, 12 12, 16 24 C20 36, 24 36, 28 24 C32 12, 36 12, 40 24" />
+        </svg>
+        <div class="fc-category">Foundation</div>
+        <div class="fc-title">Where Signal Becomes Signature</div>
+        <div class="fc-desc">The radio antenna metaphor. Five stages of signal literacy development — from undifferentiated noise to composed coherence. Your entry point into reading what the body is already broadcasting.</div>
+        <div class="fc-meta">
+          <span>8 min read</span>
+          <span class="fc-link">Read &rarr;</span>
+        </div>
+      </a>
+
+      <a href="/signals/embodied-existentialism/" class="featured-card mechanism reveal reveal-delay-1">
+        <!-- icon-focus inline -->
+        <svg class="fc-icon" viewBox="0 0 48 48" fill="none" stroke="#58FCC8" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="24" cy="24" r="18" opacity="0.4" />
+          <circle cx="24" cy="24" r="11" />
+          <circle cx="24" cy="24" r="5" />
+          <circle cx="24" cy="24" r="1.5" fill="#58FCC8" stroke="none" />
+        </svg>
+        <div class="fc-category">Mechanism</div>
+        <div class="fc-title">Embodied Existentialism</div>
+        <div class="fc-desc">Heavy resistance creates transient hypofrontality that forces existential processing. Why barbell succeeds where meditation invites. The metabolic mechanism behind authentic existence under load.</div>
+        <div class="fc-meta">
+          <span>12 min read</span>
+          <span class="fc-link">Read &rarr;</span>
+        </div>
+      </a>
+
+      <a href="/signals/gravity-forces-presence/" class="featured-card philosophy reveal reveal-delay-2">
+        <!-- icon-petal inline -->
+        <svg class="fc-icon" viewBox="0 0 48 48" fill="none" stroke="#FFA565" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M24 6 C28 14, 36 22, 36 30 C36 36, 30 42, 24 42 C18 42, 12 36, 12 30 C12 22, 20 14, 24 6Z" />
+        </svg>
+        <div class="fc-category">Manifesto</div>
+        <div class="fc-title">Gravity Forces Presence</div>
+        <div class="fc-desc">The core manifesto. Challenging cognitive-dominant culture, the 7:1 ratio, metabolic forcing, and why you cannot think your way out of a sensing problem. The case for Spatial Strength Training.</div>
+        <div class="fc-meta">
+          <span>10 min read</span>
+          <span class="fc-link">Read &rarr;</span>
+        </div>
+      </a>
+
+    </div>
+
+  </section>
+
+  <div class="zone-divider"></div>
+
+  <!-- ═══════════════════════════════════════════
+       FOUNDATION + SIDE PANEL
+       ═══════════════════════════════════════════ -->
+  <section class="category-section content-max">
+    <div class="category-layout">
+
+      <div class="reveal">
+        <div class="category-header">
+          <!-- icon-seven inline -->
+          <svg class="category-icon" viewBox="0 0 48 48" fill="none" stroke="#58FCC8" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="14" y1="38" x2="8" y2="10" />
+            <line x1="14" y1="38" x2="12" y2="8" />
+            <line x1="14" y1="38" x2="16" y2="7" />
+            <line x1="14" y1="38" x2="20" y2="8" />
+            <line x1="14" y1="38" x2="24" y2="10" />
+            <line x1="14" y1="38" x2="27" y2="13" />
+            <line x1="14" y1="38" x2="29" y2="17" />
+            <line x1="38" y1="38" x2="38" y2="10" />
+          </svg>
+          <h2 class="category-name">Foundation</h2>
+        </div>
+        <p class="category-desc">The biological wiring. What signal literacy is, why you're built for it, and what traditional training inverts.</p>
+
+        <div class="article-list">
+          <a href="/signals/where-signal-becomes-signature/" class="article-tile">
+            <span class="at-number">01</span>
+            <div class="at-content">
+              <div class="at-title">Where Signal Becomes Signature</div>
+              <div class="at-subtitle">Five stages from noise to coherence. The radio antenna metaphor.</div>
+            </div>
+            <span class="at-read">8 min</span>
+          </a>
+          <a href="/signals/seven-to-one/" class="article-tile">
+            <span class="at-number">02</span>
+            <div class="at-content">
+              <div class="at-title">The 7:1 Ratio</div>
+              <div class="at-subtitle">The neuroscience of interoceptive density. Why you have 7 sensors for feeling and 1 for positioning.</div>
+            </div>
+            <span class="at-read">10 min</span>
+          </a>
+          <a href="/signals/perception-as-reflection/" class="article-tile">
+            <span class="at-number">03</span>
+            <div class="at-content">
+              <div class="at-title">Perception as Reflection</div>
+              <div class="at-subtitle">One sentence contains the entire methodology. Unpacking training under tension with intention and full attention.</div>
+            </div>
+            <span class="at-read">7 min</span>
+          </a>
+          <a href="/signals/finding-the-space-between/" class="article-tile">
+            <span class="at-number">04</span>
+            <div class="at-content">
+              <div class="at-title">Finding the Space Between</div>
+              <div class="at-subtitle">BASE cannot be forced. Conditions can be created. A cat purring, and the neuroscience of emergence.</div>
+            </div>
+            <span class="at-read">6 min</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Side panel: SPACE quick reference -->
+      <aside class="side-panel reveal reveal-delay-1">
+        <div class="side-card">
+          <div class="sc-label">Framework Reference</div>
+          <div class="sc-title">SPACE Assessment</div>
+          <div class="sc-text">Five dimensions for reading your signal conditions. Check <em>Curiosity</em> first — if grasping, other readings are suspect.</div>
+          <div class="sc-divider">
+            <div class="sc-dim-item">
+              <span class="sc-dim-label">C &middot; Curiosity</span>
+              <span class="sc-dim-value">Exploring / Grasping</span>
+            </div>
+            <div class="sc-dim-item">
+              <span class="sc-dim-label">E &middot; Estate</span>
+              <span class="sc-dim-value">Biological substrate</span>
+            </div>
+            <div class="sc-dim-item">
+              <span class="sc-dim-label">S &middot; Salience</span>
+              <span class="sc-dim-value">What gets through</span>
+            </div>
+            <div class="sc-dim-item">
+              <span class="sc-dim-label">P &middot; Pitch</span>
+              <span class="sc-dim-value">Neural tempo</span>
+            </div>
+            <div class="sc-dim-item">
+              <span class="sc-dim-label">A &middot; Ambiance</span>
+              <span class="sc-dim-value">Background noise</span>
+            </div>
+          </div>
+          <a href="/portal/" class="sc-link">Enter the Portal &rarr;</a>
+        </div>
+
+        <div class="side-card coral-accent">
+          <div class="sc-label">The Entry Question</div>
+          <div class="sc-title">Can you sense your rhythms?</div>
+          <div class="sc-text">If you paused before answering — <em>these readings are for you.</em> Not everyone needs this. Those who do already suspect something was lost.</div>
+          <a href="/origin/" class="sc-link coral">Read the Origin &rarr;</a>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+
+  <div class="zone-divider"></div>
+
+  <!-- ═══════════════════════════════════════════
+       MECHANISM
+       ═══════════════════════════════════════════ -->
+  <section class="category-section content-max">
+    <div class="category-layout">
+
+      <div class="reveal">
+        <div class="category-header">
+          <!-- icon-focus inline -->
+          <svg class="category-icon" viewBox="0 0 48 48" fill="none" stroke="#58FCC8" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="24" cy="24" r="18" opacity="0.4" />
+            <circle cx="24" cy="24" r="11" />
+            <circle cx="24" cy="24" r="5" />
+            <circle cx="24" cy="24" r="1.5" fill="#58FCC8" stroke="none" />
+          </svg>
+          <h2 class="category-name">Mechanism</h2>
+        </div>
+        <p class="category-desc">How it works. The neuroscience of cognitive silencing, the gateway of salience, and why load reveals what conversation cannot.</p>
+
+        <div class="article-list">
+          <a href="/signals/embodied-existentialism/" class="article-tile">
+            <span class="at-number">01</span>
+            <div class="at-content">
+              <div class="at-title">Embodied Existentialism</div>
+              <div class="at-subtitle">Transient hypofrontality forces existential processing. Why barbell succeeds where meditation invites.</div>
+            </div>
+            <span class="at-read">12 min</span>
+          </a>
+          <a href="/signals/salience-and-spatial-intelligence/" class="article-tile">
+            <span class="at-number">02</span>
+            <div class="at-content">
+              <div class="at-title">Salience and Spatial Intelligence</div>
+              <div class="at-subtitle">The salience network as gatekeeper. How it determines what reaches consciousness. How load amplifies it.</div>
+            </div>
+            <span class="at-read">10 min</span>
+          </a>
+          <a href="/signals/what-waves-actually-does/" class="article-tile">
+            <span class="at-number">03</span>
+            <div class="at-content">
+              <div class="at-title">What WAVES Actually Does</div>
+              <div class="at-subtitle">Multi-timeline integration. Tissue adaptation, neural consolidation, interoceptive deepening, biorhythmic coherence — four clocks, one system.</div>
+            </div>
+            <span class="at-read">9 min</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Side panel: The Three Pillars -->
+      <aside class="side-panel reveal reveal-delay-1">
+        <div class="side-card">
+          <div class="sc-label">The Three Pillars</div>
+          <div class="sc-title">Why Load Works</div>
+          <div class="sc-divider">
+            <div class="sc-dim-item">
+              <span class="sc-dim-label">Cognitive Silencing</span>
+              <span class="sc-dim-value">Dietrich</span>
+            </div>
+            <div class="sc-dim-item">
+              <span class="sc-dim-label">Interoceptive Amplification</span>
+              <span class="sc-dim-value">Craig</span>
+            </div>
+            <div class="sc-dim-item">
+              <span class="sc-dim-label">Active Inference</span>
+              <span class="sc-dim-value">Friston</span>
+            </div>
+          </div>
+          <div class="sc-text" style="margin-top: 14px;">Heavy load starves the prefrontal cortex. Override dissolves. <em>Seven interoceptive channels come online.</em></div>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+
+  <div class="zone-divider"></div>
+
+  <!-- ═══════════════════════════════════════════
+       APPLICATION + POSITIONING
+       ═══════════════════════════════════════════ -->
+  <section class="category-section content-max">
+    <div class="category-layout">
+
+      <div class="reveal">
+        <div class="category-header">
+          <!-- icon-petal inline -->
+          <svg class="category-icon" viewBox="0 0 48 48" fill="none" stroke="#FFA565" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M24 6 C28 14, 36 22, 36 30 C36 36, 30 42, 24 42 C18 42, 12 36, 12 30 C12 22, 20 14, 24 6Z" />
+          </svg>
+          <h2 class="category-name">Application</h2>
+        </div>
+        <p class="category-desc">Where the framework meets the world. Positioning against conventional fitness, the parallel with AI spatial intelligence, and why timing outranks technique.</p>
+
+        <div class="article-list">
+          <a href="/signals/biorhythmic-case/" class="article-tile">
+            <span class="at-number">01</span>
+            <div class="at-content">
+              <div class="at-title">The Biorhythmic Case Against Traditional Fitness</div>
+              <div class="at-subtitle">Why calories-in-calories-out fails. Threat-detection systems under conventional training. The weight gain paradox.</div>
+            </div>
+            <span class="at-read">9 min</span>
+          </a>
+          <a href="/signals/external-vs-internal-spatial-intelligence/" class="article-tile">
+            <span class="at-number">02</span>
+            <div class="at-content">
+              <div class="at-title">External vs. Internal Spatial Intelligence</div>
+              <div class="at-subtitle">Silicon Valley builds external spatial AI for machines. BASEWAVES builds internal spatial intelligence for humans. Two frontiers, one mechanism.</div>
+            </div>
+            <span class="at-read">8 min</span>
+          </a>
+          <a href="/signals/under-tension/" class="article-tile">
+            <span class="at-number">03</span>
+            <div class="at-content">
+              <div class="at-title">Under Tension</div>
+              <div class="at-subtitle">Processing stress through resistance. The barbell as container for what the mind cannot hold. Personal origin, neurological mechanism.</div>
+            </div>
+            <span class="at-read">11 min</span>
+          </a>
+          <a href="/signals/biorhythmic-signature/" class="article-tile">
+            <span class="at-number">04</span>
+            <div class="at-content">
+              <div class="at-title">Your Body's Secret Symphony</div>
+              <div class="at-subtitle">Why timing trumps technique. Biorhythmic signatures, circadian conducting, and the optimization variable nobody tracks.</div>
+            </div>
+            <span class="at-read">7 min</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Side panel: Development Stages -->
+      <aside class="side-panel reveal reveal-delay-1">
+        <div class="side-card coral-accent">
+          <div class="sc-label">Development Arc</div>
+          <div class="sc-title">Signal Literacy Stages</div>
+          <div class="sc-divider">
+            <div class="sc-dim-item">
+              <span class="sc-dim-label">Conductor</span>
+              <span class="sc-dim-value">Observing patterns</span>
+            </div>
+            <div class="sc-dim-item">
+              <span class="sc-dim-label">Musician</span>
+              <span class="sc-dim-value">Collaborating with rhythms</span>
+            </div>
+            <div class="sc-dim-item">
+              <span class="sc-dim-label">Composer</span>
+              <span class="sc-dim-value">Autonomous coherence</span>
+            </div>
+          </div>
+          <div class="sc-text" style="margin-top: 14px;">Week 1: <em>"That was hard."</em><br>Week 8: <em>"My sleep was solid and my left hip is firing better today."</em><br>Week 16: <em>"There. Got it."</em> &mdash; language compresses as sensing sharpens</div>
+        </div>
+
+        <div class="side-card">
+          <div class="sc-label">Core Mechanism</div>
+          <div class="sc-title">The Feedback Loop</div>
+          <div class="sc-text">Load creates tension. Attention channels it. Intention emerges from it. <em>The body does the processing. Training clears the interference.</em></div>
+          <a href="/portal/" class="sc-link">Step through the Portal &rarr;</a>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+
+  <div class="zone-divider"></div>
+
+  <!-- ═══════════════════════════════════════════
+       BOTTOM CTA
+       ═══════════════════════════════════════════ -->
+  <section class="cta-section content-max">
+    <div class="reveal">
+      <div class="cta-statement">Reading is reconnaissance. The territory is felt.</div>
+      <p class="cta-sub">When the substrate makes sense and you're ready to feel it under load &mdash; your BASE is where sessions begin.</p>
+      <a href="mailto:greg@basewaves.com?subject=State Transition Session" class="cta-button">Schedule a State Transition Session</a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════ -->
+  <footer class="site-footer">
+    <img src="../assets/Basewaves_logo.svg" alt="BASEWAVES" class="footer-logo">
+
+    <nav class="footer-nav">
+      <a href="/">HOME</a>
+      <a href="/origin/">ORIGIN</a>
+      <a href="/portal/">PORTAL</a>
+      <a href="/signals/">SIGNALS</a>
+    </nav>
+
+    <p class="footer-contact">
+      <a href="mailto:greg@basewaves.com">greg@basewaves.com</a>
+      <span style="margin: 0 12px; color: #5A5672;">|</span>
+      <a href="tel:+15125853400">512.585.3400</a>
+    </p>
+
+    <p class="footer-tagline">You cannot think your way out of a sensing problem.</p>
+
+    <p class="footer-copyright">&copy; 2026 BASEWAVES</p>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════
+       SCRIPTS
+       ═══════════════════════════════════════════ -->
+  <script>
+    (function() {
+      const gsapAvailable = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
+
+      // Scroll reveal
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+      document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+      if (gsapAvailable) {
+        gsap.registerPlugin(ScrollTrigger);
+      }
+
+      // Hamburger menu
+      const hamburger = document.getElementById('hamburger');
+      const navOverlay = document.getElementById('navOverlay');
+
+      if (hamburger && navOverlay) {
+        hamburger.addEventListener('click', function(e) {
+          e.stopPropagation();
+          hamburger.classList.toggle('active');
+          navOverlay.classList.toggle('open');
+          document.body.style.overflow = navOverlay.classList.contains('open') ? 'hidden' : '';
+        });
+
+        navOverlay.addEventListener('click', function(e) {
+          if (e.target === navOverlay || e.target.tagName === 'A') {
+            hamburger.classList.remove('active');
+            navOverlay.classList.remove('open');
+            document.body.style.overflow = '';
+          }
+        });
+
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && navOverlay.classList.contains('open')) {
+            hamburger.classList.remove('active');
+            navOverlay.classList.remove('open');
+            document.body.style.overflow = '';
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BASEWAVES Icons Preview</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0E1220;
+    color: #E8E3FF;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    padding: 40px;
+  }
+  h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 28px;
+    margin-bottom: 8px;
+    color: #58FCC8;
+  }
+  .subtitle {
+    color: #9994B8;
+    font-size: 14px;
+    margin-bottom: 48px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 32px;
+    max-width: 1200px;
+  }
+  .icon-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 24px;
+    border: 1px solid rgba(88, 252, 200, 0.1);
+    border-radius: 12px;
+    background: rgba(88, 252, 200, 0.02);
+    transition: background 0.2s;
+  }
+  .icon-card:hover {
+    background: rgba(88, 252, 200, 0.06);
+  }
+  .icon-display {
+    width: 48px;
+    height: 48px;
+  }
+  .icon-display-large {
+    width: 80px;
+    height: 80px;
+    opacity: 0.5;
+  }
+  .icon-name {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: #58FCC8;
+    opacity: 0.8;
+  }
+  .icon-label {
+    font-size: 13px;
+    color: #9994B8;
+    text-align: center;
+    line-height: 1.4;
+  }
+  .sizes {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+    margin-top: 4px;
+  }
+  .size-label {
+    font-size: 10px;
+    color: #5A5672;
+    text-align: center;
+  }
+  .progression-section {
+    margin-top: 64px;
+    padding-top: 48px;
+    border-top: 1px solid rgba(88, 252, 200, 0.1);
+  }
+  .progression-section h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 20px;
+    color: #E8E3FF;
+    margin-bottom: 24px;
+  }
+  .progression-row {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    justify-content: center;
+    padding: 32px;
+  }
+  .progression-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .arrow {
+    color: #5A5672;
+    font-size: 24px;
+  }
+  .progression-label {
+    font-size: 12px;
+    color: #9994B8;
+  }
+  .size-32 { width: 32px; height: 32px; }
+  .size-48 { width: 48px; height: 48px; }
+  .size-80 { width: 80px; height: 80px; }
+</style>
+</head>
+<body>
+  <h1>BASEWAVES Icon Set</h1>
+  <p class="subtitle">10 monoline pictograms — stroke-only, #58FCC8, 48×48 viewBox</p>
+
+  <div class="grid">
+    <div class="icon-card">
+      <div class="sizes">
+        <div><img src="icon-petal.svg" class="size-32"><div class="size-label">32px</div></div>
+        <div><img src="icon-petal.svg" class="size-48"><div class="size-label">48px</div></div>
+        <div><img src="icon-petal.svg" class="size-80"><div class="size-label">80px</div></div>
+      </div>
+      <div class="icon-name">icon-petal.svg</div>
+      <div class="icon-label">Spatial Strength / Position</div>
+    </div>
+
+    <div class="icon-card">
+      <div class="sizes">
+        <div><img src="icon-seven.svg" class="size-32"><div class="size-label">32px</div></div>
+        <div><img src="icon-seven.svg" class="size-48"><div class="size-label">48px</div></div>
+        <div><img src="icon-seven.svg" class="size-80"><div class="size-label">80px</div></div>
+      </div>
+      <div class="icon-name">icon-seven.svg</div>
+      <div class="icon-label">The 7:1 Ratio</div>
+    </div>
+
+    <div class="icon-card">
+      <div class="sizes">
+        <div><img src="icon-triad.svg" class="size-32"><div class="size-label">32px</div></div>
+        <div><img src="icon-triad.svg" class="size-48"><div class="size-label">48px</div></div>
+        <div><img src="icon-triad.svg" class="size-80"><div class="size-label">80px</div></div>
+      </div>
+      <div class="icon-name">icon-triad.svg</div>
+      <div class="icon-label">BASEWAVES Framework</div>
+    </div>
+
+    <div class="icon-card">
+      <div class="sizes">
+        <div><img src="icon-focus.svg" class="size-32"><div class="size-label">32px</div></div>
+        <div><img src="icon-focus.svg" class="size-48"><div class="size-label">48px</div></div>
+        <div><img src="icon-focus.svg" class="size-80"><div class="size-label">80px</div></div>
+      </div>
+      <div class="icon-name">icon-focus.svg</div>
+      <div class="icon-label">BASE / Attention</div>
+    </div>
+
+    <div class="icon-card">
+      <div class="sizes">
+        <div><img src="icon-channel.svg" class="size-32"><div class="size-label">32px</div></div>
+        <div><img src="icon-channel.svg" class="size-48"><div class="size-label">48px</div></div>
+        <div><img src="icon-channel.svg" class="size-80"><div class="size-label">80px</div></div>
+      </div>
+      <div class="icon-name">icon-channel.svg</div>
+      <div class="icon-label">SPACE / Signal Conditions</div>
+    </div>
+
+    <div class="icon-card">
+      <div class="sizes">
+        <div><img src="icon-wave.svg" class="size-32"><div class="size-label">32px</div></div>
+        <div><img src="icon-wave.svg" class="size-48"><div class="size-label">48px</div></div>
+        <div><img src="icon-wave.svg" class="size-80"><div class="size-label">80px</div></div>
+      </div>
+      <div class="icon-name">icon-wave.svg</div>
+      <div class="icon-label">WAVES / Emergence</div>
+    </div>
+
+    <div class="icon-card">
+      <div class="sizes">
+        <div><img src="icon-conductor.svg" class="size-32"><div class="size-label">32px</div></div>
+        <div><img src="icon-conductor.svg" class="size-48"><div class="size-label">48px</div></div>
+        <div><img src="icon-conductor.svg" class="size-80"><div class="size-label">80px</div></div>
+      </div>
+      <div class="icon-name">icon-conductor.svg</div>
+      <div class="icon-label">Conductor Stage</div>
+    </div>
+
+    <div class="icon-card">
+      <div class="sizes">
+        <div><img src="icon-musician.svg" class="size-32"><div class="size-label">32px</div></div>
+        <div><img src="icon-musician.svg" class="size-48"><div class="size-label">48px</div></div>
+        <div><img src="icon-musician.svg" class="size-80"><div class="size-label">80px</div></div>
+      </div>
+      <div class="icon-name">icon-musician.svg</div>
+      <div class="icon-label">Musician Stage</div>
+    </div>
+
+    <div class="icon-card">
+      <div class="sizes">
+        <div><img src="icon-composer.svg" class="size-32"><div class="size-label">32px</div></div>
+        <div><img src="icon-composer.svg" class="size-48"><div class="size-label">48px</div></div>
+        <div><img src="icon-composer.svg" class="size-80"><div class="size-label">80px</div></div>
+      </div>
+      <div class="icon-name">icon-composer.svg</div>
+      <div class="icon-label">Composer Stage</div>
+    </div>
+
+    <div class="icon-card">
+      <div class="sizes">
+        <div><img src="icon-signal.svg" class="size-32"><div class="size-label">32px</div></div>
+        <div><img src="icon-signal.svg" class="size-48"><div class="size-label">48px</div></div>
+        <div><img src="icon-signal.svg" class="size-80"><div class="size-label">80px</div></div>
+      </div>
+      <div class="icon-name">icon-signal.svg</div>
+      <div class="icon-label">Signals / Articles</div>
+    </div>
+  </div>
+
+  <!-- Progression Section -->
+  <div class="progression-section">
+    <h2>Conductor → Musician → Composer Progression</h2>
+    <div class="progression-row">
+      <div class="progression-item">
+        <img src="icon-conductor.svg" class="size-80">
+        <div class="progression-label">Conductor (Rigid)</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="progression-item">
+        <img src="icon-musician.svg" class="size-80">
+        <div class="progression-label">Musician (Flow)</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="progression-item">
+        <img src="icon-composer.svg" class="size-80">
+        <div class="progression-label">Composer (Emergence)</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Space Between | BASEWAVES Signals</title>
+<meta name="description" content="The signal was always there. The reception wasn't. An essay on what opens when the narrator runs out of fuel — and what it takes to stay.">
+<meta property="og:title" content="The Space Between | BASEWAVES Signals">
+<meta property="og:description" content="The signal was always there. The reception wasn't. An essay on what opens when the narrator runs out of fuel — and what it takes to stay.">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Serif:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root { --base-blue: #0E1220; --deep-blue: #080B14; --lighter-blue: #141B2E; --primary-text: #E8E3FF; --secondary-text: #9994B8; --dim-text: #5A5672; --turquoise: #58FCC8; --coral: #FFA565; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--deep-blue); color: var(--primary-text); font-family: 'IBM Plex Mono', monospace; font-size: 14px; line-height: 1.7; letter-spacing: 0.03em; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+  .starfield { position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 0; background: radial-gradient(1px 1px at 10% 15%, rgba(232,227,255,0.4), transparent), radial-gradient(1px 1px at 25% 35%, rgba(232,227,255,0.25), transparent), radial-gradient(1.5px 1.5px at 40% 8%, rgba(232,227,255,0.35), transparent), radial-gradient(1px 1px at 55% 42%, rgba(232,227,255,0.2), transparent), radial-gradient(1px 1px at 70% 22%, rgba(88,252,200,0.12), transparent), radial-gradient(1.5px 1.5px at 85% 55%, rgba(232,227,255,0.3), transparent), radial-gradient(1px 1px at 15% 65%, rgba(232,227,255,0.2), transparent), radial-gradient(1px 1px at 35% 78%, rgba(232,227,255,0.35), transparent), radial-gradient(1.5px 1.5px at 60% 72%, rgba(232,227,255,0.25), transparent), radial-gradient(1px 1px at 80% 85%, rgba(232,227,255,0.3), transparent), radial-gradient(1px 1px at 92% 12%, rgba(232,227,255,0.2), transparent), radial-gradient(1px 1px at 48% 92%, rgba(88,252,200,0.1), transparent), radial-gradient(1px 1px at 5% 48%, rgba(232,227,255,0.3), transparent), radial-gradient(1.5px 1.5px at 72% 38%, rgba(232,227,255,0.2), transparent); animation: starfield-breathe 12s ease-in-out infinite; }
+  @keyframes starfield-breathe { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+  .zone { position: relative; z-index: 1; }
+  .zone-inner { max-width: 720px; margin: 0 auto; padding: 0 48px; }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.12s; } .reveal-delay-2 { transition-delay: 0.24s; }
+
+  /* Nav */
+  .site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; transition: background 0.4s ease, backdrop-filter 0.4s ease; }
+  .site-nav.scrolled { background: rgba(14, 18, 32, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+  .logo-container { display: block; opacity: 0.7; transition: opacity 0.3s ease, filter 0.3s ease; }
+  .logo-container:hover { opacity: 1; filter: drop-shadow(0 0 12px var(--turquoise)) drop-shadow(0 0 24px rgba(88, 252, 200, 0.4)); }
+  .nav-logo { height: 41px; width: auto; }
+  .nav-link { font-family: 'Space Mono', monospace; font-size: 15px; color: var(--secondary-text); text-decoration: none; letter-spacing: 0.05em; transition: color 0.3s ease; }
+  .nav-link:hover { color: var(--turquoise); } .nav-link.active { color: var(--primary-text); }
+  .nav-separator { color: var(--dim-text); margin: 0 12px; } .nav-desktop { display: flex; align-items: center; }
+  .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 28px; height: 28px; cursor: pointer; z-index: 60; background: none; border: none; padding: 0; }
+  .hamburger span { display: block; width: 100%; height: 2px; background-color: var(--primary-text); transition: transform 0.3s ease, opacity 0.3s ease; }
+  .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .nav-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(14, 18, 32, 0.92); z-index: 55; flex-direction: column; justify-content: center; align-items: center; gap: 40px; opacity: 0; transition: opacity 0.3s ease; }
+  .nav-overlay.open { display: flex; opacity: 1; }
+  .nav-overlay a { font-family: 'Space Mono', monospace; font-size: 18px; letter-spacing: 0.15em; color: var(--secondary-text); text-decoration: none; transition: color 0.3s ease; }
+  .nav-overlay a:hover { color: var(--turquoise); } .nav-overlay a.active { color: var(--primary-text); }
+  @media (max-width: 1023px) { .nav-logo { height: 32px; } .hamburger { display: flex; } .nav-desktop { display: none; } }
+  @media (min-width: 1024px) { .nav-overlay { display: none !important; } }
+
+  /* Essay header */
+  .essay-header { padding: 160px 0 60px; text-align: center; }
+  .essay-label { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--secondary-text); margin-bottom: 24px; }
+  .essay-label a { color: var(--secondary-text); text-decoration: none; transition: color 0.3s ease; }
+  .essay-label a:hover { color: var(--turquoise); }
+  .essay-title { font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(28px, 4vw, 44px); letter-spacing: 0.06em; color: var(--primary-text); margin-bottom: 16px; line-height: 1.3; }
+  .essay-provocation { font-family: 'IBM Plex Serif', serif; font-size: 17px; font-style: italic; color: var(--secondary-text); margin-bottom: 16px; }
+  .essay-meta { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--dim-text); letter-spacing: 0.08em; }
+
+  /* Zone divider */
+  .zone-divider { height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(88,252,200,0.15) 20%, rgba(88,252,200,0.25) 50%, rgba(88,252,200,0.15) 80%, transparent 100%); position: relative; z-index: 1; }
+
+  /* Essay body */
+  .essay-body { padding: 60px 0 80px; }
+  .essay-body p { font-family: 'IBM Plex Serif', serif; font-size: 16px; line-height: 1.85; color: var(--secondary-text); margin-bottom: 28px; letter-spacing: 0.01em; }
+  .essay-body p em { color: var(--primary-text); font-style: normal; }
+  .essay-body p strong { color: var(--primary-text); font-weight: 500; }
+  .essay-body .section-break { height: 48px; display: flex; align-items: center; justify-content: center; margin: 12px 0; }
+  .essay-body .section-break::before { content: ''; width: 40px; height: 1px; background: linear-gradient(90deg, transparent, rgba(88,252,200,0.25), transparent); }
+  .essay-body .signal-line { font-family: 'IBM Plex Serif', serif; font-size: 17px; line-height: 1.85; color: var(--primary-text); margin-bottom: 28px; }
+  .essay-body .turquoise-line { font-family: 'IBM Plex Serif', serif; font-size: 17px; line-height: 1.85; color: var(--turquoise); margin-bottom: 28px; }
+
+  /* Sources */
+  .sources { margin-top: 16px; padding-top: 24px; border-top: 1px solid rgba(88,252,200,0.08); }
+  .sources-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim-text); margin-bottom: 16px; }
+  .sources p:not(.sources-label) { font-family: 'IBM Plex Serif', serif; font-size: 13px; line-height: 1.7; color: var(--secondary-text); margin-bottom: 8px; }
+
+  /* Essay end navigation */
+  .essay-end { padding: 40px 0 80px; text-align: center; }
+  .essay-back { font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.08em; color: var(--turquoise); text-decoration: none; transition: color 0.3s ease; }
+  .essay-back:hover { color: var(--primary-text); }
+
+  /* Footer */
+  .zone-footer { padding: 60px 0 80px; background: var(--deep-blue); border-top: 1px solid rgba(88,252,200,0.08); }
+  .zone-footer .zone-inner { max-width: 900px; }
+  .footer-territory { display: flex; justify-content: space-between; align-items: start; }
+  .footer-left { max-width: 400px; }
+  .footer-statement { font-family: 'Cinzel', serif; font-size: 15px; color: var(--primary-text); letter-spacing: 0.04em; line-height: 1.5; margin-bottom: 8px; }
+  .footer-sub { font-family: 'IBM Plex Serif', serif; font-size: 13px; color: var(--secondary-text); line-height: 1.6; }
+  .footer-right { text-align: right; }
+  .footer-cta { display: inline-block; font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--coral); text-decoration: none; padding: 12px 28px; border: 1px solid rgba(255,165,101,0.3); transition: all 0.3s ease; margin-bottom: 16px; }
+  .footer-cta:hover { border-color: var(--coral); background: rgba(255,165,101,0.05); }
+  .footer-contact { font-size: 13px; color: var(--secondary-text); line-height: 1.8; }
+  .footer-contact a { color: var(--turquoise); text-decoration: none; border-bottom: 1px solid rgba(88,252,200,0.15); }
+  .footer-contact a:hover { border-color: var(--turquoise); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; }
+  .footer-logo { width: 36px; height: 24px; opacity: 0.25; } .footer-logo path { fill: var(--primary-text); }
+  .footer-tm { font-size: 12px; color: rgba(90,86,114,0.5); letter-spacing: 0.06em; }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .zone-inner { padding: 0 24px; }
+    .essay-header { padding: 120px 0 40px; }
+    .footer-territory { flex-direction: column; gap: 40px; }
+    .footer-right { text-align: left; }
+    .footer-bottom { flex-direction: column; gap: 12px; align-items: flex-start; }
+  }
+
+  .no-js .reveal { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+<nav class="site-nav" id="siteNav"><a href="/" class="logo-container"><img src="../../assets/Basewaves_logo.svg" alt="BASEWAVES" class="nav-logo"></a><div class="nav-desktop"><a href="/" class="nav-link">HOME</a><span class="nav-separator">|</span><a href="/origin/" class="nav-link">ORIGIN</a><span class="nav-separator">|</span><a href="/portal/" class="nav-link">PORTAL</a><span class="nav-separator">|</span><a href="/signals/" class="nav-link active">SIGNALS</a></div><button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button></nav>
+<div class="nav-overlay" id="navOverlay"><a href="/">HOME</a><a href="/origin/">ORIGIN</a><a href="/portal/">PORTAL</a><a href="/signals/" class="active">SIGNALS</a></div>
+<div class="starfield"></div>
+
+<!-- ===================================================================
+     ESSAY HEADER
+     =================================================================== -->
+<section class="zone essay-header">
+  <div class="zone-inner">
+    <div class="essay-label reveal"><a href="/signals/">&larr; Signals</a> &middot; 02</div>
+    <h1 class="essay-title reveal reveal-delay-1">The Space Between</h1>
+    <p class="essay-provocation reveal reveal-delay-1">"The signal was always there. The reception wasn't."</p>
+    <div class="essay-meta reveal reveal-delay-2">8 min read</div>
+  </div>
+</section>
+<div class="zone-divider"></div>
+
+<!-- ===================================================================
+     ESSAY BODY
+     =================================================================== -->
+<section class="zone essay-body">
+  <div class="zone-inner">
+
+    <p class="signal-line reveal">The narrator went quiet.</p>
+
+    <p class="reveal">Now what?</p>
+
+    <p class="reveal">Three reps into a heavy squat and the mental chatter just &mdash; stopped. Not because you told it to. Because the load ate its lunch money.</p>
+
+    <p class="reveal">In the silence where all that planning and worrying used to live. Something opened.</p>
+
+    <p class="reveal">Not emptiness. <em>Bandwidth.</em></p>
+
+    <p class="reveal">Reception blowing wide open &mdash; signals from feet, fascia, breath, joints, internal pressure systems all arriving at once because the cognitive bias that was filtering them just ran out of fuel. Everything your body had been transmitting, now with room to land.</p>
+
+    <p class="reveal">You've been here before. Mid-set. Mid-movement. The moment the lift stops being mechanical and becomes spatial.</p>
+
+    <p class="reveal">You felt it. Couldn't name it. And because you couldn't name it, couldn't get back on purpose.</p>
+
+    <p class="turquoise-line reveal">That territory is what this essay is about.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">The door opens reliably. Load amplifies the body's signal, metabolic demand bankrupts the narrator, controlled tempo holds the window open. That mechanism is mapped elsewhere.</p>
+
+    <p class="reveal">The problem is what happens after.</p>
+
+    <p class="reveal">I watch it every week. Someone hits the spatial state mid-set &mdash; you can see it in their eyes, in the sudden quality shift, in the quiet &mdash; and then one of two things.</p>
+
+    <p class="reveal">They try to hold it. <em>There it is. Don't lose it. Keep doing whatever I just did.</em> And the grabbing reactivates the very machinery that was supposed to be offline. The narrator boots back up: <em>I'm in the zone, this is the zone, don't blow it.</em> Gone.</p>
+
+    <p class="reveal">Or they float. Drift through without direction, without participating. Like sitting in a concert hall with your eyes closed &mdash; the music washes over you but you're not <em>in</em> it. Peaceful. Useless.</p>
+
+    <p class="turquoise-line reveal">Both fail the same way: treating the space as a state to achieve rather than a territory to navigate.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">Before anything else. Before &ldquo;what do I feel&rdquo; or &ldquo;how heavy is this&rdquo; or &ldquo;what's my form doing&rdquo; &mdash;</p>
+
+    <p class="signal-line reveal"><em>Am I exploring, or am I grasping?</em></p>
+
+    <p class="reveal">Binary. One or the other.</p>
+
+    <p class="reveal">You know grasping. You approach the set with an expectation &mdash; it should feel like last time, you should hit the same numbers, the movement should match the template. Sensation arrives and your first impulse is to check it against the prediction. <em>Did the bar path match? Was the depth right? Am I doing this correctly?</em></p>
+
+    <p class="reveal">I am what I lift. I am my numbers. I am my plan executed. Erich Fromm called this having mode &mdash; the orientation where you are what you possess, what you control, what you measure and compare. Under a barbell, it looks like this: the body becomes property to be managed, and the mind subordinates its signals to the script.</p>
+
+    <p class="reveal">You also know exploring, even if you've only tasted it accidentally. No predetermined interpretation. Sensation arrives and your response is &mdash; <em>what's here?</em> The bar path does what it does. You notice. The depth arrives where it arrives. You feel it. No template.</p>
+
+    <p class="reveal">Fromm called this being mode. Not something you achieve. Something that remains when the achieving mind runs out of fuel. Pressured dialogue doesn't teach you to explore. It bankrupts the grasping orientation so that exploring &mdash; which was always the body's default state, the one it was born in &mdash; can express itself.</p>
+
+    <p class="turquoise-line reveal">Check this first. Because if you're grasping, everything you sense afterward is contaminated by what you expected to find.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="signal-line reveal">Inside the space. Exploring. Receiving.</p>
+
+    <p class="reveal">It all arrives at once &mdash; not a sequence, not a checklist. Five things always present when the door opens, each coloring the others.</p>
+
+    <p class="signal-line reveal">What's getting through.</p>
+
+    <p class="reveal">Your body broadcasts on seven interoceptive channels for every proprioceptive one &mdash; but not all of it reaches consciousness. There's a gate. An editor. Some days the right things arrive with clarity: foot pressure, core tension, hip centration. Other days &mdash; nothing. Lifting in a fog. Or everything floods in at once and you can't tell any of it apart. The editor isn't selecting. It's either asleep or drowning.</p>
+
+    <p class="signal-line reveal">How fast the body is running.</p>
+
+    <p class="reveal">Your nervous system has a tempo today. After real sleep, signals fire fast and clean &mdash; you feel it as crispness, as sharpness, as <em>being here.</em> After four hours, everything arrives through water. Half-second delay between your body speaking and consciousness registering the words. It's not motivation. It's last night's sleep determining how fast your neurons fire today. You already know this feeling. You've been calling it &ldquo;a good day&rdquo; or &ldquo;an off day&rdquo; instead of reading it.</p>
+
+    <p class="signal-line reveal">How much noise you're carrying.</p>
+
+    <p class="reveal">The deadline. The argument. Yesterday's garbage food. Chronic sleep debt. All of it walks into the gym with you, all of it competing with the signal your body sends under load. Some days the barbell speaks clearly. Other days you can barely hear it over the static. That static has a volume &mdash; measurable by feel.</p>
+
+    <p class="reveal">The orientation underneath &mdash; exploring or grasping &mdash; determining whether everything you just sensed is trustworthy or pre-written.</p>
+
+    <p class="reveal">And how deep your reserves run. Not cardiovascular stamina. How long you can sustain this quality of processing before the body degrades. Some days the dialogue holds for forty-five minutes. Some days the space collapses after twenty. Not weakness. Today's honest answer to a question that changes every session.</p>
+
+    <p class="turquoise-line reveal">Five things happening at once. Three you can feel the quality of. One that makes the others trustworthy or suspect. One that tells you how long you can stay.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">What makes this different from RPE or heart rate zones or velocity tracking: where it lives.</p>
+
+    <p class="reveal">Those measure the body from the outside &mdash; step back from the experience, evaluate against a scale, report a number. The assessment happens <em>about</em> the training, not inside it.</p>
+
+    <p class="reveal">These five are sensed from within. You don't step out of the set to evaluate your neural tempo. You <em>feel</em> it &mdash; the crispness or lag. You don't calculate the noise. You <em>hear</em> it &mdash; the clarity or mud. The assessment is the experience. The map is the territory.</p>
+
+    <p class="reveal">This matters because the moment you step outside to check, you reinstall the narrator. The smartwatch on your wrist is the most socially acceptable version of this exit &mdash; mid-set, something shifts, and instead of staying in the felt difference you glance at your heart rate. The number replaces the sensation. Back in the narrator's territory, reading <em>about</em> your body instead of listening to it.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">Here's the thing I couldn't see for twenty years.</p>
+
+    <p class="reveal">The narrator doesn't just narrate. It <em>mediates.</em> Every sensation that passes through it gets translated &mdash; from direct experience into a concept about experience. You don't feel your foot on the ground. You feel your <em>idea</em> of your foot on the ground, filtered through memory, expectation, comparison. That mediation is the alienation. Not a symptom of it. The thing itself.</p>
+
+    <p class="reveal">I used to think the noise was something added to the signal &mdash; interference obscuring an otherwise clean transmission. It's not. The noise is signal intercepted and repackaged before you can receive it raw. Your body sends a sensation. The narrator grabs it, wraps it in a story, hands you the story. You think you felt something. You felt an interpretation of something. And the interpretation arrived so fast you couldn't tell the difference.</p>
+
+    <p class="reveal">Everyone's instinct is the same: remove the load, lie on the mat, scan the body in silence. But that doesn't remove the mediator. It just removes the input. The interpretive layer stays online, narrating what it thinks the body might be experiencing. Still alienated. Just made the alienation quiet.</p>
+
+    <p class="reveal">What load does is bankrupt the mediator in real-time. And what remains &mdash; this is the piece that changes everything &mdash; isn't a new state. It's the <em>original</em> relation. Organism to gravity. Tissue to force. Sensation arriving without editorial. Your body was always in direct contact with the world. You were always in relation. The narrator was converting that relation into a representation, and you were living inside the representation, mistaking your territory to explore for a map to follow.</p>
+
+    <p class="turquoise-line reveal">The space between is what's there when the representation dissolves and the relation comes through raw. Not something you build. Something that was always there &mdash; obscured by a mind that kept insisting it could describe the experience better than you could live it.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="signal-line reveal">Having mode runs out of fuel. Being is what remains.</p>
+
+    <p class="reveal">You didn't learn to be present under that barbell. You ran out of the metabolic resources required to be absent. And in that involuntary presence &mdash; narrator bankrupt, mediator offline, the body's broadcast arriving without editorial &mdash; you found something that was never missing. Just buried. Under the machinery of a mind that believed its own commentary was the experience.</p>
+
+    <p class="reveal">Five coordinates for a landscape that was always under your feet. The space between monologue and silence. Between having and being. Between what you thought you were and what you've always been.</p>
+
+    <p class="reveal">You've entered this territory before. Every time the narrator ran out of fuel mid-set, you were there. You just didn't stay. You reached for a number, a judgment, an analysis, and the reaching reinstated the narrator that closes the door.</p>
+
+    <p class="turquoise-line reveal">Five coordinates won't get you in. Load does that. But they might be the reason you stop walking out.</p>
+
+    <div class="section-break reveal"></div>
+
+    <div class="sources reveal">
+      <p class="sources-label">Sources</p>
+      <p>Fromm, E. (1976). <em>To Have or To Be?</em> Harper &amp; Row.</p>
+      <p>Dietrich, A. (2006). Transient hypofrontality as a mechanism for the psychological effects of exercise. <em>Psychiatry Research</em>, 145(1), 79&ndash;83.</p>
+      <p>Schleip, R. (2003). Fascial plasticity&mdash;a new neurobiological explanation. <em>Journal of Bodywork and Movement Therapies</em>, 7(1), 11&ndash;19.</p>
+      <p>Proske, U., &amp; Gandevia, S. C. (2012). Proprioceptive senses: Their roles in signaling body shape, body position and movement, and muscle force. <em>Physiological Reviews</em>, 92(4), 1651&ndash;1697.</p>
+      <p>Craig, A. D. (2009). How do you feel&mdash;now? The anterior insula and human awareness. <em>Nature Reviews Neuroscience</em>, 10(1), 59&ndash;70.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================================================================
+     ESSAY END NAV
+     =================================================================== -->
+<section class="zone essay-end">
+  <div class="zone-inner reveal">
+    <a href="/signals/" class="essay-back">&larr; Back to Signals</a>
+  </div>
+</section>
+
+<!-- ===================================================================
+     FOOTER
+     =================================================================== -->
+<section class="zone zone-footer">
+  <div class="zone-inner">
+    <div class="footer-territory">
+      <div class="footer-left reveal"><div class="footer-statement">You cannot think your way out of a sensing problem.</div><div class="footer-sub">BASEWAVES identifies the person who already knows something was lost.</div></div>
+      <div class="footer-right reveal reveal-delay-1"><a href="mailto:greg@basewaves.com?subject=State%20Transition%20Session" class="footer-cta">Schedule a State Transition Session</a><div class="footer-contact"><a href="mailto:greg@basewaves.com">greg@basewaves.com</a><br>512.585.3400</div></div>
+    </div>
+    <div class="footer-bottom reveal reveal-delay-2">
+      <svg class="footer-logo" viewBox="0 0 337.62 220.73" preserveAspectRatio="xMidYMid meet"><path d="M188.26,87.4c-8.54-2.09-18.2-6.13-18.04-13.69.16-9.34,4.67-13.54,7.41-15.31,9.83-4.35,16.76-14.18,16.76-25.45,0-15.15-12.25-27.39-27.39-27.39s-27.39,12.25-27.39,27.39c0,11.43,7.09,21.42,17.08,25.45,2.9,1.77,7.08,6.13,7.08,15.31,0,7.57-8.7,11.6-16.59,13.69-15.95,1.77-26.9,5.64-26.9,10.15,0,6.28,21.27,11.27,47.53,11.27s47.53-5,47.53-11.27c0-4.51-11.12-8.39-27.06-10.15h-.02ZM160.06,17.65c-3.87,1.6-6.92,4.67-8.54,8.54-.48,1.28-1.93,1.93-3.06,1.28-1.28-.31-1.93-1.77-1.44-3.06,1.93-5.17,6.13-9.18,11.11-11.28,1.29-.47,2.57.16,3.22,1.29.48,1.28-.16,2.57-1.29,3.22h0ZM92.72,96.27c0,9.99,34,18.04,75.89,18.04s75.89-8.05,75.89-18.04-30.61-17.24-69.6-18.04c-.48-.65-.65-1.13-.97-1.78,53.66.65,96.18,11.28,96.18,24.17s-45.43,24.17-101.5,24.17-101.5-10.8-101.5-24.17,40.92-23.04,93.12-24.01c-.16.65-.48,1.13-.81,1.78-37.54.97-66.7,8.7-66.7,17.88ZM329.72,104.65c0-20.63-69.45-37.38-156.12-37.86-.16.65-.16,1.29-.16,1.93,69.76.48,125.67,14.03,125.67,30.62s-57.99,30.78-129.7,30.78-129.7-13.7-129.7-30.62,53.49-29.65,120.99-30.62c0-.64-.16-1.28-.16-2.09-84.4,1.13-151.43,17.72-151.43,37.86s68.16,37.06,153.54,37.86c.81,1.29,1.13,2.9,1.13,4.51,0,9.18-4.19,13.37-7.08,15.31-9.99,4.03-17.08,13.86-17.08,25.45,0,15.15,12.25,27.39,27.39,27.39s27.39-12.25,27.39-27.39c0-11.27-6.93-21.11-16.76-25.3-2.73-1.77-7.25-5.96-7.41-15.3,0-1.78.48-3.22,1.28-4.68,87.65-.32,158.22-17.07,158.22-37.86h0ZM161.35,205.02c-.48,1.29-1.93,1.77-3.22,1.29-5.16-2.1-9.18-6.13-11.11-11.28-.48-1.28.16-2.57,1.28-3.06,1.29-.47,2.58.16,3.06,1.29,1.45,3.87,4.68,7.09,8.54,8.54,1.45.65,1.94,2.09,1.45,3.22h0Z"/></svg>
+      <div class="footer-tm">&copy; BASEWAVES &middot; Spatial Strength Training&trade; &middot; Austin, TX</div>
+    </div>
+  </div>
+</section>
+
+<script>
+const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+const nav = document.getElementById('siteNav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 80));
+const hb = document.getElementById('hamburger'), ov = document.getElementById('navOverlay');
+hb.addEventListener('click', (e) => { e.stopPropagation(); hb.classList.toggle('active'); ov.classList.toggle('open'); document.body.style.overflow = ov.classList.contains('open') ? 'hidden' : ''; });
+ov.addEventListener('click', (e) => { if (e.target === ov || e.target.tagName === 'A') { hb.classList.remove('active'); ov.classList.remove('open'); document.body.style.overflow = ''; } });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && ov.classList.contains('open')) { hb.classList.remove('active'); ov.classList.remove('open'); document.body.style.overflow = ''; } });
+</script>
+</body>
+</html>

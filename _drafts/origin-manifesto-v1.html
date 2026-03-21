@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ORIGIN | BASEWAVES — Signal Literacy Through Strength</title>
+  <meta name="description" content="The neurological origin of BASEWAVES. How signal literacy became a methodology for restoring what override culture buried.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="ORIGIN | BASEWAVES">
+  <meta property="og:description" content="The neurological origin of BASEWAVES. How signal literacy became a methodology for restoring what override culture buried.">
+  <meta property="og:type" content="website">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Option B Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- GSAP + ScrollTrigger CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'base-bg': '#0E1220',
+            'base-bg-dark': '#080B14',
+            'turquoise': '#58FCC8',
+            'coral': '#FFA565',
+            'text-primary': '#E8E3FF',
+            'text-secondary': '#9994B8',
+            'text-dim': '#5A5672',
+          },
+          fontFamily: {
+            'cinzel': ['Cinzel', 'serif'],
+            'ibm': ['IBM Plex Mono', 'monospace'],
+            'mono': ['Space Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* ═══════════════════════════════════════════
+       RESET
+       ═══════════════════════════════════════════ */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      background-color: #080B14;
+      color: #E8E3FF;
+      overflow-x: hidden;
+    }
+
+    /* ═══════════════════════════════════════════
+       STARFIELD — fixed CSS dot pattern
+       ═══════════════════════════════════════════ */
+    .starfield {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(1px 1px at 10% 15%, rgba(232,227,255,0.4), transparent),
+        radial-gradient(1px 1px at 25% 35%, rgba(232,227,255,0.25), transparent),
+        radial-gradient(1.5px 1.5px at 40% 8%, rgba(232,227,255,0.35), transparent),
+        radial-gradient(1px 1px at 55% 42%, rgba(232,227,255,0.2), transparent),
+        radial-gradient(1px 1px at 70% 22%, rgba(88,252,200,0.12), transparent),
+        radial-gradient(1.5px 1.5px at 85% 55%, rgba(232,227,255,0.3), transparent),
+        radial-gradient(1px 1px at 15% 65%, rgba(232,227,255,0.2), transparent),
+        radial-gradient(1px 1px at 35% 78%, rgba(232,227,255,0.35), transparent),
+        radial-gradient(1.5px 1.5px at 60% 72%, rgba(232,227,255,0.25), transparent),
+        radial-gradient(1px 1px at 80% 85%, rgba(232,227,255,0.3), transparent),
+        radial-gradient(1px 1px at 92% 12%, rgba(232,227,255,0.2), transparent),
+        radial-gradient(1px 1px at 48% 92%, rgba(88,252,200,0.1), transparent),
+        radial-gradient(1px 1px at 5% 48%, rgba(232,227,255,0.3), transparent),
+        radial-gradient(1.5px 1.5px at 72% 38%, rgba(232,227,255,0.2), transparent);
+      animation: starfield-breathe 12s ease-in-out infinite;
+    }
+
+    @keyframes starfield-breathe {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
+    /* ═══════════════════════════════════════════
+       GLOBAL TYPOGRAPHY: Option B — The Architect
+       ═══════════════════════════════════════════ */
+    h1, h2, h3, .headline {
+      font-family: 'Cinzel', serif;
+      font-weight: 400;
+    }
+
+    .body-text, p {
+      font-family: 'IBM Plex Mono', monospace;
+      letter-spacing: 0.15em;
+    }
+
+    /* ═══════════════════════════════════════════
+       NAVIGATION
+       ═══════════════════════════════════════════ */
+    .logo-container {
+      opacity: 0.7;
+      transition: opacity 0.3s ease, filter 0.3s ease;
+    }
+
+    .logo-container:hover {
+      opacity: 1;
+      filter: drop-shadow(0 0 12px #58FCC8) drop-shadow(0 0 24px rgba(88, 252, 200, 0.4));
+    }
+
+    .nav-link {
+      font-family: 'Space Mono', monospace;
+      font-size: 14px;
+      color: #9994B8;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link:hover { color: #58FCC8; }
+
+    .nav-link.active {
+      color: #E8E3FF;
+    }
+
+    .nav-separator {
+      color: #5A5672;
+      margin: 0 12px;
+    }
+
+    /* ═══ HAMBURGER MENU (<1024px) ═══ */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      z-index: 60;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: #E8E3FF;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .nav-desktop {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(14, 18, 32, 0.92);
+      z-index: 55;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav-overlay.open {
+      display: flex;
+      opacity: 1;
+    }
+
+    .nav-overlay a {
+      font-family: 'Space Mono', monospace;
+      font-size: 18px;
+      letter-spacing: 0.15em;
+      color: #9994B8;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-overlay a:hover {
+      color: #58FCC8;
+    }
+
+    .nav-overlay a.active {
+      color: #E8E3FF;
+    }
+
+    @media (max-width: 1023px) {
+      .nav-logo {
+        height: 32px;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-desktop {
+        display: none;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .nav-overlay {
+        display: none !important;
+      }
+    }
+
+    /* ═══════════════════════════════════════════
+       CONTENT SECTIONS
+       ═══════════════════════════════════════════ */
+    .content-column {
+      max-width: 900px;
+      margin: 0 auto;
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+
+    /* Movement 1: Sensorium Opening */
+    .sensorium-section {
+      padding: 30vh 0 16vh 0;
+    }
+
+    .sensorium-section h1 {
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.35;
+      color: #E8E3FF;
+      margin-bottom: 48px;
+    }
+
+    .body-copy {
+      font-size: 15px;
+      letter-spacing: 0.05em;
+      line-height: 1.8;
+      color: #9994B8;
+      margin-bottom: 32px;
+    }
+
+    .signal-line {
+      font-size: 15px;
+      letter-spacing: 0.05em;
+      line-height: 1.8;
+      color: #E8E3FF;
+      margin-bottom: 32px;
+    }
+
+    .turquoise-accent {
+      font-size: 15px;
+      letter-spacing: 0.05em;
+      line-height: 1.8;
+      color: #58FCC8;
+      margin-bottom: 32px;
+    }
+
+    /* Movement sections */
+    .movement-section {
+      padding: 16vh 0;
+    }
+
+    .movement-section h2 {
+      font-size: clamp(22px, 3vw, 32px);
+      line-height: 1.4;
+      color: #E8E3FF;
+      margin-bottom: 40px;
+    }
+
+    /* Indictment block */
+    .indictment {
+      padding: 48px 0;
+      margin: 40px 0;
+    }
+
+    .indictment-line {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 15px;
+      letter-spacing: 0.1em;
+      line-height: 2.4;
+      color: #5A5672;
+    }
+
+    /* Figure container */
+    .figure-container {
+      width: 70%;
+      margin: 64px auto;
+      background: none;
+      border-radius: 0;
+      padding: 0;
+    }
+
+    .figure-container img {
+      width: 100%;
+      height: auto;
+      border-radius: 0;
+      display: block;
+    }
+
+    /* Movement 5: Bio link */
+    .bio-link {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 14px;
+      letter-spacing: 0.15em;
+      color: #58FCC8;
+      text-decoration: none;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    .bio-link:hover {
+      color: #ffffff;
+      text-shadow: 0 0 20px rgba(88, 252, 200, 0.6);
+    }
+
+    /* Movement 6: Filter lines */
+    .filter-line {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 16px;
+      letter-spacing: 0.05em;
+      line-height: 2.2;
+      color: #E8E3FF;
+      margin-bottom: 16px;
+    }
+
+    .method-link {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 14px;
+      letter-spacing: 0.15em;
+      color: #58FCC8;
+      text-decoration: none;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    .method-link:hover {
+      color: #ffffff;
+      text-shadow: 0 0 20px rgba(88, 252, 200, 0.6);
+    }
+
+    /* ═══════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════ */
+    .site-footer {
+      padding: 80px 40px 48px 40px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      height: 46px;
+      opacity: 0.5;
+      margin-bottom: 32px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .nav-logo {
+      height: 41px;
+      width: auto;
+    }
+
+    .footer-nav {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      margin-bottom: 24px;
+    }
+
+    .footer-nav a {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: #9994B8;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-nav a:hover { color: #E8E3FF; }
+
+    .footer-contact {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      color: #5A5672;
+      margin-bottom: 16px;
+    }
+
+    .footer-contact a {
+      color: #5A5672;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-contact a:hover { color: #9994B8; }
+
+    .footer-tagline {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 14px;
+      letter-spacing: 0.05em;
+      color: #5A5672;
+      margin-bottom: 16px;
+    }
+
+    .footer-copyright {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      color: #5A5672;
+    }
+
+    /* ═══════════════════════════════════════════
+       SCROLL REVEAL
+       ═══════════════════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ═══════════════════════════════════════════
+       MOBILE (<768px)
+       ═══════════════════════════════════════════ */
+    @media (max-width: 767px) {
+      .content-column {
+        padding: 0 24px;
+      }
+
+      .sensorium-section {
+        padding: 25vh 0 12vh 0;
+      }
+
+      .sensorium-section h1 {
+        font-size: clamp(1.75rem, 5vw, 2.5rem);
+      }
+
+      .movement-section {
+        padding: 10vh 0;
+      }
+
+      body {
+        font-size: 16px;
+        line-height: 1.75;
+      }
+
+      .figure-container {
+        width: 90%;
+        margin: 48px auto;
+        padding: 0;
+        border-radius: 0;
+      }
+
+      /* Footer */
+      .site-footer {
+        padding: 48px 24px;
+      }
+
+      .footer-nav {
+        flex-direction: column;
+        gap: 16px;
+      }
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+      .content-column {
+        padding: 0 30px;
+      }
+    }
+
+    /* ═══════════════════════════════════════════
+       FALLBACK (no JS)
+       ═══════════════════════════════════════════ */
+    .no-js .reveal {
+      opacity: 1;
+      transform: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Starfield background -->
+  <div class="starfield"></div>
+
+  <!-- ═══════════════════════════════════════════
+       NAVIGATION
+       ═══════════════════════════════════════════ -->
+  <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-5 flex justify-between items-center">
+    <a href="/" class="logo-container block">
+      <img src="../assets/Basewaves_logo.svg" alt="BASEWAVES" class="nav-logo">
+    </a>
+
+    <div class="nav-desktop">
+      <a href="/" class="nav-link">HOME</a>
+      <span class="nav-separator">|</span>
+      <a href="/origin/" class="nav-link active">ORIGIN</a>
+      <span class="nav-separator">|</span>
+      <a href="/portal/" class="nav-link">PORTAL</a>
+      <span class="nav-separator">|</span>
+      <a href="/signals/" class="nav-link">SIGNALS</a>
+    </div>
+
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Nav Overlay -->
+  <div class="nav-overlay" id="navOverlay">
+    <a href="/">HOME</a>
+    <a href="/origin/" class="active">ORIGIN</a>
+    <a href="/portal/">PORTAL</a>
+    <a href="/signals/">SIGNALS</a>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       MOVEMENT 1: SENSORIUM
+       ═══════════════════════════════════════════ -->
+  <section class="sensorium-section">
+    <div class="content-column">
+      <h1 class="reveal">Something fires before the word forms.</h1>
+
+      <p class="body-copy reveal">You feel tension, a collective pressure. You sense a shift but you can't find the words to describe it. A subtle discomfort, an abnormal state, with no explanation. Your chest tightens. You check your surroundings. The room hasn't changed. The body has.</p>
+
+      <p class="body-copy reveal">You've felt this before. The moment between normal and sensing something is different. Not wrong. Not right. Different. A signal arriving before the interpretation.</p>
+
+      <p class="body-copy reveal">You've been taught to override it. Reach for the phone, check the time, label the pressure as anxiety and move on. The signal dissolves into distraction, gets absorbed by life noise. Eventually, your mind stops receiving what you've trained yourself to ignore.</p>
+
+      <p class="signal-line reveal">But your body doesn't stop signaling.</p>
+
+      <p class="body-copy reveal">Right now, beneath every conscious thought you're having, your body is running a signaling operation of staggering complexity. Your fascia — the entangled web of connective tissue that wraps every muscle, organ, and nerve — carries seven interoceptive nerve endings for every one proprioceptive nerve ending. Seven channels sensing how you feel for every one tracking where you are.</p>
+
+      <p class="turquoise-accent reveal">You are wired 7-to-1 for state over position.</p>
+
+      <p class="body-copy reveal">This isn't a metaphor. It's histology. Your body allocates seven times more neural architecture to sensing its own condition than to tracking its location in space. Seven channels of signal, reporting continuously — tension, temperature, pressure, stretch, chemical balance, force, vibration — and one channel of position.</p>
+
+      <p class="body-copy reveal">Your cognitive default has been the one. The seven have been running without you. Your mind's default is distracted, no longer tuned-in to your body's signaling symphony.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       MOVEMENT 2: WHAT WAS BURIED
+       ═══════════════════════════════════════════ -->
+  <section class="movement-section">
+    <div class="content-column">
+      <h2 class="reveal">What Was Buried</h2>
+
+      <p class="body-copy reveal">Somewhere between the stopwatch and the spreadsheet, training became override practice.</p>
+
+      <div class="indictment reveal">
+        <p class="indictment-line">Push through.</p>
+        <p class="indictment-line">Ignore signals.</p>
+        <p class="indictment-line">Chase metrics.</p>
+        <p class="indictment-line">Override what the body sends.</p>
+        <p class="indictment-line">Repeat until numb.</p>
+      </div>
+
+      <p class="body-copy reveal">This ongoing PR quest is the buoy you swim toward. Not because you chose it — because it's the only option anyone presented. The body sends information constantly: fatigue, compensation, misalignment, readiness, capacity, rhythm. The cultural response to all of it became identical: work harder.</p>
+
+      <p class="body-copy reveal">Discomfort meant progress. Silence meant weakness. The person who could override the loudest won.</p>
+
+      <p class="body-copy reveal">And for most people, it worked well enough. Until it didn't. Until the volume accumulated without the capacity. Until the effort increased without the clarity. Until the programs kept failing and the answer was always a different program.</p>
+
+      <p class="body-copy reveal">The cost was never injury — injury is the dramatic version, the one people notice. The cost was literacy. The quiet erosion of your capacity to read what your own body sends. Not because the signal weakened. Because you were trained to produce noise louder than the signal could survive.</p>
+
+      <p class="turquoise-accent reveal">Override culture didn't break your body. It broke your ability to hear it.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       MOVEMENT 3: COMPETENT MATERIAL
+       ═══════════════════════════════════════════ -->
+  <section class="movement-section">
+    <div class="content-column">
+      <h2 class="reveal">Competent Material</h2>
+
+      <p class="body-copy reveal">Your body is not a machine that needs programming. It is an intelligent system that needs communication.</p>
+
+      <p class="body-copy reveal">Every cell in your body participates in a collective intelligence that knows how to build, repair, adapt, and respond — without your conscious instruction. Your immune system solves problems you can't articulate. Your wounds heal through coordination you never orchestrate. Your bones remodel along lines of force without being told which lines matter.</p>
+
+      <p class="signal-line reveal">You are made of competent material.</p>
+
+      <p class="body-copy reveal">This is not poetry. Bioelectric research has demonstrated that cellular collectives store pattern memories, navigate toward goal states, and solve problems in high-dimensional spaces that would overwhelm any conscious calculation. Your body doesn't wait for you to figure out the answer. It is already computing.</p>
+
+      <p class="body-copy reveal">What it needs from you is not instruction. It's signal.</p>
+
+      <p class="body-copy reveal">When you place your hands on a dumbbell and lower into a squat, you are not telling your muscles what to do. You are communicating a constraint — a goal state — to a cellular collective that has been solving movement problems since before you had language. The dumbbell doesn't build you. It speaks to something in you that already knows how to respond.</p>
+
+      <p class="body-copy reveal">Every rep is a signal sent. Every set is a pattern heard. Every session is a conversation between you and competent material — navigating toward coherence within the constraint you've provided.</p>
+
+      <p class="body-copy reveal">You don't build capacity. You clear the interference that prevented capacity from expressing. The capacity was already there. The signal was blocked.</p>
+
+      <p class="signal-line reveal">The dumbbell is not a tool. It is a portal.</p>
+
+      <p class="body-copy reveal">And the things you were told to chase — the muscle, the fat loss, the physical transformation — those aren't the goal. They're the side effect. When you solve the actual problem — signal clarity between you and your own cellular intelligence — the body handles the rest the way it handles wound healing and immune response and bone remodeling: without being told how. You don't pursue the aesthetic. You restore the communication. The aesthetic resolves on its own, the way every downstream problem resolves when you address what's upstream.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       MOVEMENT 4: THE PORTAL
+       ═══════════════════════════════════════════ -->
+  <section class="movement-section">
+    <div class="content-column">
+      <h2 class="reveal">The Portal</h2>
+
+      <p class="body-copy reveal">At bodyweight, you can perform a squat while mentally reviewing your to-do list. At significant load, you cannot. This is not willpower. This is metabolic forcing.</p>
+
+      <p class="body-copy reveal">Under heavy resistance, your brain must shunt glucose and oxygen away from the prefrontal cortex — the region responsible for planning, projecting, worrying, seeking external answers — and redirect it to the motor and sensory systems actually handling the load. The part of your brain that grasps for certainty runs out of fuel. What remains is direct perception.</p>
+
+      <p class="body-copy reveal">You stop calculating and start sensing. The seven come online. The noise floor drops. Signals that were always present become perceptible because the machinery that was generating noise has been metabolically silenced.</p>
+
+      <p class="body-copy reveal">This is the mechanism by which physical training produces what meditation invites. Not through willpower. Not through concentration. Through metabolic constraint that makes the prefrontal override biologically impossible.</p>
+
+      <p class="body-copy reveal">Your mind quiets not because you told it to. It quiets because the dumbbell starved it.</p>
+
+      <div class="figure-container reveal">
+        <img src="../assets/neural-pathway-figure.png" alt="Body under load with neural signal pathways visible">
+      </div>
+
+      <p class="body-copy reveal">And in that quiet — in the space between the effort and the interpretation — your body's own intelligence becomes audible. Tension patterns you've been carrying for years. Compensation strategies your nervous system built around old injuries. The precise moment where force transfers cleanly and the moment where it leaks. All of it was always broadcasting. You just couldn't hear it over the noise.</p>
+
+      <p class="body-copy reveal">This is what we mean by signal literacy. Not a concept to understand. A capacity to restore. The ability to read what your body has been sending all along — because load created the conditions where the override couldn't sustain itself and the signal finally got through.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       MOVEMENT 5: AUTOBIOGRAPHY (No headline)
+       ═══════════════════════════════════════════ -->
+  <section class="movement-section">
+    <div class="content-column">
+      <p class="body-copy reveal">This methodology didn't emerge from theory. It emerged from a nervous system that never had the luxury of override.</p>
+
+      <p class="body-copy reveal">Temporal lobe epilepsy. Two craniotomies. Two hemispheres. A brain that was forced to choose — during critical developmental windows — between tracking the external world and reading its own internal signals. It chose to read itself. What emerged from that allocation was spatial intelligence so precise it has managed epilepsy for twenty-five years without medication.</p>
+
+      <p class="body-copy reveal">What necessity carved into one nervous system, methodology now teaches to any nervous system willing to listen. The adaptation was specific. The capacity it revealed is universal.</p>
+
+      <a href="/origin/" class="bio-link reveal" style="display: inline-block; margin-top: 24px;">The full story lives here →</a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       MOVEMENT 6: THE INVITATION (No headline)
+       ═══════════════════════════════════════════ -->
+  <section class="movement-section">
+    <div class="content-column">
+      <div class="reveal" style="margin-bottom: 48px;">
+        <p class="filter-line">If the templates keep failing.</p>
+        <p class="filter-line">If you've accumulated volume without accumulating clarity.</p>
+        <p class="filter-line">If you've been told to push harder when pushing harder is what buried the signal in the first place.</p>
+      </div>
+
+      <p class="body-copy reveal">The disconnect between effort and results is not a motivation problem. It is a signal-to-noise problem. The signal was always there. The noise was trained.</p>
+
+      <p class="body-copy reveal">You are not broken. You are not undertrained. You are not lacking discipline or the right program or a better coach. You are made of competent material that has been receiving incompetent communication.</p>
+
+      <p class="turquoise-accent reveal">The dumbbell is waiting. Not to build you into something you're not. To clear the interference between you and what you already are.</p>
+
+      <a href="/method/" class="method-link reveal" style="display: inline-block; margin-top: 24px;">The method is spatial. It begins with attention. →</a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════ -->
+  <footer class="site-footer">
+    <img src="../assets/Basewaves_logo.svg" alt="BASEWAVES" class="footer-logo">
+
+    <nav class="footer-nav">
+      <a href="/">HOME</a>
+      <a href="/origin/">ORIGIN</a>
+      <a href="/portal/">PORTAL</a>
+      <a href="/signals/">SIGNALS</a>
+    </nav>
+
+    <p class="footer-contact">
+      <a href="mailto:greg@basewaves.com">greg@basewaves.com</a>
+      <span style="margin: 0 12px; color: #5A5672;">|</span>
+      <a href="tel:+15125853400">512.585.3400</a>
+    </p>
+
+    <p class="footer-tagline">You cannot think your way out of a sensing problem.</p>
+
+    <p class="footer-copyright">&copy; 2026 BASEWAVES</p>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════
+       GSAP SCROLL CONTROLLER
+       ═══════════════════════════════════════════ -->
+  <script>
+    (function() {
+      const gsapAvailable = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
+
+      // Scroll reveal observer
+      const revealElements = document.querySelectorAll('.reveal');
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.15 });
+
+      revealElements.forEach(el => revealObserver.observe(el));
+
+      if (gsapAvailable) {
+        gsap.registerPlugin(ScrollTrigger);
+      }
+
+    // Hamburger menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const navOverlay = document.getElementById('navOverlay');
+
+    if (hamburger && navOverlay) {
+      hamburger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        hamburger.classList.toggle('active');
+        navOverlay.classList.toggle('open');
+        document.body.style.overflow = navOverlay.classList.contains('open') ? 'hidden' : '';
+      });
+
+      navOverlay.addEventListener('click', function(e) {
+        if (e.target === navOverlay || e.target.tagName === 'A') {
+          hamburger.classList.remove('active');
+          navOverlay.classList.remove('open');
+          document.body.style.overflow = '';
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && navOverlay.classList.contains('open')) {
+          hamburger.classList.remove('active');
+          navOverlay.classList.remove('open');
+          document.body.style.overflow = '';
+        }
+      });
+    }
+
+    })();
+  </script>
+</body>
+</html>

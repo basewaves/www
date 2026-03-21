@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Making WAVES | BASEWAVES Signals</title>
+<meta name="description" content="What emerges when the foundation stops requiring thought. An essay on the intelligence that arrives after the framework dissolves.">
+<meta property="og:title" content="Making WAVES | BASEWAVES Signals">
+<meta property="og:description" content="What emerges when the foundation stops requiring thought. An essay on the intelligence that arrives after the framework dissolves.">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Serif:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root { --base-blue: #0E1220; --deep-blue: #080B14; --lighter-blue: #141B2E; --primary-text: #E8E3FF; --secondary-text: #9994B8; --dim-text: #5A5672; --turquoise: #58FCC8; --coral: #FFA565; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--deep-blue); color: var(--primary-text); font-family: 'IBM Plex Mono', monospace; font-size: 14px; line-height: 1.7; letter-spacing: 0.03em; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+  .starfield { position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 0; background: radial-gradient(1px 1px at 10% 15%, rgba(232,227,255,0.4), transparent), radial-gradient(1px 1px at 25% 35%, rgba(232,227,255,0.25), transparent), radial-gradient(1.5px 1.5px at 40% 8%, rgba(232,227,255,0.35), transparent), radial-gradient(1px 1px at 55% 42%, rgba(232,227,255,0.2), transparent), radial-gradient(1px 1px at 70% 22%, rgba(88,252,200,0.12), transparent), radial-gradient(1.5px 1.5px at 85% 55%, rgba(232,227,255,0.3), transparent), radial-gradient(1px 1px at 15% 65%, rgba(232,227,255,0.2), transparent), radial-gradient(1px 1px at 35% 78%, rgba(232,227,255,0.35), transparent), radial-gradient(1.5px 1.5px at 60% 72%, rgba(232,227,255,0.25), transparent), radial-gradient(1px 1px at 80% 85%, rgba(232,227,255,0.3), transparent), radial-gradient(1px 1px at 92% 12%, rgba(232,227,255,0.2), transparent), radial-gradient(1px 1px at 48% 92%, rgba(88,252,200,0.1), transparent), radial-gradient(1px 1px at 5% 48%, rgba(232,227,255,0.3), transparent), radial-gradient(1.5px 1.5px at 72% 38%, rgba(232,227,255,0.2), transparent); animation: starfield-breathe 12s ease-in-out infinite; }
+  @keyframes starfield-breathe { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+  .zone { position: relative; z-index: 1; }
+  .zone-inner { max-width: 720px; margin: 0 auto; padding: 0 48px; }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.12s; } .reveal-delay-2 { transition-delay: 0.24s; }
+
+  /* Nav */
+  .site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; transition: background 0.4s ease, backdrop-filter 0.4s ease; }
+  .site-nav.scrolled { background: rgba(14, 18, 32, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+  .logo-container { display: block; opacity: 0.7; transition: opacity 0.3s ease, filter 0.3s ease; }
+  .logo-container:hover { opacity: 1; filter: drop-shadow(0 0 12px var(--turquoise)) drop-shadow(0 0 24px rgba(88, 252, 200, 0.4)); }
+  .nav-logo { height: 41px; width: auto; }
+  .nav-link { font-family: 'Space Mono', monospace; font-size: 15px; color: var(--secondary-text); text-decoration: none; letter-spacing: 0.05em; transition: color 0.3s ease; }
+  .nav-link:hover { color: var(--turquoise); } .nav-link.active { color: var(--primary-text); }
+  .nav-separator { color: var(--dim-text); margin: 0 12px; } .nav-desktop { display: flex; align-items: center; }
+  .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 28px; height: 28px; cursor: pointer; z-index: 60; background: none; border: none; padding: 0; }
+  .hamburger span { display: block; width: 100%; height: 2px; background-color: var(--primary-text); transition: transform 0.3s ease, opacity 0.3s ease; }
+  .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .nav-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(14, 18, 32, 0.92); z-index: 55; flex-direction: column; justify-content: center; align-items: center; gap: 40px; opacity: 0; transition: opacity 0.3s ease; }
+  .nav-overlay.open { display: flex; opacity: 1; }
+  .nav-overlay a { font-family: 'Space Mono', monospace; font-size: 18px; letter-spacing: 0.15em; color: var(--secondary-text); text-decoration: none; transition: color 0.3s ease; }
+  .nav-overlay a:hover { color: var(--turquoise); } .nav-overlay a.active { color: var(--primary-text); }
+  @media (max-width: 1023px) { .nav-logo { height: 32px; } .hamburger { display: flex; } .nav-desktop { display: none; } }
+  @media (min-width: 1024px) { .nav-overlay { display: none !important; } }
+
+  /* Essay header */
+  .essay-header { padding: 160px 0 60px; text-align: center; }
+  .essay-label { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--secondary-text); margin-bottom: 24px; }
+  .essay-label a { color: var(--secondary-text); text-decoration: none; transition: color 0.3s ease; }
+  .essay-label a:hover { color: var(--turquoise); }
+  .essay-title { font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(28px, 4vw, 44px); letter-spacing: 0.06em; color: var(--primary-text); margin-bottom: 16px; line-height: 1.3; }
+  .essay-provocation { font-family: 'IBM Plex Serif', serif; font-size: 17px; font-style: italic; color: var(--secondary-text); margin-bottom: 16px; }
+  .essay-meta { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--dim-text); letter-spacing: 0.08em; }
+
+  /* Zone divider */
+  .zone-divider { height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(88,252,200,0.15) 20%, rgba(88,252,200,0.25) 50%, rgba(88,252,200,0.15) 80%, transparent 100%); position: relative; z-index: 1; }
+
+  /* Essay body */
+  .essay-body { padding: 60px 0 80px; }
+  .essay-body p { font-family: 'IBM Plex Serif', serif; font-size: 16px; line-height: 1.85; color: var(--secondary-text); margin-bottom: 28px; letter-spacing: 0.01em; }
+  .essay-body p em { color: var(--primary-text); font-style: normal; }
+  .essay-body p strong { color: var(--primary-text); font-weight: 500; }
+  .essay-body .section-break { height: 48px; display: flex; align-items: center; justify-content: center; margin: 12px 0; }
+  .essay-body .section-break::before { content: ''; width: 40px; height: 1px; background: linear-gradient(90deg, transparent, rgba(88,252,200,0.25), transparent); }
+  .essay-body .signal-line { font-family: 'IBM Plex Serif', serif; font-size: 17px; line-height: 1.85; color: var(--primary-text); margin-bottom: 28px; }
+  .essay-body .turquoise-line { font-family: 'IBM Plex Serif', serif; font-size: 17px; line-height: 1.85; color: var(--turquoise); margin-bottom: 28px; }
+
+  /* Sources */
+  .sources { margin-top: 16px; padding-top: 24px; border-top: 1px solid rgba(88,252,200,0.08); }
+  .sources-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim-text); margin-bottom: 16px; }
+  .sources p:not(.sources-label) { font-family: 'IBM Plex Serif', serif; font-size: 13px; line-height: 1.7; color: var(--secondary-text); margin-bottom: 8px; }
+
+  /* Essay end navigation */
+  .essay-end { padding: 40px 0 80px; text-align: center; }
+  .essay-back { font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.08em; color: var(--turquoise); text-decoration: none; transition: color 0.3s ease; }
+  .essay-back:hover { color: var(--primary-text); }
+
+  /* Footer */
+  .zone-footer { padding: 60px 0 80px; background: var(--deep-blue); border-top: 1px solid rgba(88,252,200,0.08); }
+  .zone-footer .zone-inner { max-width: 900px; }
+  .footer-territory { display: flex; justify-content: space-between; align-items: start; }
+  .footer-left { max-width: 400px; }
+  .footer-statement { font-family: 'Cinzel', serif; font-size: 15px; color: var(--primary-text); letter-spacing: 0.04em; line-height: 1.5; margin-bottom: 8px; }
+  .footer-sub { font-family: 'IBM Plex Serif', serif; font-size: 13px; color: var(--secondary-text); line-height: 1.6; }
+  .footer-right { text-align: right; }
+  .footer-cta { display: inline-block; font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--coral); text-decoration: none; padding: 12px 28px; border: 1px solid rgba(255,165,101,0.3); transition: all 0.3s ease; margin-bottom: 16px; }
+  .footer-cta:hover { border-color: var(--coral); background: rgba(255,165,101,0.05); }
+  .footer-contact { font-size: 13px; color: var(--secondary-text); line-height: 1.8; }
+  .footer-contact a { color: var(--turquoise); text-decoration: none; border-bottom: 1px solid rgba(88,252,200,0.15); }
+  .footer-contact a:hover { border-color: var(--turquoise); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; }
+  .footer-logo { width: 36px; height: 24px; opacity: 0.25; } .footer-logo path { fill: var(--primary-text); }
+  .footer-tm { font-size: 12px; color: rgba(90,86,114,0.5); letter-spacing: 0.06em; }
+
+  /* Scroll progress */
+  .scroll-counter-wrap { position: fixed; bottom: 24px; right: 24px; z-index: 50; }
+  .scroll-indicator { font-family: 'Space Mono', monospace; font-size: 14px; color: var(--dim-text); letter-spacing: 0.1em; }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .zone-inner { padding: 0 24px; }
+    .essay-header { padding: 120px 0 40px; }
+    .footer-territory { flex-direction: column; gap: 40px; }
+    .footer-right { text-align: left; }
+    .footer-bottom { flex-direction: column; gap: 12px; align-items: flex-start; }
+  }
+
+  .no-js .reveal { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+<nav class="site-nav" id="siteNav"><a href="/" class="logo-container"><img src="../../assets/Basewaves_logo.svg" alt="BASEWAVES" class="nav-logo"></a><div class="nav-desktop"><a href="/" class="nav-link">HOME</a><span class="nav-separator">|</span><a href="/origin/" class="nav-link">ORIGIN</a><span class="nav-separator">|</span><a href="/portal/" class="nav-link">PORTAL</a><span class="nav-separator">|</span><a href="/signals/" class="nav-link active">SIGNALS</a></div><button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button></nav>
+<div class="nav-overlay" id="navOverlay"><a href="/">HOME</a><a href="/origin/">ORIGIN</a><a href="/portal/">PORTAL</a><a href="/signals/" class="active">SIGNALS</a></div>
+<div class="starfield"></div>
+
+<!-- ===================================================================
+     ESSAY HEADER
+     =================================================================== -->
+<section class="zone essay-header">
+  <div class="zone-inner">
+    <div class="essay-label reveal"><a href="/signals/">&larr; Signals</a> &middot; 06</div>
+    <h1 class="essay-title reveal reveal-delay-1">Making WAVES</h1>
+    <p class="essay-provocation reveal reveal-delay-1">&ldquo;The framework was designed to make itself obsolete.&rdquo;</p>
+    <div class="essay-meta reveal reveal-delay-2">10 min read</div>
+  </div>
+</section>
+<div class="zone-divider"></div>
+
+<!-- ===================================================================
+     ESSAY BODY
+     =================================================================== -->
+<section class="zone essay-body">
+  <div class="zone-inner">
+
+    <p class="reveal">She changed the movement mid-set.</p>
+
+    <p class="reveal">Not a correction. Not something I cued. Bilateral hamstring walkouts &mdash; the program called for both legs together. But mid-rep, without pausing, without looking up, she shifted to one leg. Her body had identified an asymmetry in load distribution and reorganized the entire movement pattern to address it. Before her mind could articulate what was happening, her fascia had already solved it.</p>
+
+    <p class="reveal">I watched this from across the room. She didn't know she'd done it until I told her.</p>
+
+    <p class="signal-line reveal">That wasn't execution. That was composition.</p>
+
+    <p class="reveal">Something had emerged that I didn't teach. That the program didn't contain. That her conscious mind didn't initiate. Her body had received a signal, processed it below awareness, and generated a creative response &mdash; all inside a single rep, while the mind was occupied with the effort of the movement itself.</p>
+
+    <p class="turquoise-line reveal">I've spent five essays describing what happens when load meets body. This one is about what happens after &mdash; when the body starts conducting the session.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">You've felt this without naming it. Not during a session &mdash; after months of sessions. The day you walked in and the weight found you instead of you finding it. The set where your grip pressure adjusted itself without instruction. The moment you knew &mdash; not thought, <em>knew</em> &mdash; to back off the load before anything went wrong, and by the time you could have explained why, the decision was already three reps old.</p>
+
+    <p class="reveal">Something had automated. Not the movement &mdash; you'd been doing the movements for months. Something underneath the movement. The foundation was still there, still operating, still holding everything up. But it had dropped below the threshold of conscious management. The way balance does when you've been walking for thirty years. The way language does when you've been speaking it since childhood. Still working. No longer requiring thought.</p>
+
+    <p class="signal-line reveal">And in the space that freed up, something else arrived.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">The neuroscience of this transition is well documented in a different vocabulary. When the cerebellum develops accurate enough predictive models of a movement &mdash; through repetition, variation, and sensory feedback across hundreds of sessions &mdash; cortical oversight releases. The prefrontal cortex stops managing what the cerebellum can predict. Resources that were allocated to conscious motor control become available for other processing.</p>
+
+    <p class="reveal">In conventional training, this is called skill acquisition. The movement automates and the athlete can attend to strategy, timing, environment. In BASEWAVES, something different happens. Because the foundation wasn't just motor patterns. It was signal reception. BASE &mdash; balancing, aligning, sourcing, engaging &mdash; had been training four channels of internal attention. SPACE had been calibrating what signals mean. When that entire perceptual architecture automates, what opens up isn't just strategic bandwidth. It's creative bandwidth. The body doesn't just execute more efficiently. It starts composing.</p>
+
+    <p class="turquoise-line reveal">This is what the methodology was always building toward. Not stronger bodies. Bodies that compose.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">Composition doesn't arrive as a single capacity. It arrives as five.</p>
+
+    <p class="reveal">Not five techniques. Not five goals. Five expressions of the same underlying shift &mdash; the transition from managing signals to being conducted by them. Each one is something the body was always capable of. Each one was blocked by the same thing: a mind too busy managing the foundation to let intelligence emerge from it.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">The first is pattern recognition across domains. You start noticing that the way fatigue moves through a deadlift set is structurally identical to the way a difficult conversation exhausts you at work. Not metaphorically identical. <em>Structurally.</em> The same depletion arc. The same compensatory bracing. The same moment where forcing makes it worse and sensing makes it navigable. You didn't learn this. The body was always drawing these connections. The mind was too busy managing reps to notice what the body already knew.</p>
+
+    <p class="reveal">I see this migrate in clients within weeks of the shift. Someone who developed signal literacy under load starts reporting on how a meal sits in the gut with the same precision they describe a hip position mid-squat. Not because I told them to. Because once the body's pattern recognition comes online across one domain, the mind can't confine it to just that domain. The signal architecture is the same everywhere. The body always knew this. The training just cleared the interference long enough for the recognition to surface.</p>
+
+    <p class="signal-line reveal">That cross-domain recognition is the first wave. Call it wisdom &mdash; not accumulated knowledge, but the body's own capacity to read structural similarity across contexts that the mind treats as unrelated.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">The second is real-time responsiveness. Not the delayed correction of the early months &mdash; where you'd finish a set, review what happened, and adjust the next one. Something faster. You've already shifted your weight distribution before you register that your left hip was drifting. The correction is three frames ahead of the awareness. Your body read the signal and responded in the gap between sensation and narration &mdash; the same gap the first essay described, but now the body is filling it with action, not waiting for the mind to catch up.</p>
+
+    <p class="reveal">The cerebellum has enough data from hundreds of sessions of signal-aware training to generate responses without asking the prefrontal cortex for permission. The analytical mind, which spent months learning to check in, to scan, to assess &mdash; that mind is now too slow. The body has outpaced it. Not through speed. Through fidelity.</p>
+
+    <p class="turquoise-line reveal">Real-time adaptation. The second wave. Not reacting. Not even responding. Reorganizing before the event fully arrives.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">The third arrives as variation without anxiety. Early in training, any deviation from the program feels like failure. Did I do the wrong number of reps? Was that the right tempo? Am I deviating from the plan? The mind treats structure as law and variation as crime. But once the foundation automates, variation becomes the body's natural operating mode. Not randomness &mdash; structured exploration within established capacity. The body knows its boundaries and plays inside them. Changes angle mid-set. Modifies tempo based on tissue readiness. Discovers movement variations that no program could have prescribed because they emerge from real-time sensing of today's body, not yesterday's plan.</p>
+
+    <p class="reveal">This is what I watched happen in the room. A body that no longer needed permission to explore. Not recklessness. The opposite &mdash; exploration grounded so deeply in signal literacy that the body could improvise safely because it was reading its own state with enough resolution to know where the edges were.</p>
+
+    <p class="signal-line reveal">Variance. The third wave. The body as improviser, not executor.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">The fourth is edge-finding without fear. This is distinct from variance &mdash; variance plays within known territory. Edge-finding extends the territory. The moment you discover a depth in a squat that you've never reached, not because you forced it but because the body organized itself into a position that simply hadn't been available before. Not a personal record in the conventional sense. A spatial expansion. Your body's internal map grew because the conditions &mdash; estate, curiosity, signal clarity &mdash; aligned well enough that the nervous system released a boundary it had been holding.</p>
+
+    <p class="reveal">I can see this happen in real time. The set that goes deeper than the previous month. The client who tells me it felt like a different body and means it literally &mdash; the body they're operating today has access to ranges the body from six months ago did not. Not because muscles stretched or joints mobilized. Because the nervous system updated its prediction of what was safe, based on accumulated evidence from hundreds of reps of accurate signal processing. The restriction was never structural. It was predictive. The cerebellum was holding a boundary until it had enough data to release it.</p>
+
+    <p class="turquoise-line reveal">Exploration. The fourth wave. Not pushing past limits. The nervous system redrawing the map because it finally trusts the data.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">The fifth is the hardest to describe because it's what the other four produce when they operate simultaneously. Not a fifth capacity added to four. An emergent property that arises when pattern recognition, real-time adaptation, structured variation, and edge-finding converge in the same body at the same time. Movement becomes coherent in a way that can't be decomposed into its components. The session stops being a sequence of exercises and becomes something the parts can't explain.</p>
+
+    <p class="reveal">I've watched clients hit this state and struggle to describe it afterward. They say things like: everything felt like one system. The exercises were doing themselves. The movements stopped being separate. The language gets vaguer as the experience gets more precise. Because the mind's vocabulary was built for parts, and what the body is reporting is the dissolution of parts into integration.</p>
+
+    <p class="signal-line reveal">Synergy. The fifth wave. The body self-organizing beyond what any of its components could produce alone.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">Here is the paradox that holds all of this together.</p>
+
+    <p class="reveal">Everything I've described in this series &mdash; the pressured dialogue, the space between, the four channels of BASE, the five dimensions of SPACE, the 7:1 ratio &mdash; was left-hemisphere architecture. Structure. Sequence. Named dimensions. Assessable coordinates. Analytical scaffolding designed to give the mind something to do while the body's signal literacy developed underneath.</p>
+
+    <p class="reveal">And now, at the point of emergence, all of that scaffolding becomes unnecessary. The framework was designed to make itself obsolete. BASE automates and dissolves into felt competence. SPACE becomes an ambient read the body runs without checking. The analytical structure that organized the learning served its purpose: it kept the mind occupied long enough for the body's organizational intelligence to come online. The left hemisphere built a bridge so the right hemisphere could cross it. And once across, the bridge isn't needed. The territory is the thing. Not the map.</p>
+
+    <p class="turquoise-line reveal">This is the framework's deepest teaching: structure exists to enable its own dissolution. You learn it to forget it. You name the dimensions so the body can stop naming and start composing.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">But forgetting isn't losing. The foundation doesn't vanish when it automates. It descends &mdash; from conscious practice into the body's operating architecture. The same way you don't lose the ability to balance when you stop thinking about balance. You stop thinking about it <em>because</em> you've integrated it so completely that conscious management would only interfere. BASE is still running. SPACE is still reading. They're just running and reading at a depth the mind no longer needs to supervise.</p>
+
+    <p class="reveal">This is why emergence can't be skipped to. I've watched people try. They want the composition without the conducting. The synergy without the signal literacy. The creative freedom without the structured foundation. It doesn't work. Not because the rules demand progression. Because the cerebellum requires data. Hundreds of sessions of accurate sensory feedback before it will release cortical oversight. Thousands of reps where signal matched prediction before the nervous system trusts its own models enough to let the mind step back. The automation isn't mechanical. It's earned. Every session of conscious practice deposits a prediction the cerebellum eventually trusts enough to act on without asking.</p>
+
+    <p class="signal-line reveal">You can't skip the scaffolding. You can only build it well enough that it dissolves on schedule.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">The transfer is what makes this more than a training methodology.</p>
+
+    <p class="reveal">I've watched the five waves leave with the person after a session. The same pattern recognition that reads a deadlift arc starts reading conversations. The same real-time adaptation that reorganizes a hip mid-squat starts reorganizing conflict responses. The variance that plays with movement variations becomes the capacity to sit with uncertainty at work instead of forcing a resolution. The clients don't report this as a technique they learned. They report it as something they can't turn off. The body's compositional intelligence, once restored, doesn't respect the boundary between the session and the rest of your life. The session was the antenna. The broadcast is everything.</p>
+
+    <p class="turquoise-line reveal">WAVES &mdash; wisdom, adaptation, variance, exploration, synergy. Not five things to achieve. Five names for what your body already does when you stop blocking the signal it needs to compose.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">She changed the movement mid-set. Bilateral to unilateral. No instruction, no hesitation, no permission. Her body identified what it needed, organized a response, and executed a creative solution while her conscious mind was busy with the effort of the rep.</p>
+
+    <p class="reveal">That moment contained all five waves at once. Pattern recognition &mdash; her body read an asymmetry it had encountered before. Adaptation &mdash; the response arrived in real time, not after the set. Variance &mdash; she departed from the program without anxiety. Exploration &mdash; she entered a movement pattern she hadn't been prescribed. Synergy &mdash; all of it integrated into a single fluid adjustment that the parts couldn't have produced in sequence.</p>
+
+    <p class="reveal">I didn't teach her that. The framework didn't contain it. The five essays before this one didn't describe it. What they described were the conditions under which it becomes possible &mdash; load that creates dialogue, space that opens when the narrator bankrupts, channels that restore reception, dimensions that calibrate what you're receiving, a ratio that explains why your body was always wired for this.</p>
+
+    <p class="reveal">The composition was hers. It arrived because the scaffolding had done its work and dissolved. Because the foundation had automated. Because exploring had become her default orientation so completely that her body could compose without asking her mind whether it was allowed.</p>
+
+    <p class="turquoise-line reveal">The framework builds toward its own disappearance. What remains &mdash; when the structure dissolves and the scaffolding comes down and the named dimensions settle into felt competence &mdash; is the body, composing. It was always composing. You just couldn't hear it over the noise of the mind trying to manage what didn't need managing.</p>
+
+    <div class="section-break reveal"></div>
+
+    <div class="sources reveal">
+      <p class="sources-label">Sources</p>
+      <p>Wolpert, D. M., &amp; Ghahramani, Z. (2000). Computational principles of movement neuroscience. <em>Nature Neuroscience</em>, 3(S11), 1212&ndash;1217.</p>
+      <p>Dietrich, A. (2004). The cognitive neuroscience of creativity. <em>Psychonomic Bulletin &amp; Review</em>, 11(6), 1011&ndash;1026.</p>
+      <p>Imamizu, H., et al. (2000). Human cerebellar activity reflecting an acquired internal model of a new tool. <em>Nature</em>, 403(6766), 192&ndash;195.</p>
+      <p>Cs&iacute;kszentmih&aacute;lyi, M. (1990). <em>Flow: The Psychology of Optimal Experience.</em> Harper &amp; Row.</p>
+      <p>Kelso, J. A. S. (1995). <em>Dynamic Patterns: The Self-Organization of Brain and Behavior.</em> MIT Press.</p>
+      <p>Craig, A. D. (2009). How do you feel&mdash;now? The anterior insula and human awareness. <em>Nature Reviews Neuroscience</em>, 10(1), 59&ndash;70.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================================================================
+     ESSAY END NAV
+     =================================================================== -->
+<section class="zone essay-end">
+  <div class="zone-inner reveal">
+    <a href="/signals/" class="essay-back">&larr; Back to Signals</a>
+  </div>
+</section>
+
+<!-- ===================================================================
+     FOOTER
+     =================================================================== -->
+<section class="zone zone-footer">
+  <div class="zone-inner">
+    <div class="footer-territory">
+      <div class="footer-left reveal"><div class="footer-statement">You cannot think your way out of a sensing problem.</div><div class="footer-sub">BASEWAVES identifies the person who already knows something was lost.</div></div>
+      <div class="footer-right reveal reveal-delay-1"><a href="mailto:greg@basewaves.com?subject=State%20Transition%20Session" class="footer-cta">Schedule a State Transition Session</a><div class="footer-contact"><a href="mailto:greg@basewaves.com">greg@basewaves.com</a><br>512.585.3400</div></div>
+    </div>
+    <div class="footer-bottom reveal reveal-delay-2">
+      <svg class="footer-logo" viewBox="0 0 337.62 220.73" preserveAspectRatio="xMidYMid meet"><path d="M188.26,87.4c-8.54-2.09-18.2-6.13-18.04-13.69.16-9.34,4.67-13.54,7.41-15.31,9.83-4.35,16.76-14.18,16.76-25.45,0-15.15-12.25-27.39-27.39-27.39s-27.39,12.25-27.39,27.39c0,11.43,7.09,21.42,17.08,25.45,2.9,1.77,7.08,6.13,7.08,15.31,0,7.57-8.7,11.6-16.59,13.69-15.95,1.77-26.9,5.64-26.9,10.15,0,6.28,21.27,11.27,47.53,11.27s47.53-5,47.53-11.27c0-4.51-11.12-8.39-27.06-10.15h-.02ZM160.06,17.65c-3.87,1.6-6.92,4.67-8.54,8.54-.48,1.28-1.93,1.93-3.06,1.28-1.28-.31-1.93-1.77-1.44-3.06,1.93-5.17,6.13-9.18,11.11-11.28,1.29-.47,2.57.16,3.22,1.29.48,1.28-.16,2.57-1.29,3.22h0ZM92.72,96.27c0,9.99,34,18.04,75.89,18.04s75.89-8.05,75.89-18.04-30.61-17.24-69.6-18.04c-.48-.65-.65-1.13-.97-1.78,53.66.65,96.18,11.28,96.18,24.17s-45.43,24.17-101.5,24.17-101.5-10.8-101.5-24.17,40.92-23.04,93.12-24.01c-.16.65-.48,1.13-.81,1.78-37.54.97-66.7,8.7-66.7,17.88ZM329.72,104.65c0-20.63-69.45-37.38-156.12-37.86-.16.65-.16,1.29-.16,1.93,69.76.48,125.67,14.03,125.67,30.62s-57.99,30.78-129.7,30.78-129.7-13.7-129.7-30.62,53.49-29.65,120.99-30.62c0-.64-.16-1.28-.16-2.09-84.4,1.13-151.43,17.72-151.43,37.86s68.16,37.06,153.54,37.86c.81,1.29,1.13,2.9,1.13,4.51,0,9.18-4.19,13.37-7.08,15.31-9.99,4.03-17.08,13.86-17.08,25.45,0,15.15,12.25,27.39,27.39,27.39s27.39-12.25,27.39-27.39c0-11.27-6.93-21.11-16.76-25.3-2.73-1.77-7.25-5.96-7.41-15.3,0-1.78.48-3.22,1.28-4.68,87.65-.32,158.22-17.07,158.22-37.86h0ZM161.35,205.02c-.48,1.29-1.93,1.77-3.22,1.29-5.16-2.1-9.18-6.13-11.11-11.28-.48-1.28.16-2.57,1.28-3.06,1.29-.47,2.58.16,3.06,1.29,1.45,3.87,4.68,7.09,8.54,8.54,1.45.65,1.94,2.09,1.45,3.22h0Z"/></svg>
+      <div class="footer-tm">&copy; BASEWAVES &middot; Spatial Strength Training&trade; &middot; Austin, TX</div>
+    </div>
+  </div>
+</section>
+
+<!-- Scroll Progress Indicator -->
+<div class="scroll-counter-wrap"><span class="scroll-indicator" id="scrollCounter">000</span></div>
+
+<script>
+const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+const nav = document.getElementById('siteNav');
+const counter = document.getElementById('scrollCounter');
+window.addEventListener('scroll', function() { var y = window.scrollY; var max = document.documentElement.scrollHeight - window.innerHeight; counter.textContent = String(max > 0 ? Math.round((y / max) * 100) : 0).padStart(3, '0'); nav.classList.toggle('scrolled', y > 80); });
+const hb = document.getElementById('hamburger'), ov = document.getElementById('navOverlay');
+hb.addEventListener('click', (e) => { e.stopPropagation(); hb.classList.toggle('active'); ov.classList.toggle('open'); document.body.style.overflow = ov.classList.contains('open') ? 'hidden' : ''; });
+ov.addEventListener('click', (e) => { if (e.target === ov || e.target.tagName === 'A') { hb.classList.remove('active'); ov.classList.remove('open'); document.body.style.overflow = ''; } });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && ov.classList.contains('open')) { hb.classList.remove('active'); ov.classList.remove('open'); document.body.style.overflow = ''; } });
+</script>
+</body>
+</html>

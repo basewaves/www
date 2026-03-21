@@ -198,6 +198,35 @@
   .arch-annotation { font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: 15px; line-height: 1.85; color: var(--secondary-text); font-style: italic; }
   .arch-annotation em { color: var(--primary-text); font-style: normal; }
 
+  /* ========== FEEDBACK LOOP ========== */
+  .loop-flow { margin: 48px 0; display: flex; flex-direction: column; gap: 0; }
+  .loop-step { padding: 28px 24px; border-left: 2px solid; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .loop-icon { width: 280px; height: 280px; margin-bottom: 0; opacity: 0.75; transition: opacity 0.4s ease; }
+  .loop-step:hover .loop-icon { opacity: 1; }
+  @media (max-width: 640px) { .loop-icon { width: 160px; height: 160px; } }
+  .loop-step.noise-step { border-color: rgba(90,86,114,0.25); }
+  .loop-step.base-step { border-color: rgba(255,165,101,0.3); }
+  .loop-step.load-step { border-color: rgba(255,165,101,0.25); }
+  .loop-step.space-step { border-color: rgba(232,227,255,0.2); }
+  .loop-step.waves-step { border-color: rgba(88,252,200,0.35); }
+  .loop-step.close-step { border-color: rgba(172,208,190,0.25); }
+  .loop-channel { width: 1px; height: 32px; margin: 0 auto 6px; }
+  .noise-step .loop-channel { background: linear-gradient(to bottom, rgba(90,86,114,0.4), rgba(90,86,114,0.1)); }
+  .base-step .loop-channel { background: linear-gradient(to bottom, rgba(255,165,101,0.5), rgba(255,165,101,0.1)); }
+  .load-step .loop-channel { background: linear-gradient(to bottom, rgba(255,165,101,0.4), rgba(255,165,101,0.1)); }
+  .space-step .loop-channel { background: linear-gradient(to bottom, rgba(232,227,255,0.35), rgba(232,227,255,0.08)); }
+  .waves-step .loop-channel { background: linear-gradient(to bottom, rgba(88,252,200,0.5), rgba(88,252,200,0.1)); }
+  .close-step .loop-channel { background: linear-gradient(to bottom, rgba(172,208,190,0.4), rgba(172,208,190,0.1)); }
+  .loop-label { font-family: 'Space Mono', monospace; font-size: 14px; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 12px; }
+  .loop-step.noise-step .loop-label { color: var(--secondary-text); }
+  .loop-step.base-step .loop-label { color: var(--coral); }
+  .loop-step.load-step .loop-label { color: var(--coral); }
+  .loop-step.space-step .loop-label { color: var(--primary-text); }
+  .loop-step.waves-step .loop-label { color: var(--turquoise); }
+  .loop-step.close-step .loop-label { color: var(--secondary-text); }
+  .loop-desc { font-size: 14px; line-height: 1.75; color: var(--secondary-text); }
+  .loop-desc em { color: var(--primary-text); font-style: normal; }
+
   /* ========== TRANSFER EVIDENCE CARDS ========== */
   .transfer-territory { margin-top: 20px; }
   .transfer-card { display: grid; grid-template-columns: 180px 2px 1fr; gap: 0; margin-bottom: 48px; position: relative; }
@@ -231,12 +260,13 @@
   .mech-label { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--secondary-text); }
   .mech-load-value { font-family: 'Cinzel', serif; font-size: clamp(24px, 3vw, 36px); color: var(--primary-text); letter-spacing: 0.04em; }
   .mech-firing { font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--turquoise); opacity: 0.9; margin-bottom: 20px; letter-spacing: 0.03em; }
-  .mech-slider-wrap { max-width: 600px; margin-bottom: 20px; }
+  .mech-firing-sub { font-size: 11px; color: var(--secondary-text); opacity: 0.6; letter-spacing: 0.04em; margin-left: 6px; }
+  .mech-slider-wrap { width: 100%; margin-bottom: 20px; }
   .mech-slider { -webkit-appearance: none; appearance: none; width: 100%; height: 2px; background: rgba(88,252,200,0.15); outline: none; border-radius: 1px; cursor: pointer; }
   .mech-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 14px; height: 14px; border-radius: 50%; background: var(--turquoise); cursor: pointer; box-shadow: 0 0 12px rgba(88,252,200,0.3); }
   .mech-slider::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: var(--turquoise); cursor: pointer; border: none; box-shadow: 0 0 12px rgba(88,252,200,0.3); }
   .mech-slider-labels { display: flex; justify-content: space-between; margin-top: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--secondary-text); letter-spacing: 0.06em; }
-  .mech-state { font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-style: italic; color: var(--primary-text); opacity: 0.8; line-height: 1.7; max-width: 600px; }
+  .mech-state { font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-style: italic; color: var(--primary-text); opacity: 0.8; line-height: 1.7; width: 100%; }
 
   .mech-ratio { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 64px; }
   .mech-panel { padding: 28px; border: 1px solid rgba(90,86,114,0.15); background: rgba(14,18,32,0.5); }
@@ -397,6 +427,8 @@
     margin-top: 16px;
     margin-bottom: 0;
 }
+.scroll-counter-wrap { position: fixed; bottom: 24px; right: 24px; z-index: 50; }
+.scroll-indicator { font-family: 'Space Mono', monospace; font-size: 14px; color: var(--dim-text); letter-spacing: 0.1em; }
 </style>
 </head>
 <body>
@@ -503,7 +535,7 @@
         <span class="mech-label">EXTERNAL LOAD</span>
         <span class="mech-load-value" id="mech-load-name">Bodyweight</span>
       </div>
-      <div class="mech-firing" id="mech-firing">Mechanoreceptor firing: ~8 Hz</div>
+      <div class="mech-firing" id="mech-firing">Intensity: ~8 Hz <span class="mech-firing-sub">mechanoreceptor firing</span></div>
       <div class="mech-slider-wrap">
         <input type="range" min="0" max="100" value="0" class="mech-slider" id="mech-slider">
         <div class="mech-slider-labels">
@@ -521,7 +553,7 @@
     <div class="mech-ratio reveal">
       <div class="mech-panel mech-panel-one" id="panel-one">
         <div class="mech-panel-title">The 1 — <span style="color: var(--coral);">positioning brain</span> (thinking)</div>
-        <div class="mech-panel-sub">Proprioceptive / exteroceptive</div>
+        <div class="mech-panel-sub">Tracking position and surroundings</div>
         <div class="mech-bars" id="bars-one">
           <div class="mech-bar-row"><span class="mech-bar-label">Form tracking</span><div class="mech-bar-track"><div class="mech-bar-fill one" style="width: 92%"></div></div></div>
           <div class="mech-bar-row"><span class="mech-bar-label">Rumination</span><div class="mech-bar-track"><div class="mech-bar-fill one" style="width: 90%"></div></div></div>
@@ -534,7 +566,7 @@
       </div>
       <div class="mech-panel mech-panel-seven" id="panel-seven">
         <div class="mech-panel-title">The 7 — <span style="color: var(--turquoise);">interoceptive system</span> (sensing)</div>
-        <div class="mech-panel-sub">C-fiber afferents / fascial signaling</div>
+        <div class="mech-panel-sub">Sensing internal state and condition</div>
         <div class="mech-bars" id="bars-seven">
           <div class="mech-bar-row"><span class="mech-bar-label">Fascial tension</span><div class="mech-bar-track"><div class="mech-bar-fill seven" style="width: 8%"></div></div></div>
           <div class="mech-bar-row"><span class="mech-bar-label">Visceral tone</span><div class="mech-bar-track"><div class="mech-bar-fill seven" style="width: 10%"></div></div></div>
@@ -548,12 +580,32 @@
       </div>
     </div>
 
+    <!-- LOAD SLIDER (LOWER — synced with upper) -->
+    <div class="mech-load reveal">
+      <div class="mech-load-header">
+        <span class="mech-label">EXTERNAL LOAD</span>
+        <span class="mech-load-value" id="mech-load-name-lower">Bodyweight</span>
+      </div>
+      <div class="mech-firing" id="mech-firing-lower">Intensity: ~8 Hz <span class="mech-firing-sub">mechanoreceptor firing</span></div>
+      <div class="mech-slider-wrap">
+        <input type="range" min="0" max="100" value="0" class="mech-slider" id="mech-slider-lower">
+        <div class="mech-slider-labels">
+          <span>BW</span>
+          <span>Light</span>
+          <span>Moderate</span>
+          <span>Heavy</span>
+          <span>Max</span>
+        </div>
+      </div>
+      <div class="mech-state" id="mech-state-lower">PFC dominant — narrative running — interoceptive signal below conscious threshold</div>
+    </div>
+
     <!-- LANGUAGE COMPRESSION ARC -->
     <div class="mech-lang reveal">
       <div class="mech-lang-title">LANGUAGE COMPRESSION ARC — SENSING WITH EXTERNAL LOAD TAMES YOUR INNER NARRATOR</div>
 
       <div class="mech-lang-stage active" id="lang-stage-0">
-        <div class="mech-lang-quote">"The contractor situation is chaos &mdash; nobody documented anything, the boss is restructuring again, and I'm trying to advocate for proper process&hellip;"</div>
+        <div class="mech-lang-quote">"My work situation is chaos &mdash; nobody documented anything, the boss is restructuring again, and I'm trying to advocate for proper process&hellip;"</div>
         <div class="mech-lang-annotation">Full PFC engagement &mdash; abstract organizational analysis</div>
       </div>
 
@@ -587,7 +639,7 @@
         </div>
         <div class="mech-transfer-col" id="tf-matrix">
           <div class="mech-transfer-domain" style="color: var(--turquoise);">Matrix</div>
-          <p>And to how you navigate cognitive stress. Deadlines, conflict, uncertainty &mdash; the same pattern recognition you developed under the bar now reads pressure in the room.</p>
+          <p>And to how you navigate cognitive stress. Deadlines, conflict, uncertainty — the same pattern recognition you developed with pressing weights now senses the pressure in the room.</p>
         </div>
       </div>
     </div>
@@ -651,7 +703,7 @@
         <div class="arch-name">SPACE</div>
         <div class="arch-role">The channel — where processing happens</div>
         <p class="arch-desc">
-          The conditions enabling clear signal transmission. Five dimensions assessed in real-time: <em>Curiosity</em> gates validity, <em>Estate</em> gates resolution, then <em>Salience</em>, <em>Pitch</em>, and <em>Ambiance</em> describe what's actually flowing through the channel.
+          The conditions enabling clear signal transmission. <em>Curiosity</em> and <em>Estate</em> form the bandwidth — orientation and substrate determining what resolution is possible. Then <em>Salience</em>, <em>Pitch</em>, and <em>Ambiance</em> describe the signal quality that bandwidth can carry.
         </p>
       </div>
 
@@ -668,6 +720,74 @@
     <p class="arch-annotation reveal">
       BASE and WAVES are mental models — how you attend to and interpret signals. SPACE is the mechanism where actual processing occurs. <em>Load creates the conditions. SPACE reads them. What emerges is yours.</em>
     </p>
+  </div>
+</section>
+
+<div class="zone-divider"></div>
+
+<!-- ===================================================================
+     THE LOOP IN MOTION
+     =================================================================== -->
+<section class="zone" style="background-color: var(--base-blue); padding: 80px 0;">
+  <div class="zone-content">
+    <div class="zone-title reveal">
+      <h2>The Loop in Motion</h2>
+      <span class="zone-subtag">Architecture is static. This is what it feels like when it runs.</span>
+    </div>
+
+    <p class="reveal prose" style="color: var(--secondary-text); margin-bottom: 8px;">
+      Every session follows this arc. Not as a protocol you execute &mdash; as a process you enter.
+    </p>
+
+    <div class="loop-flow reveal">
+      <!-- 1. Noise -->
+      <div class="loop-step noise-step">
+        <svg class="loop-icon" viewBox="0 0 88 88" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20,55 C25,30 35,70 42,35 C49,0 30,65 55,40 C80,15 15,50 60,55 C105,60 35,25 30,60" fill="none" stroke="#9994B8" stroke-width="1.2" opacity="0.4"/>
+          <path d="M35,65 C40,20 60,75 50,30 C40,-15 70,60 25,45 C-20,30 65,70 45,25" fill="none" stroke="#9994B8" stroke-width="0.8" opacity="0.3"/>
+          <path d="M55,50 C20,35 65,15 30,50 C-5,85 70,30 40,65 C10,100 60,40 50,70" fill="none" stroke="#FFA565" stroke-width="0.9" opacity="0.2"/>
+          <path d="M15,40 C45,60 25,20 55,55 C85,90 30,35 65,45 C100,55 20,65 45,35" fill="none" stroke="#FFA565" stroke-width="0.7" opacity="0.15"/>
+          <path d="M48,30 C30,55 62,40 38,60 C14,80 56,20 44,50" fill="none" stroke="#5A5672" stroke-width="1" opacity="0.25"/>
+        </svg>
+        <div class="loop-channel"></div>
+        <div class="loop-label">Noise</div><div class="loop-desc">You arrive carrying the day &mdash; deadlines, sleep debt, the residue of decisions made and unmade. The mind narrates continuously. <em>This is baseline.</em></div>
+      </div>
+
+      <!-- 2. BASE -->
+      <div class="loop-step base-step">
+        <img class="loop-icon" src="../assets/icon_signal_base.svg" alt="BASE signal forming">
+        <div class="loop-channel"></div>
+        <div class="loop-label">B &rarr; A &rarr; S &rarr; E</div><div class="loop-desc">Attention finds direction. Balancing. Aligning. Sourcing. Engaging. Not forced &mdash; oriented. You begin noticing <em>how</em> you're processing before the load arrives. The noise doesn't stop. You stop swimming in it.</div>
+      </div>
+
+      <!-- 3. Load -->
+      <div class="loop-step load-step">
+        <img class="loop-icon" src="../assets/icon_base_frame.svg" alt="BASE arch forming under load">
+        <div class="loop-channel"></div>
+        <div class="loop-label">Load Arrives</div><div class="loop-desc">Tension and attention braid together. Under sufficient load, the brain shunts fuel from the prefrontal cortex to the motor cortex. The narrating mind goes quiet &mdash; not through discipline, but through <em>metabolic demand.</em></div>
+      </div>
+
+      <!-- 4. SPACE -->
+      <div class="loop-step space-step">
+        <img class="loop-icon" src="../assets/icon_space_multi.svg" alt="SPACE channel forming">
+        <div class="loop-channel"></div>
+        <div class="loop-label">SPACE Opens</div><div class="loop-desc">With the narrator offline, the channel clears. Signals that were always broadcasting &mdash; from fascia, joints, breath, internal pressure systems &mdash; arrive without editorial. <em>You perceive what was always there.</em> Bandwidth determines resolution. The conditions describe what flows through.</div>
+      </div>
+
+      <!-- 5. WAVES -->
+      <div class="loop-step waves-step">
+        <img class="loop-icon" src="../assets/icon_signal_waves.svg" alt="WAVES signal emerging">
+        <div class="loop-channel"></div>
+        <div class="loop-label">W &rarr; A &rarr; V &rarr; E &rarr; S</div><div class="loop-desc">Pattern recognition composes itself. Adaptation. Variance. Exploration. Synergy. You stop executing a program and start <em>responding to what's actually there.</em> The framework recedes. The body composes.</div>
+      </div>
+
+      <!-- 6. Close -->
+      <div class="loop-step close-step">
+        <img class="loop-icon" src="../assets/icon_waves_frame.svg" alt="WAVES arch completing the loop">
+        <div class="loop-channel"></div>
+        <div class="loop-label">The Loop Closes</div><div class="loop-desc">The noise you arrived with hasn't been eliminated. It has been <em>recalibrated.</em> Same external signals, different internal receiver. How you eat, how you process stress, how you navigate uncertainty &mdash; downstream of a nervous system that just updated its resolution.</div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -947,7 +1067,7 @@
     </div>
 
     <p class="reveal prose" style="color: #9994B8; margin-bottom: 32px;">
-      A 15-minute State Assessment determines whether this is the right portal, the right time, and the right entry point. It's not an intake form. It's an orientation to your current signal environment. Where is your Salience? What's your noise floor? Are you arriving to explore or arriving to grasp?
+      A 15-minute State Assessment determines whether this is the right fit, the right time, and the right entry point. It's not an intake form. It's a read of where your body is right now. How you slept. What you're carrying. Whether you're arriving curious or arriving to check a box.
     </p>
 
     <div class="reveal" style="display: flex; gap: 48px; margin-bottom: 48px; flex-wrap: wrap;">
@@ -963,9 +1083,9 @@
 
     <div class="divider-coral reveal"></div>
 
-    <p class="reveal prose" style="color: #9994B8; font-size: 15px;">
-      No progress photos. No before/after sequencing. What gets tracked: language evolution. The moment &ldquo;I think I feel my glutes&rdquo; becomes &ldquo;I feel glutes firing.&rdquo; The moment a client stops mid-set without instruction. The moment training becomes energizing rather than depleting. Load progression, recovery patterns, and compensation resolution are documented &mdash; but the leading indicators are always perceptual. Physical adaptation follows signal clarity, not the reverse. These are the markers. They consolidate between sessions or they don&rsquo;t. Consolidation is the diagnostic.
-    </p>
+    <p class=”reveal prose” style=”color: #9994B8; font-size: 15px; margin-bottom: 24px;”> No progress photos. No before/after sequencing. What gets tracked: signal resolution — the body’s capacity to read and respond with increasing precision.</p>
+    <p class=”reveal prose” style=”color: #9994B8; font-size: 15px; margin-bottom: 24px;”>The evidence shows up in language: “I think I feel my glutes” becomes “I feel glutes firing.” It shows up in behavior: a client adjusts tempo mid-set without instruction because the body said to. And it shows up in the body: load tolerance increases, compensation patterns resolve, body composition shifts, recovery compounds. Physical adaptation follows signal clarity, not the reverse.</p>
+    <p class=”reveal prose” style=”color: #9994B8; font-size: 15px;”>The proof is never in the session. It’s in what shows up next time.</p>
   </div>
 </section>
 
@@ -983,12 +1103,13 @@
     </h2>
 
     <p class="reveal prose" style="color: #9994B8; margin: 0 auto 32px; max-width: 560px;">
-      The nervous system reading yours has 37 years of embodied practice and a neurological history that made internal spatial intelligence a survival necessity — not an intellectual interest. The methodology didn’t come from research. It came from a brain that had to rebuild its own signal architecture after the analytical paths were damaged. That’s who’s in the room with you.
+      The nervous system reading yours belongs to Greg Lutcavage &mdash; 37 years of embodied practice and a neurological history that made internal spatial intelligence a survival necessity, not an intellectual interest. The methodology didn’t come from research. It came from a brain that had to rebuild its own signal architecture after the analytical paths were damaged. That’s who’s in the room with you.
     </p>
 
     <p class="reveal prose" style="color: #9994B8; margin: 0 auto 48px; max-width: 560px;">
-      What you learn to sense under the bar, you sense everywhere. Why you crash at 2pm. Stress you can't name yet. The room shifting before anyone speaks. The weight on the bar was never the point. The sensing was.
-    </p>
+    What you learn to sense under stress with increased intensity, you sense everywhere. Why you crash at 2pm. Stress you can't name yet. The room shifting before anyone speaks. 
+	  </p>
+	  <p class="reveal prose" style="color: #9994B8; margin: 0 auto 48px; max-width: 560px;">The weight is never the point. The sensing is.</p>
 
     <div class="reveal" style="margin-bottom: 48px;">
       <a href="mailto:greg@basewaves.com?subject=State%20Assessment" class="footer-cta">
@@ -1034,6 +1155,8 @@
   </div>
 </section>
 
+<!-- Scroll Progress Indicator -->
+<div class="scroll-counter-wrap"><span class="scroll-indicator" id="scrollCounter">000</span></div>
 
 <script>
 // IntersectionObserver reveals
@@ -1052,10 +1175,11 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 // Mechanism slider interaction
 (function() {
-  var slider = document.getElementById('mech-slider');
-  var loadName = document.getElementById('mech-load-name');
-  var firing = document.getElementById('mech-firing');
-  var state = document.getElementById('mech-state');
+  var sliderUpper = document.getElementById('mech-slider');
+  var sliderLower = document.getElementById('mech-slider-lower');
+  var loadNames = [document.getElementById('mech-load-name'), document.getElementById('mech-load-name-lower')];
+  var firings = [document.getElementById('mech-firing'), document.getElementById('mech-firing-lower')];
+  var states = [document.getElementById('mech-state'), document.getElementById('mech-state-lower')];
   var panelOne = document.getElementById('panel-one');
   var panelSeven = document.getElementById('panel-seven');
   var barsOne = document.querySelectorAll('#bars-one .mech-bar-fill');
@@ -1073,49 +1197,48 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     document.getElementById('tf-matrix')
   ];
 
-  // Base widths for PFC bars (7 bars: Form tracking, Rumination, Self-narrative, Social comparison, Identity maintenance, Planning, Worry)
   var oneBase = [92, 90, 85, 95, 88, 82, 78];
 
-  slider.addEventListener('input', function() {
-    var v = parseInt(this.value);
+  function updateMech(v) {
+    // Sync both sliders
+    sliderUpper.value = v;
+    sliderLower.value = v;
 
-    // Load name + color
-    if (v < 15) { loadName.textContent = 'Bodyweight'; loadName.style.color = 'var(--secondary-text)'; }
-    else if (v < 35) { loadName.textContent = 'Light Load'; loadName.style.color = 'var(--coral)'; }
-    else if (v < 60) { loadName.textContent = 'Moderate Load'; loadName.style.color = 'var(--coral)'; }
-    else if (v < 85) { loadName.textContent = 'Heavy Load'; loadName.style.color = '#E24B4A'; }
-    else { loadName.textContent = 'Threshold'; loadName.style.color = '#E24B4A'; }
+    // Load name + color (both locations)
+    var name, color;
+    if (v < 15) { name = 'Bodyweight'; color = 'var(--secondary-text)'; }
+    else if (v < 35) { name = 'Light Load'; color = 'var(--coral)'; }
+    else if (v < 60) { name = 'Moderate Load'; color = 'var(--coral)'; }
+    else if (v < 85) { name = 'Heavy Load'; color = '#E24B4A'; }
+    else { name = 'Threshold'; color = '#E24B4A'; }
+    loadNames.forEach(function(el) { el.textContent = name; el.style.color = color; });
 
     // Continuous Hz
     var hz = Math.round(8 + (v / 100) * 58);
-    firing.textContent = 'Mechanoreceptor firing: ~' + hz + ' Hz';
+    firings.forEach(function(el) { el.innerHTML = 'Intensity: ~' + hz + ' Hz <span class="mech-firing-sub">mechanoreceptor firing</span>'; });
 
     // State annotation
-    if (v < 20) state.textContent = 'PFC dominant \u2014 narrative running \u2014 interoceptive signal below conscious threshold';
-    else if (v < 45) state.textContent = 'Metabolic competition begins \u2014 bottom-up signals breaking through top-down dominance';
-    else if (v < 70) state.textContent = 'Transient hypofrontality \u2014 PFC losing glucose \u2014 the 7 becoming undeniable';
-    else state.textContent = 'Cognitive silencing \u2014 the narrator ran out of fuel \u2014 the body\u2019s architecture teaches the brain';
+    var stateText;
+    if (v < 20) stateText = 'PFC dominant \u2014 narrative running \u2014 interoceptive signal below conscious threshold';
+    else if (v < 45) stateText = 'Metabolic competition begins \u2014 bottom-up signals breaking through top-down dominance';
+    else if (v < 70) stateText = 'Transient hypofrontality \u2014 PFC losing glucose \u2014 the 7 becoming undeniable';
+    else stateText = 'Cognitive silencing \u2014 the narrator runs out of fuel \u2014 the body\u2019s architecture teaches the brain';
+    states.forEach(function(el) { el.textContent = stateText; });
 
-    // Asymmetric scaling (PFC drops to zero before max, 7 fills before max)
+    // Asymmetric scaling
     var pfcScale = Math.max(0, 1 - (v / 100) * 1.3);
 
-    // PFC bars — shrink + fade
+    // PFC bars
     barsOne.forEach(function(bar, i) {
       bar.style.width = Math.max(2, oneBase[i] * pfcScale) + '%';
       bar.style.opacity = Math.max(0.1, 0.8 * pfcScale);
     });
 
-    // Interoceptive bars — sequenced cascade (bottom fills first, then ripples upward)
-    // Order: Fascial tension(0), Visceral tone(1), Thermal state(2), Cardiac rhythm(3),
-    //        Respiratory depth(4), Muscular activation(5), Metabolic status(6)
-    // Metabolic status (index 6, bottom) peaks first at ~41 Hz (slider ~56),
-    // then each bar above it follows with increasing delay
+    // Interoceptive bars — sequenced cascade
     var intBase = [8, 11, 6, 15, 5, 14, 4];
     var numInt = barsSeven.length;
     barsSeven.forEach(function(bar, i) {
-      // Reverse index: bottom bar (6) gets offset 0, top bar (0) gets offset 6
       var reverseIdx = numInt - 1 - i;
-      // Each bar's effective slider position is delayed by 8 units per step from the bottom
       var delayed = Math.max(0, v - (reverseIdx * 8));
       var localScale = Math.min(1, (delayed / 100) * 1.8);
       bar.style.width = Math.min(98, intBase[i] + (90 * localScale)) + '%';
@@ -1128,29 +1251,36 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     panelOne.style.opacity = Math.max(0.35, pfcScale + 0.2);
     panelSeven.style.borderColor = intScale > 0.5 ? 'rgba(88,252,200,0.3)' : 'rgba(90,86,114,0.15)';
 
-    // Pulse on interoceptive panel at high load
+    // Pulse
     pulse.style.display = v > 55 ? 'block' : 'none';
 
-    // Language stages — single active (artifact behavior)
+    // Language stages
     var thresholds = [0, 25, 55, 80];
     langStages.forEach(function(el, i) {
       var isActive = v >= thresholds[i] && (i === 3 || v < thresholds[i + 1]);
       el.classList.toggle('active', isActive);
     });
 
-    // Transfer cards — fade in with interoceptive dominance
+    // Transfer cards
     var tfOpacity = Math.min(1, 0.4 + intScale * 0.6);
     transferCards.forEach(function(c) {
       c.style.opacity = tfOpacity;
       c.style.borderTopColor = v > 70 ? 'rgba(88,252,200,0.3)' : 'rgba(90,86,114,0.15)';
     });
-  });
+  }
+
+  sliderUpper.addEventListener('input', function() { updateMech(parseInt(this.value)); });
+  sliderLower.addEventListener('input', function() { updateMech(parseInt(this.value)); });
 })();
 
-// Nav scroll blur
+// Nav scroll blur + scroll counter
 const nav = document.getElementById('siteNav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 80);
+const counter = document.getElementById('scrollCounter');
+window.addEventListener('scroll', function() {
+  var y = window.scrollY;
+  var max = document.documentElement.scrollHeight - window.innerHeight;
+  counter.textContent = String(max > 0 ? Math.round((y / max) * 100) : 0).padStart(3, '0');
+  nav.classList.toggle('scrolled', y > 80);
 });
 
 // Hamburger menu

@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reading SPACE | BASEWAVES Signals</title>
+<meta name="description" content="Five dimensions. One you check first. If it's wrong, the other four lie. An essay on the mechanism where signal becomes legible.">
+<meta property="og:title" content="Reading SPACE | BASEWAVES Signals">
+<meta property="og:description" content="Five dimensions. One you check first. If it's wrong, the other four lie.">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Serif:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root { --base-blue: #0E1220; --deep-blue: #080B14; --lighter-blue: #141B2E; --primary-text: #E8E3FF; --secondary-text: #9994B8; --dim-text: #5A5672; --turquoise: #58FCC8; --coral: #FFA565; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--deep-blue); color: var(--primary-text); font-family: 'IBM Plex Mono', monospace; font-size: 14px; line-height: 1.7; letter-spacing: 0.03em; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+  .starfield { position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 0; background: radial-gradient(1px 1px at 10% 15%, rgba(232,227,255,0.4), transparent), radial-gradient(1px 1px at 25% 35%, rgba(232,227,255,0.25), transparent), radial-gradient(1.5px 1.5px at 40% 8%, rgba(232,227,255,0.35), transparent), radial-gradient(1px 1px at 55% 42%, rgba(232,227,255,0.2), transparent), radial-gradient(1px 1px at 70% 22%, rgba(88,252,200,0.12), transparent), radial-gradient(1.5px 1.5px at 85% 55%, rgba(232,227,255,0.3), transparent), radial-gradient(1px 1px at 15% 65%, rgba(232,227,255,0.2), transparent), radial-gradient(1px 1px at 35% 78%, rgba(232,227,255,0.35), transparent), radial-gradient(1.5px 1.5px at 60% 72%, rgba(232,227,255,0.25), transparent), radial-gradient(1px 1px at 80% 85%, rgba(232,227,255,0.3), transparent), radial-gradient(1px 1px at 92% 12%, rgba(232,227,255,0.2), transparent), radial-gradient(1px 1px at 48% 92%, rgba(88,252,200,0.1), transparent), radial-gradient(1px 1px at 5% 48%, rgba(232,227,255,0.3), transparent), radial-gradient(1.5px 1.5px at 72% 38%, rgba(232,227,255,0.2), transparent); animation: starfield-breathe 12s ease-in-out infinite; }
+  @keyframes starfield-breathe { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+  .zone { position: relative; z-index: 1; }
+  .zone-inner { max-width: 720px; margin: 0 auto; padding: 0 48px; }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.12s; } .reveal-delay-2 { transition-delay: 0.24s; }
+
+  /* Nav */
+  .site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; transition: background 0.4s ease, backdrop-filter 0.4s ease; }
+  .site-nav.scrolled { background: rgba(14, 18, 32, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+  .logo-container { display: block; opacity: 0.7; transition: opacity 0.3s ease, filter 0.3s ease; }
+  .logo-container:hover { opacity: 1; filter: drop-shadow(0 0 12px var(--turquoise)) drop-shadow(0 0 24px rgba(88, 252, 200, 0.4)); }
+  .nav-logo { height: 41px; width: auto; }
+  .nav-link { font-family: 'Space Mono', monospace; font-size: 15px; color: var(--secondary-text); text-decoration: none; letter-spacing: 0.05em; transition: color 0.3s ease; }
+  .nav-link:hover { color: var(--turquoise); } .nav-link.active { color: var(--primary-text); }
+  .nav-separator { color: var(--dim-text); margin: 0 12px; } .nav-desktop { display: flex; align-items: center; }
+  .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 28px; height: 28px; cursor: pointer; z-index: 60; background: none; border: none; padding: 0; }
+  .hamburger span { display: block; width: 100%; height: 2px; background-color: var(--primary-text); transition: transform 0.3s ease, opacity 0.3s ease; }
+  .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .nav-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(14, 18, 32, 0.92); z-index: 55; flex-direction: column; justify-content: center; align-items: center; gap: 40px; opacity: 0; transition: opacity 0.3s ease; }
+  .nav-overlay.open { display: flex; opacity: 1; }
+  .nav-overlay a { font-family: 'Space Mono', monospace; font-size: 18px; letter-spacing: 0.15em; color: var(--secondary-text); text-decoration: none; transition: color 0.3s ease; }
+  .nav-overlay a:hover { color: var(--turquoise); } .nav-overlay a.active { color: var(--primary-text); }
+  @media (max-width: 1023px) { .nav-logo { height: 32px; } .hamburger { display: flex; } .nav-desktop { display: none; } }
+  @media (min-width: 1024px) { .nav-overlay { display: none !important; } }
+
+  /* Essay header */
+  .essay-header { padding: 160px 0 60px; text-align: center; }
+  .essay-label { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--secondary-text); margin-bottom: 24px; }
+  .essay-label a { color: var(--secondary-text); text-decoration: none; transition: color 0.3s ease; }
+  .essay-label a:hover { color: var(--turquoise); }
+  .essay-title { font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(28px, 4vw, 44px); letter-spacing: 0.06em; color: var(--primary-text); margin-bottom: 16px; line-height: 1.3; }
+  .essay-provocation { font-family: 'IBM Plex Serif', serif; font-size: 17px; font-style: italic; color: var(--secondary-text); margin-bottom: 16px; }
+  .essay-meta { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--dim-text); letter-spacing: 0.08em; }
+
+  /* Zone divider */
+  .zone-divider { height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(88,252,200,0.15) 20%, rgba(88,252,200,0.25) 50%, rgba(88,252,200,0.15) 80%, transparent 100%); position: relative; z-index: 1; }
+
+  /* Essay body */
+  .essay-body { padding: 60px 0 80px; }
+  .essay-body p { font-family: 'IBM Plex Serif', serif; font-size: 16px; line-height: 1.85; color: var(--secondary-text); margin-bottom: 28px; letter-spacing: 0.01em; }
+  .essay-body p em { color: var(--primary-text); font-style: normal; }
+  .essay-body p strong { color: var(--primary-text); font-weight: 500; }
+  .essay-body .section-break { height: 48px; display: flex; align-items: center; justify-content: center; margin: 12px 0; }
+  .essay-body .section-break::before { content: ''; width: 40px; height: 1px; background: linear-gradient(90deg, transparent, rgba(88,252,200,0.25), transparent); }
+  .essay-body .signal-line { font-family: 'IBM Plex Serif', serif; font-size: 17px; line-height: 1.85; color: var(--primary-text); margin-bottom: 28px; }
+  .essay-body .turquoise-line { font-family: 'IBM Plex Serif', serif; font-size: 17px; line-height: 1.85; color: var(--turquoise); margin-bottom: 28px; }
+
+  /* SPACE architecture diagram */
+  .space-diagram { width: 100%; max-width: 420px; margin: 20px auto 44px; display: block; }
+  .space-diagram svg { width: 100%; height: auto; overflow: visible; }
+  .space-diagram text { pointer-events: none; user-select: none; }
+  .space-diagram .tier-group { cursor: pointer; }
+  .space-diagram .hit-area { fill: transparent; stroke: none; }
+  .space-diagram .contour { transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+  .space-diagram .core-node { transition: r 0.4s ease, fill-opacity 0.4s ease; }
+  .space-diagram .tier-label { transition: opacity 0.4s ease, fill 0.4s ease; }
+  .space-diagram .tier-desc { transition: opacity 0.4s ease, fill 0.4s ease; }
+  .space-diagram .tier-marker { transition: opacity 0.4s ease; }
+  .space-diagram .spring-path { transition: stroke-opacity 0.4s ease, stroke 0.4s ease; }
+
+  /* Active states — toggled by JS */
+  .space-diagram .tier-curiosity.active .contour-outer { rx: 115; ry: 48; stroke-opacity: 0.55; stroke-width: 1.1; }
+  .space-diagram .tier-curiosity.active .contour-inner { rx: 82; ry: 34; stroke-opacity: 0.28; }
+  .space-diagram .tier-curiosity.active .core-node { r: 6; fill-opacity: 0.95; }
+  .space-diagram .tier-curiosity.active .tier-label { opacity: 1; }
+  .space-diagram .tier-curiosity.active .tier-desc { opacity: 0.9; fill: #58FCC8; }
+  .space-diagram .tier-curiosity.active .tier-marker { opacity: 0.75; }
+  .space-diagram .tier-curiosity.active ~ .spring-curiosity-estate { stroke-opacity: 0.55; stroke: #58FCC8; }
+  .space-diagram .tier-curiosity.active ~ .spring-estate-curiosity { stroke-opacity: 0.4; stroke: #E8E3FF; }
+
+  .space-diagram .tier-estate.active .contour-outer { rx: 120; ry: 50; stroke-opacity: 0.4; stroke-width: 1.1; }
+  .space-diagram .tier-estate.active .contour-inner { rx: 86; ry: 36; stroke-opacity: 0.2; }
+  .space-diagram .tier-estate.active .core-node { r: 6; fill-opacity: 0.85; }
+  .space-diagram .tier-estate.active .tier-label { opacity: 1; }
+  .space-diagram .tier-estate.active .tier-desc { opacity: 0.9; fill: #E8E3FF; }
+  .space-diagram .tier-estate.active .tier-marker { opacity: 0.75; }
+  .space-diagram .tier-estate.active ~ .spring-estate-salience { stroke-opacity: 0.45; stroke: #E8E3FF; }
+
+  /* Bandwidth loop springs — activated by JS class on the paths themselves */
+  .space-diagram .spring-path.spring-active { stroke-opacity: 0.5 !important; }
+  .space-diagram .spring-curiosity-estate.spring-active { stroke: #58FCC8 !important; stroke-opacity: 0.55 !important; }
+  .space-diagram .spring-estate-curiosity.spring-active { stroke: #E8E3FF !important; stroke-opacity: 0.45 !important; }
+  .space-diagram .spring-conditions-curiosity.spring-active { stroke: #58FCC8 !important; stroke-opacity: 0.35 !important; }
+
+  .space-diagram .tier-ambiance.active .contour { stroke-opacity: 0.5; stroke-width: 1.1; }
+  .space-diagram .tier-ambiance.active .core-node { r: 5; fill-opacity: 0.8; }
+  .space-diagram .tier-ambiance.active .tier-label { opacity: 0.95; fill: #E8E3FF; }
+  .space-diagram .tier-ambiance.active .tier-desc { opacity: 0.9; fill: #E8E3FF; }
+
+  .space-diagram .tier-pitch.active .contour { stroke-opacity: 0.5; stroke-width: 1.1; }
+  .space-diagram .tier-pitch.active .core-node { r: 5; fill-opacity: 0.8; }
+  .space-diagram .tier-pitch.active .tier-label { opacity: 0.95; fill: #E8E3FF; }
+  .space-diagram .tier-pitch.active .tier-desc { opacity: 0.9; fill: #E8E3FF; }
+
+  .space-diagram .tier-salience.active .contour { stroke-opacity: 0.5; stroke-width: 1.1; }
+  .space-diagram .tier-salience.active .core-node { r: 5; fill-opacity: 0.8; }
+  .space-diagram .tier-salience.active .tier-label { opacity: 0.95; fill: #E8E3FF; }
+  .space-diagram .tier-salience.active .tier-desc { opacity: 0.9; fill: #E8E3FF; }
+
+  .space-diagram .conditions-marker { transition: opacity 0.4s ease; }
+  .space-diagram .conditions-marker.active { opacity: 0.7 !important; }
+
+  @media (max-width: 900px) {
+    .space-diagram { max-width: 100%; margin: 16px auto 36px; }
+  }
+
+  /* Sources */
+  .sources { margin-top: 16px; padding-top: 24px; border-top: 1px solid rgba(88,252,200,0.08); }
+  .sources-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim-text); margin-bottom: 16px; }
+  .sources p:not(.sources-label) { font-family: 'IBM Plex Serif', serif; font-size: 13px; line-height: 1.7; color: var(--secondary-text); margin-bottom: 8px; }
+
+  /* Essay end navigation */
+  .essay-end { padding: 40px 0 80px; text-align: center; }
+  .essay-back { font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.08em; color: var(--turquoise); text-decoration: none; transition: color 0.3s ease; }
+  .essay-back:hover { color: var(--primary-text); }
+
+  /* Footer */
+  .zone-footer { padding: 60px 0 80px; background: var(--deep-blue); border-top: 1px solid rgba(88,252,200,0.08); }
+  .zone-footer .zone-inner { max-width: 900px; }
+  .footer-territory { display: flex; justify-content: space-between; align-items: start; }
+  .footer-left { max-width: 400px; }
+  .footer-statement { font-family: 'Cinzel', serif; font-size: 15px; color: var(--primary-text); letter-spacing: 0.04em; line-height: 1.5; margin-bottom: 8px; }
+  .footer-sub { font-family: 'IBM Plex Serif', serif; font-size: 13px; color: var(--secondary-text); line-height: 1.6; }
+  .footer-right { text-align: right; }
+  .footer-cta { display: inline-block; font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--coral); text-decoration: none; padding: 12px 28px; border: 1px solid rgba(255,165,101,0.3); transition: all 0.3s ease; margin-bottom: 16px; }
+  .footer-cta:hover { border-color: var(--coral); background: rgba(255,165,101,0.05); }
+  .footer-contact { font-size: 13px; color: var(--secondary-text); line-height: 1.8; }
+  .footer-contact a { color: var(--turquoise); text-decoration: none; border-bottom: 1px solid rgba(88,252,200,0.15); }
+  .footer-contact a:hover { border-color: var(--turquoise); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; }
+  .footer-logo { width: 36px; height: 24px; opacity: 0.25; } .footer-logo path { fill: var(--primary-text); }
+  .footer-tm { font-size: 12px; color: rgba(90,86,114,0.5); letter-spacing: 0.06em; }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .zone-inner { padding: 0 24px; }
+    .essay-header { padding: 120px 0 40px; }
+    .footer-territory { flex-direction: column; gap: 40px; }
+    .footer-right { text-align: left; }
+    .footer-bottom { flex-direction: column; gap: 12px; align-items: flex-start; }
+  }
+
+  .no-js .reveal { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+<nav class="site-nav" id="siteNav"><a href="/" class="logo-container"><img src="../../assets/Basewaves_logo.svg" alt="BASEWAVES" class="nav-logo"></a><div class="nav-desktop"><a href="/" class="nav-link">HOME</a><span class="nav-separator">|</span><a href="/origin/" class="nav-link">ORIGIN</a><span class="nav-separator">|</span><a href="/portal/" class="nav-link">PORTAL</a><span class="nav-separator">|</span><a href="/signals/" class="nav-link active">SIGNALS</a></div><button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button></nav>
+<div class="nav-overlay" id="navOverlay"><a href="/">HOME</a><a href="/origin/">ORIGIN</a><a href="/portal/">PORTAL</a><a href="/signals/" class="active">SIGNALS</a></div>
+<div class="starfield"></div>
+
+<!-- ===================================================================
+     ESSAY HEADER
+     =================================================================== -->
+<section class="zone essay-header">
+  <div class="zone-inner">
+    <div class="essay-label reveal"><a href="/signals/">&larr; Signals</a> &middot; 04</div>
+    <h1 class="essay-title reveal reveal-delay-1">Reading SPACE</h1>
+    <p class="essay-provocation reveal reveal-delay-1">"Five dimensions. One you check first. If it's wrong, the other four lie."</p>
+    <div class="essay-meta reveal reveal-delay-2">11 min read</div>
+  </div>
+</section>
+<div class="zone-divider"></div>
+
+<!-- ===================================================================
+     ESSAY BODY
+     =================================================================== -->
+<section class="zone essay-body">
+  <div class="zone-inner">
+
+    <p class="reveal">I’ve watched two different sensoriums show up in the same body hundreds of times.</p>
+
+    <p class="reveal">Tuesday. Constantine walks in. Five hours of sleep. Conference deadline. Coffee instead of breakfast.</p>
+
+    <p class="reveal">&ldquo;I feel off.&rdquo;</p>
+
+    <p class="reveal">Thursday. Same person. Eight hours. No deadline. Eggs and toast at seven. Two hours later, during  workout...</p>
+
+    <p class="reveal">&ldquo;I feel my legs and my knees much more stable, really strong base.&rdquo;</p>
+
+    <p class="reveal">You&rsquo;ve had this Tuesday. The weight that moved clean last week now feels bolted to the floor, and the only word you have for it is <em>off.</em></p>
+
+    <p class="reveal">Same body. Same gym. Same program. Two completely different sensoriums. And the only language available to describe the difference — in the entire history of strength training — was <em>off</em> and <em>on.</em></p>
+
+    <p class="turquoise-line reveal">That's not a vocabulary problem. It's a resolution problem. And it has a solution.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">You've already felt the territory. If you've been reading these essays in order, you've spent time inside the five dimensions without knowing their names. The spatial state from essay one. The five coordinates from essay two. The four channels of BASE from essay three. All of it was preparation for what comes next.</p>
+
+    <p class="signal-line reveal">The map.</p>
+
+    <p class="reveal">Not a replacement for the territory. The territory always comes first &mdash; that's the sequence these essays honor. But a map that lets you return to territory you've visited, navigate while you're inside it, and communicate what you found when you come back.</p>
+
+    <p class="reveal">The map is called SPACE. Five dimensions your body is always broadcasting in. Three tiers &mdash; not a flat read but an architecture, where each tier's reliability depends on the one before it.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="signal-line reveal">Tier one. Before anything else.</p>
+
+    <p class="reveal"><em>Am I exploring, or am I grasping?</em></p>
+
+    <p class="reveal">You know this one already. Binary. Not a scale. Not a gradient. A switch. You're either receiving what's actually there or you're checking sensation against what you expected to find.</p>
+
+    <p class="reveal">This is <strong>Curiosity</strong> &mdash; the orientation that gates everything else. It doesn't live on the same plane as the other four dimensions. It sits above them. Because if you're grasping, every reading you take afterward is contaminated. You'll report sharp pitch because you slept well and <em>should</em> feel sharp. You'll report low noise because you want today to be a good day. You'll rate your reserves high because you don't want to scale back the program.</p>
+
+    <p class="reveal">None of it real. All of it the narrator writing the body's report card.</p>
+
+    <p class="turquoise-line reveal">Check curiosity first. If the answer is grasping, stop assessing. Restore the orientation. Then &mdash; only then &mdash; read the rest.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="signal-line reveal">Tier two. The ground under the signal.</p>
+
+    <p class="reveal">Once you're exploring &mdash; actually receiving rather than projecting &mdash; the next question isn't about signal quality. It's about the body that's doing the receiving.</p>
+
+    <p class="reveal"><em>What is my biological estate right now?</em></p>
+
+    <p class="reveal">Not cardiovascular stamina. Not how long you can run. <strong>Estate</strong> &mdash; the infrastructure holdings your body currently possesses. Sleep debt or sleep surplus. Fed or fasted. Hydrated or dry. Tissue quality. Recovery status. The biological hardware through which every signal must travel.</p>
+
+    <p class="reveal">This is third-person data. Your coach can see it. Your bloodwork can confirm it. It doesn't require interpretation &mdash; it just is. Estate doesn't narrate. The body either has reserves or it doesn't.</p>
+
+    <p class="reveal">Why this comes before signal conditions: because a depleted estate distorts everything downstream. If your biological infrastructure is compromised &mdash; four hours of sleep, skipped meals, accumulated training stress without recovery &mdash; the signal conditions you read next are artifacts of exhaustion, not perception. You'll think your processing is dull when really your hardware is degraded. You'll think the noise is high when really you're too depleted to filter anything.</p>
+
+    <p class="turquoise-line reveal">Know the cable's integrity before trusting what travels through it.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="signal-line reveal">Tier three. What's actually flowing through the channel.</p>
+
+    <p class="reveal">Curiosity confirmed. Estate assessed. Now &mdash; three conditions describing the quality of what's arriving.</p>
+
+    <p class="reveal">Some days you feel your foot pressure distinct from your core tension distinct from your hip position &mdash; each signal arriving with editorial precision, the right ones reaching consciousness while the noise stays out. Other days nothing gets through. Or everything floods in at once, undifferentiated, and you can&rsquo;t tell what matters because your body isn&rsquo;t selecting. That selection &mdash; the editorial gate deciding which signals reach awareness and which get filtered &mdash; is <strong>Salience.</strong> Your body broadcasts continuously, seven interoceptive channels for every proprioceptive one. Salience isn&rsquo;t volume. It&rsquo;s the intelligence deciding what gets through.</p>
+
+    <p class="reveal">Your nervous system has a tempo today. You already know what it is. After real sleep and adequate fuel, there&rsquo;s an immediacy between intention and response &mdash; you think <em>engage the left glute</em> and it&rsquo;s already happening. After four hours of sleep, everything arrives through water. The lag between cue and response. The slight delay before the body catches up to the intention. I can see someone&rsquo;s tempo in the first three reps. You can&rsquo;t fake sharp processing and you can&rsquo;t hide dull processing from someone who&rsquo;s been reading it for decades. That tempo &mdash; the firing rate determined not by motivation but by the metabolic resources available to your neurons right now &mdash; is <strong>Pitch.</strong> The body&rsquo;s processing speed.</p>
+
+    <p class="reveal">The deadline followed you in. The argument from this morning. The chronic sleep debt. The financial stress. You can feel it &mdash; this background hum occupying bandwidth that could otherwise process the body&rsquo;s signal. Some days the hum is barely there and subtle signals emerge like detail in a quiet room. Other days it drowns everything. That background interference &mdash; the total noise floor competing with the signal you&rsquo;re trying to read &mdash; is <strong>Ambiance.</strong> Unlike the other conditions, lower is better. You don&rsquo;t calculate the noise. You hear it &mdash; the clarity or the mud.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">Five dimensions. An architecture, not a checklist.</p>
+
+    <p class="reveal">Curiosity determines whether your readings are trustworthy &mdash; if you&rsquo;re grasping, don&rsquo;t bother reading the rest. Estate determines their resolution &mdash; if the hardware is depleted, the readings are suspect. Then three conditions describe the content of what's flowing through the channel: what's getting through, how fast it's arriving, how much interference competes with it.</p>
+
+    <p class="signal-line reveal">Orientation. Estate. Conditions. In that order. Always.</p>
+
+    <div class="space-diagram reveal">
+      <svg viewBox="0 0 400 640" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="glow-orient" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#58FCC8" stop-opacity="0.12"/>
+            <stop offset="100%" stop-color="#58FCC8" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="glow-sub" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#E8E3FF" stop-opacity="0.08"/>
+            <stop offset="100%" stop-color="#E8E3FF" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="glow-cond" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#9994B8" stop-opacity="0.06"/>
+            <stop offset="100%" stop-color="#9994B8" stop-opacity="0"/>
+          </radialGradient>
+          <marker id="spring-arrow" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 1 1 L 4 4 L 1 7" fill="none" stroke="#9994B8" stroke-width="1" stroke-opacity="0.4"/>
+          </marker>
+        </defs>
+
+        <!-- ==================== TIER 1: ORIENTATION ==================== -->
+        <g class="tier-group tier-curiosity" data-tier="curiosity">
+          <rect class="hit-area" x="30" y="10" width="280" height="90" rx="8"/>
+          <ellipse cx="170" cy="58" rx="100" ry="38" fill="url(#glow-orient)"/>
+          <ellipse class="contour contour-outer" cx="170" cy="58" rx="100" ry="38" fill="none" stroke="#58FCC8" stroke-width="0.9" stroke-opacity="0.35"/>
+          <ellipse class="contour contour-inner" cx="170" cy="58" rx="68" ry="26" fill="none" stroke="#58FCC8" stroke-width="0.6" stroke-opacity="0.15"/>
+          <circle class="core-node" cx="170" cy="58" r="4" fill="#58FCC8" fill-opacity="0.75"/>
+          <text class="tier-label" x="170" y="52" text-anchor="middle" font-family="Cinzel, serif" font-size="16" letter-spacing="0.1em" fill="#58FCC8" opacity="0.9">CURIOSITY</text>
+          <text class="tier-desc" x="170" y="73" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="11" letter-spacing="0.04em" fill="#9994B8" opacity="0.6">exploring or grasping</text>
+          <text class="tier-marker" x="370" y="61" text-anchor="end" font-family="'IBM Plex Mono', monospace" font-size="10" letter-spacing="0.12em" fill="#58FCC8" opacity="0.35">ORIENTATION</text>
+        </g>
+
+        <!-- Feedback loop: Curiosity ↔ Estate (bandwidth envelope) -->
+        <path class="spring-path spring-curiosity-estate" d="M 178,96 C 206,110 206,128 178,140 C 150,152 150,164 178,172" fill="none" stroke="#58FCC8" stroke-width="1" stroke-opacity="0.22" marker-end="url(#spring-arrow)"/>
+        <path class="spring-path spring-estate-curiosity" d="M 162,172 C 134,160 134,142 162,130 C 190,118 190,104 162,96" fill="none" stroke="#E8E3FF" stroke-width="1" stroke-opacity="0.18" marker-end="url(#spring-arrow)"/>
+
+        <!-- ==================== TIER 2: SUBSTRATE ==================== -->
+        <g class="tier-group tier-estate" data-tier="estate">
+          <rect class="hit-area" x="25" y="145" width="290" height="95" rx="8"/>
+          <ellipse cx="170" cy="195" rx="105" ry="40" fill="url(#glow-sub)"/>
+          <ellipse class="contour contour-outer" cx="170" cy="195" rx="105" ry="40" fill="none" stroke="#E8E3FF" stroke-width="0.9" stroke-opacity="0.25"/>
+          <ellipse class="contour contour-inner" cx="170" cy="195" rx="72" ry="28" fill="none" stroke="#E8E3FF" stroke-width="0.6" stroke-opacity="0.1"/>
+          <circle class="core-node" cx="170" cy="195" r="4" fill="#E8E3FF" fill-opacity="0.6"/>
+          <text class="tier-label" x="170" y="189" text-anchor="middle" font-family="Cinzel, serif" font-size="16" letter-spacing="0.1em" fill="#E8E3FF" opacity="0.75">ESTATE</text>
+          <text class="tier-desc" x="170" y="210" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="11" letter-spacing="0.04em" fill="#9994B8" opacity="0.6">biological holdings</text>
+          <text class="tier-marker" x="370" y="198" text-anchor="end" font-family="'IBM Plex Mono', monospace" font-size="10" letter-spacing="0.12em" fill="#E8E3FF" opacity="0.3">SUBSTRATE</text>
+        </g>
+
+        <!-- Spring: Estate → Salience -->
+        <path class="spring-path spring-estate-salience" d="M 170,235 C 200,248 200,265 170,278 C 140,291 140,306 170,316" fill="none" stroke="#9994B8" stroke-width="1" stroke-opacity="0.2" marker-end="url(#spring-arrow)"/>
+
+        <!-- ==================== TIER 3: CONDITIONS ==================== -->
+        <!-- Containing oval — concurrent processing envelope -->
+        <ellipse class="conditions-envelope" cx="170" cy="468" rx="130" ry="180" fill="none" stroke="#9994B8" stroke-width="1" stroke-opacity="0.25" stroke-dasharray="5 5"/>
+        <text class="tier-marker conditions-marker" x="370" y="470" text-anchor="end" font-family="'IBM Plex Mono', monospace" font-size="10" letter-spacing="0.12em" fill="#9994B8" opacity="0.25">CONDITIONS</text>
+
+        <!-- Salience -->
+        <g class="tier-group tier-salience" data-tier="salience">
+          <rect class="hit-area" x="50" y="300" width="240" height="70" rx="8"/>
+          <ellipse cx="170" cy="340" rx="90" ry="32" fill="url(#glow-cond)"/>
+          <ellipse class="contour" cx="170" cy="340" rx="90" ry="32" fill="none" stroke="#9994B8" stroke-width="0.8" stroke-opacity="0.2"/>
+          <circle class="core-node" cx="170" cy="340" r="3.5" fill="#9994B8" fill-opacity="0.45"/>
+          <text class="tier-label" x="170" y="334" text-anchor="middle" font-family="Cinzel, serif" font-size="14" letter-spacing="0.08em" fill="#9994B8" opacity="0.6">SALIENCE</text>
+          <text class="tier-desc" x="170" y="354" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="10" letter-spacing="0.03em" fill="#5A5672" opacity="0.75">what gets through</text>
+        </g>
+
+        <!-- Spring: Salience ↔ Pitch (bidirectional) -->
+        <path class="spring-path spring-salience-pitch" d="M 170,372 C 198,384 198,400 170,412 C 142,424 142,436 170,445" fill="none" stroke="#9994B8" stroke-width="1" stroke-opacity="0.18" marker-start="url(#spring-arrow)" marker-end="url(#spring-arrow)"/>
+
+        <!-- Pitch -->
+        <g class="tier-group tier-pitch" data-tier="pitch">
+          <rect class="hit-area" x="55" y="430" width="230" height="70" rx="8"/>
+          <ellipse cx="170" cy="468" rx="85" ry="30" fill="url(#glow-cond)"/>
+          <ellipse class="contour" cx="170" cy="468" rx="85" ry="30" fill="none" stroke="#9994B8" stroke-width="0.8" stroke-opacity="0.2"/>
+          <circle class="core-node" cx="170" cy="468" r="3.5" fill="#9994B8" fill-opacity="0.45"/>
+          <text class="tier-label" x="170" y="462" text-anchor="middle" font-family="Cinzel, serif" font-size="14" letter-spacing="0.08em" fill="#9994B8" opacity="0.6">PITCH</text>
+          <text class="tier-desc" x="170" y="482" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="10" letter-spacing="0.03em" fill="#5A5672" opacity="0.75">processing speed</text>
+        </g>
+
+        <!-- Spring: Pitch ↔ Ambiance (bidirectional) -->
+        <path class="spring-path spring-pitch-ambiance" d="M 170,498 C 198,510 198,526 170,538 C 142,550 142,562 170,570" fill="none" stroke="#9994B8" stroke-width="1" stroke-opacity="0.18" marker-start="url(#spring-arrow)" marker-end="url(#spring-arrow)"/>
+
+        <!-- Ambiance -->
+        <g class="tier-group tier-ambiance" data-tier="ambiance">
+          <rect class="hit-area" x="50" y="555" width="240" height="70" rx="8"/>
+          <ellipse cx="170" cy="595" rx="90" ry="32" fill="url(#glow-cond)"/>
+          <ellipse class="contour" cx="170" cy="595" rx="90" ry="32" fill="none" stroke="#9994B8" stroke-width="0.8" stroke-opacity="0.2"/>
+          <circle class="core-node" cx="170" cy="595" r="3.5" fill="#9994B8" fill-opacity="0.45"/>
+          <text class="tier-label" x="170" y="589" text-anchor="middle" font-family="Cinzel, serif" font-size="14" letter-spacing="0.08em" fill="#9994B8" opacity="0.6">AMBIANCE</text>
+          <text class="tier-desc" x="170" y="609" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="10" letter-spacing="0.03em" fill="#5A5672" opacity="0.75">background noise floor</text>
+        </g>
+
+        <!-- Feedback: Conditions → Curiosity (what conditions report reshapes orientation) -->
+        <path class="spring-path spring-conditions-curiosity" d="M 52,500 C 20,400 20,200 80,90" fill="none" stroke="#9994B8" stroke-width="0.8" stroke-opacity="0.15" marker-end="url(#spring-arrow)"/>
+        <path class="spring-path spring-conditions-curiosity" d="M 288,500 C 320,400 320,200 260,90" fill="none" stroke="#9994B8" stroke-width="0.8" stroke-opacity="0.15" marker-end="url(#spring-arrow)"/>
+
+      </svg>
+    </div>
+
+    <p class="reveal">The first two set the bandwidth. The last three tell you what that bandwidth can carry. Curiosity and Estate don&rsquo;t just come first &mdash; they determine the resolution of everything below them. Dull pitch on a depleted estate isn&rsquo;t a condition to fix. It&rsquo;s what processing sounds like when the bandwidth is narrow. Widen the bandwidth &mdash; sleep, fuel, restored orientation &mdash; and the conditions sharpen as a consequence.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">Here's what this gives you that &ldquo;I feel off&rdquo; doesn't.</p>
+
+    <p class="reveal">Constantine walks in Tuesday. Five hours of sleep, conference stress, no breakfast. Instead of &ldquo;off,&rdquo; he reads his SPACE: <em>Exploring &mdash; good, actually present today despite the fatigue. Estate around 4 &mdash; depleted, sleep debt is real. Salience muddy &mdash; can't discriminate, everything blurring. Pitch dull &mdash; slow processing, lag between cue and response. Ambiance high &mdash; conference noise everywhere, can't get it out of my head.</em></p>
+
+    <p class="reveal">That's not &ldquo;off.&rdquo; That's a specific landscape with specific coordinates. And each coordinate suggests a specific response.</p>
+
+    <p class="reveal">Estate at 4 is the bandwidth constraint &mdash; everything downstream is operating within depleted capacity. Dull pitch isn&rsquo;t a separate problem to solve. It&rsquo;s what neural processing sounds like inside an estate of 4. High ambiance isn&rsquo;t a coincidence &mdash; a depleted body has fewer resources to filter the noise that a resourced body handles automatically. Muddy salience follows from both. The conditions aren&rsquo;t four independent readings. They&rsquo;re three expressions of the same bandwidth limitation.</p>
+
+    <p class="reveal">The response isn&rsquo;t to fix each condition. It&rsquo;s to respect the bandwidth: reduce volume, extend tempo, simplify movement selection, use external cueing. Not because each condition demands it individually &mdash; because the envelope demands it collectively.</p>
+
+    <p class="reveal">Thursday, same person: <em>Exploring. Estate 8. Salience sharp &mdash; feeling specific things in specific places. Pitch quick &mdash; immediate response to every cue. Ambiance low &mdash; quiet, focused, nothing competing.</em></p>
+
+    <p class="turquoise-line reveal">That's not &ldquo;on.&rdquo; That's a peak window. Full intensity accessible. Creative exploration safe. Push.</p>
+
+    <p class="reveal">Same person. Different bandwidth. The conditions didn&rsquo;t improve because Constantine worked on his salience or trained his pitch. They improved because the bandwidth widened &mdash; eight hours of sleep and adequate fuel restored the estate, which restored the resolution, which let the conditions express what they&rsquo;re capable of when the envelope isn&rsquo;t constraining them.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">The instinct &mdash; I've seen it every time someone encounters this framework &mdash; is to turn it into a scoring system. Rate each dimension, calculate a total, compare today to last Thursday. The mind reaches for the spreadsheet.</p>
+
+    <p class="reveal">Resist this.</p>
+
+    <p class="reveal">The moment you optimize SPACE, you've converted it from a perceptual instrument into a performance metric. You're no longer reading the channel &mdash; you're scoring it. And scoring is grasping. The mind that needs a number is the mind that needs to know whether today is good enough. That's having mode wearing a framework's clothes.</p>
+
+    <p class="reveal">SPACE is read, not scored. Felt, not calculated. The dimensions exist to give you language for what you're already sensing &mdash; not to create a new thing to achieve. You already know your pitch is dull today. You've been calling it &ldquo;foggy.&rdquo; You already know your ambiance is high. You've been calling it &ldquo;distracted.&rdquo; You already know your estate is depleted. You've been calling it &ldquo;running on empty.&rdquo;</p>
+
+    <p class="turquoise-line reveal">SPACE doesn't add information. It gives resolution to information that was always arriving &mdash; formless, nameless, rounded off to &ldquo;good day&rdquo; or &ldquo;bad day&rdquo; because nobody offered you a finer instrument.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">BASE tells you where to point your attention. Balancing, aligning, sourcing, engaging &mdash; four channels to tune into. That's the what.</p>
+
+    <p class="reveal">SPACE tells you the conditions under which that attention operates. Whether you're exploring or grasping. Whether the hardware can sustain what you're asking of it. What's getting through, how fast, how cleanly. That's the where &mdash; the landscape in which attention lives or dies.</p>
+
+    <p class="reveal">BASE without SPACE is attention without context. You know where to listen but not what&rsquo;s shaping what you hear. SPACE without BASE is conditions without direction. You know the landscape but have nowhere to point. BASE tells the mind where to listen. SPACE tells the body&rsquo;s signal what conditions it&rsquo;s traveling through. Together they form the first two legs of a three-part architecture &mdash; the mind&rsquo;s attention framework and the body&rsquo;s processing mechanism.</p>
+
+    <p class="reveal">The third leg &mdash; what emerges when attention meets adequate conditions &mdash; is a different essay.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">There's a version of this essay that would have started with the framework. Five dimensions, here they are, here's what each one means, here's how to assess yourself. Clean. Logical. Left-hemisphere scaffolding delivered as instruction.</p>
+
+    <p class="reveal">This series didn't do that. You felt pressured dialogue before you learned the mechanism. You navigated the space between before you had coordinates. You found your BASE before the map arrived. And now, reading SPACE, you're recognizing dimensions you've already inhabited &mdash; the foggy processing, the noisy background, the editorial gate opening or slamming shut, the reserves running deep or running out.</p>
+
+    <p class="reveal">The framework didn't teach you these things. Your body has been experiencing them your entire training life. The framework gave them names &mdash; and naming is not trivial. Naming is what lets you find the territory again on purpose. Naming is what lets you communicate the landscape to a coach, a training partner, yourself in your own notes. Naming is what converts accidental visits into deliberate navigation.</p>
+
+    <p class="signal-line reveal">You've been reading your SPACE all along. You just didn't know you were literate.</p>
+
+    <div class="section-break reveal"></div>
+
+    <p class="reveal">Tuesday and Thursday were never &ldquo;off&rdquo; and &ldquo;on.&rdquo; They were two different SPACE configurations producing two different organisms, each requiring a different conversation, each capable of different work, each honest about different things.</p>
+
+    <p class="reveal">The body that showed up depleted on Tuesday wasn't broken. It was broadcasting a specific set of conditions &mdash; low estate, dull pitch, high noise, muddy selection &mdash; and asking for a specific response. The body that showed up resourced on Thursday wasn't better. It was broadcasting different conditions and asking for a different response.</p>
+
+    <p class="reveal">Neither required fixing. Both required reading.</p>
+
+    <p class="turquoise-line reveal">Five dimensions. One architecture. The channel through which every signal you'll ever receive must travel &mdash; already running, already broadcasting, already legible to anyone willing to check their orientation before they check their numbers.</p>
+
+    <div class="section-break reveal"></div>
+
+    <div class="sources reveal">
+      <p class="sources-label">Sources</p>
+      <p>Craig, A. D. (2009). How do you feel&mdash;now? The anterior insula and human awareness. <em>Nature Reviews Neuroscience</em>, 10(1), 59&ndash;70.</p>
+      <p>Dietrich, A. (2006). Transient hypofrontality as a mechanism for the psychological effects of exercise. <em>Psychiatry Research</em>, 145(1), 79&ndash;83.</p>
+      <p>Proske, U., &amp; Gandevia, S. C. (2012). Proprioceptive senses: Their roles in signaling body shape, body position and movement, and muscle force. <em>Physiological Reviews</em>, 92(4), 1651&ndash;1697.</p>
+      <p>Schleip, R. (2003). Fascial plasticity&mdash;a new neurobiological explanation. <em>Journal of Bodywork and Movement Therapies</em>, 7(1), 11&ndash;19.</p>
+      <p>Fromm, E. (1976). <em>To Have or To Be?</em> Harper &amp; Row.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================================================================
+     ESSAY END NAV
+     =================================================================== -->
+<section class="zone essay-end">
+  <div class="zone-inner reveal">
+    <a href="/signals/" class="essay-back">&larr; Back to Signals</a>
+  </div>
+</section>
+
+<!-- ===================================================================
+     FOOTER
+     =================================================================== -->
+<section class="zone zone-footer">
+  <div class="zone-inner">
+    <div class="footer-territory">
+      <div class="footer-left reveal"><div class="footer-statement">You cannot think your way out of a sensing problem.</div><div class="footer-sub">BASEWAVES identifies the person who already knows something was lost.</div></div>
+      <div class="footer-right reveal reveal-delay-1"><a href="mailto:greg@basewaves.com?subject=State%20Transition%20Session" class="footer-cta">Schedule a State Transition Session</a><div class="footer-contact"><a href="mailto:greg@basewaves.com">greg@basewaves.com</a><br>512.585.3400</div></div>
+    </div>
+    <div class="footer-bottom reveal reveal-delay-2">
+      <svg class="footer-logo" viewBox="0 0 337.62 220.73" preserveAspectRatio="xMidYMid meet"><path d="M188.26,87.4c-8.54-2.09-18.2-6.13-18.04-13.69.16-9.34,4.67-13.54,7.41-15.31,9.83-4.35,16.76-14.18,16.76-25.45,0-15.15-12.25-27.39-27.39-27.39s-27.39,12.25-27.39,27.39c0,11.43,7.09,21.42,17.08,25.45,2.9,1.77,7.08,6.13,7.08,15.31,0,7.57-8.7,11.6-16.59,13.69-15.95,1.77-26.9,5.64-26.9,10.15,0,6.28,21.27,11.27,47.53,11.27s47.53-5,47.53-11.27c0-4.51-11.12-8.39-27.06-10.15h-.02ZM160.06,17.65c-3.87,1.6-6.92,4.67-8.54,8.54-.48,1.28-1.93,1.93-3.06,1.28-1.28-.31-1.93-1.77-1.44-3.06,1.93-5.17,6.13-9.18,11.11-11.28,1.29-.47,2.57.16,3.22,1.29.48,1.28-.16,2.57-1.29,3.22h0ZM92.72,96.27c0,9.99,34,18.04,75.89,18.04s75.89-8.05,75.89-18.04-30.61-17.24-69.6-18.04c-.48-.65-.65-1.13-.97-1.78,53.66.65,96.18,11.28,96.18,24.17s-45.43,24.17-101.5,24.17-101.5-10.8-101.5-24.17,40.92-23.04,93.12-24.01c-.16.65-.48,1.13-.81,1.78-37.54.97-66.7,8.7-66.7,17.88ZM329.72,104.65c0-20.63-69.45-37.38-156.12-37.86-.16.65-.16,1.29-.16,1.93,69.76.48,125.67,14.03,125.67,30.62s-57.99,30.78-129.7,30.78-129.7-13.7-129.7-30.62,53.49-29.65,120.99-30.62c0-.64-.16-1.28-.16-2.09-84.4,1.13-151.43,17.72-151.43,37.86s68.16,37.06,153.54,37.86c.81,1.29,1.13,2.9,1.13,4.51,0,9.18-4.19,13.37-7.08,15.31-9.99,4.03-17.08,13.86-17.08,25.45,0,15.15,12.25,27.39,27.39,27.39s27.39-12.25,27.39-27.39c0-11.27-6.93-21.11-16.76-25.3-2.73-1.77-7.25-5.96-7.41-15.3,0-1.78.48-3.22,1.28-4.68,87.65-.32,158.22-17.07,158.22-37.86h0ZM161.35,205.02c-.48,1.29-1.93,1.77-3.22,1.29-5.16-2.1-9.18-6.13-11.11-11.28-.48-1.28.16-2.57,1.28-3.06,1.29-.47,2.58.16,3.06,1.29,1.45,3.87,4.68,7.09,8.54,8.54,1.45.65,1.94,2.09,1.45,3.22h0Z"/></svg>
+      <div class="footer-tm">&copy; BASEWAVES &middot; Spatial Strength Training&trade; &middot; Austin, TX</div>
+    </div>
+  </div>
+</section>
+
+<script>
+const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+const nav = document.getElementById('siteNav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 80));
+const hb = document.getElementById('hamburger'), ov = document.getElementById('navOverlay');
+hb.addEventListener('click', (e) => { e.stopPropagation(); hb.classList.toggle('active'); ov.classList.toggle('open'); document.body.style.overflow = ov.classList.contains('open') ? 'hidden' : ''; });
+ov.addEventListener('click', (e) => { if (e.target === ov || e.target.tagName === 'A') { hb.classList.remove('active'); ov.classList.remove('open'); document.body.style.overflow = ''; } });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && ov.classList.contains('open')) { hb.classList.remove('active'); ov.classList.remove('open'); document.body.style.overflow = ''; } });
+
+/* SPACE diagram hover interactions */
+const conditionsMarker = document.querySelector('.conditions-marker');
+const conditionTiers = ['ambiance', 'pitch', 'salience'];
+const springMap = {
+  curiosity: ['.spring-curiosity-estate', '.spring-estate-curiosity'],
+  estate: ['.spring-curiosity-estate', '.spring-estate-curiosity', '.spring-estate-salience'],
+  salience: ['.spring-estate-salience', '.spring-salience-pitch', '.spring-conditions-curiosity'],
+  pitch: ['.spring-salience-pitch', '.spring-pitch-ambiance', '.spring-conditions-curiosity'],
+  ambiance: ['.spring-pitch-ambiance', '.spring-conditions-curiosity']
+};
+function getAdjacentSprings(tier) {
+  return (springMap[tier] || []).flatMap(s => [...document.querySelectorAll(s)]).filter(Boolean);
+}
+document.querySelectorAll('.space-diagram .tier-group').forEach(group => {
+  const tier = group.dataset.tier;
+  const isCondition = conditionTiers.includes(tier);
+  const activate = () => {
+    group.classList.add('active');
+    getAdjacentSprings(tier).forEach(s => s.classList.add('spring-active'));
+    if (isCondition && conditionsMarker) conditionsMarker.classList.add('active');
+  };
+  const deactivate = () => {
+    group.classList.remove('active');
+    getAdjacentSprings(tier).forEach(s => s.classList.remove('spring-active'));
+    if (isCondition && conditionsMarker) conditionsMarker.classList.remove('active');
+  };
+  group.addEventListener('mouseenter', activate);
+  group.addEventListener('mouseleave', deactivate);
+  group.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    document.querySelectorAll('.space-diagram .tier-group.active').forEach(g => g.classList.remove('active'));
+    document.querySelectorAll('.spring-path.spring-active').forEach(s => s.classList.remove('spring-active'));
+    if (conditionsMarker) conditionsMarker.classList.remove('active');
+    group.classList.add('active');
+    getAdjacentSprings(tier).forEach(s => s.classList.add('spring-active'));
+    if (isCondition && conditionsMarker) conditionsMarker.classList.add('active');
+  }, { passive: false });
+});
+</script>
+</body>
+</html>
