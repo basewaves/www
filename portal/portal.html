@@ -12,6 +12,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<!-- Cal Sans UI -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@calcom/cal-sans-ui/ui.css">
 
 <style>
   :root {
@@ -33,7 +36,7 @@
   body {
     background: var(--deep-blue);
     color: var(--primary-text);
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'Cal Sans UI', 'IBM Plex Mono', sans-serif;
     font-size: 15px;
     line-height: 1.7;
     letter-spacing: 0.03em;
@@ -100,7 +103,7 @@
 
   /* ========== TYPOGRAPHY ========== */
   h1, h2, h3, .headline { font-family: 'Cinzel', serif; font-weight: 400; }
-  .prose, p { font-family: 'IBM Plex Mono', monospace; font-weight: 300; letter-spacing: 0.03em; font-size: 15px; line-height: 1.85; }
+  .prose, p { font-family: 'Cal Sans UI', 'IBM Plex Mono', sans-serif; font-weight: 300; letter-spacing: 0.03em; font-size: 15px; line-height: 1.85; }
 
   /* ========== NAVIGATION ========== */
   .site-nav {
@@ -146,7 +149,7 @@
 }
 
   .zone-bridge { position: relative; z-index: 3; text-align: center; padding: 48px 40px; max-width: 640px; margin: 0 auto; }
-  .zone-bridge p { font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: 14px; letter-spacing: 0.05em; color: #5A5672; line-height: 1.8; }
+  .zone-bridge p { font-family: 'Cal Sans UI', 'IBM Plex Mono', sans-serif; font-weight: 300; font-size: 14px; letter-spacing: 0.05em; color: #5A5672; line-height: 1.8; }
 
   /* ========== SENSORIUM — CENTERED ========== */
   .zone-entry {
@@ -170,7 +173,7 @@
 
   /* ========== CALLOUT ========== */
   .callout { border-left: 2px solid #FFA565; padding: 24px 32px; margin: 40px 0; background: rgba(255, 165, 101, 0.03); }
-  .callout p { font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: 16px; line-height: 1.9; color: #E8E3FF; }
+  .callout p { font-family: 'Cal Sans UI', 'IBM Plex Mono', sans-serif; font-weight: 300; font-size: 16px; line-height: 1.9; color: #E8E3FF; }
   .divider { width: 60px; height: 1px; background: #58FCC8; opacity: 0.4; margin: 56px 0; }
   .divider-coral { width: 60px; height: 1px; background: #FFA565; opacity: 0.4; margin: 56px 0; }
 
@@ -189,20 +192,20 @@
   .arch-block.attention .arch-name { color: var(--turquoise); }
   .arch-block.channel .arch-name { color: var(--primary-text); }
   .arch-block.intention .arch-name { color: var(--turquoise); }
-  .arch-role { font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--primary-text); opacity: 0.8; letter-spacing: 0.03em; margin-bottom: 16px; }
-  .arch-desc { font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: 14px; line-height: 1.75; color: var(--secondary-text); }
+  .arch-role { font-family: 'Cal Sans UI', 'IBM Plex Mono', sans-serif; font-size: 14px; color: var(--primary-text); opacity: 0.8; letter-spacing: 0.03em; margin-bottom: 16px; }
+  .arch-desc { font-family: 'Cal Sans UI', 'IBM Plex Mono', sans-serif; font-weight: 300; font-size: 14px; line-height: 1.75; color: var(--secondary-text); }
   .arch-desc em { color: var(--primary-text); font-style: normal; }
   .arch-dims { margin-top: 12px; }
-  .arch-dim { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--secondary-text); margin-bottom: 4px; }
+  .arch-dim { font-family: 'Cal Sans UI', 'IBM Plex Mono', sans-serif; font-size: 13px; color: var(--secondary-text); margin-bottom: 4px; }
   .arch-dim span { color: var(--primary-text); }
-  .arch-annotation { font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: 15px; line-height: 1.85; color: var(--secondary-text); font-style: italic; }
+  .arch-annotation { font-family: 'Cal Sans UI', 'IBM Plex Mono', sans-serif; font-weight: 300; font-size: 15px; line-height: 1.85; color: var(--secondary-text); font-style: italic; }
   .arch-annotation em { color: var(--primary-text); font-style: normal; }
 
   /* ========== TRANSFER EVIDENCE CARDS ========== */
   .transfer-territory { margin-top: 20px; }
   .transfer-card { display: grid; grid-template-columns: 180px 2px 1fr; gap: 0; margin-bottom: 48px; position: relative; }
   .transfer-sidebar { padding: 20px 24px 20px 0; text-align: right; }
-  .transfer-sidebar .t-duration { font-family: 'IBM Plex Mono', monospace; font-size: 20px; font-weight: 300; color: var(--primary-text); letter-spacing: 0.02em; margin-bottom: 2px; }
+  .transfer-sidebar .t-duration { font-family: 'Cal Sans UI', 'IBM Plex Mono', sans-serif; font-size: 20px; font-weight: 300; color: var(--primary-text); letter-spacing: 0.02em; margin-bottom: 2px; }
   .transfer-sidebar .t-freq { font-size: 13px; color: var(--secondary-text); letter-spacing: 0.08em; margin-bottom: 16px; }
   .transfer-sidebar .t-stage { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; }
   .transfer-sidebar .t-stage.composer { color: var(--turquoise); }
@@ -220,31 +223,31 @@
   /* ========== TERRITORY / ENTRY TIERS ========== */
   .territory-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
   .entry-tier { border-left: 2px solid rgba(255, 165, 101, 0.2); padding: 28px 24px; }
-  .tier-name { font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 16px; letter-spacing: 0.08em; color: #FFA565; margin-bottom: 4px; }
-  .tier-format { font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: 13px; color: #9994B8; letter-spacing: 0.03em; margin-bottom: 4px; }
-  .tier-investment { font-family: 'IBM Plex Mono', monospace; font-weight: 400; font-size: 14px; color: #E8E3FF; letter-spacing: 0.03em; margin-bottom: 16px; }
-  .tier-desc { font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: 14px; color: #9994B8; letter-spacing: 0.03em; line-height: 1.75; }
+  .tier-name { font-family: 'Cal Sans UI', 'IBM Plex Mono', sans-serif; font-weight: 500; font-size: 16px; letter-spacing: 0.08em; color: #FFA565; margin-bottom: 4px; }
+  .tier-format { font-family: 'Cal Sans UI', 'IBM Plex Mono', sans-serif; font-weight: 300; font-size: 13px; color: #9994B8; letter-spacing: 0.03em; margin-bottom: 4px; }
+  .tier-investment { font-family: 'Cal Sans UI', 'IBM Plex Mono', sans-serif; font-weight: 400; font-size: 14px; color: #E8E3FF; letter-spacing: 0.03em; margin-bottom: 16px; }
+  .tier-desc { font-family: 'Cal Sans UI', 'IBM Plex Mono', sans-serif; font-weight: 300; font-size: 14px; color: #9994B8; letter-spacing: 0.03em; line-height: 1.75; }
 
   /* ========== MECHANISM VISUALIZATION ========== */
   .mech-load { margin-bottom: 48px; }
   .mech-load-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 4px; }
   .mech-label { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--secondary-text); }
   .mech-load-value { font-family: 'Cinzel', serif; font-size: clamp(24px, 3vw, 36px); color: var(--primary-text); letter-spacing: 0.04em; }
-  .mech-firing { font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--turquoise); opacity: 0.9; margin-bottom: 20px; letter-spacing: 0.03em; }
+  .mech-firing { font-family: 'Cal Sans UI', 'IBM Plex Mono', sans-serif; font-size: 14px; color: var(--turquoise); opacity: 0.9; margin-bottom: 20px; letter-spacing: 0.03em; }
   .mech-slider-wrap { max-width: 600px; margin-bottom: 20px; }
   .mech-slider { -webkit-appearance: none; appearance: none; width: 100%; height: 2px; background: rgba(88,252,200,0.15); outline: none; border-radius: 1px; cursor: pointer; }
   .mech-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 14px; height: 14px; border-radius: 50%; background: var(--turquoise); cursor: pointer; box-shadow: 0 0 12px rgba(88,252,200,0.3); }
   .mech-slider::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: var(--turquoise); cursor: pointer; border: none; box-shadow: 0 0 12px rgba(88,252,200,0.3); }
-  .mech-slider-labels { display: flex; justify-content: space-between; margin-top: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--secondary-text); letter-spacing: 0.06em; }
-  .mech-state { font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-style: italic; color: var(--primary-text); opacity: 0.8; line-height: 1.7; max-width: 600px; }
+  .mech-slider-labels { display: flex; justify-content: space-between; margin-top: 8px; font-family: 'Cal Sans UI', 'IBM Plex Mono', sans-serif; font-size: 12px; color: var(--secondary-text); letter-spacing: 0.06em; }
+  .mech-state { font-family: 'Cal Sans UI', 'IBM Plex Mono', sans-serif; font-size: 14px; font-style: italic; color: var(--primary-text); opacity: 0.8; line-height: 1.7; max-width: 600px; }
 
   .mech-ratio { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 64px; }
   .mech-panel { padding: 28px; border: 1px solid rgba(90,86,114,0.15); background: rgba(14,18,32,0.5); }
-  .mech-panel-title { font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 500; color: var(--primary-text); margin-bottom: 4px; }
-  .mech-panel-sub { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--secondary-text); letter-spacing: 0.06em; margin-bottom: 20px; }
+  .mech-panel-title { font-family: 'Cal Sans UI', 'IBM Plex Mono', sans-serif; font-size: 15px; font-weight: 500; color: var(--primary-text); margin-bottom: 4px; }
+  .mech-panel-sub { font-family: 'Cal Sans UI', 'IBM Plex Mono', sans-serif; font-size: 12px; color: var(--secondary-text); letter-spacing: 0.06em; margin-bottom: 20px; }
   .mech-bars { display: flex; flex-direction: column; gap: 10px; }
   .mech-bar-row { display: flex; align-items: center; gap: 12px; }
-  .mech-bar-label { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--secondary-text); min-width: 140px; text-align: right; flex-shrink: 0; letter-spacing: 0.02em; }
+  .mech-bar-label { font-family: 'Cal Sans UI', 'IBM Plex Mono', sans-serif; font-size: 13px; color: var(--secondary-text); min-width: 140px; text-align: right; flex-shrink: 0; letter-spacing: 0.02em; }
   .mech-bar-track { flex: 1; height: 10px; background: rgba(90,86,114,0.15); border-radius: 1px; overflow: hidden; }
   .mech-bar-fill { height: 100%; border-radius: 1px; transition: width 0.5s ease; }
   .mech-bar-fill.one { background: var(--coral); opacity: 0.9; }
@@ -258,20 +261,20 @@
   .mech-lang-title { font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--secondary-text); margin-bottom: 32px; }
   .mech-lang-stage { border-left: 2px solid transparent; padding: 16px 24px; margin-bottom: 24px; transition: opacity 0.5s ease, border-color 0.5s ease; opacity: 0.15; }
   .mech-lang-stage.active { opacity: 1; border-left-color: var(--coral); }
-  .mech-lang-quote { font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-style: italic; color: var(--primary-text); line-height: 1.75; margin-bottom: 8px; }
-  .mech-lang-annotation { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--secondary-text); letter-spacing: 0.04em; }
+  .mech-lang-quote { font-family: 'Cal Sans UI', 'IBM Plex Mono', sans-serif; font-size: 15px; font-style: italic; color: var(--primary-text); line-height: 1.75; margin-bottom: 8px; }
+  .mech-lang-annotation { font-family: 'Cal Sans UI', 'IBM Plex Mono', sans-serif; font-size: 13px; color: var(--secondary-text); letter-spacing: 0.04em; }
 
   .mech-transfer-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
   .mech-transfer-col { border-top: 2px solid rgba(90,86,114,0.15); padding-top: 16px; }
-  .mech-transfer-domain { font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
-  .mech-transfer-col p { font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 300; color: var(--primary-text); opacity: 0.8; line-height: 1.75; }
+  .mech-transfer-domain { font-family: 'Cal Sans UI', 'IBM Plex Mono', sans-serif; font-size: 14px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+  .mech-transfer-col p { font-family: 'Cal Sans UI', 'IBM Plex Mono', sans-serif; font-size: 14px; font-weight: 300; color: var(--primary-text); opacity: 0.8; line-height: 1.75; }
 
   /* ========== SVGs ========== */
   .svg-container { width: 100%; margin: 48px 0; display: flex; justify-content: center; }
   .svg-container svg { width: 100%; max-width: 900px; height: auto; overflow: visible; }
   .svg-mobile { display: none !important; }
   .svg-desktop { display: flex; }
-  svg text { font-family: 'IBM Plex Mono', monospace; pointer-events: none; }
+  svg text { font-family: 'Cal Sans UI', 'IBM Plex Mono', sans-serif; pointer-events: none; }
 
   /* ========== DEV STAGES: PIPELINE STYLE (matches base-perception) ========== */
   .territory-hit { fill: transparent; cursor: pointer; }
@@ -952,12 +955,12 @@
 
     <div class="reveal" style="display: flex; gap: 48px; margin-bottom: 48px; flex-wrap: wrap;">
       <div style="flex: 1; min-width: 240px; padding: 24px; border-left: 2px solid rgba(90, 86, 114, 0.4);">
-        <p style="font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 15px; color: #7A7594; letter-spacing: 0.08em; margin-bottom: 8px;">GRASPING</p>
-        <p style="font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: 15px; color: #7A7594; line-height: 1.75;">Arriving for transformation language. Outcome promises. A framework to add to your collection. The portal won't open. Not as withholding. As physics.</p>
+        <p style="font-family: 'Cal Sans UI', 'IBM Plex Mono', sans-serif; font-weight: 500; font-size: 15px; color: #7A7594; letter-spacing: 0.08em; margin-bottom: 8px;">GRASPING</p>
+        <p style="font-family: 'Cal Sans UI', 'IBM Plex Mono', sans-serif; font-weight: 300; font-size: 15px; color: #7A7594; line-height: 1.75;">Arriving for transformation language. Outcome promises. A framework to add to your collection. The portal won't open. Not as withholding. As physics.</p>
       </div>
       <div style="flex: 1; min-width: 240px; padding: 24px; border-left: 2px solid rgba(88, 252, 200, 0.3);">
-        <p style="font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 15px; color: #58FCC8; letter-spacing: 0.08em; margin-bottom: 8px;">EXPLORING</p>
-        <p style="font-family: 'IBM Plex Mono', monospace; font-weight: 300; font-size: 15px; color: #E8E3FF; line-height: 1.75;">Arriving curious. Uncertain. Sensing that something in you already knows what you've been overriding. You're already through.</p>
+        <p style="font-family: 'Cal Sans UI', 'IBM Plex Mono', sans-serif; font-weight: 500; font-size: 15px; color: #58FCC8; letter-spacing: 0.08em; margin-bottom: 8px;">EXPLORING</p>
+        <p style="font-family: 'Cal Sans UI', 'IBM Plex Mono', sans-serif; font-weight: 300; font-size: 15px; color: #E8E3FF; line-height: 1.75;">Arriving curious. Uncertain. Sensing that something in you already knows what you've been overriding. You're already through.</p>
       </div>
     </div>
 
@@ -997,8 +1000,8 @@
     </div>
 
     <div class="reveal" style="margin-top: 48px; display: flex; justify-content: center; gap: 48px; flex-wrap: wrap;">
-      <a href="/origin/" style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; letter-spacing: 0.05em; color: #58FCC8; text-decoration: none;">← Return to Origin</a>
-      <a href="/signals/" style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; letter-spacing: 0.05em; color: #58FCC8; text-decoration: none;">Enter Signals →</a>
+      <a href="/origin/" style="font-family: 'Cal Sans UI', 'IBM Plex Mono', sans-serif; font-size: 14px; letter-spacing: 0.05em; color: #58FCC8; text-decoration: none;">← Return to Origin</a>
+      <a href="/signals/" style="font-family: 'Cal Sans UI', 'IBM Plex Mono', sans-serif; font-size: 14px; letter-spacing: 0.05em; color: #58FCC8; text-decoration: none;">Enter Signals →</a>
     </div>
   </div>
 </section>

@@ -1,0 +1,45 @@
+# BASEWAVES site repo - publish target
+# Anything matched here stays out of the published site
+
+# Drafts and experiments — archived to V:\Basewaves\_Archive\
+_drafts/
+*.draft.html
+*.draft.md
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+*~
+*.tmp
+*.log
+
+# Editor / IDE configs
+.vscode/
+.idea/
+*.code-workspace
+
+# Build artifacts (none yet — placeholder for future build step)
+node_modules/
+dist/
+build/
+.cache/
+
+# Large media that belongs in the vault, not the publish target
+*.mp3
+*.mp4
+*.mov
+*.avi
+*.m4a
+*.wav
+*.psd
+*.ai
+*.aep
+
+# Local env / secrets — never commit
+.env
+.env.*
+*.pem
+*.key

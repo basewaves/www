@@ -10,12 +10,12 @@
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&amp;family=IBM+Plex+Mono:wght@300;400;500&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&amp;family=Alegreya+Sans:wght@300;400;500;700&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
 <style>
   :root { --base-blue: #0E1220; --deep-blue: #080B14; --lighter-blue: #141B2E; --primary-text: #E8E3FF; --secondary-text: #9994B8; --dim-text: #5A5672; --turquoise: #58FCC8; --coral: #FFA565; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  body { background: var(--deep-blue); color: var(--primary-text); font-family: 'IBM Plex Mono', monospace; font-size: 14px; line-height: 1.7; letter-spacing: 0.03em; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+  body { background: var(--deep-blue); color: var(--primary-text); font-family: 'Alegreya Sans', sans-serif; font-size: 22px; line-height: 1.7; letter-spacing: 0.01em; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
   .starfield { position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 0; background: radial-gradient(1px 1px at 10% 15%, rgba(232,227,255,0.4), transparent), radial-gradient(1px 1px at 25% 35%, rgba(232,227,255,0.25), transparent), radial-gradient(1.5px 1.5px at 40% 8%, rgba(232,227,255,0.35), transparent), radial-gradient(1px 1px at 55% 42%, rgba(232,227,255,0.2), transparent), radial-gradient(1px 1px at 70% 22%, rgba(88,252,200,0.12), transparent), radial-gradient(1.5px 1.5px at 85% 55%, rgba(232,227,255,0.3), transparent), radial-gradient(1px 1px at 15% 65%, rgba(232,227,255,0.2), transparent), radial-gradient(1px 1px at 35% 78%, rgba(232,227,255,0.35), transparent), radial-gradient(1.5px 1.5px at 60% 72%, rgba(232,227,255,0.25), transparent), radial-gradient(1px 1px at 80% 85%, rgba(232,227,255,0.3), transparent), radial-gradient(1px 1px at 92% 12%, rgba(232,227,255,0.2), transparent), radial-gradient(1px 1px at 48% 92%, rgba(88,252,200,0.1), transparent), radial-gradient(1px 1px at 5% 48%, rgba(232,227,255,0.3), transparent), radial-gradient(1.5px 1.5px at 72% 38%, rgba(232,227,255,0.2), transparent); animation: starfield-breathe 12s ease-in-out infinite; }
   @keyframes starfield-breathe { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
   .zone { position: relative; z-index: 1; }
@@ -44,28 +44,28 @@
   @media (min-width: 1024px) { .nav-overlay { display: none !important; } }
   .zone-hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: transparent; padding: 60px 48px; }
   .hero-headline { font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(28px, 4.5vw, 48px); letter-spacing: 0.08em; color: var(--primary-text); margin-bottom: 40px; line-height: 1.3; }
-  .hero-prose { max-width: 660px; font-size: 14px; line-height: 1.9; color: var(--secondary-text); margin-bottom: 60px; }
+  .hero-prose { max-width: 660px; font-size: 22px; line-height: 1.5; color: var(--secondary-text); margin-bottom: 60px; }
   .hero-prose em { color: var(--primary-text); font-style: normal; }
-  .page-subtitle { font-family: "IBM Plex Mono", monospace; font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 400; color: var(--secondary-text); margin-top: 0; margin-bottom: 20px; }
+  .page-subtitle { font-family: 'Alegreya Sans', sans-serif; font-size: 16px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 400; color: var(--secondary-text); margin-top: 0; margin-bottom: 20px; }
   .scroll-hint { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--secondary-text); animation: pulse 2.5s ease infinite; }
   .scroll-hint::after { content: ''; display: block; width: 1px; height: 40px; background: linear-gradient(180deg, var(--dim-text), transparent); margin: 12px auto 0; }
   @keyframes pulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 0.7; } }
   .zone-divider { height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(88,252,200,0.15) 20%, rgba(88,252,200,0.25) 50%, rgba(88,252,200,0.15) 80%, transparent 100%); position: relative; z-index: 1; }
   .zone-section { padding: 100px 0 80px; }
   .zone-headline { font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(22px, 3vw, 32px); letter-spacing: 0.06em; color: var(--primary-text); margin-bottom: 32px; line-height: 1.35; }
-  .body-prose { font-size: 14px; line-height: 1.85; color: var(--secondary-text); margin-bottom: 24px; }
+  .body-prose { font-size: 22px; line-height: 1.5; color: var(--secondary-text); margin-bottom: 24px; }
   .body-prose em { color: var(--primary-text); font-style: normal; }
-  .signal-line { font-size: 15px; line-height: 1.85; color: var(--primary-text); margin-bottom: 24px; }
-  .turquoise-line { font-size: 15px; line-height: 1.85; color: var(--turquoise); margin-bottom: 24px; }
+  .signal-line { font-size: 22px; line-height: 1.5; color: var(--primary-text); margin-bottom: 24px; }
+  .turquoise-line { font-size: 22px; line-height: 1.5; color: var(--turquoise); margin-bottom: 24px; }
   .indictment { padding: 48px 0; margin: 16px 0; }
-  .indictment-line { font-size: 15px; letter-spacing: 0.1em; line-height: 2.4; color: var(--secondary-text); }
+  .indictment-line { font-size: 22px; letter-spacing: 0.1em; line-height: 2.4; color: var(--secondary-text); }
   .ratio-territory { margin: 48px 0; }
   .ratio-label { font-family: 'Cinzel', serif; font-size: 16px; letter-spacing: 0.06em; color: var(--primary-text); margin-bottom: 20px; }
   .ratio-visual { display: grid; grid-template-columns: 7fr 1fr; gap: 3px; margin-bottom: 20px; }
   .ratio-bar { height: 52px; display: flex; align-items: center; padding: 0 16px; font-size: 13px; letter-spacing: 0.04em; }
   .ratio-bar.seven { background: linear-gradient(90deg, rgba(88,252,200,0.12), rgba(88,252,200,0.03)); border-left: 3px solid rgba(88,252,200,0.4); color: var(--turquoise); }
   .ratio-bar.one { background: rgba(232,227,255,0.04); border-left: 3px solid rgba(232,227,255,0.15); color: var(--secondary-text); font-size: 12px; justify-content: center; }
-  .ratio-annotation { font-size: 14px; line-height: 1.75; color: var(--secondary-text); }
+  .ratio-annotation { font-size: 22px; line-height: 1.75; color: var(--secondary-text); }
   .ratio-annotation em { color: var(--secondary-text); font-style: normal; }
   .cta-link { display: inline-block; font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.08em; color: var(--turquoise); text-decoration: none; margin-top: 24px; transition: color 0.3s ease; }
   .cta-link:hover { color: var(--primary-text); } .cta-link.coral { color: var(--coral); } .cta-link.coral:hover { color: var(--primary-text); }
@@ -108,8 +108,8 @@
     opacity: 0.85;
   }
   .competent-figure-grid .figure-prose p {
-    font-size: 14px;
-    line-height: 1.85;
+    font-size: 22px;
+    line-height: 1.5;
     color: var(--secondary-text);
     margin-bottom: 24px;
   }
@@ -142,8 +142,8 @@
      =================================================================== -->
 <section class="zone zone-hero">
   <p class="page-subtitle reveal">Why strength training develops more than muscle</p>
-  <h1 class="hero-headline reveal reveal-delay-1">Something fires before the word forms.</h1>
-  <p class="hero-prose reveal reveal-delay-1">You feel tension, a collective pressure. You sense a shift but can't find the words. A slight discomfort, an abnormal state, with no explanation. Your chest tightens. You check your surroundings. The room hasn't changed. <em>Your body has.</em></p>
+  <h1 class="hero-headline reveal reveal-delay-1">Something fires before the words form.</h1>
+  <p class="hero-prose reveal reveal-delay-1">You feel tension, a collective pressure. You sense a shift but can't find the words. A slight discomfort, an abnormal state, with no explanation. You check your surroundings. The room hasn't changed. <em>Your body has.</em></p>
   <div class="scroll-hint reveal reveal-delay-3">Enter</div>
 </section>
 <div class="zone-divider"></div>
@@ -176,8 +176,8 @@
   <div class="zone-inner">
     <h2 class="zone-headline reveal">The Frontier Nobody Named</h2>
     <p class="body-prose reveal">A Stanford neuroscientist spent two decades building machines that navigate external space &mdash; robots that see rooms, estimate distance, interact with physical environments. She called it spatial intelligence and named it the next frontier beyond language. She's right. But she's looking in only one direction.</p>
-    <p class="body-prose reveal">While the world races to build machines that model external 3D space, nobody is systematically training humans to navigate internal biological space &mdash; the neural territory where your seven interoceptive channels sense state, process stress, regulate adaptation, and compose response. <em>Internal spatial intelligence</em> is the capacity to consciously access and navigate your own somatic signaling architecture. Not as metaphor. As trainable skill. Developed through load, refined through signal literacy, expressed as adaptive capacity that transfers far beyond the session.</p>
-    <p class="body-prose reveal">BASEWAVES trains the other direction. Proactive collaboration with your own biology rather than reactive dependence on external systems. Preventative signal capacity developed at a fraction of what crisis intervention costs &mdash; because the vulnerable moments will arrive, and the question is whether your only available response is external.</p>
+    <p class="body-prose reveal">While the world races to build machines that model external 3D space, nobody is systematically training humans to navigate internal biological space &mdash; the neural territory where your seven interoceptive channels sense state, process stress, regulate adaptation, and compose response. <em>Internal spatial intelligence</em> is the capacity to consciously access and navigate your own somatic signaling architecture. Not as metaphor. As trainable skill. Developed through load, developed under load, refined through repeated exposure, and expressed as adaptive actions that extend into every domain where pressure arrives.</p>
+    <p class="body-prose reveal">BASEWAVES trains the other direction. Most stress responses are reactive &mdash; the system fires after the threshold is crossed. This builds the sensing capacity before the threshold arrives, under controlled conditions, so it&rsquo;s available when they aren&rsquo;t.</p>
     <p class="turquoise-line reveal">The ratio was always there. The frontier was always internal. Nobody named it because the very capacity required to see it &mdash; internal spatial intelligence &mdash; was the thing that had gone untrained.</p>
   </div>
 </section>
@@ -201,7 +201,7 @@
         <p>When you place your hands on a dumbbell and lower into a squat, you are not telling your muscles what to do. You are communicating a constraint &mdash; a goal state &mdash; to a cellular collective that has been solving movement problems since before you had language. The dumbbell doesn't build you. It speaks to something in you that already knows how to respond.</p>
         <p>You don't build capacity. You clear the interference that prevented capacity from expressing. The capacity was already there. The signal was blocked.</p>
         <p>When the interference clears, physical adaptation follows. Load tolerance increases. Compensation patterns resolve. Force production becomes coherent across the whole kinetic chain rather than leaking through structures that weren't designed to bear it. You get stronger &mdash; not because you chased strength as a metric, but because your system became organized enough to express it.</p>
-        <p>This requires metabolic readiness. The body adapts under load only when the metabolic estate supports adaptation &mdash; adequate fuel, adequate sleep, manageable stress. Train against your metabolic rhythm and you produce breakdown without adaptation. Train with it and every session compounds. The signal cascade runs: metabolic state determines what your brain can process, which determines what your body can organize, which determines whether load produces growth or depletion.</p>
+        <p>This requires metabolic readiness. The body adapts under load only when metabolism adapts &mdash; adequate fuel, adequate sleep, manageable stress. Train against your metabolic rhythm and you produce breakdown without adaptation. Train with it and every session compounds. The signal cascade runs: metabolic state determines what your brain can process, which determines what your body can organize, which determines whether load produces growth or depletion.</p>
       </div>
     </div>
   </div>
@@ -220,8 +220,8 @@
     <p class="body-prose reveal">Conventional fitness does the same thing from the other direction. Nutrition in one silo. Training in another. Recovery as an afterthought. Three dimensions of the same system — fragmented into three industries, each selling you their slice. Knowledge processing — the 1 — stacked higher and higher. Signal processing — the 7 — has remained untouched.</p>
     <p class="turquoise-line reveal">The gap isn't scientific. It's structural. No specialty owns the bridge between what medicine identified and what fitness can deliver.</p>
     <p class="body-prose reveal">There's no insurance billing code for teaching someone to read their own signals under load. No certification for the space between endocrinology, neurology, and exercise science. No scalable funding model that rewards integration over fragmentation. The research exists on both shores. Nobody built the bridge — because the bridge falls between specialties that have higher margins.</p>
-    <p class="body-prose reveal">Strength training under specific conditions turns out to be the bridging mechanism. Not medicine. Not therapy. Not conventional group fitness. Load is binary — you either lifted it or you didn't. Metabolic demand is measurable. The barbell doesn't need a billing code or a referral. It creates undeniable tension, and that tension becomes signal when you learn to read it. Every session is a feedback loop that develops the very capacity the gap left untrained.</p>
-    <p class="turquoise-line reveal">The bridge was never built because it falls between everything that has a name. BASEWAVES is the bridge.</p>
+    <p class="body-prose reveal">Strength training under specific conditions turns out to be the bridging mechanism. Not medicine. Not therapy. Not conventional group fitness. Load is binary — you either lifted it or you didn't. Metabolic demand is measurable. The dumbbell doesn't need a billing code or a referral. It creates undeniable tension, and that tension becomes signal when you learn to read it. Every session is a feedback loop that develops the very capacity the gap left untrained.</p>
+    <p class="turquoise-line reveal">The bridge was never built because it falls between everything that has a name.</p>
   </div>
 </section>
 <div class="zone-divider"></div>
@@ -291,9 +291,9 @@ Fine motor skills: 2nd. <br>
     <p class="body-prose reveal"><em>1989&ndash;2000.</em> Internal surveillance under seizure conditions. Pattern recognition through metabolic necessity. Signal reading without vocabulary.</p>
     <p class="body-prose reveal"><em>2000&ndash;2016.</em> Load as laboratory. Progressive resistance as diagnostic instrument &mdash; at bodyweight, compensations hide. Under load, only truth emerges. The discovery: load doesn&rsquo;t add stress to a calm system. It provides structured containment for stress already present.</p>
     <p class="body-prose reveal"><em>2016.</em> Medication stops. The practiced becomes nameable.</p>
-    <p class="body-prose reveal"><em>2022.</em> BASE crystallizes. Balancing &rarr; Aligning &rarr; Sourcing &rarr; Engaging &mdash; the attention framework named from existing practice. Not invented. Recognized.</p>
-    <p class="body-prose reveal"><em>2023&ndash;2024.</em> Teaching begins. First clients train using BASE. SPACE emerges — the processing mechanism. WAVES follows. The framework expanded through contact with other nervous systems. Clients didn’t just receive it — they revealed dimensions I also encountered myself but hadn’t articulated.</p>
-    <p class="body-prose reveal"><em>2025.</em> BASEWAVES formalized. Clients developing signal literacy at a pace that took the creator decades to discover alone.</p>
+    <p class="body-prose reveal"><em>2019&ndash;2022.</em> Client work begins &mdash; years of implicit framework practice before the vocabulary exists. Load as laboratory, applied to other nervous systems. The principles running in sessions before they had names.</p><p class="body-prose reveal"><em>2022.</em> BASE crystallizes. Balancing &rarr; Aligning &rarr; Sourcing &rarr; Engaging &mdash; the attention framework named from existing practice. Not invented. Recognized.</p>
+    <p class="body-prose reveal"><em>2023&ndash;2024.</em> SPACE emerges as the processing mechanism. WAVES follows. The framework expanded through contact with other nervous systems. Clients didn&rsquo;t just receive it &mdash; they revealed dimensions I also encountered myself but hadn&rsquo;t articulated.</p>
+    <p class="body-prose reveal"><em>2025.</em> BASEWAVES formalized. Clients developing the same sensing capacity in months that took Greg decades to develop through necessity alone.</p>
     <p class="turquoise-line reveal">Twenty-eight years unnamed. Eight years translatable. Three years crystallizing. The capacity for BASEWAVES was always running.</p>
   </div>
 </section>

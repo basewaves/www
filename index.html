@@ -3,22 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BASEWAVES | Strength Training Austin TX</title>
-  <meta name="description" content="Personal strength training in Austin. Your body has 7 sensors for internal state for every 1 tracking position. Most training ignores the 7. This one doesn't.">
+  <title>BASEWAVES | Strength Training · Austin TX</title>
+  <meta name="description" content="Private strength training for analytical professionals. Progressive load, signal assessment, measurable results. $150/session · Austin, TX · 12-week minimum.">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="BASEWAVES | Strength Training Austin TX">
-  <meta property="og:description" content="Personal strength training in Austin. Your body has 7 sensors for internal state for every 1 tracking position. Most training ignores the 7. This one doesn't.">
+  <meta property="og:title" content="BASEWAVES | Strength Training · Austin TX">
+  <meta property="og:description" content="Private strength training for analytical professionals. $150/session · Austin, TX.">
   <meta property="og:type" content="website">
 
-  <!-- Google Fonts: Cinzel + IBM Plex Mono (incl. 300) + Space Mono -->
+  <!-- Google Fonts: Cinzel + Alegreya Sans (incl. 300) + Space Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Alegreya+Sans:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Cal Sans UI -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@calcom/cal-sans-ui/ui.css">
 
   <style>
     /* ═══════════════════════════════════════════
-       CUSTOM PROPERTIES (matches portal)
+       CUSTOM PROPERTIES
        ═══════════════════════════════════════════ */
     :root {
       --base-blue: #0E1220;
@@ -40,16 +43,16 @@
     body {
       background: var(--deep-blue);
       color: var(--primary-text);
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 15px;
+      font-family: 'Cal Sans UI', 'Alegreya Sans', sans-serif;
+      font-size: 22px;
       line-height: 1.7;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.01em;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
 
     /* ═══════════════════════════════════════════
-       STARFIELD — fixed CSS dot pattern
+       STARFIELD
        ═══════════════════════════════════════════ */
     .starfield {
       position: fixed;
@@ -88,33 +91,30 @@
     }
 
     p {
-      font-family: 'IBM Plex Mono', monospace;
+      font-family: 'Cal Sans UI', 'Alegreya Sans', sans-serif;
       font-weight: 300;
-      letter-spacing: 0.03em;
-      font-size: 15px;
-      line-height: 1.85;
+      letter-spacing: 0.01em;
+      font-size: 22px;
+      line-height: 1.5;
     }
 
     .page-subtitle {
-      font-family: 'Cinzel', serif;
-      font-size: 15px;
-      letter-spacing: 0.08em;
-      text-transform: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
       font-weight: 400;
       color: var(--dim-text);
-      margin-top: 16px;
-      margin-bottom: 0;
+      margin-top: 0;
+      margin-bottom: 24px;
     }
-
 
     /* ═══════════════════════════════════════════
        NAVIGATION
        ═══════════════════════════════════════════ */
     .site-nav {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       z-index: 50;
       padding: 20px 24px;
       display: flex;
@@ -162,7 +162,6 @@
       width: auto;
     }
 
-    /* ═══ HAMBURGER MENU (<1024px) ═══ */
     .hamburger {
       display: none;
       flex-direction: column;
@@ -269,10 +268,8 @@
 
     .hero-waveform {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
+      top: 0; left: 0;
+      width: 100%; height: 100vh;
       z-index: 1;
       pointer-events: none;
       display: flex;
@@ -293,7 +290,6 @@
       50% { opacity: 0.7; }
     }
 
-    /* Hero section */
     .zone-hero {
       position: relative;
       z-index: 2;
@@ -308,9 +304,7 @@
     }
 
     /* ═══════════════════════════════════════════
-       RHYTHM STRIPS (full viewport breakout)
-       Opacity on img, not container — prevents
-       .reveal.visible specificity collision
+       RHYTHM STRIPS
        ═══════════════════════════════════════════ */
     .rhythm-strip {
       width: 100vw;
@@ -339,25 +333,25 @@
        BODY TEXT CLASSES
        ═══════════════════════════════════════════ */
     .body-copy {
-      font-size: 15px;
-      letter-spacing: 0.03em;
-      line-height: 1.85;
+      font-size: 22px;
+      letter-spacing: 0.01em;
+      line-height: 1.5;
       color: var(--secondary-text);
       margin-bottom: 32px;
     }
 
     .signal-line {
-      font-size: 15px;
-      letter-spacing: 0.03em;
-      line-height: 1.85;
+      font-size: 20px;
+      letter-spacing: 0.01em;
+      line-height: 1.5;
       color: var(--primary-text);
       margin-bottom: 32px;
     }
 
     .turquoise-accent {
-      font-size: 15px;
-      letter-spacing: 0.03em;
-      line-height: 1.85;
+      font-size: 20px;
+      letter-spacing: 0.01em;
+      line-height: 1.5;
       color: var(--turquoise);
       margin-bottom: 32px;
     }
@@ -378,15 +372,12 @@
       margin-bottom: 40px;
     }
 
-    /* ═══════════════════════════════════════════
-       ZONE BACKGROUNDS
-       Gradients live ONLY in bridge elements
-       ═══════════════════════════════════════════ */
     .zone-reframe      { background: var(--base-blue); padding-bottom: 0; }
-    .zone-close        { background: var(--deep-blue); }
+    .zone-offer        { background: var(--base-blue); }
+    .zone-signals      { background: var(--deep-blue); }
 
     /* ═══════════════════════════════════════════
-       BRIDGE ELEMENTS (gradient seams between zones)
+       BRIDGE ELEMENTS
        ═══════════════════════════════════════════ */
     .zone-bridge-wrap {
       position: relative;
@@ -403,30 +394,16 @@
     }
 
     .zone-bridge p {
-      font-family: 'IBM Plex Mono', monospace;
+      font-family: 'Cal Sans UI', 'Alegreya Sans', sans-serif;
       font-weight: 300;
-      font-size: 14px;
-      letter-spacing: 0.05em;
+      font-size: 21px;
+      letter-spacing: 0.02em;
       color: var(--secondary-text);
-      line-height: 1.8;
-    }
-
-    .zone-bridge:empty {
-      padding: 40px 0;
+      line-height: 1.5;
     }
 
     /* ═══════════════════════════════════════════
-       PULL LINKS (close section — two doors)
-       ═══════════════════════════════════════════ */
-    .pull-links {
-      display: flex;
-      gap: 48px;
-      margin-top: 56px;
-      justify-content: center;
-    }
-
-    /* ═══════════════════════════════════════════
-       ZONE DIVIDER (within consolidated sections)
+       ZONE DIVIDER
        ═══════════════════════════════════════════ */
     .zone-divider {
       height: 1px;
@@ -436,24 +413,7 @@
     }
 
     /* ═══════════════════════════════════════════
-       REFRAME GRID (Section 3 — single column)
-       ═══════════════════════════════════════════ */
-    .reframe-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 0;
-      margin-bottom: 40px;
-    }
-
-    /* ═══════════════════════════════════════════
-       DENSITY FIELD — base_perception bloom
-       Own-row layout with labels
-       Inner 4 petals: proprioceptive (bright)
-       Outer 27 petals: interoceptive (dim → reveal)
-       ═══════════════════════════════════════════ */
-    /* ═══════════════════════════════════════════
-       THREE Ms VISUAL — Pathway Map Style
-       (Metabolism, Movement, Matrix)
+       THREE Ms VISUAL
        ═══════════════════════════════════════════ */
     .three-ms-wrap {
       max-width: 900px;
@@ -476,193 +436,73 @@
       pointer-events: none;
     }
 
-    /* Territory hit areas */
     .ms-hit {
       fill: transparent;
       cursor: pointer;
     }
 
-    /* ---- METABOLISM territory (turquoise) ---- */
-    .territory-metabolism .contour-outer {
-      transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    .territory-metabolism .contour-mid {
-      transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s;
-    }
-    .territory-metabolism .contour-inner {
-      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s;
-    }
-    .territory-metabolism .core-node {
-      transition: all 0.3s ease;
-    }
-    .territory-metabolism .territory-desc {
-      opacity: 0;
-      transition: opacity 0.5s ease 0.15s;
-    }
-    .territory-metabolism .pulse-ring {
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
+    .territory-metabolism .contour-outer { transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .territory-metabolism .contour-mid   { transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s; }
+    .territory-metabolism .contour-inner { transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s; }
+    .territory-metabolism .core-node     { transition: all 0.3s ease; }
+    .territory-metabolism .territory-desc { opacity: 0; transition: opacity 0.5s ease 0.15s; }
+    .territory-metabolism .pulse-ring    { opacity: 0; transition: opacity 0.3s ease; }
 
-    .territory-metabolism:hover .contour-outer {
-      rx: 148; ry: 138;
-      stroke-opacity: 0.35;
-    }
-    .territory-metabolism:hover .contour-mid {
-      rx: 118; ry: 108;
-      stroke-opacity: 0.22;
-    }
-    .territory-metabolism:hover .contour-inner {
-      rx: 82; ry: 72;
-      stroke-opacity: 0.15;
-    }
-    .territory-metabolism:hover .core-node {
-      r: 6;
-      fill-opacity: 0.8;
-    }
-    .territory-metabolism:hover .territory-desc {
-      opacity: 1;
-    }
-    .territory-metabolism:hover .pulse-ring {
-      opacity: 1;
-      animation: ms-pulse-amber 2s ease-out infinite;
-    }
+    .territory-metabolism:hover .contour-outer  { rx: 148; ry: 138; stroke-opacity: 0.35; }
+    .territory-metabolism:hover .contour-mid    { rx: 118; ry: 108; stroke-opacity: 0.22; }
+    .territory-metabolism:hover .contour-inner  { rx: 82;  ry: 72;  stroke-opacity: 0.15; }
+    .territory-metabolism:hover .core-node      { r: 6; fill-opacity: 0.8; }
+    .territory-metabolism:hover .territory-desc { opacity: 1; }
+    .territory-metabolism:hover .pulse-ring     { opacity: 1; animation: ms-pulse-amber 2s ease-out infinite; }
 
-    /* ---- MOVEMENT territory (turquoise) ---- */
-    .territory-movement .contour-outer {
-      transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    .territory-movement .contour-mid {
-      transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s;
-    }
-    .territory-movement .contour-inner {
-      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s;
-    }
-    .territory-movement .core-node {
-      transition: all 0.3s ease;
-    }
-    .territory-movement .territory-desc {
-      opacity: 0;
-      transition: opacity 0.5s ease 0.15s;
-    }
-    .territory-movement .pulse-ring {
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
+    .territory-movement .contour-outer  { transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .territory-movement .contour-mid    { transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s; }
+    .territory-movement .contour-inner  { transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s; }
+    .territory-movement .core-node      { transition: all 0.3s ease; }
+    .territory-movement .territory-desc { opacity: 0; transition: opacity 0.5s ease 0.15s; }
+    .territory-movement .pulse-ring     { opacity: 0; transition: opacity 0.3s ease; }
 
-    .territory-movement:hover .contour-outer {
-      rx: 158; ry: 143;
-      stroke-opacity: 0.35;
-    }
-    .territory-movement:hover .contour-mid {
-      rx: 126; ry: 113;
-      stroke-opacity: 0.22;
-    }
-    .territory-movement:hover .contour-inner {
-      rx: 90; ry: 78;
-      stroke-opacity: 0.15;
-    }
-    .territory-movement:hover .core-node {
-      r: 7;
-      fill-opacity: 0.8;
-    }
-    .territory-movement:hover .territory-desc {
-      opacity: 1;
-    }
-    .territory-movement:hover .pulse-ring {
-      opacity: 1;
-      animation: ms-pulse-amber 2s ease-out infinite;
-    }
+    .territory-movement:hover .contour-outer  { rx: 158; ry: 143; stroke-opacity: 0.35; }
+    .territory-movement:hover .contour-mid    { rx: 126; ry: 113; stroke-opacity: 0.22; }
+    .territory-movement:hover .contour-inner  { rx: 90;  ry: 78;  stroke-opacity: 0.15; }
+    .territory-movement:hover .core-node      { r: 7; fill-opacity: 0.8; }
+    .territory-movement:hover .territory-desc { opacity: 1; }
+    .territory-movement:hover .pulse-ring     { opacity: 1; animation: ms-pulse-amber 2s ease-out infinite; }
 
-    /* ---- MATRIX territory (turquoise, dimmer) ---- */
-    .territory-matrix .contour-outer {
-      transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    .territory-matrix .contour-mid {
-      transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s;
-    }
-    .territory-matrix .contour-inner {
-      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s;
-    }
-    .territory-matrix .core-node {
-      transition: all 0.3s ease;
-    }
-    .territory-matrix .territory-desc {
-      opacity: 0;
-      transition: opacity 0.5s ease 0.15s;
-    }
-    .territory-matrix .pulse-ring {
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
+    .territory-matrix .contour-outer  { transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .territory-matrix .contour-mid    { transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s; }
+    .territory-matrix .contour-inner  { transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s; }
+    .territory-matrix .core-node      { transition: all 0.3s ease; }
+    .territory-matrix .territory-desc { opacity: 0; transition: opacity 0.5s ease 0.15s; }
+    .territory-matrix .pulse-ring     { opacity: 0; transition: opacity 0.3s ease; }
 
-    .territory-matrix:hover .contour-outer {
-      rx: 240; ry: 240;
-      stroke-opacity: 0.25;
-    }
-    .territory-matrix:hover .contour-mid {
-      rx: 190; ry: 190;
-      stroke-opacity: 0.15;
-    }
-    .territory-matrix:hover .contour-inner {
-      rx: 125; ry: 125;
-      stroke-opacity: 0.08;
-    }
-    .territory-matrix:hover .core-node {
-      r: 7;
-      fill-opacity: 0.8;
-    }
-    .territory-matrix:hover .territory-desc {
-      opacity: 1;
-    }
-    .territory-matrix:hover .pulse-ring {
-      opacity: 1;
-      animation: ms-pulse-amber 2s ease-out infinite;
-    }
+    .territory-matrix:hover .contour-outer  { rx: 240; ry: 240; stroke-opacity: 0.25; }
+    .territory-matrix:hover .contour-mid    { rx: 190; ry: 190; stroke-opacity: 0.15; }
+    .territory-matrix:hover .contour-inner  { rx: 125; ry: 125; stroke-opacity: 0.08; }
+    .territory-matrix:hover .core-node      { r: 7; fill-opacity: 0.8; }
+    .territory-matrix:hover .territory-desc { opacity: 1; }
+    .territory-matrix:hover .pulse-ring     { opacity: 1; animation: ms-pulse-amber 2s ease-out infinite; }
 
-    /* Connection paths illuminate on hover */
-    .ms-connection {
-      transition: stroke-opacity 0.5s ease, stroke 0.5s ease;
-    }
+    .ms-connection { transition: stroke-opacity 0.5s ease, stroke 0.5s ease; }
     .territory-metabolism:hover ~ .conn-metab-move,
-    .territory-movement:hover ~ .conn-metab-move {
-      stroke-opacity: 0.35 !important;
-    }
-    .territory-movement:hover ~ .conn-move-matrix,
-    .territory-matrix:hover ~ .conn-move-matrix {
-      stroke-opacity: 0.35 !important;
-    }
+    .territory-movement:hover   ~ .conn-metab-move  { stroke-opacity: 0.35 !important; }
+    .territory-movement:hover   ~ .conn-move-matrix,
+    .territory-matrix:hover     ~ .conn-move-matrix  { stroke-opacity: 0.35 !important; }
     .territory-metabolism:hover ~ .conn-metab-matrix,
-    .territory-matrix:hover ~ .conn-metab-matrix {
-      stroke-opacity: 0.3 !important;
-    }
+    .territory-matrix:hover     ~ .conn-metab-matrix { stroke-opacity: 0.3  !important; }
 
-    /* Matrix hover lights ALL connections — it organizes both */
-    .territory-matrix:hover ~ .conn-metab-move {
-      stroke-opacity: 0.35 !important;
-      stroke: #58FCC8 !important;
-    }
+    .territory-matrix:hover ~ .conn-metab-move    { stroke-opacity: 0.35 !important; stroke: #58FCC8 !important; }
     .territory-matrix:hover ~ .conn-move-matrix,
-    .territory-matrix:hover ~ .conn-metab-matrix {
-      stroke: #58FCC8 !important;
-    }
+    .territory-matrix:hover ~ .conn-metab-matrix  { stroke: #58FCC8 !important; }
 
-    /* Center integration label — hidden until Matrix hover */
-    .ms-integration-label {
-      opacity: 0;
-      transition: opacity 0.6s ease 0.15s;
-    }
-    .territory-matrix:hover ~ .ms-integration-label {
-      opacity: 1;
-    }
+    .ms-integration-label { opacity: 0; transition: opacity 0.6s ease 0.15s; }
+    .territory-matrix:hover ~ .ms-integration-label { opacity: 1; }
 
-    /* Pulse animations */
     @keyframes ms-pulse-amber {
-      0% { r: 8; opacity: 0.4; }
+      0%   { r: 8;  opacity: 0.4; }
       100% { r: 42; opacity: 0; }
     }
 
-    /* Three Ms tagline below visual */
     .three-ms-tagline {
       display: flex;
       justify-content: center;
@@ -671,8 +511,8 @@
     }
 
     .ms-tag {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
+      font-family: 'Cal Sans UI', 'Alegreya Sans', sans-serif;
+      font-size: 16px;
       letter-spacing: 0.06em;
       color: var(--dim-text);
     }
@@ -683,33 +523,125 @@
     }
 
     /* ═══════════════════════════════════════════
-       FILTER LINES (close section)
+       OFFER GRID
        ═══════════════════════════════════════════ */
-    .filter-line {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 16px;
-      letter-spacing: 0.03em;
-      line-height: 2.2;
-      color: var(--primary-text);
-      margin-bottom: 16px;
+    .offer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      margin: 48px 0;
+      background: rgba(88,252,200,0.08);
+      border: 1px solid rgba(88,252,200,0.08);
     }
 
-    .filter-resolve {
-      font-family: 'IBM Plex Mono', monospace;
+    .offer-cell {
+      padding: 32px 36px;
+      background: var(--base-blue);
+    }
+
+    .offer-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--dim-text);
+      margin-bottom: 10px;
+    }
+
+    .offer-value {
+      font-family: 'Cinzel', serif;
+      font-size: 26px;
+      color: var(--turquoise);
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .offer-note {
+      font-family: 'Cal Sans UI', 'Alegreya Sans', sans-serif;
       font-size: 16px;
-      letter-spacing: 0.03em;
-      line-height: 2.2;
-      color: var(--accent-coral);
-      margin-top: 32px;
-      margin-bottom: 16px;
+      color: var(--secondary-text);
+      line-height: 1.5;
+      font-weight: 300;
+    }
+
+    /* ═══════════════════════════════════════════
+       OUTCOME LIST
+       ═══════════════════════════════════════════ */
+    .outcome-list {
+      list-style: none;
+      margin: 0 0 32px 0;
+      padding: 0;
+    }
+
+    .outcome-list li {
+      font-family: 'Cal Sans UI', 'Alegreya Sans', sans-serif;
+      font-size: 20px;
+      font-weight: 300;
+      color: var(--secondary-text);
+      line-height: 1.6;
+      padding: 12px 0 12px 28px;
+      border-bottom: 1px solid rgba(88,252,200,0.06);
+      position: relative;
+    }
+
+    .outcome-list li:first-child {
+      border-top: 1px solid rgba(88,252,200,0.06);
+    }
+
+    .outcome-list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--turquoise);
+      opacity: 0.4;
+    }
+
+    /* ═══════════════════════════════════════════
+       BOOK CTA BUTTON
+       ═══════════════════════════════════════════ */
+    .book-cta {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--deep-blue);
+      background: var(--turquoise);
+      text-decoration: none;
+      padding: 16px 40px;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .book-cta:hover {
+      background: #ffffff;
+      color: var(--deep-blue);
+    }
+
+    /* ═══════════════════════════════════════════
+       SIGNALS TEASER
+       ═══════════════════════════════════════════ */
+    .signals-teaser {
+      border-left: 2px solid rgba(88,252,200,0.2);
+      padding: 24px 0 24px 32px;
+      margin: 48px 0 0 0;
+    }
+
+    .signals-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--turquoise);
+      opacity: 0.6;
+      margin-bottom: 14px;
     }
 
     /* ═══════════════════════════════════════════
        LINKS
        ═══════════════════════════════════════════ */
     .portal-link {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 14px;
+      font-family: 'Cal Sans UI', 'Alegreya Sans', sans-serif;
+      font-size: 21px;
       letter-spacing: 0.15em;
       color: var(--turquoise);
       text-decoration: none;
@@ -757,9 +689,9 @@
       border-top: 1px solid rgba(88,252,200,0.08);
     }
     .footer-territory { display: flex; justify-content: space-between; align-items: start; }
-    .footer-left { max-width: 400px; }
+    .footer-left { max-width: 520px; }
     .footer-statement { font-family: 'Cinzel', serif; font-size: 15px; color: var(--primary-text); letter-spacing: 0.04em; line-height: 1.5; margin-bottom: 8px; }
-    .footer-sub { font-size: 12px; color: var(--dim-text); line-height: 1.6; }
+    .footer-sub { font-size: 14px; color: var(--dim-text); line-height: 1.6; }
     .footer-right { text-align: right; }
     .footer-cta {
       display: inline-block; font-family: 'Space Mono', monospace; font-size: 11px;
@@ -768,16 +700,16 @@
       transition: all 0.3s ease; margin-bottom: 16px;
     }
     .footer-cta:hover { border-color: var(--coral); background: rgba(255,165,101,0.05); }
-    .footer-contact { font-size: 11px; color: var(--dim-text); line-height: 1.8; }
+    .footer-contact { font-size: 13px; color: var(--dim-text); line-height: 1.8; }
     .footer-contact a { color: var(--turquoise); text-decoration: none; border-bottom: 1px solid rgba(88,252,200,0.15); }
     .footer-contact a:hover { border-color: var(--turquoise); }
     .footer-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; }
     .footer-logo { width: 36px; height: 24px; opacity: 0.25; }
     .footer-logo path { fill: var(--primary-text); }
-    .footer-tm { font-size: 10px; color: rgba(90,86,114,0.4); letter-spacing: 0.06em; }
+    .footer-tm { font-size: 12px; color: rgba(90,86,114,0.4); letter-spacing: 0.06em; }
 
     /* ═══════════════════════════════════════════
-       SCROLL REVEAL + STAGGER
+       SCROLL REVEAL
        ═══════════════════════════════════════════ */
     .reveal {
       opacity: 0;
@@ -799,6 +731,18 @@
        RESPONSIVE
        ═══════════════════════════════════════════ */
     @media (max-width: 767px) {
+      .offer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .offer-cell { padding: 24px; }
+
+      .book-cta {
+        display: block;
+        text-align: center;
+        margin-bottom: 16px;
+      }
+
       .three-ms-wrap {
         max-width: 100%;
         padding: 16px 0 0 0;
@@ -810,7 +754,7 @@
         justify-content: center;
       }
 
-      .ms-tag { font-size: 9px; }
+      .ms-tag { font-size: 11px; }
 
       .rhythm-strip {
         max-height: 60px;
@@ -818,57 +762,31 @@
         margin-bottom: 40px;
       }
 
-      .rhythm-strip img {
-        max-height: 60px;
-      }
+      .rhythm-strip img { max-height: 60px; }
 
       .zone-content,
-      .zone-content-wide {
-        padding: 0 24px;
-      }
+      .zone-content-wide { padding: 0 24px; }
 
-      .zone-hero {
-        padding: 25vh 0 12vh 0;
-      }
+      .zone-hero { padding: 25vh 0 12vh 0; }
 
-      .zone-hero h1 {
-        font-size: clamp(1.75rem, 5vw, 2.5rem);
-      }
+      .zone-hero h1 { font-size: clamp(1.75rem, 5vw, 2.5rem); }
 
-      .zone {
-        padding: 10vh 0;
-      }
+      .zone { padding: 10vh 0; }
 
-      .zone-bridge { padding: 36px 24px; }
-
-      .pull-links {
-        flex-direction: column;
-        gap: 24px;
-        align-items: center;
-      }
+      .signals-teaser { padding-left: 20px; }
 
       .footer-territory { flex-direction: column; gap: 40px; }
       .footer-right { text-align: left; }
       .footer-bottom { flex-direction: column; gap: 12px; align-items: flex-start; }
 
-      .reveal {
-        transform: none !important;
-      }
+      .reveal { transform: none !important; }
     }
 
     @media (min-width: 768px) and (max-width: 1024px) {
-      .rhythm-strip {
-        max-height: 72px;
-      }
-
-      .rhythm-strip img {
-        max-height: 72px;
-      }
-
+      .rhythm-strip { max-height: 72px; }
+      .rhythm-strip img { max-height: 72px; }
       .zone-content,
-      .zone-content-wide {
-        padding: 0 30px;
-      }
+      .zone-content-wide { padding: 0 30px; }
     }
 
     /* ═══════════════════════════════════════════
@@ -881,7 +799,6 @@
   </style>
 </head>
 <body>
-  <!-- Starfield background -->
   <div class="starfield"></div>
 
   <!-- ═══════════════════════════════════════════
@@ -909,7 +826,6 @@
     </button>
   </nav>
 
-  <!-- Mobile Nav Overlay -->
   <div class="nav-overlay" id="navOverlay">
     <a href="/" class="active">HOME</a>
     <a href="/origin/">ORIGIN</a>
@@ -917,64 +833,102 @@
     <a href="/signals/">SIGNALS</a>
   </div>
 
-  <!-- Scroll Progress Indicator -->
   <div class="scroll-counter-wrap">
     <span class="scroll-indicator" id="scrollCounter">000</span>
   </div>
 
   <!-- ═══════════════════════════════════════════
        SECTION 1: HERO
-       Sensorium opening. Recognition before framework.
+       Concrete offer first. Who it's for. What it costs.
        ═══════════════════════════════════════════ -->
   <div class="hero-container">
-    <!-- Hero Waveform (environmental, behind content) -->
     <div class="hero-waveform">
       <img src="assets/hero-waveform_1.svg" alt="" role="presentation">
     </div>
 
     <section class="zone-hero">
       <div class="zone-content">
-        <h1 class="reveal">You already know something is off.</h1>
+        <p class="page-subtitle reveal">Austin, TX &nbsp;·&nbsp; Private Sessions &nbsp;·&nbsp; $150</p>
+        <h1 class="reveal">Strength training for people who think too much.</h1>
 
-        <!-- Rhythm pattern — full width, breaks out of content column -->
         <div class="rhythm-strip reveal reveal-delay-1">
           <img src="assets/bw_rhythms_off.svg" alt="" role="presentation">
         </div>
 
-        <p class="body-copy reveal reveal-delay-2">You train. You exercise. You follow the program. And somewhere between the effort and the result, there's a gap you can't close. Not injury. Not laziness. Something quieter. A void in your body's response. A sense that the volume keeps increasing but the signal isn't getting clearer.</p>
+        <p class="body-copy reveal reveal-delay-2">You've tried programs. They worked until they didn't. The issue wasn't effort — it was that nothing you tried was reading the right signals. You were training the output while the input stayed unread. BASEWAVES doesn't manage stress at a distance. It engages it at intensity — using load to trigger the biological and neurological adaptation that makes the signals readable.</p>
 
-        <p class="body-copy reveal reveal-delay-3">You've tried more structure. More discipline. More information. None of it closed the gap — because the gap was never about effort.</p>
+        <p class="turquoise-accent reveal reveal-delay-3">Load reveals what effort hides. That's what we train.</p>
 
-        <p class="turquoise-accent reveal reveal-delay-4">The problem was never what you were doing. It was what you couldn't hear inside while you were doing it.</p>
-
-        <div class="reveal reveal-delay-4" style="text-align: center; padding-top: 48px;">
+        <div class="reveal reveal-delay-4" style="padding-top: 40px; display: flex; gap: 32px; align-items: center; flex-wrap: wrap;">
+          <a href="mailto:greg@basewaves.com?subject=Session%20Inquiry" class="book-cta">Book a Session</a>
           <span class="scroll-arrow">↓</span>
         </div>
       </div>
     </section>
   </div>
 
-  <!-- Divider: Hero → Reframe -->
   <div class="zone-divider"></div>
 
   <!-- ═══════════════════════════════════════════
-       MOVE 2: REFRAME
-       Ontological pivot. Not undertrained — unheard.
+       SECTION 2: THE OFFER
+       What you get. Price. Format. Outcomes.
+       ═══════════════════════════════════════════ -->
+  <section class="zone zone-offer">
+    <div class="zone-content">
+      <h2 class="reveal">Twelve weeks.</h2>
+
+      <p class="body-copy reveal">Private sessions, in-person in Austin. Progressive load programming with signal assessment built in — not as an add-on, but as the method. You track what you lift. We also track what changes in how you read what you're lifting.</p>
+
+      <div class="offer-grid reveal">
+        <div class="offer-cell">
+          <div class="offer-label">Rate</div>
+          <div class="offer-value">$150</div>
+          <div class="offer-note">per session</div>
+        </div>
+        <div class="offer-cell">
+          <div class="offer-label">Format</div>
+          <div class="offer-value">Private</div>
+          <div class="offer-note">In-person · Austin, TX<br>Remote available on request</div>
+        </div>
+        <div class="offer-cell">
+          <div class="offer-label">Minimum</div>
+          <div class="offer-value">12 weeks</div>
+          <div class="offer-note">recommended — not contracted</div>
+        </div>
+        <div class="offer-cell">
+          <div class="offer-label">Cadence</div>
+          <div class="offer-value">2&times; / week</div>
+          <div class="offer-note">typical — adjusted to readiness</div>
+        </div>
+      </div>
+
+      <p class="signal-line reveal">After twelve weeks:</p>
+      <ul class="outcome-list reveal">
+        <li>Load has increased on primary movement patterns — squat, hinge, press</li>
+        <li>Movement quality holds under fatigue, not just when fresh</li>
+        <li>You have a clearer read on what your body signals under physical and cognitive pressure</li>
+        <li>You know the difference between a depleted session and a strong one before the first set</li>
+      </ul>
+
+      <div class="reveal">
+        <a href="mailto:greg@basewaves.com?subject=Session%20Inquiry" class="book-cta">Book a Session</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="zone-divider"></div>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 3: WHY THIS READS DIFFERENTLY
+       Three channels, not one.
        ═══════════════════════════════════════════ -->
   <section class="zone zone-reframe">
     <div class="zone-content">
-      <h2 class="reveal">You are not undertrained. You are unheard.</h2>
+      <h2 class="reveal">Why this reads more than most programs.</h2>
+      <p class="body-copy reveal">Most strength training tracks one channel: movement. Reps, sets, load progression. That's one signal out of three running simultaneously under your biology. Training that only reads one channel produces results that stall when the other two change — and they change constantly.</p>
     </div>
 
     <div class="zone-content-wide">
-      <div class="reframe-grid">
-        <div>
-          <p class="body-copy reveal">Your body is not a machine that needs better programming. It is a signaling architecture — connective tissue carrying vastly more sensory channels for internal state than for position. Tension, temperature, pressure, chemical balance, force, vibration. All broadcasting. Continuously. Wired overwhelmingly for sensing condition, not locating limbs.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="zone-content">
       <div class="three-ms-wrap reveal">
         <div class="three-ms-field">
           <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three Ms: Metabolism fuels, Movement carries, Matrix organizes">
@@ -989,85 +943,67 @@
               </radialGradient>
             </defs>
 
-            <!-- METABOLISM territory (turquoise — top left) -->
-            <g class="territory-metabolism">
-              <ellipse cx="210" cy="150" rx="130" ry="120" fill="url(#glow-turq-ms)"/>
-              <ellipse class="contour-outer" cx="210" cy="150" rx="130" ry="120" fill="none" stroke="#58FCC8" stroke-width="0.6" stroke-opacity="0.18"/>
-              <ellipse class="contour-mid" cx="210" cy="150" rx="100" ry="90" fill="none" stroke="#58FCC8" stroke-width="0.4" stroke-opacity="0.1"/>
-              <ellipse class="contour-inner" cx="210" cy="150" rx="65" ry="55" fill="none" stroke="#58FCC8" stroke-width="0.3" stroke-opacity="0.06"/>
-
-              <circle class="pulse-ring" cx="210" cy="150" fill="none" stroke="#FFA565" stroke-width="0.8"/>
-              <circle class="core-node" cx="210" cy="150" r="4" fill="#58FCC8" fill-opacity="0.55"/>
-
-              <text x="210" y="128" fill="#58FCC8" opacity="0.65" font-size="24" text-anchor="middle" font-family="Cinzel, serif" letter-spacing="0.08em">METABOLISM</text>
-              <text x="210" y="170" fill="#5A5672" font-size="14" text-anchor="middle" letter-spacing="0.08em">THE FUEL</text>
-
-              <text class="territory-desc" x="210" y="206" fill="#58FCC8" font-size="12" text-anchor="middle" letter-spacing="0.04em" opacity="0.5">What powers the signal.</text>
-              <text class="territory-desc" x="210" y="226" fill="#58FCC8" font-size="12" text-anchor="middle" letter-spacing="0.04em" opacity="0.4">capacity &middot; depletion &middot; readiness</text>
-
-              <ellipse class="ms-hit" cx="210" cy="150" rx="130" ry="120"/>
-            </g>
-
-            <!-- MOVEMENT territory (turquoise — top right) -->
+            <!-- MOVEMENT territory -->
             <g class="territory-movement">
-              <ellipse cx="590" cy="150" rx="140" ry="125" fill="url(#glow-turq-ms)"/>
-              <ellipse class="contour-outer" cx="590" cy="150" rx="140" ry="125" fill="none" stroke="#58FCC8" stroke-width="0.6" stroke-opacity="0.18"/>
-              <ellipse class="contour-mid" cx="590" cy="150" rx="108" ry="95" fill="none" stroke="#58FCC8" stroke-width="0.4" stroke-opacity="0.1"/>
-              <ellipse class="contour-inner" cx="590" cy="150" rx="72" ry="60" fill="none" stroke="#58FCC8" stroke-width="0.3" stroke-opacity="0.06"/>
-
-              <circle class="pulse-ring" cx="590" cy="150" fill="none" stroke="#FFA565" stroke-width="0.8"/>
-              <circle class="core-node" cx="590" cy="150" r="4.5" fill="#58FCC8" fill-opacity="0.55"/>
-
-              <text x="590" y="128" fill="#58FCC8" opacity="0.65" font-size="24" text-anchor="middle" font-family="Cinzel, serif" letter-spacing="0.08em">MOVEMENT</text>
-              <text x="590" y="170" fill="#5A5672" font-size="14" text-anchor="middle" letter-spacing="0.08em">THE MEDIUM</text>
-
-              <text class="territory-desc" x="590" y="206" fill="#58FCC8" font-size="12" text-anchor="middle" letter-spacing="0.04em" opacity="0.5">Where force originates and transfers.</text>
-              <text class="territory-desc" x="590" y="226" fill="#58FCC8" font-size="12" text-anchor="middle" letter-spacing="0.04em" opacity="0.4">force &middot; kinetic chain &middot; load</text>
-
-              <ellipse class="ms-hit" cx="590" cy="150" rx="140" ry="125"/>
+              <ellipse cx="210" cy="150" rx="140" ry="125" fill="url(#glow-turq-ms)"/>
+              <ellipse class="contour-outer" cx="210" cy="150" rx="140" ry="125" fill="none" stroke="#58FCC8" stroke-width="0.6" stroke-opacity="0.18"/>
+              <ellipse class="contour-mid"   cx="210" cy="150" rx="108" ry="95"  fill="none" stroke="#58FCC8" stroke-width="0.4" stroke-opacity="0.1"/>
+              <ellipse class="contour-inner" cx="210" cy="150" rx="72"  ry="60"  fill="none" stroke="#58FCC8" stroke-width="0.3" stroke-opacity="0.06"/>
+              <circle class="pulse-ring" cx="210" cy="150" fill="none" stroke="#FFA565" stroke-width="0.8"/>
+              <circle class="core-node"  cx="210" cy="150" r="4.5" fill="#58FCC8" fill-opacity="0.55"/>
+              <text x="210" y="128" fill="#58FCC8" opacity="0.65" font-size="24" text-anchor="middle" font-family="Cinzel, serif" letter-spacing="0.08em">MOVEMENT</text>
+              <text x="210" y="170" fill="#5A5672" font-size="14" text-anchor="middle" letter-spacing="0.08em">THE SIGNAL</text>
+              <text class="territory-desc" x="210" y="206" fill="#58FCC8" font-size="12" text-anchor="middle" letter-spacing="0.04em" opacity="0.5">Where force becomes information under load.</text>
+              <text class="territory-desc" x="210" y="226" fill="#58FCC8" font-size="12" text-anchor="middle" letter-spacing="0.04em" opacity="0.4">tension &middot; pattern &middot; force</text>
+              <ellipse class="ms-hit" cx="210" cy="150" rx="140" ry="125"/>
             </g>
 
-            <!-- MATRIX territory (turquoise dimmer — bottom center) -->
+            <!-- METABOLISM territory -->
+            <g class="territory-metabolism">
+              <ellipse cx="590" cy="150" rx="130" ry="120" fill="url(#glow-turq-ms)"/>
+              <ellipse class="contour-outer" cx="590" cy="150" rx="130" ry="120" fill="none" stroke="#58FCC8" stroke-width="0.6" stroke-opacity="0.18"/>
+              <ellipse class="contour-mid"   cx="590" cy="150" rx="100" ry="90"  fill="none" stroke="#58FCC8" stroke-width="0.4" stroke-opacity="0.1"/>
+              <ellipse class="contour-inner" cx="590" cy="150" rx="65"  ry="55"  fill="none" stroke="#58FCC8" stroke-width="0.3" stroke-opacity="0.06"/>
+              <circle class="pulse-ring" cx="590" cy="150" fill="none" stroke="#FFA565" stroke-width="0.8"/>
+              <circle class="core-node"  cx="590" cy="150" r="4" fill="#58FCC8" fill-opacity="0.55"/>
+              <text x="590" y="128" fill="#58FCC8" opacity="0.65" font-size="24" text-anchor="middle" font-family="Cinzel, serif" letter-spacing="0.08em">METABOLISM</text>
+              <text x="590" y="170" fill="#5A5672" font-size="14" text-anchor="middle" letter-spacing="0.08em">THE SUBSTRATE</text>
+              <text class="territory-desc" x="590" y="206" fill="#58FCC8" font-size="12" text-anchor="middle" letter-spacing="0.04em" opacity="0.5">What powers and sustains the signal.</text>
+              <text class="territory-desc" x="590" y="226" fill="#58FCC8" font-size="12" text-anchor="middle" letter-spacing="0.04em" opacity="0.4">capacity &middot; depletion &middot; readiness</text>
+              <ellipse class="ms-hit" cx="590" cy="150" rx="130" ry="120"/>
+            </g>
+
+            <!-- MATRIX territory -->
             <g class="territory-matrix">
               <ellipse cx="400" cy="340" rx="130" ry="120" fill="url(#glow-turq-ms)"/>
               <ellipse class="contour-outer" cx="400" cy="340" rx="130" ry="120" fill="none" stroke="#58FCC8" stroke-width="0.6" stroke-opacity="0.15"/>
-              <ellipse class="contour-mid" cx="400" cy="340" rx="100" ry="90" fill="none" stroke="#58FCC8" stroke-width="0.4" stroke-opacity="0.08"/>
-              <ellipse class="contour-inner" cx="400" cy="340" rx="65" ry="55" fill="none" stroke="#58FCC8" stroke-width="0.3" stroke-opacity="0.05"/>
-
+              <ellipse class="contour-mid"   cx="400" cy="340" rx="100" ry="90"  fill="none" stroke="#58FCC8" stroke-width="0.4" stroke-opacity="0.08"/>
+              <ellipse class="contour-inner" cx="400" cy="340" rx="65"  ry="55"  fill="none" stroke="#58FCC8" stroke-width="0.3" stroke-opacity="0.05"/>
               <circle class="pulse-ring" cx="400" cy="340" fill="none" stroke="#FFA565" stroke-width="0.8"/>
-              <circle class="core-node" cx="400" cy="340" r="4" fill="#58FCC8" fill-opacity="0.45"/>
-
+              <circle class="core-node"  cx="400" cy="340" r="4" fill="#58FCC8" fill-opacity="0.45"/>
               <text x="400" y="318" fill="#58FCC8" opacity="0.55" font-size="24" text-anchor="middle" font-family="Cinzel, serif" letter-spacing="0.08em">MATRIX</text>
-              <text x="400" y="360" fill="#5A5672" font-size="14" text-anchor="middle" letter-spacing="0.08em">THE TERRITORY</text>
-
+              <text x="400" y="360" fill="#5A5672" font-size="14" text-anchor="middle" letter-spacing="0.08em">THE ARCHITECTURE</text>
               <text class="territory-desc" x="400" y="396" fill="#58FCC8" font-size="12" text-anchor="middle" letter-spacing="0.04em" opacity="0.4">How your body organizes under pressure.</text>
               <text class="territory-desc" x="400" y="416" fill="#58FCC8" font-size="12" text-anchor="middle" letter-spacing="0.04em" opacity="0.35">compensation &middot; coordination &middot; pattern</text>
-
               <ellipse class="ms-hit" cx="400" cy="340" rx="130" ry="120"/>
             </g>
 
-            <!-- Connection paths (after groups for CSS sibling selectors) -->
-            <path class="ms-connection conn-metab-move" d="M 330 115 Q 400 85 460 115" fill="none" stroke="#5A5672" stroke-width="0.8" stroke-opacity="0.12" stroke-dasharray="3,6"/>
-            <path class="ms-connection conn-move-matrix" d="M 530 240 Q 510 300 460 320" fill="none" stroke="#5A5672" stroke-width="0.8" stroke-opacity="0.1" stroke-dasharray="3,6"/>
-            <path class="ms-connection conn-metab-matrix" d="M 270 240 Q 290 300 340 320" fill="none" stroke="#5A5672" stroke-width="0.6" stroke-opacity="0.08" stroke-dasharray="3,8"/>
+            <!-- Connection paths -->
+            <path class="ms-connection conn-metab-move"    d="M 330 115 Q 400 85  460 115" fill="none" stroke="#5A5672" stroke-width="0.8" stroke-opacity="0.12" stroke-dasharray="3,6"/>
+            <path class="ms-connection conn-move-matrix"   d="M 530 240 Q 510 300 460 320" fill="none" stroke="#5A5672" stroke-width="0.8" stroke-opacity="0.1"  stroke-dasharray="3,6"/>
+            <path class="ms-connection conn-metab-matrix"  d="M 270 240 Q 290 300 340 320" fill="none" stroke="#5A5672" stroke-width="0.6" stroke-opacity="0.08" stroke-dasharray="3,8"/>
 
-            <!-- Center integration label — appears on Matrix hover -->
             <g class="ms-integration-label">
               <text x="400" y="218" fill="#58FCC8" opacity="0.8" font-size="16" text-anchor="middle" font-family="Cinzel, serif" letter-spacing="0.12em">BASEWAVES</text>
               <text x="400" y="242" fill="#9994B8" font-size="12" text-anchor="middle" letter-spacing="0.08em">connects the signals</text>
             </g>
-
           </svg>
         </div>
- 
       </div>
     </div>
+
     <div class="zone-content" style="padding-top: 32px;">
-      <p class="body-copy reveal">Most strength training addresses one channel — movement. Reps, sets, load. BASEWAVES reads three channels simultaneously: the metabolic state that fuels your processing, the movement patterns that carry your force, and your organizational intelligence that determines how both express. <br>
-<br>
-<strong> Metabolism</strong> fuels. <strong>Movement</strong> carries. <strong>Matrix</strong> organizes. <br>
-<br>
-These channels were never separate inside your biology. The programming was.</p>
+      <p class="body-copy reveal"><strong>Metabolism</strong> fuels. <strong>Movement</strong> carries. <strong>Matrix</strong> organizes. These channels were never separate inside your biology — what changes in one changes all three. A session that engages all three doesn't just make you stronger. It develops the sensing capacity that extends into everything else under pressure.</p>
     </div>
 
     <div class="rhythm-strip rhythm-strip-full reveal" style="margin-bottom: 0;">
@@ -1075,41 +1011,29 @@ These channels were never separate inside your biology. The programming was.</p>
     </div>
   </section>
 
-  <!-- Bridge: Reframe → Pull -->
-  <div class="zone-bridge-wrap" style="background: var(--base-blue); background: linear-gradient(to bottom, var(--base-blue), var(--deep-blue));">
-    <div class="zone-bridge reveal">
-      <h3>You've been solving the wrong problem.</h3>
-    <p style="margin-top: 1.2em; font-family: 'IBM Plex Mono', monospace; font-size: 0.95rem; color: var(--secondary-text); max-width: 640px; margin-left: auto; margin-right: auto; line-height: 1.7;">More effort won’t fix what was never an effort problem.<br>
-      <br>
-Your body processes muscle gains and fat loss through the same channels it processes stress, fuel, and uncertainty. <br>
-<br>
-How you channel stress is the problem. Not the program. Not the load. Not the exercise.</p>
-    </div>
-  </div>
-
-  <!-- Divider: Bridge → Close -->
   <div class="zone-divider"></div>
 
   <!-- ═══════════════════════════════════════════
-       MOVE 3: PULL
-       Qualification + direction. Two doors.
+       SECTION 4: SIGNALS — what grows with you
+       Performance biology → performance psychology
        ═══════════════════════════════════════════ -->
-  <section class="zone zone-close">
+  <section class="zone zone-signals">
     <div class="zone-content">
-      <p class="filter-line reveal reveal-delay-1">If you've been told to push harder when pushing harder drains you.</p>
-      <p class="filter-line reveal reveal-delay-2">If you sense the problem lives upstream of every program you've tried.</p>
-      <p class="filter-line reveal reveal-delay-3">If your body gets stronger some weeks and stalls  others and nobody can explain why.</p>
+      <h2 class="reveal">What grows with you.</h2>
 
-      <p class="filter-resolve reveal reveal-delay-4">Then you're not looking for another program. You're looking at fine-tuning your other channels.</p>
+      <p class="body-copy reveal">Strength is the entry point. What develops alongside it is the ability to read the deeper signals your body sends exercising with intensity — and eventually under any pressure. Same signals. Sharper reception.</p>
 
-      <div class="pull-links reveal reveal-delay-5">
-        <a href="/origin/" class="portal-link">Where this came from →</a>
-        <a href="/portal/" class="portal-link">Where this leads →</a>
+      <p class="body-copy reveal">Clients who stay develop access to performance signals that most training never surfaces. The work moves from performance biology — how load, fatigue, and readiness interact in the body — toward performance psychology — how stress, attention, and intention operate under pressure.</p>
+
+      <div class="signals-teaser reveal">
+        <div class="signals-label">SIGNALS</div>
+        <p class="signal-line">An ongoing research series on the biology and psychology of performance under load.</p>
+        <p class="body-copy">Twelve essays and growing. Free. Public. The intellectual layer behind the work — available to clients and anyone else who wants to go deeper than the session.</p>
+        <a href="/signals/" class="portal-link">Read SIGNALS →</a>
       </div>
     </div>
   </section>
 
-  <!-- Divider: Close → Footer -->
   <div class="zone-divider"></div>
 
   <!-- ═══════════════════════════════════════════
@@ -1120,12 +1044,12 @@ How you channel stress is the problem. Not the program. Not the load. Not the ex
       <div class="footer-territory">
 
         <div class="footer-left reveal">
-          <div class="footer-statement">Signal over noise. Curiosity over volume.</div>
-          <div class="footer-sub">BASEWAVES identifies the person who already knows something was lost.</div>
+          <div class="footer-statement">You cannot think your way out of a sensing problem.</div>
+          <div class="footer-sub">Signal over noise. Load as teacher. Austin, TX.</div>
         </div>
 
         <div class="footer-right reveal reveal-delay-1">
-          <a href="mailto:greg@basewaves.com?subject=State%20Assessment" class="footer-cta">Schedule a State Assessment</a>
+          <a href="mailto:greg@basewaves.com?subject=Session%20Inquiry" class="footer-cta">Book a Session — $150</a>
           <div class="footer-contact">
             <a href="mailto:greg@basewaves.com">greg@basewaves.com</a><br>
             512.585.3400
@@ -1145,13 +1069,12 @@ How you channel stress is the problem. Not the program. Not the load. Not the ex
   </section>
 
   <!-- ═══════════════════════════════════════════
-       SCROLL CONTROLLER (vanilla)
+       SCROLL CONTROLLER
        ═══════════════════════════════════════════ -->
   <script>
     (function() {
       document.documentElement.classList.remove('no-js');
 
-      // Scroll reveal observer
       var reveals = document.querySelectorAll('.reveal');
       var observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
@@ -1160,7 +1083,6 @@ How you channel stress is the problem. Not the program. Not the load. Not the ex
       }, { threshold: 0.15 });
       reveals.forEach(function(el) { observer.observe(el); });
 
-      // Scroll counter + nav background
       var nav = document.getElementById('siteNav');
       var counter = document.getElementById('scrollCounter');
       window.addEventListener('scroll', function() {
@@ -1170,7 +1092,6 @@ How you channel stress is the problem. Not the program. Not the load. Not the ex
         nav.classList.toggle('scrolled', y > 80);
       });
 
-      // Hamburger menu
       var hb = document.getElementById('hamburger');
       var ov = document.getElementById('navOverlay');
       if (hb && ov) {
