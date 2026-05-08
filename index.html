@@ -15,11 +15,19 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Alegreya+Sans:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <!-- Cal Sans UI -->
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@calcom/cal-sans-ui/ui.css">
 
   <style>
+    /* ═══════════════════════════════════════════
+       SELF-HOSTED CAL SANS
+       ═══════════════════════════════════════════ */
+    @font-face {
+      font-family: 'Cal Sans';
+      src: url('/assets/fonts/CalSans-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
     /* ═══════════════════════════════════════════
        CUSTOM PROPERTIES
        ═══════════════════════════════════════════ */
@@ -43,7 +51,7 @@
     body {
       background: var(--deep-blue);
       color: var(--primary-text);
-      font-family: 'Cal Sans UI', 'Alegreya Sans', sans-serif;
+      font-family: 'Cal Sans', 'Alegreya Sans', sans-serif;
       font-size: 22px;
       line-height: 1.7;
       letter-spacing: 0.01em;
@@ -91,7 +99,7 @@
     }
 
     p {
-      font-family: 'Cal Sans UI', 'Alegreya Sans', sans-serif;
+      font-family: 'Cal Sans', 'Alegreya Sans', sans-serif;
       font-weight: 300;
       letter-spacing: 0.01em;
       font-size: 22px;
@@ -394,7 +402,7 @@
     }
 
     .zone-bridge p {
-      font-family: 'Cal Sans UI', 'Alegreya Sans', sans-serif;
+      font-family: 'Cal Sans', 'Alegreya Sans', sans-serif;
       font-weight: 300;
       font-size: 21px;
       letter-spacing: 0.02em;
@@ -511,7 +519,7 @@
     }
 
     .ms-tag {
-      font-family: 'Cal Sans UI', 'Alegreya Sans', sans-serif;
+      font-family: 'Cal Sans', 'Alegreya Sans', sans-serif;
       font-size: 16px;
       letter-spacing: 0.06em;
       color: var(--dim-text);
@@ -557,7 +565,7 @@
     }
 
     .offer-note {
-      font-family: 'Cal Sans UI', 'Alegreya Sans', sans-serif;
+      font-family: 'Cal Sans', 'Alegreya Sans', sans-serif;
       font-size: 16px;
       color: var(--secondary-text);
       line-height: 1.5;
@@ -574,7 +582,7 @@
     }
 
     .outcome-list li {
-      font-family: 'Cal Sans UI', 'Alegreya Sans', sans-serif;
+      font-family: 'Cal Sans', 'Alegreya Sans', sans-serif;
       font-size: 20px;
       font-weight: 300;
       color: var(--secondary-text);
@@ -640,7 +648,7 @@
        LINKS
        ═══════════════════════════════════════════ */
     .portal-link {
-      font-family: 'Cal Sans UI', 'Alegreya Sans', sans-serif;
+      font-family: 'Cal Sans', 'Alegreya Sans', sans-serif;
       font-size: 21px;
       letter-spacing: 0.15em;
       color: var(--turquoise);
