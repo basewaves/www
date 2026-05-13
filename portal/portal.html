@@ -14,7 +14,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-  /* Self-hosted Cal Sans — variable font, weight range 300-700 */
+  /* Self-hosted Cal Sans — variable font, two registers via GEOM axis.
+     'Cal Sans Geo' (GEOM=1) for body / reading copy.
+     'Cal Sans' (GEOM=0) for titles / display.
+     Both share wght axis 300-700. */
+  @font-face {
+    font-family: 'Cal Sans Geo';
+    src: url('/assets/fonts/CalSansUI%5Bwght%2CGEOM%5D.woff2') format('woff2-variations'),
+         url('/assets/fonts/CalSansUI%5Bwght%2CGEOM%5D.woff2') format('woff2');
+    font-weight: 300 700;
+    font-style: normal;
+    font-display: swap;
+    font-variation-settings: "GEOM" 1;
+  }
   @font-face {
     font-family: 'Cal Sans';
     src: url('/assets/fonts/CalSansUI%5Bwght%2CGEOM%5D.woff2') format('woff2-variations'),
@@ -22,6 +34,7 @@
     font-weight: 300 700;
     font-style: normal;
     font-display: swap;
+    font-variation-settings: "GEOM" 0;
   }
 
   :root {

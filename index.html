@@ -18,9 +18,21 @@
 
   <style>
     /* ═══════════════════════════════════════════
-       SELF-HOSTED CAL SANS — VARIABLE FONT
-       Single file, full weight range 300-700 via wght axis.
+       SELF-HOSTED CAL SANS — VARIABLE FONT, TWO REGISTERS
+       Single variable file, exposed as two font-families:
+       'Cal Sans Geo'  — geometric (GEOM axis set), for body / reading
+       'Cal Sans'      — humanist (default GEOM), for titles / display
+       Both share the wght axis 300-700.
        ═══════════════════════════════════════════ */
+    @font-face {
+      font-family: 'Cal Sans Geo';
+      src: url('/assets/fonts/CalSansUI%5Bwght%2CGEOM%5D.woff2') format('woff2-variations'),
+           url('/assets/fonts/CalSansUI%5Bwght%2CGEOM%5D.woff2') format('woff2');
+      font-weight: 300 700;
+      font-style: normal;
+      font-display: swap;
+      font-variation-settings: "GEOM" 1;
+    }
     @font-face {
       font-family: 'Cal Sans';
       src: url('/assets/fonts/CalSansUI%5Bwght%2CGEOM%5D.woff2') format('woff2-variations'),
@@ -28,6 +40,7 @@
       font-weight: 300 700;
       font-style: normal;
       font-display: swap;
+      font-variation-settings: "GEOM" 0;
     }
 
     /* ═══════════════════════════════════════════
